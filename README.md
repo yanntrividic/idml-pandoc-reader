@@ -1,93 +1,60 @@
-# InDesign HTML Legacy to Markdown
+# INDD to Markdown
 
+Ce dépôt vise à automatiser la conversion d'un fichier Adobe InDesign vers un fichier Markdown en conservant au maximum la structure sémantique du fichier originale, de sorte à automatiser une chaîne de publication en prenant un fichier INDD comme fichier pivot.
 
+## Prérequis
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.com/deborderbollore/html-legacy-to-markdown.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.com/deborderbollore/html-legacy-to-markdown/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+* Pandoc
+* Python
+* Avoir installé les dépendances du script Python (avec la commande `pip install -r requirements.txt`)
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+```bash
+pandoc -f html_inherited.lua -t input.html -o output.md --lua-filter=filter.lua
+```
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## HTML (hérité) comme format d'entrée
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Un fichier INDD est constitué d'un ensemble de fichiers XML zippés, mais il est possible depuis Adobe InDesign d'avoir accès à d'autres types d'exports, en particulier ce qu'iels appellent le [HTML (hérité)](https://helpx.adobe.com/fr/indesign/using/export-content-html-cc.html) :
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+> L'exportation au format HTML convertit facilement votre contenu InDesign en un format adapté au Web. Lorsque vous exportez du contenu au format HTML, vous pouvez contrôler la manière dont le texte et les images sont exportés. InDesign conserve les noms des paragraphes, caractères, objets, tableaux et styles de cellule appliqués aux contenus exportés en marquant les contenus HTML avec les classes de styles CSS du même nom.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+Cela implique que pour que ce convertisseur fonctionne comme escompté, il est nécessaire que le fichier INDD présenté en entrée soit strictement formaté, en adoptant une structure de document rigoureuse où chaque unité sémantique est différenciée par un style de paragraphe ou un style de caractère dédié.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+En contrepartie, ce format d'export ne retient pas :
 
-## License
-For open source projects, say how it is licensed.
+* les paragraphes vides (soit les caractères de fin de paragraphes `¶`) ;
+* les espaces en tête et en queue de ligne (mais cela fonctionne avec des espaces insécables) ;
+* _n_ espaces les uns à la suite des autres (mais cela fonctionne avec des espaces insécables) ;
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Et il conserve :
+
+* les césures, en ajoutant un espace après le tiret de la césure et en supprimant le retour chariot.
+
+Le problème avec cette approche est qu'il est nécessaire d'avoir accès à une licence Adobe pour exporter dans un premier temps le fichier INDD au format HTML (hérité). Idéalement, ce convertisseur prendrait en entrée un fichier INDD (ou IDML), et en ressortirait un fichier Markdown. Cette approche, bien que plus générique, nécessite plus de travail du fait de la complexité de la structuration des documents IDML.
+
+## IDML comme format d'entrée
+
+Quand on dézippe un fichier IDML, chaque section du document apparaît ensuite dans un dossier `Stories` qui contient un fichier XML par série de blocs liés.
+
+Scribus peut importer des fichiers IDML, mais ne peut pas les réexporter dans des formats intéressants concernant la structuration sémantique.
+
+## Markdown comme format de sortie
+
+Pour rendre les identifiants et les classes, Kirby utilise [`markdown.extra`](https://michelf.ca/projects/php-markdown/extra/). Concrètement, ça ne semble pas être la meilleure approche pour gérer ça.
+
+## Pandoc
+
+Pandoc utilise des filtres Lua pour manipuler l'AST **après** que le contenu du code source ait été parsé par ses _readers_. Cela veut dire que si le _reader_ ignore un élément ou un attribut, alors les filtres Lua ne pourront rien y faire, les données sont perdues.
+
+En l'occurrence, les blocs imbriqués ne peuvent pas porter d'attributs ou de métadonnées, ce qui fait sauter les noms de classes et les `id` de la plupart de nos éléments.
+
+Pour contourner ce problème, deux options : 
+
+* Préprocesser le fichier HTML ;
+* Écrire un _reader_ custom pour notre cas de figure, du genre `inherited_html`.
+
+Il y a exactement ce qu'on veut dans la doc de Pandoc avec l'example [_Extracting the content from web pages_](https://pandoc.org/custom-readers.html#example-extracting-the-content-from-web-pages). Ce qui est intéressant dans ce cas est que le _preprocessing_ est géré par une application tierce, qui permet beaucoup plus de flexibilité en amont du parsing du fichier.
+
+Le plus simple serait certainement de brancher un script de preprocessing ici, avec BeautifulSoup par exemple, pour nettoyer l'HTML et ensuite utiliser Pandoc pour générer le Markdown en sortie. C'est le plus simple car finalement, avant que le document soit parsé, avoir accès à des filtres Lua n'a pas un intérêt énorme... L'API de Pandoc est pour ainsi dire inutile. Aussi, Pandoc ne fournit pas d'outil pour exposer ses _readers_ internes, ce qui veut dire que surcharger un _reader_ spécifique (le reader `html`) est impossible.
