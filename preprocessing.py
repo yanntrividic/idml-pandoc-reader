@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import sys
 import re
-from map import MAP
+from map import *
 
 # Read the HTML input file
 with open(sys.argv[1], "r") as f:
@@ -10,22 +10,32 @@ with open(sys.argv[1], "r") as f:
 # Use BeautifulSoup to parse and manipulate HTML
 soup = BeautifulSoup(html_content, "html.parser")
 
-# Find all divs where the id starts with '_idContainer'
-for div in soup.find_all('div', id=lambda x: x and x.startswith('_idContainer')):
-    # Replace the div with its children by unwrapping the div
-    div.unwrap()  # This removes the div and keeps the children in place
-    # div.name = "section"
+for id in ID_TO_DELETE:
+    el = soup.find(id=id)
+    if el: el.decompose()
 
 def mapList(soup):
     for key, value in MAP.items():
         for el in soup.select(key):
-            el.name = value["name"]
-            if "classes" in value.keys():
-                el["class"] = value["classes"]
+            if not value: # We remove all elements that have an empty dict associated to them!
+                el.decompose()
             else:
-                del el["class"]
+                el.name = value["name"]
+                if "classes" in value.keys():
+                    el["class"] = value["classes"]
+                else:
+                    del el["class"]
 
 mapList(soup)
+
+# We do not need text anchors
+# as we will make them ourselves
+# and Pandoc doesn't handle it well
+def removeTextAnchors(soup):
+    for el in soup.select("[id*=\"_idTextAnchor\"]"):
+        del el["id"]
+
+removeTextAnchors(soup)
 
 def removeHyphens(soup):
     return BeautifulSoup(re.sub(r'([a-zA-ZÀ-Ÿ])\-\s([a-zA-ZÀ-Ÿ])', r'\1\2', str(soup)), "html.parser")
@@ -36,7 +46,7 @@ def handleFootnotes(soup):
     # for fn in soup.select(".Note_de_bas_de_pages"):
     #     for child in fn.descendants:
     #         print(child)
-    for fn in soup.select(".Note_de_bas_de_pages"):
+    for fn in soup.select("." + FOOTNOTES_CLASS):
         count = 0
         id = ""
         for descendant in fn.descendants:
@@ -61,6 +71,18 @@ def handleFootnotes(soup):
         s.decompose()
 
 handleFootnotes(soup)
+
+def turnIdContainersIntoSections(soup):
+    for div in soup.find_all('div', id=lambda x: x and x.startswith('_idContainer')):
+        div.name = "section"
+
+turnIdContainersIntoSections(soup)
+
+def removeSections(soup):
+    for s in soup.find_all('section'):
+        s.unwrap()
+
+removeSections(soup)
 
 # Print the modified HTML
 print(soup.prettify())
