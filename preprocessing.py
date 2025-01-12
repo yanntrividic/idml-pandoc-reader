@@ -3,30 +3,24 @@ import sys
 import re
 from map import *
 
-# Read the HTML input file
-with open(sys.argv[1], "r") as f:
-    html_content = f.read()
-
-# Use BeautifulSoup to parse and manipulate HTML
-soup = BeautifulSoup(html_content, "html.parser")
-
-for id in ID_TO_DELETE:
-    el = soup.find(id=id)
-    if el: el.decompose()
+def removeIdsToIgnore(soup):
+    for id in ID_TO_DELETE:
+        el = soup.find(id=id)
+        if el: el.decompose()
 
 def mapList(soup):
     for key, value in MAP.items():
         for el in soup.select(key):
-            if not value: # We remove all elements that have an empty dict associated to them!
+            if "delete" in value and value["delete"]:
                 el.decompose()
+            elif "unwrap" in value and value["unwrap"]:
+                el.unwrap()
             else:
                 el.name = value["name"]
                 if "classes" in value.keys():
                     el["class"] = value["classes"]
                 else:
                     del el["class"]
-
-mapList(soup)
 
 # We do not need text anchors
 # as we will make them ourselves
@@ -35,17 +29,28 @@ def removeTextAnchors(soup):
     for el in soup.select("[id*=\"_idTextAnchor\"]"):
         del el["id"]
 
-removeTextAnchors(soup)
+def removeOverrideClasses(soup):
+    overrideString = "Override-"
+    for el in soup.select("[class*=\"" + overrideString + "\"]"):
+        newClasses = []
+        for c in el["class"]:
+            if overrideString not in c:
+                newClasses.append(c)
+        el['class'] = newClasses
 
+# InDesign leaves hyphens from the INDD file in the HTML export
+# Hopefully, it leaves them with a trailing space,
+# which allows us to spot them easily with a regular expression.
 def removeHyphens(soup):
-    return BeautifulSoup(re.sub(r'([a-zA-ZÀ-Ÿ])\-\s([a-zA-ZÀ-Ÿ])', r'\1\2', str(soup)), "html.parser")
+    soup = BeautifulSoup(re.sub(r'([a-zA-ZÀ-Ÿ])\-\s([a-zA-ZÀ-Ÿ])', r'\1\2', str(soup)), "html.parser")
 
-soup = removeHyphens(soup)
+# Pandoc keeps tags with only lang attributes,
+# it is for now not something we want to bother with.
+def removeLangAttributes(soup):
+    for lang in soup.select("[lang]"):
+        del lang["lang"]
 
 def handleFootnotes(soup):
-    # for fn in soup.select(".Note_de_bas_de_pages"):
-    #     for child in fn.descendants:
-    #         print(child)
     for fn in soup.select("." + FOOTNOTES_CLASS):
         count = 0
         id = ""
@@ -70,19 +75,74 @@ def handleFootnotes(soup):
     for s in soup.select("section._idFootnotes"):
         s.decompose()
 
-handleFootnotes(soup)
+# AsciiDoc doesn't allow multilines headers, but the Pandoc AsciiDoc
+# writer doesn't seem to care.
+# It does remove the linebreaks with the Markdown writer though.
+def removeBrFromHeaders(soup):
+    for br in soup.select("h1 br, h2 br, h3 br, h4 br, h5 br, h6 br"):
+        br.decompose()
 
 def turnIdContainersIntoSections(soup):
     for div in soup.find_all('div', id=lambda x: x and x.startswith('_idContainer')):
         div.name = "section"
 
-turnIdContainersIntoSections(soup)
-
 def removeSections(soup):
     for s in soup.find_all('section'):
         s.unwrap()
 
-removeSections(soup)
+# Pandoc's AST takes into account all spans,
+# even if they don't carry any useful information
+# this allows to clean the document before sending
+# it to Pandoc.
+def unwrapSuperfluousSpans(soup):
+    for s in soup.find_all('span'):
+        if not s.attrs:
+            s.unwrap()
 
-# Print the modified HTML
-print(soup.prettify())
+# Adds unnecessary complexity. Adds unnecessary SoftBreaks
+# in Pandoc that could not be automatically removed.
+def removeEmptyHrefAnchors(soup):
+    for a in soup.select('a[href=\"\"]'): a.unwrap()
+
+if __name__ == "__main__":
+    # Read the HTML input file
+    with open(sys.argv[1], "r") as f:
+        html_content = f.read()
+
+    # Use BeautifulSoup to parse and manipulate HTML
+    soup = BeautifulSoup(html_content, "html.parser")
+
+    # All the transformations we need to perform...
+
+    # First, take remove the IDs we will for sure not need (see map.py)
+    removeIdsToIgnore(soup)
+
+    # Then, clean up the easy mess that was made by InDesign
+    removeLangAttributes(soup)
+    removeEmptyHrefAnchors(soup)
+    removeHyphens(soup)
+
+    # Apply the styles mapping (see map.py)
+    mapList(soup)
+
+    # And this part is a bit more contextual... You might want
+    # to comment out some of those depending on the context
+    # removeOverrideClasses(soup) # Must appear after mapList
+    removeTextAnchors(soup) # Must appear after mapList
+    handleFootnotes(soup) # Must appear after mapList
+    unwrapSuperfluousSpans(soup) # Must appear after mapList
+    removeBrFromHeaders(soup) # Must appear after mapList
+    turnIdContainersIntoSections(soup)
+    removeSections(soup) # Must appear after turnIdContainersIntoSections
+
+    # There might be a few empty lines laying around:
+    soup = BeautifulSoup(re.sub(r"\n+", r"\n", str(soup)), "html.parser")
+
+    # Print the modified HTML to pipe it into Pandoc
+    # If you want to read the HTML yourself, you might want to
+    # read the output of soup.prettify(). Though, it messes
+    # with Pandoc's inlines Elements.
+    # To ensure better result, make sure that you print one HTML block
+    # per line.
+    print(str(soup))
+    # print(soup.prettify())
