@@ -1,4 +1,5 @@
 __pycache__
-sources
 .venv
+.env
+sources
 output

@@ -2,11 +2,7 @@ from bs4 import BeautifulSoup
 import sys
 import re
 from map import *
-
-def removeIdsToIgnore(soup):
-    for id in ID_TO_DELETE:
-        el = soup.find(id=id)
-        if el: el.decompose()
+from utils import *
 
 def mapList(soup):
     for key, value in MAP.items():
@@ -37,12 +33,6 @@ def removeOverrideClasses(soup):
             if overrideString not in c:
                 newClasses.append(c)
         el['class'] = newClasses
-
-# InDesign leaves hyphens from the INDD file in the HTML export
-# Hopefully, it leaves them with a trailing space,
-# which allows us to spot them easily with a regular expression.
-def removeHyphens(soup):
-    soup = BeautifulSoup(re.sub(r'([a-zA-ZÀ-Ÿ])\-\s([a-zA-ZÀ-Ÿ])', r'\1\2', str(soup)), "html.parser")
 
 # Pandoc keeps tags with only lang attributes,
 # it is for now not something we want to bother with.
@@ -90,15 +80,6 @@ def removeSections(soup):
     for s in soup.find_all('section'):
         s.unwrap()
 
-# Pandoc's AST takes into account all spans,
-# even if they don't carry any useful information
-# this allows to clean the document before sending
-# it to Pandoc.
-def unwrapSuperfluousSpans(soup):
-    for s in soup.find_all('span'):
-        if not s.attrs:
-            s.unwrap()
-
 # Adds unnecessary complexity. Adds unnecessary SoftBreaks
 # in Pandoc that could not be automatically removed.
 def removeEmptyHrefAnchors(soup):
@@ -120,7 +101,7 @@ if __name__ == "__main__":
     # Then, clean up the easy mess that was made by InDesign
     removeLangAttributes(soup)
     removeEmptyHrefAnchors(soup)
-    removeHyphens(soup)
+    soup = removeHyphens(soup, "html.parser")
 
     # Apply the styles mapping (see map.py)
     mapList(soup)
@@ -135,9 +116,7 @@ if __name__ == "__main__":
     turnIdContainersIntoSections(soup)
     removeSections(soup) # Must appear after turnIdContainersIntoSections
 
-    # There might be a few empty lines laying around:
-    soup = BeautifulSoup(re.sub(r"\n+", r"\n", str(soup)), "html.parser")
-
+    soup = removeEmptyLines(soup, "html.parser")
     # Print the modified HTML to pipe it into Pandoc
     # If you want to read the HTML yourself, you might want to
     # read the output of soup.prettify(). Though, it messes

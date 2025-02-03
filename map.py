@@ -120,20 +120,21 @@ MAP = {
 
 ID_TO_DELETE = [
     # BOLLO
-    # "_idContainer001",
-    # "_idContainer002",
-    # "_idContainer003",
-    # "_idContainer004",
-    # "_idContainer005",
-    # "_idContainer006",
-    # "_idGenObjectLayout",
-
-    #NN,
+    "_idContainer000",
+    "_idContainer001",
+    "_idContainer002",
     "_idContainer003",
     "_idContainer004",
     "_idContainer005",
-    "_idContainer007",
-    "_idContainer008",
+    "_idContainer006",
+    "_idGenObjectLayout",
+
+    #NN,
+    # "_idContainer003",
+    # "_idContainer004",
+    # "_idContainer005",
+    # "_idContainer007",
+    # "_idContainer008",
 
     # PLE
     # "_idContainer007",
