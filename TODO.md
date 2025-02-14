@@ -6,7 +6,7 @@
 * [ ] Write the editorial chart.
 * [ ] Make a nice JSON template that shows how to write down a `map.json`, and pass add an optional argument to `preprocessing.py` to specify a custom JSON file. 
 * [ ] Try out incorporating alt-text in InDesign, does it follow in HTML Legacy?
-* [ ] 
+* [ ] Handle the nested sections
 
 ## Issues to publish on jgm/pandoc
 
