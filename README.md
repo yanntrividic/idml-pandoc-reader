@@ -6,13 +6,14 @@ Ce dépôt vise à automatiser la conversion d'un fichier Adobe InDesign vers un
 
 * Pandoc
 * Python
-* Avoir installé les dépendances du script Python (avec la commande `pip install -r requirements.txt`)
-* Avoir installé `idml2xml-frontend` (s'installe avec `git` via la commande `git clone https://github.com/transpect/idml2xml-frontend --recurse-submodules`)
+* les dépendances du script Python (avec la commande `pip install -r requirements.txt`)
+* `idml2xml-frontend` (s'installe avec `git` via la commande `git clone https://github.com/transpect/idml2xml-frontend --recurse-submodules`)
+* avoir précisé dans un fichier `.env` le chemin vers idml2xml-frontend (voir l'exemple fourni avec `.env.sample`)
 
 ## Usage
 
 ```bash
-pandoc -f html_inherited.lua -t input.html -o output.md --lua-filter=filter.lua
+pandoc -f idml.lua -t input.idml -o output.md --lua-filter=filter.lua
 ```
 
 ## HTML (hérité) comme format d'entrée
@@ -70,7 +71,6 @@ Il y a des choses à savoir avant de pouvoir convertir du DocBook avec Pandoc. [
 Aussi, il n'est pas ultra clair ce que Pandoc supporte quant à la spécification de DocBook v5.1. [Il semblerait qu'il y ait une partie du support pour la v4.5, et une autre pour la v5.x.](https://github.com/jgm/pandoc/issues/7747).
 
 Pour obtenir de l'AsciiDoc depuis DocBook, on a notamment [ce convertisseur](https://github.com/asciidoctor/docbookrx), auquel Dan Allen, entre autres, a beaucoup contribué. Trouvé grâce à cette [note de blog](https://blogs.gnome.org/pmkovar/2015/10/27/converting-docbook-into-asciidoc/) qui est intéressante sur la question.
-
 
 ## Markdown comme format de sortie
 

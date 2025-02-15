@@ -31,9 +31,9 @@
 function preprocessing(source)
     local result
     if not pcall(function ()
-        result = pandoc.pipe("python", {'preprocessing.py', source.name}, "")
+        result = pandoc.pipe("python", {'idml2docbook.py', source.name}, "")
     end) then
-        io.stderr:write("Error running 'preprocessing.py'\n")
+        io.stderr:write("Error running 'idml2docbook.py'\n")
         os.exit(1)
     end
     return result
