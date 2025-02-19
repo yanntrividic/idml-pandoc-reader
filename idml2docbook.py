@@ -116,6 +116,11 @@ def generateSections(soup):
         section = soup.new_tag("section", **{"xml:id": xml_id})
         title_tag = soup.new_tag("title")
         title_tag.string = title_text
+        # print(element.get("role"))
+        if "role" in element.attrs:
+            # print(element.attrs["role"])
+            # print("yes")
+            title_tag["role"] = element.attrs["role"]
         section.append(title_tag)
 
         # Close higher or equal level sections
@@ -160,7 +165,7 @@ def idml2xml(file):
 
 if __name__ == "__main__":
     tmpfile = idml2xml(sys.argv[1])
-    # tmpfile = "/tmp/Deborder-Bollore_A5_250214.xml"
+    # tmpfile = "output/output.xml"
 
     # Read the HTML input file
     with open(tmpfile, "r") as f:
@@ -176,7 +181,7 @@ if __name__ == "__main__":
     # <article version="5.0" xml:lang="fr-FR" xmlns="http://docbook.org/ns/docbook">
 
     removeUnnecessaryNodes(soup)
-    removeUnnecessaryLayers(soup)
+    # removeUnnecessaryLayers(soup)
     removeUnnecessaryAttributes(soup)
     removeEmptyElements(soup)
     soup = removeHyphens(soup, "xml")

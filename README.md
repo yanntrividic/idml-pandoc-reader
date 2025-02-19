@@ -72,6 +72,17 @@ Aussi, il n'est pas ultra clair ce que Pandoc supporte quant à la spécificatio
 
 Pour obtenir de l'AsciiDoc depuis DocBook, on a notamment [ce convertisseur](https://github.com/asciidoctor/docbookrx), auquel Dan Allen, entre autres, a beaucoup contribué. Trouvé grâce à cette [note de blog](https://blogs.gnome.org/pmkovar/2015/10/27/converting-docbook-into-asciidoc/) qui est intéressante sur la question.
 
+Code source du reader : https://github.com/jgm/pandoc/blob/main/src/Text/Pandoc/Readers/DocBook.hs.
+
+Le problème avec cette approche, c'est que Pandoc ne supporte pas l'attribut `role` pour les blocs (voir [#9089](https://github.com/jgm/pandoc/issues/9089)), qui est un attribut un peu fourre-tout mais qui permet notamment d'attribuer des sortes de classes à DocBook.
+
+Pour régler ce problème, plusieurs solutions :
+
+* Forker Pandoc et y ajouter le support pour automatiquement ajouter l'attribut `role` à la liste d'attributs de tous les blocs pour le lecteur DocBook.
+* Trouver une solution en formattant le fichier XML fourni en entrée en permettant de récupérer l'information dans l'AST, puis nettoyer l'AST avec des filtres. Ce qui a été essayé jusqu'à présent. Ajouter des `xml:id` sur tous les éléments ne fonctionne pas. Peut-être qu'on pourrait encapsuler le contenu de toutes les feuilles de type bloc dans des `phrase` qui auraient des `role` ?
+* Convertir le fichier DocBook en un fichier HTML, qui lui comporterait des classes, au travers d'une transformation XSLT.
+
+
 ## Markdown comme format de sortie
 
 Pour rendre les identifiants et les classes, Kirby utilise [`markdown.extra`](https://michelf.ca/projects/php-markdown/extra/). Concrètement, ça ne semble pas être la meilleure approche pour gérer ça.
