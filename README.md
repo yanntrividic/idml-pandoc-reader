@@ -1,4 +1,4 @@
-# INDD to Markdown
+# IDML Pandoc reader
 
 Ce dépôt vise à automatiser la conversion d'un fichier Adobe InDesign vers un fichier Markdown en conservant au maximum la structure sémantique du fichier originale, de sorte à automatiser une chaîne de publication en prenant un fichier INDD comme fichier pivot.
 
