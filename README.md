@@ -13,7 +13,7 @@ Ce dépôt vise à automatiser la conversion d'un fichier Adobe InDesign vers un
 ## Usage
 
 ```bash
-pandoc -f idml.lua -t input.idml -o output.md --lua-filter=filter.lua
+pandoc -f idml.lua -t input.idml -o output.md --lua-filter=roles-to-classes.lua
 ```
 
 ## HTML (hérité) comme format d'entrée
