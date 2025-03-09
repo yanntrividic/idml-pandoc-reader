@@ -114,14 +114,14 @@ def generateSections(soup):
 
         # Create new section
         section = soup.new_tag("section", **{"xml:id": xml_id})
-        title_tag = soup.new_tag("title")
-        title_tag.string = title_text
+        title = soup.new_tag("title")
+        title.string = title_text
         # print(element.get("role"))
         if "role" in element.attrs:
             # print(element.attrs["role"])
             # print("yes")
-            title_tag["role"] = element.attrs["role"]
-        section.append(title_tag)
+            section["role"] = element.attrs["role"]
+        section.append(title)
 
         # Close higher or equal level sections
         while section_stack and section_stack[-1][0] >= level:
