@@ -75,6 +75,11 @@ def removeNsAttributes(soup):
         for attr in toRemove:
             del tag[attr]
 
+def removeLinebreaks(soup):
+    for tag in soup.select("br"):
+        tag.string = " "
+        tag.unwrap()
+
 def mapList(soup):
     for key, value in MAP.items():
         for el in soup.find_all(attrs={"role": key}):
@@ -188,6 +193,7 @@ if __name__ == "__main__":
     removeNsAttributes(soup)
     mapList(soup)
     generateSections(soup)
+    removeLinebreaks(soup)
 
     # soup.prettify() adds `\n` around inline elements,
     # which is parsed as spaces in Pandoc.
