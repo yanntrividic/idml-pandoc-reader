@@ -4,8 +4,8 @@ Ce dépôt vise à automatiser la conversion d'un fichier Adobe InDesign vers un
 
 ## Prérequis
 
-* Pandoc
 * Python
+* Pandoc, dans [une version un peu modifiée](https://github.com/yanntrividic/pandoc/). Il faut la télécharger et [la compiler depuis la source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md).
 * les dépendances du script Python (avec la commande `pip install -r requirements.txt`)
 * `idml2xml-frontend` (s'installe avec `git` via la commande `git clone https://github.com/transpect/idml2xml-frontend --recurse-submodules`)
 * avoir précisé dans un fichier `.env` le chemin vers idml2xml-frontend (voir l'exemple fourni avec `.env.sample`)
