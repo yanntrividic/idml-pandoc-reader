@@ -189,7 +189,12 @@ if __name__ == "__main__":
     mapList(soup)
     generateSections(soup)
 
-    print(soup.prettify())
+    # soup.prettify() adds `\n` around inline elements,
+    # which is parsed as spaces in Pandoc.
+    # str(soup) does it less, but to ensure we don't have
+    # this problem, we just remove linebreaks entirely.abs
+    result = str(soup).replace("\n", "")
+    print(result)
 
     with open("output/output.xml", "w") as file:
         file.write(soup.prettify())
