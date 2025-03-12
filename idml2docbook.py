@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import tempfile
 import os
 from dotenv import load_dotenv
+import re
 
 from utils import *
 from map import *
@@ -79,6 +80,37 @@ def removeLinebreaks(soup):
     for tag in soup.select("br"):
         tag.string = " "
         tag.unwrap()
+
+def removeMicrotypography(soup):
+    s = str(soup)
+
+    # Remove non-discretionary hyphens
+    non_discretionary_hyphen = u"\u00ad"
+    s = s.replace(non_discretionary_hyphen, "")
+
+    # Replace special spaces with spaces
+    special_spaces = [
+    u"\u00a0", u"\u1680", u"\u180e", u"\u2000", u"\u2001", u"\u2002", u"\u2003", u"\u2004",
+    u"\u2005", u"\u2006", u"\u2007", u"\u2008", u"\u2009", u"\u200a", u"\u200b", u"\u202f",
+    u"\u205f", u"\u3000"
+    ]
+
+    for space in special_spaces:
+        s = s.replace(space, " ")
+
+    return BeautifulSoup(s, "xml")
+
+def addMicrotypography(soup):
+    s = str(soup)
+
+    s = re.sub(r"\s([!\?;€\$%])", u"\u202f" + r'\1', s) # thin spaces
+    s = re.sub(r"\s\:", u"\u00a0" + r':', s) # nbsp, doesn't seem to work...
+    s = re.sub(r"(\d)\s(\d\d\d)", r'\1' + u"\u202f", s) # numbers
+    s = re.sub(r"«\s?", r'«' + u"\u202f", s) # quotes
+    s = re.sub(r"\s?»", u"\u202f" + r'»', s) # quotes
+    s = re.sub(r"°\s?", r'°' + u"\u202f", s) # degrees
+
+    return BeautifulSoup(s, "xml")
 
 def mapList(soup):
     for key, value in MAP.items():
@@ -194,6 +226,8 @@ if __name__ == "__main__":
     mapList(soup)
     generateSections(soup)
     removeLinebreaks(soup)
+    soup = removeMicrotypography(soup)
+    soup = addMicrotypography(soup)
 
     # soup.prettify() adds `\n` around inline elements,
     # which is parsed as spaces in Pandoc.
