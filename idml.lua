@@ -15,6 +15,11 @@ function preprocessing(source)
 end
 
 function Reader(input)
+    -- to add arguments from the command line, see (?)
+    -- https://github.com/pandoc/lua-filters/blob/916ca389645940373d9a3c4beca3bd07d51b27aa/track-changes/track-changes.lua#L215
+    -- arguments to add:
+    -- * reflow-microtypography
+    -- * map
     local preprocessed_html = ''
     for _, source in ipairs(input) do
         preprocessed_html = preprocessed_html .. preprocessing(source)
