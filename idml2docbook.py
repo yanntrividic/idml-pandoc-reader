@@ -7,12 +7,15 @@ import tempfile
 import os
 from dotenv import load_dotenv
 import re
+import logging
 
 from utils import *
 from map import *
 
-load_dotenv()
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
 
+load_dotenv()
 IDML2XML_FOLDER = os.getenv("IDML2XML_FOLDER")
 
 NODES_TO_REMOVE = [
@@ -117,14 +120,17 @@ def mapList(soup):
         for el in soup.find_all(attrs={"role": key}):
             if "unwrap" in value and value["unwrap"]:
                 el.unwrap()
+            if "delete" in value and value["delete"]:
+                el.decompose()
             if "level" in value and value["type"] == "title":
                 el["level"] = value["level"]
             if "type" in value:
                 el.name = value["type"]
             if "role" in value:
                 el["role"] = value["role"]
-            else:
-                del el["role"]
+            if not value: # when the dict is empty, remove the role
+                if el.has_attr("role"):
+                    del el["role"]
 
 def generateXmlId(title_text, xml_ids):
     xml_id = custom_slugify(title_text)
