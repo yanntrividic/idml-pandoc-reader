@@ -64,7 +64,14 @@ def removeEmptyElements(soup):
     for tag in EMPTY_TAGS_TO_REMOVE:
         for el in soup.find_all(tag):
             if el.is_empty_element: el.decompose()
-            if not el.text.strip(): el.decompose()
+
+def processImages(soup, wrapFig = False):
+    for tag in soup.select("para > mediaobject"):
+        imagedata = tag.find_next("imagedata")
+        fileref = imagedata["fileref"]
+        imagedata["fileref"] = "Links/" + fileref.split("/").pop()
+        if(wrapFig) : tag.parent.name = "figure"
+        else : tag.parent.unwrap() # no need for a figure!
 
 def removeNsAttributes(soup):
     # Remove all css nodes
@@ -145,6 +152,13 @@ def generateSections(soup):
     new_structure = []
     section_stack = []  # Tracks open sections
     xml_ids = []
+    first_elements = []
+
+    # All the elements, after a title tag are processed by the rest of the method
+    # this loop is to preserve what comes before the fisrt title tag
+    body = soup.select("article > *")
+    while body[0].name != "title":
+        first_elements.append(body.pop(0))
 
     for element in soup.find_all("title"):  # Only processing <title> elements
         try:
@@ -159,11 +173,7 @@ def generateSections(soup):
         section = soup.new_tag("section", **{"xml:id": xml_id})
         title = soup.new_tag("title")
         title.string = title_text
-        # print(element.get("role"))
-        if "role" in element.attrs:
-            # print(element.attrs["role"])
-            # print("yes")
-            section["role"] = element.attrs["role"]
+        if "role" in element.attrs: section["role"] = element.attrs["role"]
         section.append(title)
 
         # Close higher or equal level sections
@@ -190,6 +200,9 @@ def generateSections(soup):
     # Replace soup's body (or a wrapper element) with the new structure
     body = soup.find("article") or soup
     body.clear()
+
+    for elem in first_elements:
+        body.append(elem)
     for sec in new_structure:
         body.append(sec)
 
@@ -231,6 +244,7 @@ if __name__ == "__main__":
     removeNsAttributes(soup)
     mapList(soup)
     generateSections(soup)
+    processImages(soup)
     removeLinebreaks(soup)
     soup = removeMicrotypography(soup)
     soup = addMicrotypography(soup)
