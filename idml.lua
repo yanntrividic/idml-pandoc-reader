@@ -20,9 +20,9 @@ function Reader(input)
     -- arguments to add:
     -- * reflow-microtypography
     -- * map
-    local preprocessed_html = ''
+    local preprocessed_docbook = ''
     for _, source in ipairs(input) do
-        preprocessed_html = preprocessed_html .. preprocessing(source)
+        preprocessed_docbook = preprocessed_docbook .. preprocessing(source)
     end
-    return pandoc.read(preprocessed_html, "docbook")
+    return pandoc.read(preprocessed_docbook, "docbook")
 end
