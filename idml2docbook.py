@@ -91,6 +91,17 @@ def removeLinebreaks(soup):
         tag.string = " "
         tag.unwrap()
 
+def cleanURLs(soup):
+    s = str(soup)
+
+    url_regex_with_br = r"https?:\/\/([-A-zÀ-ÿ0-9]+\.)?([-A-zÀ-ÿ0-9@:%._\+~#=]+(<br/>)?)+\.[A-zÀ-ÿ0-9()]{1,6}(\b[-A-zÀ-ÿ0-9()@:%;_\+.~#?&//=]*(<br/>)?)*"
+
+    def replacer(match):
+        return match.group(0).replace(r"<br/>", "")
+    
+    return BeautifulSoup(re.sub(url_regex_with_br, replacer, s), "xml")
+
+
 def removeMicrotypography(soup):
     s = str(soup)
 
@@ -240,12 +251,13 @@ if __name__ == "__main__":
     # removeUnnecessaryLayers(soup)
     removeUnnecessaryAttributes(soup)
     removeEmptyElements(soup)
-    soup = removeHyphens(soup, "xml")
     removeNsAttributes(soup)
     mapList(soup)
     generateSections(soup)
     processImages(soup)
+    soup = cleanURLs(soup) # must be done before removeLineBreaks and removeHyphens
     removeLinebreaks(soup)
+    soup = removeHyphens(soup, "xml")
     soup = removeMicrotypography(soup)
     soup = addMicrotypography(soup)
 
