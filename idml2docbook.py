@@ -91,7 +91,10 @@ def removeLinebreaks(soup):
         tag.string = " "
         tag.unwrap()
 
-def cleanURLs(soup):
+def cleanURLsFromLineBreaks(soup):
+    """URLs can have line breaks within to compose correct rags.
+    This method removes those line breaks by joining the strings that start with http and
+    that are separated by a <br/> tag. The URL can't end with a line break in the source file."""
     s = str(soup)
 
     url_regex_with_br = r"https?:\/\/([-A-zÀ-ÿ0-9]+\.)?([-A-zÀ-ÿ0-9@:%._\+~#=]+(<br/>)?)+\.[A-zÀ-ÿ0-9()]{1,6}(\b[-A-zÀ-ÿ0-9()@:%;_\+.~#?&//=]*(<br/>)?)*"
@@ -134,7 +137,7 @@ def addMicrotypography(soup):
     return BeautifulSoup(s, "xml")
 
 def mapList(soup):
-    for key, value in MAP.items():
+    for key, value in getMap().items():
         for el in soup.find_all(attrs={"role": key}):
             if "unwrap" in value and value["unwrap"]:
                 el.unwrap()
@@ -167,9 +170,9 @@ def generateSections(soup):
 
     # All the elements, after a title tag are processed by the rest of the method
     # this loop is to preserve what comes before the fisrt title tag
-    body = soup.select("article > *")
-    while body[0].name != "title":
-        first_elements.append(body.pop(0))
+    article_contents = soup.select("article > *")
+    while article_contents[0].name != "title":
+        first_elements.append(article_contents.pop(0))
 
     for element in soup.find_all("title"):  # Only processing <title> elements
         try:
@@ -208,18 +211,18 @@ def generateSections(soup):
             to_move.extract()  # Remove from original place
             section.append(to_move)  # Append to current section
 
-    # Replace soup's body (or a wrapper element) with the new structure
-    body = soup.find("article") or soup
-    body.clear()
+    # Replace soup's article (or a wrapper element) with the new structure
+    article = soup.find("article") or soup
+    article.clear()
 
     for elem in first_elements:
-        body.append(elem)
+        article.append(elem)
     for sec in new_structure:
-        body.append(sec)
+        article.append(sec)
 
     return soup
 
-def idml2xml(file):
+def idml2hubxml(file):
     input = IDML2XML_FOLDER + "/" + file
     filename = Path(file).stem
     tmpfile = tempfile.gettempdir()
@@ -230,12 +233,9 @@ def idml2xml(file):
     # print("Output of idml2xml written at: " + outputfile)
     return outputfile
 
-if __name__ == "__main__":
-    tmpfile = idml2xml(sys.argv[1])
-    # tmpfile = "output/output.xml"
-
+def hubxml2docbook(file):
     # Read the HTML input file
-    with open(tmpfile, "r") as f:
+    with open(file, "r") as f:
         xml_content = f.read()
 
     soup = BeautifulSoup(xml_content, "xml")
@@ -255,7 +255,7 @@ if __name__ == "__main__":
     mapList(soup)
     generateSections(soup)
     processImages(soup)
-    soup = cleanURLs(soup) # must be done before removeLineBreaks and removeHyphens
+    soup = cleanURLsFromLineBreaks(soup) # must be done before removeLineBreaks and removeHyphens
     removeLinebreaks(soup)
     soup = removeHyphens(soup, "xml")
     soup = removeMicrotypography(soup)
@@ -266,7 +266,18 @@ if __name__ == "__main__":
     # str(soup) does it less, but to ensure we don't have
     # this problem, we just remove linebreaks entirely.abs
     result = str(soup).replace("\n", "")
-    print(result)
 
     with open("output/output.xml", "w") as file:
         file.write(soup.prettify())
+
+    return result
+
+def idml2docbook(file):
+    tmpfile = idml2hubxml(file)
+    # tmpfile = "output/output.xml"
+    docbook = hubxml2docbook(tmpfile)
+    return docbook
+
+if __name__ == "__main__":
+    docbook = idml2docbook(sys.argv[1])
+    print(docbook)

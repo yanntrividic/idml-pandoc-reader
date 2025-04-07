@@ -1,6 +1,20 @@
 from bs4 import BeautifulSoup
 import re
 import unidecode
+import json
+import sys
+
+MAP = "map.json"
+
+def getMap():
+    map = MAP
+    if len(sys.argv) == 3:
+        map = sys.argv[2]
+    # Opening JSON file 
+    f = open(map)
+    # returns JSON object as a list 
+    data = json.load(f)[0]
+    return data
 
 # InDesign leaves hyphens from the INDD file in the HTML export
 # Hopefully, it leaves them with a trailing space,
