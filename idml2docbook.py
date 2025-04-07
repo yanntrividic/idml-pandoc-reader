@@ -268,7 +268,7 @@ def hubxml2docbook(file):
     result = str(soup).replace("\n", "")
 
     with open("output/output.xml", "w") as file:
-        file.write(soup.prettify())
+        file.write(result)
 
     return result
 

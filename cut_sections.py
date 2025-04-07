@@ -56,14 +56,16 @@ if __name__ == "__main__":
 
     for i, section in enumerate(sections):
         cmd = [
-            "yandoc",
+            os.getenv("PANDOC_EXECUTABLE"),
             "-f", "docbook",
             "-t", "markdown_phpextra",
             "--lua-filter=roles-to-classes.lua",
             "--wrap=none",
-            "-o", "output/{}.md".format(i)
+            "-o", "output/sections/{}.md".format(i)
         ]
-        docbook = wrapXmlInDocbookSchema("".join(section).replace("\n\s*", ""))
-        # print(docbook)
-        print(os.getcwd())
+        docbook = wrapXmlInDocbookSchema("".join(section))
+
+        # with open("output/sections/" + str(i) + ".xml", "w") as file:
+        #     file.write(docbook)
+
         subprocess.run(cmd, input=docbook.encode('utf-8'))
