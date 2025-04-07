@@ -171,7 +171,7 @@ def generateSections(soup):
     # All the elements, after a title tag are processed by the rest of the method
     # this loop is to preserve what comes before the fisrt title tag
     article_contents = soup.select("article > *")
-    while article_contents[0].name != "title":
+    while len(article_contents) > 0 and article_contents[0].name != "title":
         first_elements.append(article_contents.pop(0))
 
     for element in soup.find_all("title"):  # Only processing <title> elements
