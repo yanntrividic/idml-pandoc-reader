@@ -2,6 +2,8 @@ import sys
 from bs4 import BeautifulSoup
 from idml2docbook import idml2docbook
 from utils import *
+import subprocess
+import os
 
 def getCuts():
     """Returns a list of classes that will allow to
@@ -20,14 +22,23 @@ def splitDocbook(soup, cuts):
     sections = [[]]
 
     while article_contents:
-        if "role" in article_contents[0].attrs:
+        if "role" in article_contents[0].attrs and article_contents[0].attrs["role"] in cuts:
             print(article_contents[0].attrs["role"])
             if len(sections[-1]) > 0:
                 sections.append([])
-            sections[-1].append(article_contents.pop(0))
-        else: sections[-1].append(article_contents.pop(0))
+            sections[-1].append(str(article_contents.pop(0)))
+        else: sections[-1].append(str(article_contents.pop(0)))
+
+    for section in sections: "".join(section)
 
     return sections
+
+
+def wrapXmlInDocbookSchema(string):
+    return ("""<?xml version="1.0" encoding="utf-8"?>
+           <article version="5.0" xml:lang="fr-FR" xmlns="http://docbook.org/ns/docbook">""" +
+           string +
+           """</article>""")
 
 if __name__ == "__main__":
     cuts = getCuts()
@@ -39,4 +50,20 @@ if __name__ == "__main__":
         docbook = f.read()
 
     soup = BeautifulSoup(docbook, "xml")
-    print(len(splitDocbook(soup, cuts)))
+    sections = splitDocbook(soup, cuts)
+    print(len(sections))
+    # for section in sections: print(section)
+
+    for i, section in enumerate(sections):
+        cmd = [
+            "yandoc",
+            "-f", "docbook",
+            "-t", "markdown_phpextra",
+            "--lua-filter=roles-to-classes.lua",
+            "--wrap=none",
+            "-o", "output/{}.md".format(i)
+        ]
+        docbook = wrapXmlInDocbookSchema("".join(section).replace("\n\s*", ""))
+        # print(docbook)
+        print(os.getcwd())
+        subprocess.run(cmd, input=docbook.encode('utf-8'))
