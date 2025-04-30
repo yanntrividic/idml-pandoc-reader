@@ -13,7 +13,6 @@ def getCuts():
     for key, value in getMap().items():
         if "cut" in value:
             cuts.append(key)
-    print(cuts)
     return cuts
 
 def splitDocbook(soup, cuts):
@@ -23,7 +22,6 @@ def splitDocbook(soup, cuts):
 
     while article_contents:
         if "role" in article_contents[0].attrs and article_contents[0].attrs["role"] in cuts:
-            print(article_contents[0].attrs["role"])
             if len(sections[-1]) > 0:
                 sections.append([])
             sections[-1].append(str(article_contents.pop(0)))
@@ -34,11 +32,18 @@ def splitDocbook(soup, cuts):
     return sections
 
 
-def wrapXmlInDocbookSchema(string):
+def wrapXmlInDocbookSchema(xml):
     return ("""<?xml version="1.0" encoding="utf-8"?>
            <article version="5.0" xml:lang="fr-FR" xmlns="http://docbook.org/ns/docbook">""" +
-           string +
+           xml +
            """</article>""")
+
+def getNameFromSections(xml):
+    soup = BeautifulSoup(xml, "xml")
+    sections = soup.select("article > section")
+    ids = []
+    for section in sections: ids.append(section.attrs["xml:id"])
+    return "_".join(ids).lower()
 
 if __name__ == "__main__":
     cuts = getCuts()
@@ -51,19 +56,20 @@ if __name__ == "__main__":
 
     soup = BeautifulSoup(docbook, "xml")
     sections = splitDocbook(soup, cuts)
-    print(len(sections))
     # for section in sections: print(section)
 
     for i, section in enumerate(sections):
+        docbook = wrapXmlInDocbookSchema("".join(section))
+        name = "{:02d}".format(i) + "_" + getNameFromSections(docbook)
         cmd = [
             os.getenv("PANDOC_EXECUTABLE"),
             "-f", "docbook",
             "-t", "markdown_phpextra",
             "--lua-filter=roles-to-classes.lua",
+            "--lua-filter=collapse-sections-into-headers.lua",
             "--wrap=none",
-            "-o", "output/sections/{}.md".format(i)
+            "-o", "output/sections/{}.md".format(name)
         ]
-        docbook = wrapXmlInDocbookSchema("".join(section))
 
         # with open("output/sections/" + str(i) + ".xml", "w") as file:
         #     file.write(docbook)
