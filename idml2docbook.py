@@ -10,10 +10,10 @@ import re
 import logging
 
 from utils import *
-from map import *
+from map_helper import *
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(filename='example.log', encoding='utf-8', level=logging.DEBUG)
+logging.basicConfig(filename='idml2docbook.log', encoding='utf-8', level=logging.DEBUG)
 
 load_dotenv()
 IDML2XML_FOLDER = os.getenv("IDML2XML_FOLDER")
