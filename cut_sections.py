@@ -4,6 +4,7 @@ from idml2docbook import idml2docbook
 from utils import *
 import subprocess
 import os
+from map_helper import *
 
 def getCuts():
     """Returns a list of classes that will allow to
@@ -12,7 +13,8 @@ def getCuts():
     cuts = []
     for key, value in getMap().items():
         if "cut" in value:
-            cuts.append(key)
+            if "role" in value: cuts.append(value[f"role"])
+            else: cuts.append(key)
     return cuts
 
 def splitDocbook(soup, cuts):

@@ -22,7 +22,7 @@ def getMap():
 def log_map_entry(entry):
     s = ""
     if "type" in entry: s = s + entry.get("type")
-    if "role" in entry: s = s + "." + entry.get("role")
+    if "role" in entry: s = s + "." + entry.get("role").replace(" ", ".")
     if "level" in entry: s = s + " (level " + str(entry.get("level")) + ")"
     if "delete" in entry: return "deleted!"
     if "unwrap" in entry: return "unwrapped!"
@@ -45,8 +45,10 @@ if __name__ == "__main__":
     covered = []
     uncovered = []
 
-    for el in re.findall(type_and_role, docbook):
-        roles.add((el[1], el[0]))
+    # We are only interested in what is after the info tag
+    for el in re.findall(type_and_role, docbook.split("</info>")[1]):
+        if not el[1].startswith("hub"): roles.add((el[1], el[0]))
+        # And not interested in hub specific tags
 
     boldprint("Role/tag couples present in " + file + ":")
     for couple in sorted(roles):
