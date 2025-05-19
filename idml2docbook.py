@@ -3,6 +3,7 @@ import subprocess
 from zipfile import ZipFile
 from pathlib import Path
 from bs4 import BeautifulSoup
+import copy
 import tempfile
 import os
 from dotenv import load_dotenv
@@ -20,6 +21,7 @@ IDML2XML_FOLDER = os.getenv("IDML2XML_FOLDER")
 
 NODES_TO_REMOVE = [
     "info",
+    "sidebar"
     # "xml-model"
     # "StoryPreference",
     # "InCopyExportOption",
@@ -65,11 +67,14 @@ def removeEmptyElements(soup):
         for el in soup.find_all(tag):
             if el.is_empty_element: el.decompose()
 
-def processImages(soup, wrapFig = False):
+def processImages(soup, wrapFig = False, rep_tif = None, rep_eps = None, folder = "Links"):
     for tag in soup.select("para > mediaobject"):
         imagedata = tag.find_next("imagedata")
         fileref = imagedata["fileref"]
-        imagedata["fileref"] = "Links/" + fileref.split("/").pop()
+        base, file_ext = os.path.splitext(fileref)
+        if rep_tif and (file_ext.lower() == ".tif"): fileref = base + "." + rep_tif
+        if rep_eps and (file_ext.lower() == ".eps"): fileref = base + "." + rep_eps
+        imagedata["fileref"] = folder + "/" + fileref.split("/").pop()
         if(wrapFig) : tag.parent.name = "figure"
         else : tag.parent.unwrap() # no need for a figure!
 
@@ -185,10 +190,9 @@ def generateSections(soup):
 
         # Create new section
         section = soup.new_tag("section", **{"xml:id": xml_id})
-        title = soup.new_tag("title")
-        title.string = title_text
-        if "role" in element.attrs: section["role"] = element.attrs["role"]
-        section.append(title)
+        new_title = copy.copy(element) # clone the element to keep it as is.
+        if "role" in new_title.attrs: section["role"] = new_title.attrs["role"]
+        section.append(new_title)
 
         # Close higher or equal level sections
         while section_stack and section_stack[-1][0] >= level:
@@ -254,7 +258,7 @@ def hubxml2docbook(file):
     removeNsAttributes(soup)
     mapList(soup)
     generateSections(soup)
-    processImages(soup)
+    processImages(soup, False, "jpg", "svg", "images")
     soup = cleanURLsFromLineBreaks(soup) # must be done before removeLineBreaks and removeHyphens
     removeLinebreaks(soup)
     soup = removeHyphens(soup, "xml")
