@@ -280,8 +280,5 @@ def idml2docbook(file):
     tmpfile = idml2hubxml(file)
     # tmpfile = "output/output.xml"
     docbook = hubxml2docbook(tmpfile)
+    # docbook = hubxml2docbook(file)
     return docbook
-
-if __name__ == "__main__":
-    docbook = idml2docbook(sys.argv[1])
-    print(docbook)

@@ -50,11 +50,11 @@ def getNameFromSections(xml):
 if __name__ == "__main__":
     cuts = getCuts()
 
-    # docbook = idml2docbook(sys.argv[1])
+    docbook = idml2docbook(sys.argv[1])
 
     # For debugging
-    with open(sys.argv[1], "r") as f:
-        docbook = f.read()
+    # with open(sys.argv[1], "r") as f:
+    #     docbook = f.read()
 
     soup = BeautifulSoup(docbook, "xml")
     sections = splitDocbook(soup, cuts)
@@ -66,11 +66,13 @@ if __name__ == "__main__":
         cmd = [
             os.getenv("PANDOC_EXECUTABLE"),
             "-f", "docbook",
-            "-t", "markdown_phpextra",
-            "--lua-filter=roles-to-classes.lua",
-            "--lua-filter=collapse-sections-into-headers.lua",
+            # "-t", "markdown_phpextra",
+            "-t", "native",
+            "--lua-filter=lua-filters/roles-to-classes.lua",
+            "--lua-filter=lua-filters/collapse-sections-into-headers.lua",
             "--wrap=none",
             "-o", "output/sections/{}.md".format(name)
+            # "-o", "output/sections/{}.native".format(name)
         ]
 
         # with open("output/sections/" + str(i) + ".xml", "w") as file:
