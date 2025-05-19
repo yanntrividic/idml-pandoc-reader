@@ -6,18 +6,20 @@ import subprocess
 import os
 from map_helper import *
 
-def getCuts():
+def get_cuts(file):
     """Returns a list of classes that will allow to
     cut the DocBook file in several
     They have a positive "cut" entry in the map."""
     cuts = []
-    for key, value in getMap().items():
+    for key, value in getMap(file).items():
         if "cut" in value:
             if "role" in value: cuts.append(value[f"role"])
             else: cuts.append(key)
     return cuts
 
-def splitDocbook(soup, cuts):
+def split_docbook(docbook, **options):
+    soup = BeautifulSoup(docbook, "xml")
+    cuts = get_cuts(options["map"])
     article_contents = soup.select("article > *")
     # print(article_contents)
     sections = [[]]
@@ -29,26 +31,29 @@ def splitDocbook(soup, cuts):
             sections[-1].append(str(article_contents.pop(0)))
         else: sections[-1].append(str(article_contents.pop(0)))
 
-    for section in sections: "".join(section)
+    names = []
+    for i, _ in enumerate(sections):
+        sections[i] = wrap_xml_in_docbook_schema("".join(sections[i]))
+        if options["prettify"]: sections[i] = BeautifulSoup(sections[i], "xml").prettify()
+        names.append(get_name_from_sections(sections[i]))
 
-    return sections
+    return names, sections
 
 
-def wrapXmlInDocbookSchema(xml):
-    return ("""<?xml version="1.0" encoding="utf-8"?>
-           <article version="5.0" xml:lang="fr-FR" xmlns="http://docbook.org/ns/docbook">""" +
+def wrap_xml_in_docbook_schema(xml):
+    return ("""<?xml version="1.0" encoding="utf-8"?>""" +
+           """<article version="5.0" xml:lang="fr-FR" xmlns="http://docbook.org/ns/docbook">""" +
            xml +
            """</article>""")
 
-def getNameFromSections(xml):
+def get_name_from_sections(xml):
     soup = BeautifulSoup(xml, "xml")
     sections = soup.select("article > section")
     ids = []
     for section in sections: ids.append(section.attrs["xml:id"])
-    return "_".join(ids).lower()
+    return "_".join(ids[:10]).lower()
 
 if __name__ == "__main__":
-    cuts = getCuts()
 
     docbook = idml2docbook(sys.argv[1])
 
@@ -57,12 +62,12 @@ if __name__ == "__main__":
     #     docbook = f.read()
 
     soup = BeautifulSoup(docbook, "xml")
-    sections = splitDocbook(soup, cuts)
+    sections = split_docbook(soup, cuts)
     # for section in sections: print(section)
 
     for i, section in enumerate(sections):
-        docbook = wrapXmlInDocbookSchema("".join(section))
-        name = "{:02d}".format(i) + "_" + getNameFromSections(docbook)
+        docbook = wrap_xml_in_docbook_schema("".join(section))
+        name = "{:02d}".format(i) + "_" + get_name_from_sections(docbook)
         cmd = [
             os.getenv("PANDOC_EXECUTABLE"),
             "-f", "docbook",

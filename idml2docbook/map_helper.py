@@ -1,22 +1,19 @@
 import re
 import sys
 import json
-
-DEFAULT_MAP = "map.json"
+import logging
 
 BOLD = '\033[1m'
 END = '\033[0m'
 OKGREEN = '\033[92m'
 WARNING = '\033[93m'
 
-def getMap():
-    map = DEFAULT_MAP
-    if len(sys.argv) == 3:
-        map = sys.argv[2]
-    # Opening JSON file 
-    f = open(map)
+def getMap(file):
+    logging.info("Reading map file at: " + file)
+    f = open(file)
     # returns JSON object as a list 
     data = json.load(f)[0]
+    logging.debug("Data read from map file: " + str(data))
     return data
 
 def log_map_entry(entry):
@@ -32,45 +29,53 @@ def boldprint(s):
     print(BOLD + s + END)
 
 if __name__ == "__main__":
-    map = getMap()
-    file = sys.argv[1]
+    if len(sys.argv) == 3:
+        file = sys.argv[1]
+        map = getMap(sys.argv[2])
 
-    # Read the HTML input file
-    with open(file, "r") as f:
-        docbook = f.read()
+        # Read the HTML input file
+        with open(file, "r") as f:
+            docbook = f.read()
 
-    type_and_role = r'<(\w+)[^>]*\brole="(.*?)"[^>]*>'
+        type_and_role = r'<(\w+)[^>]*\brole="(.*?)"[^>]*>'
 
-    roles = set()
-    covered = []
-    uncovered = []
+        roles = set()
+        covered = []
+        uncovered = []
 
-    # We are only interested in what is after the info tag
-    for el in re.findall(type_and_role, docbook.split("</info>")[1]):
-        if not el[1].startswith("hub"): roles.add((el[1], el[0]))
-        # And not interested in hub specific tags
+        # We are only interested in what is after the info tag
+        try:
+            for el in re.findall(type_and_role, docbook.split("</info>")[1]):
+                if not el[1].startswith("hub"): roles.add((el[1], el[0]))
+                # And not interested in hub specific tags
+        except:
+            raise ValueError("This file doesn't seem to be coming from idml2xml...")
 
-    boldprint("Role/tag couples present in " + file + ":")
-    for couple in sorted(roles):
-        print("- " + couple[0] + " (" + couple[1] + ")")
-        if couple[0] in map:
-            covered.append(couple[0])
+        boldprint("Role/tag couples present in " + file + ":")
+        for couple in sorted(roles):
+            print("- " + couple[0] + " (" + couple[1] + ")")
+            if couple[0] in map:
+                covered.append(couple[0])
+            else:
+                uncovered.append(couple)
+
+        print(OKGREEN)
+        if len(covered) > 0 :
+            boldprint("Applied mapping:")
+            for c in covered:
+                print("- " + c + " => " + log_map_entry(map[c]))
         else:
-            uncovered.append(couple)
+            boldprint(WARNING + (sys.argv[2] if (len(sys.argv) == 3) else DEFAULT_MAP) + " does not apply to " + file)
 
-    print(OKGREEN)
-    if len(covered) > 0 :
-        boldprint("Applied mapping:")
-        for c in covered:
-            print("- " + c + " => " + log_map_entry(map[c]))
+        if len(uncovered) > 0 :
+            print(WARNING)
+            boldprint("Unhandled elements:")
+            for c in uncovered:
+                print("- " + c[0] + " (" + c[1] + ")")
+        else:
+            print(OKGREEN + "All elements are covered!")
+        print(END)
     else:
-        boldprint(WARNING + (sys.argv[2] if (len(sys.argv) == 3) else DEFAULT_MAP) + " does not apply to " + file)
-
-    if len(uncovered) > 0 :
-        print(WARNING)
-        boldprint("Unhandled elements:")
-        for c in uncovered:
-            print("- " + c[0] + " (" + c[1] + ")")
-    else:
-        print(OKGREEN + "All elements are covered!")
-    print(END)
+        print("This script takes to arguments:")
+        print("1) an output XML file from Transpect's idml2xml")
+        print("2) a JSON map file designed for idml2docbook")

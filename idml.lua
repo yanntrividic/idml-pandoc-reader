@@ -6,20 +6,15 @@
 function preprocessing(source)
     local result
     if not pcall(function ()
-        result = pandoc.pipe("python", {'idml2docbook.py', source.name}, "")
+        result = pandoc.pipe("python", {'-m', 'idml2docbook', source.name}, "")
     end) then
-        io.stderr:write("Error running 'idml2docbook.py'\n")
+        io.stderr:write("Error running 'idml2docbook'\nRefer to idml2docbook.log")
         os.exit(1)
     end
     return result
 end
 
 function Reader(input)
-    -- to add arguments from the command line, see (?)
-    -- https://github.com/pandoc/lua-filters/blob/916ca389645940373d9a3c4beca3bd07d51b27aa/track-changes/track-changes.lua#L215
-    -- arguments to add:
-    -- * reflow-microtypography
-    -- * map
     local preprocessed_docbook = ''
     for _, source in ipairs(input) do
         preprocessed_docbook = preprocessed_docbook .. preprocessing(source)

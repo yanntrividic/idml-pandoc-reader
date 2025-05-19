@@ -1,23 +1,14 @@
-import sys
 import subprocess
-from zipfile import ZipFile
 from pathlib import Path
 from bs4 import BeautifulSoup
 import copy
-import tempfile
 import os
-from dotenv import load_dotenv
 import re
 import logging
 
 from utils import *
 from map_helper import *
 
-logger = logging.getLogger(__name__)
-logging.basicConfig(filename='idml2docbook.log', encoding='utf-8', level=logging.DEBUG)
-
-load_dotenv()
-IDML2XML_FOLDER = os.getenv("IDML2XML_FOLDER")
 
 NODES_TO_REMOVE = [
     "info",
@@ -60,23 +51,34 @@ def removeUnnecessaryAttributes(soup):
 
 def unwrapUnnecessaryNodes(soup):
     for tag in NODES_TO_UNWRAP:
-        for el in soup.find_all(tag): el.unwrap()
+        for el in soup.find_all(tag):
+            logging.debug("Unwrapping " + tag)
+            el.unwrap()
 
 def removeEmptyElements(soup):
     for tag in EMPTY_TAGS_TO_REMOVE:
         for el in soup.find_all(tag):
             if el.is_empty_element: el.decompose()
 
-def processImages(soup, wrapFig = False, rep_tif = None, rep_eps = None, folder = "Links"):
+def processImages(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
+    logging.info("Processing media filenames...")
+    RASTER_EXTS = [".tif", ".tiff", ".png", ".jpg", ".jpeg", ".psd"]
+    VECTOR_EXTS = [".svg", ".eps", ".ai", ".pdf"]
+
     for tag in soup.select("para > mediaobject"):
         imagedata = tag.find_next("imagedata")
         fileref = imagedata["fileref"]
+
         base, file_ext = os.path.splitext(fileref)
-        if rep_tif and (file_ext.lower() == ".tif"): fileref = base + "." + rep_tif
-        if rep_eps and (file_ext.lower() == ".eps"): fileref = base + "." + rep_eps
-        imagedata["fileref"] = folder + "/" + fileref.split("/").pop()
-        if(wrapFig) : tag.parent.name = "figure"
-        else : tag.parent.unwrap() # no need for a figure!
+        if rep_raster and (file_ext.lower() in RASTER_EXTS): fileref = base + "." + rep_raster
+        if rep_vector and (file_ext.lower() in VECTOR_EXTS): fileref = base + "." + rep_vector
+        if folder: imagedata["fileref"] = folder + "/" + fileref.split("/").pop()
+        if (rep_raster or rep_vector or folder):
+            logging.debug("Media was: " + fileref)
+            logging.debug("and is now: " + imagedata["fileref"])
+
+        if(wrap_fig): tag.parent.name = "figure"
+        else: tag.parent.unwrap() # no need for a figure!
 
 def removeNsAttributes(soup):
     # Remove all css nodes
@@ -92,6 +94,7 @@ def removeNsAttributes(soup):
             del tag[attr]
 
 def removeLinebreaks(soup):
+    logging.info("Removing linebreaks...")
     for tag in soup.select("br"):
         tag.string = " "
         tag.unwrap()
@@ -110,7 +113,8 @@ def cleanURLsFromLineBreaks(soup):
     return BeautifulSoup(re.sub(url_regex_with_br, replacer, s), "xml")
 
 
-def removeMicrotypography(soup):
+def removeOrthotypography(soup):
+    logging.info("Removing input's orthotypography...")
     s = str(soup)
 
     # Remove non-discretionary hyphens
@@ -129,7 +133,9 @@ def removeMicrotypography(soup):
 
     return BeautifulSoup(s, "xml")
 
-def addMicrotypography(soup):
+def addOrthotypography(soup):
+    logging.info("Adding new orthotypography...")
+
     s = str(soup)
 
     s = re.sub(r"\s([!\?;€\$%])", u"\u202f" + r'\1', s) # thin spaces
@@ -141,8 +147,13 @@ def addMicrotypography(soup):
 
     return BeautifulSoup(s, "xml")
 
-def mapList(soup):
-    for key, value in getMap().items():
+def mapList(soup, file):
+    """Takes a soup and a map as arguments.
+    Performs a series of operations depending
+    on what the map describes.
+    """
+    logging.info("Starting to apply the roles' mapping...")
+    for key, value in getMap(file).items():
         for el in soup.find_all(attrs={"role": key}):
             if "unwrap" in value and value["unwrap"]:
                 el.unwrap()
@@ -168,6 +179,8 @@ def generateXmlId(title_text, xml_ids):
 
 def generateSections(soup):
     """Transform soup to hierarchical sections up to 6 levels deep."""
+    logging.info("Generating nested sections' hierarchy...")
+
     new_structure = []
     section_stack = []  # Tracks open sections
     xml_ids = []
@@ -226,21 +239,37 @@ def generateSections(soup):
 
     return soup
 
-def idml2hubxml(file):
-    input = IDML2XML_FOLDER + "/" + file
-    filename = Path(file).stem
-    tmpfile = tempfile.gettempdir()
-    # tmpfile = "output"
-    cmd = [IDML2XML_FOLDER + "/idml2xml.sh", "-o", tmpfile, file]
-    subprocess.run(cmd, capture_output=True) # comment out this line to just get the previous run of idml2xml
-    outputfile = tmpfile + "/" + filename + ".xml"
-    # print("Output of idml2xml written at: " + outputfile)
+def idml2hubxml(input, **options):
+    logging.info("idml2hubxml starting...")
+
+    filename = Path(input).stem
+
+    output_folder = options["idml2hubxml_output"]
+
+    if options["idml2hubxml_script"] is None:
+        msg = "Your .env file is missing the IDML2HUBXML_SCRIPT_FOLDER entry"
+        logging.error(msg)
+        raise NameError(msg)
+    else:
+        cmd = [options["idml2hubxml_script"] + "/idml2xml.sh", "-o", output_folder, input]
+        logging.info("Now running: " + " ".join(cmd))
+        subprocess.run(cmd, capture_output=True) # comment out this line to just get the previous run of idml2xml
+
+    outputfile = output_folder + "/" + filename + ".xml"
+    logfile = output_folder + "/" + filename + ".log"
+
+    logging.info("Output of idml2xml written at: " + outputfile)
+    logging.info("idml2xml log file written at: " + logfile)
+    logging.info("idml2hubxml done.")
     return outputfile
 
-def hubxml2docbook(file):
+def hubxml2docbook(file, **options):
+    logging.info("hubxml2docbook starting...")
     # Read the HTML input file
     with open(file, "r") as f:
         xml_content = f.read()
+
+    logging.info(file + " read succesfully!")
 
     soup = BeautifulSoup(xml_content, "xml")
 
@@ -256,29 +285,50 @@ def hubxml2docbook(file):
     removeUnnecessaryAttributes(soup)
     removeEmptyElements(soup)
     removeNsAttributes(soup)
-    mapList(soup)
-    generateSections(soup)
-    processImages(soup, False, "jpg", "svg", "images")
+
+    if options["map"]:
+        mapList(soup, options["map"])
+    else:
+        logging.warning("No map was specified. The conversion might not result in what you want.")
+
+    if not options["hierarchy"]: generateSections(soup)
+
+    processImages(soup,
+        False,
+        options["raster"],
+        options["vector"],
+        options["media"])
+
     soup = cleanURLsFromLineBreaks(soup) # must be done before removeLineBreaks and removeHyphens
-    removeLinebreaks(soup)
+
+    if not options["linebreaks"]: removeLinebreaks(soup)
     soup = removeHyphens(soup, "xml")
-    soup = removeMicrotypography(soup)
-    soup = addMicrotypography(soup)
 
-    # soup.prettify() adds `\n` around inline elements,
-    # which is parsed as spaces in Pandoc.
-    # str(soup) does it less, but to ensure we don't have
-    # this problem, we just remove linebreaks entirely.abs
-    result = str(soup).replace("\n", "")
+    if not options["typography"]:
+        soup = removeOrthotypography(soup)
+        soup = addOrthotypography(soup)
 
-    with open("output/output.xml", "w") as file:
-        file.write(result)
+    if options["prettify"]:
+        logging.warning("Prettifying can result in errors depending on whatcha wanna do afterwards!")
+        result = soup.prettify()
+        # prettify adds `\n` around inline elements,
+        # which is parsed as spaces in Pandoc.
+        # str(soup) does it less, but to ensure we don't have
+        # this problem, we just remove linebreaks entirely.
+    else:
+        result = str(soup).replace("\n", "")
+
+    logging.info("hubxml2docbook done.")
 
     return result
 
-def idml2docbook(file):
-    tmpfile = idml2hubxml(file)
-    # tmpfile = "output/output.xml"
-    docbook = hubxml2docbook(tmpfile)
-    # docbook = hubxml2docbook(file)
+def idml2docbook(input, **options):
+    logging.info("idml2docbook starting...")
+    if options["idml2hubxml_file"]:
+        hubxml = input
+        logging.warning("Directly reading the input as a hubxml file.")
+    else:
+        hubxml = idml2hubxml(input, **options)
+    docbook = hubxml2docbook(hubxml, **options)
+    logging.info("idml2docbook done.")
     return docbook
