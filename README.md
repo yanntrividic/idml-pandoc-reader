@@ -21,8 +21,10 @@ pandoc input.idml -f idml.lua [remplir à l'envi...]
 Dans notre cas, on veut être en mesure de garder les classes, et générer du Markdown compatible pour KirbyCMS, et cette commande est donc adaptée :
 
 ```bash
-pandoc input.idml -f idml.lua -t markdown_phpextra -o output.md --lua-filter=roles-to-classes.lua
+pandoc input.idml -f idml.lua -t markdown_phpextra -o output.md --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua
 ```
+
+Pour les fichiers IDML les plus lourds, il peut être nécessaire d'[augmenter la taille du tas Java](https://github.com/transpect/idml2xml-frontend/blob/master/idml2xml.sh#L33), par exemple à `2048m` ou `4096m`.
 
 ## HTML (hérité) comme format d'entrée
 
