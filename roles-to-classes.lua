@@ -10,9 +10,11 @@ end
 local function roles_to_classes(els)
     for _, el in ipairs(els) do
         if el.attributes and el.attributes.role then
-            -- Add the single role as a class
-            if not has_value(el.classes, el.attributes.role) then
-                el.classes:insert(el.attributes.role)
+            -- Add the space-separated roles as classes
+            for class in string.gmatch(el.attributes.role, "%S+") do
+                if not has_value(el.classes, class) then
+                    el.classes:insert(class)
+                end
             end
             -- Remove the original "role" attribute
             el.attributes.role = nil
