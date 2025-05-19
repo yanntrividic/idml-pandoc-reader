@@ -7,3 +7,5 @@ output
 bollo.*
 *.json
 *.native
+idml2hubxml
+*.xml
