@@ -55,4 +55,4 @@ def get_name_from_sections(xml):
     sections = soup.select("article > section")
     ids = []
     for section in sections: ids.append(section.attrs["xml:id"])
-    return "_".join(ids).lower()
+    return "_".join(ids[:10]).lower()
