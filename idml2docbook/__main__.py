@@ -6,7 +6,7 @@ import os
 
 from . import __version__, DEFAULT_OPTIONS, LOGGER
 from .idml2docbook import idml2docbook
-from .cut_sections import split_docbook
+from .cut import split_docbook
 
 # This file structure is inspired from weasyprint:
 # https://github.com/Kozea/WeasyPrint/blob/main/weasyprint/__main__.py

@@ -4,7 +4,7 @@ from idml2docbook import idml2docbook
 from utils import *
 import subprocess
 import os
-from map_helper import *
+from map import *
 
 def get_cuts(file):
     """Returns a list of classes that will allow to

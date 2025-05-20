@@ -7,7 +7,7 @@ import re
 import logging
 
 from utils import *
-from map_helper import *
+from map import *
 
 
 NODES_TO_REMOVE = [
