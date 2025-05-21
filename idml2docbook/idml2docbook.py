@@ -51,14 +51,19 @@ def unwrapUnnecessaryNodes(soup):
             logging.debug("Unwrapping " + tag)
             el.unwrap()
 
-def removeEmptyElements(soup, deleteElementsWithRoles):
-    """Removes empty paras, except when the para has a role
-    and keepElementsWithRoles is True.
-    must be called before mapList so that it is applied on all elements.
+def removeEmptyElements(soup, map):
+    """Removes empty paras, except when the para has a "empty" entry
+    in the map. Must be called before mapList so that it is applied on all elements.
     """
+    logging.info("Removing empty elements...")
     for el in soup.find_all("para"):
         if el.is_empty_element:
-            if not("role" in el.attrs and not deleteElementsWithRoles): el.decompose()
+            if "role" in el.attrs:
+                role = el.attrs["role"]
+                if role in map and "empty" not in map[role]:
+                    el.decompose()
+                else:
+                    logging.warning("Empty \"" + role + "\" has been kept.")
 
 def processImages(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
     logging.info("Processing media filenames...")
@@ -158,13 +163,13 @@ def addOrthotypography(soup):
 
     return BeautifulSoup(s, "xml")
 
-def mapList(soup, file):
+def mapList(soup, map):
     """Takes a soup and a map as arguments.
     Performs a series of operations depending
     on what the map describes.
     """
     logging.info("Starting to apply the roles' mapping...")
-    for key, value in getMap(file).items():
+    for key, value in map.items():
         for el in soup.find_all(attrs={"role": key}):
             if "unwrap" in value and value["unwrap"]:
                 el.unwrap()
@@ -259,9 +264,9 @@ def idml2hubxml(input, **options):
     output_folder = options["idml2hubxml_output"]
 
     if options["idml2hubxml_script"] is None:
-        msg = "Your .env file is missing the IDML2HUBXML_SCRIPT_FOLDER entry"
-        logging.error(msg)
-        raise NameError(msg)
+        e = NameError("Your .env file is missing the IDML2HUBXML_SCRIPT_FOLDER entry")
+        logging.error(e)
+        raise e
     else:
         cmd = [options["idml2hubxml_script"] + "/idml2xml.sh", "-o", output_folder, input]
         logging.info("Now running: " + " ".join(cmd))
@@ -281,6 +286,12 @@ def hubxml2docbook(file, **options):
     with open(file, "r") as f:
         xml_content = f.read()
 
+    map = {}
+    if options["map"]:
+        map = getMap(options["map"])
+    else:
+        logging.warning("No map was specified. The conversion might not result in what you want.")
+
     logging.info(file + " read succesfully!")
 
     soup = BeautifulSoup(xml_content, "xml")
@@ -297,13 +308,12 @@ def hubxml2docbook(file, **options):
     removeUnnecessaryAttributes(soup)
     removeNsAttributes(soup)
 
-    if not options["empty"]: logging.warning("Keeping empty elements with roles... It might keep unwanted residuous elements!")
-    removeEmptyElements(soup, not options["empty"])
-
-    if options["map"]:
-        mapList(soup, options["map"])
+    if not options["empty"]:
+        removeEmptyElements(soup, map)
     else:
-        logging.warning("No map was specified. The conversion might not result in what you want.")
+        logging.warning("Keeping empty elements with roles... It might keep unwanted residuous elements!")
+
+    if options["map"]: mapList(soup, map)
 
     if not options["hierarchy"]: generateSections(soup)
 
