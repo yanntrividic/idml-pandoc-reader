@@ -119,6 +119,10 @@ def main(argv=None, stdout=None, stdin=None):
     docbook = idml2docbook(args.input, **options)
     
     if(args.cut):
+        if not args.map:
+            e = ValueError("Trying to cut, but no map given as argument...")
+            logging.error(e)
+            raise e
         names, sections = split_docbook(docbook, **options)
         if(args.output):
             logging.info("Creating directory if it does not exist: " + args.output)
