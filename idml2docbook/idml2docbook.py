@@ -33,10 +33,6 @@ ATTRIBUTES_TO_REMOVE = [
     # "xmlns:idml2xml",
 ]
 
-EMPTY_TAGS_TO_REMOVE = [
-    "para"
-]
-
 def removeUnnecessaryLayers(soup):
     for layer in LAYERS_TO_REMOVE:
         for el in soup.find_all(attrs={"idml2xml:layer": layer}): el.decompose()
@@ -55,10 +51,14 @@ def unwrapUnnecessaryNodes(soup):
             logging.debug("Unwrapping " + tag)
             el.unwrap()
 
-def removeEmptyElements(soup):
-    for tag in EMPTY_TAGS_TO_REMOVE:
-        for el in soup.find_all(tag):
-            if el.is_empty_element: el.decompose()
+def removeEmptyElements(soup, deleteElementsWithRoles):
+    """Removes empty paras, except when the para has a role
+    and keepElementsWithRoles is True.
+    must be called before mapList so that it is applied on all elements.
+    """
+    for el in soup.find_all("para"):
+        if el.is_empty_element:
+            if not("role" in el.attrs and not deleteElementsWithRoles): el.decompose()
 
 def processImages(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
     logging.info("Processing media filenames...")
@@ -68,11 +68,22 @@ def processImages(soup, wrap_fig = False, rep_raster = None, rep_vector = None, 
     for tag in soup.select("para > mediaobject"):
         imagedata = tag.find_next("imagedata")
         fileref = imagedata["fileref"]
+        new_fileref = ""
 
         base, file_ext = os.path.splitext(fileref)
-        if rep_raster and (file_ext.lower() in RASTER_EXTS): fileref = base + "." + rep_raster
-        if rep_vector and (file_ext.lower() in VECTOR_EXTS): fileref = base + "." + rep_vector
-        if folder: imagedata["fileref"] = folder + "/" + fileref.split("/").pop()
+        if rep_raster and (file_ext.lower() in RASTER_EXTS): new_fileref = base + "." + rep_raster
+        if rep_vector and (file_ext.lower() in VECTOR_EXTS): new_fileref = base + "." + rep_vector
+
+        # Replace spaces with underscores
+        filename = new_fileref.split("/").pop()
+        if "%20" in filename:
+            logging.warning("Replacing space character in filename by '_': " + filename)
+            filename = filename.replace("%20", "_")
+            new_fileref = "/".join(new_fileref.split("/")[:-1]) + "/" + filename
+
+        if folder: imagedata["fileref"] = folder + "/" + new_fileref.split("/").pop()
+        else: imagedata["fileref"] = new_fileref
+
         if (rep_raster or rep_vector or folder):
             logging.debug("Media was: " + fileref)
             logging.debug("and is now: " + imagedata["fileref"])
@@ -165,6 +176,7 @@ def mapList(soup, file):
                 el.name = value["type"]
             if "role" in value:
                 el["role"] = value["role"]
+                if el["role"] == "": del el["role"]
             if not value: # when the dict is empty, remove the role
                 if el.has_attr("role"):
                     del el["role"]
@@ -283,8 +295,10 @@ def hubxml2docbook(file, **options):
     removeUnnecessaryNodes(soup)
     # removeUnnecessaryLayers(soup)
     removeUnnecessaryAttributes(soup)
-    removeEmptyElements(soup)
     removeNsAttributes(soup)
+
+    if not options["empty"]: logging.warning("Keeping empty elements with roles... It might keep unwanted residuous elements!")
+    removeEmptyElements(soup, not options["empty"])
 
     if options["map"]:
         mapList(soup, options["map"])

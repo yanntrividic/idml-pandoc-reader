@@ -57,6 +57,10 @@ PARSER.add_argument(
     help='filename of the JSON map file to perform role-specific actions, '
     'reads by default the value of the .env file')
 PARSER.add_argument(
+    '-e', '--empty', action='store_true',
+    help='do not remove empty elements with roles, '
+    'such as <para role="r"></para>, warning: may keep residuous elements!')
+PARSER.add_argument(
     '-g', '--hierarchy', action='store_true',
     help='do not generate nested sections out of a flat hierarchy, '
     'works in pair with --map')

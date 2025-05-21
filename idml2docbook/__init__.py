@@ -15,6 +15,7 @@ IDML2HUBXML_OUTPUT = os.getenv("IDML2HUBXML_OUTPUT_FOLDER") if os.getenv("IDML2H
 DEFAULT_OPTIONS = {
     'idml2hubxml_file': False,
     'map': os.getenv("MAP"),
+    'empty': False,
     'hierarchy': False,
     'cut': False,
     'names': False,
