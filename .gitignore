@@ -8,4 +8,5 @@ bollo.*
 *.json
 *.native
 idml2hubxml
+articles
 *.xml
