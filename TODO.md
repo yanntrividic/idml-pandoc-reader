@@ -9,7 +9,8 @@
 * [x] Handle the nested sections
 * [x] Make a wrapper script so that it is possible to specify a map through the command line, expose other options...
 * [ ] Write the documentation
-* [ ] Write a `setup.py` file 
+* [ ] Write a `setup.py` file
+* [ ] Add every option to the `.env` file so that the `idml.lua` file is usable on its own.
 
 ## Issues to publish on jgm/pandoc
 
