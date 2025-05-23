@@ -48,6 +48,8 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
+myst_heading_anchors = 6
+
 html_theme_options = {
     'language_selector': True,
     # Toc options
