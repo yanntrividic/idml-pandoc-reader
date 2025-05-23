@@ -11,4 +11,4 @@ idml2hubxml
 articles
 *.xml
 doctrees
-# objects.inv
+objects.inv
