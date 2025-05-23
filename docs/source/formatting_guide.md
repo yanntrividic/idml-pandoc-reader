@@ -41,11 +41,11 @@ Pour éviter tout problème, mieux vaut utiliser seulement des caractères alpha
 ❌ `Mon super-étonnant fichier InDesign.indd` \
 ✔️ `Mon_super_etonnant_fichier_InDesign.indd`
 
-## Notes de bas de page, listes, textes alternatifs
+### Notes de bas de page, listes, textes alternatifs
 
 Le convertisseur supporte entre autres les notes de bas de page, les listes et les textes alternatifs. Cependant, pour que cela soit bien reconnu, il faut en premier lieu les formater correctement dans InDesign.
 
-## Hyperliens
+### Hyperliens
 
 Dans le cas d'un PDF pour l'impression, il est souvent nécessaire de faire figurer l'URL au complet. Si l'URL est correctement renseignée dans InDesign (c'est-à-dire, en spécifiant que l'URL et son texte de remplacement sont les mêmes), alors cela fonctionnera sans problème.
 
@@ -58,11 +58,11 @@ https://www.example
 
 Sera converti en [https://www.example.org](https://www.example.org), mais pas `https://www.example .org` si le `https://` n'était pas présent.
 
-## Retour à la ligne et saut de paragraphe
+### Retour à la ligne et saut de paragraphe
 
 Les retours à la ligne sont automatiquement convertis en caractères espace ` `.
 
-Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont supprimés, sauf si l'option `--empty` est active, ou que le bloc porte un style de parapraphe portant l'attribut `empty` dans le fichier JSON de correspondance. Voir _Correspondance des styles_.
+Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont supprimés, sauf si l'option `--empty` est active, ou que le bloc porte un style de parapraphe portant l'attribut `empty` dans le fichier JSON de correspondance. Voir [Correspondance des styles](/usage.html/#correspondance_des_styles).
 
 ## Limitations
 

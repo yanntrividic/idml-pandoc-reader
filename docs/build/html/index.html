@@ -1,0 +1,145 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDML Pandoc reader &mdash; Documentation IDML Pandoc reader 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=897fae25"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Contenus du dépôt" href="contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            IDML Pandoc reader
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Contenus du dépôt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prérequis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="formatting_guide.html">Guide de formatage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribuer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licence.html">Licence</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">IDML Pandoc reader</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">IDML Pandoc reader</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.md.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="idml-pandoc-reader">
+<h1>IDML Pandoc reader<a class="headerlink" href="#idml-pandoc-reader" title="Lien vers cette rubrique"></a></h1>
+<p>Le dépôt <a class="reference external" href="https://gitlab.com/deborderbollore/idml-pandoc-reader">deborderbollore/idml-pandoc-reader</a> contient un programme en ligne de commande automatisant la lecture de fichiers IDML (InDesign Markup Language) pour <a class="reference external" href="https://pandoc.org">Pandoc</a>. Pandoc est un convertisseur universel pouvant convertir énormément de formats de fichiers d’entrée vers énormément de formats de fichiers de sortie, dont DOCX, ODT, HTML, Markdown, AsciiDoc, <a class="reference external" href="https://pandoc.org/diagram.svgz">etc.</a> <strong>Seule la structure du document est convertie, la mise en forme est totalement ignorée.</strong></p>
+<p>Le développement de ce programme a été effectué dans le contexte du projet <a class="reference external" href="https://deborderbollore.fr">Déborder Bolloré</a>, où il était nécessaire de faire coexister les compétences expertes de graphistes utilisateurices d’Adobe InDesign et de développeureuses web, dans l’idée de produire une publication multiformat accessible quel que soit le contexte de lecture.</p>
+<div style="color:orangered">
+<p>À terme, une interface web viendra faciliter l’utilisation de ce programme. Cette interface s’appellera <strong>OutDesign</strong>.</p>
+</div>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="contents.html">Contenus du dépôt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prérequis</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#dependances">Dépendances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#configuration-de-lenvironnement-env">Configuration de l’environnement .env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="prerequisites.html#test-de-la-configuration">Test de la configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="formatting_guide.html">Guide de formatage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="formatting_guide.html#en-guide-dintroduction-a-propos-du-format-idml">En guide d’introduction : à propos du format IDML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formatting_guide.html#recommandations">Recommandations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="formatting_guide.html#limitations">Limitations</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#preparation-des-fichiers-idml">Préparation des fichiers IDML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#correspondance-des-styles">Correspondance des styles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#commandes-de-base">Commandes de base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#detail-de-la-commande-permettant-de-convertir-le-recueil-deborder-bollore">Détail de la commande permettant de convertir le recueil <em>Déborder Bolloré</em></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribuer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licence.html">Licence</a></li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="contents.html" class="btn btn-neutral float-right" title="Contenus du dépôt" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yann Trividic.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
