@@ -10,4 +10,5 @@ bollo.*
 idml2hubxml
 articles
 *.xml
-doctree
+doctrees
+# objects.inv

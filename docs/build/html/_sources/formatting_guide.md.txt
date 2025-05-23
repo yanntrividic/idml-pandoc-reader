@@ -1,6 +1,6 @@
 # Guide de formatage
 
-## En guide d'introduction : à propos du format IDML
+## En guise d'introduction : à propos du format IDML
 
 IDML est le format "ouvert"[^cookbook] d'Adobe InDesign, le format de retrocompabilité d'InDesign (c'est-à-dire le format que toutes les versions d'InDesign peuvent lire), a contrario du format INDD qui est spécifique à chaque version. IDML est aussi le format que l'on peut lire et interpréter sans avoir besoin de lancer InDesign, car un fichier IDML est en fait une sorte d'[archive zippée](https://fr.wikipedia.org/wiki/ZIP_(format_de_fichier)) d'une arborescence de fichiers [XML](https://fr.wikipedia.org/wiki/Extensible_Markup_Language).
 
