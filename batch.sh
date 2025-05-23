@@ -9,11 +9,13 @@
 @license CC BY-SA
 '
 
+source .env
+
 mkdir -p "$2"
 
 for i in "$1"/*.xml; do
   filename=$(basename "$i" .xml)
-  pandoc \
+  $PANDOC_EXECUTABLE \
     -f docbook \
     -t markdown_phpextra \
     --wrap=none \

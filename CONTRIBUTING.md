@@ -11,14 +11,15 @@ This project is an ongoing work. Want to contribute? You can:
 ### For this project
 
 * [x] Make a wrapper that is able to pipe distinct sections into the reader so that several ouput files are produced
-* [ ] Write the editorial chart
+* [x] Write the ~~editorial chart~~ formatting guide
 * [x] Make a nice JSON template that shows how to write down a `map.json`, and pass add an optional argument to `preprocessing.py` to specify a custom JSON file
 * [x] Try out incorporating alt-text in InDesign, does it follow in HTML Legacy?
 * [x] Handle the nested sections
 * [x] Make a wrapper script so that it is possible to specify a map through the command line, expose other options...
-* [ ] Write the documentation
+* [x] Write the documentation
 * [ ] Write a `setup.py` file
-* [ ] Add every option to the `.env` file so that the `idml.lua` file is usable on its own.
+* [ ] Add every option to the `.env` file so that the `idml.lua` file is usable on its own
+* [ ] Enable CSS selectors in map files
 
 ### Issues to publish on jgm/pandoc
 
