@@ -1,0 +1,32 @@
+# SEE https://gitlab.com/pages/plain-html
+image: alpine:latest
+
+stages:
+  - deploy_doc
+
+doc:
+  stage: deploy_doc
+  only:
+    - main
+  before_script:
+    # Installation de openssh, rsync [et ssh-agent]
+    - apk add git curl rsync
+    - 'command -v ssh-agent >/dev/null || ( apk add --update openssh )'
+    # Ajout de la clé privée
+    - eval $(ssh-agent -s)
+    - echo "$PRIVATEKEY" | tr -d '\r' | ssh-add -
+    # Ajout de la clé publique
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $PUBHOST >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    # Commande de test
+    - ssh -vv $USER@$PUBHOST echo "Hello"
+    # Synchronisation des fichiers avec rsync
+    - rsync 
+      -av --checksum --fuzzy
+      --include='.htaccess'
+      --include='.htpasswd'
+      --exclude '.*'
+      ./docs/build/html $USER@$PUBHOST:$PUBDIR
