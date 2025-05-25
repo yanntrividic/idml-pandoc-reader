@@ -1,5 +1,5 @@
 digraph conversions {
-    // bgcolor="transparent"
+    bgcolor="transparent"
     rankdir="LR"
     p [shape=box label="Pandoc AST"]
     "IDML":e -> "Hub XML":sw [xlabel="\nidml2xml" style="dotted" fontsize=13 arrowhead=none];
