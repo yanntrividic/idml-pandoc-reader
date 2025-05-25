@@ -1,10 +1,14 @@
 digraph simplified_conversions {
     bgcolor="transparent"
     p [shape=box label="Pandoc"]
-    "IDML" -> p [label=""];
+    id [shape=diamond label="InDesign"]
+    id -> p [label=""];
     p -> "ODT";
+    p -> "DOCX";
     p -> "HTML";
     p -> "Markdown";
     p -> "AsciiDoc";
-    p -> "etc.";
+    p -> "EPUB";
+    etc [shape=octagon label="etc."]
+    p -> etc;
 }

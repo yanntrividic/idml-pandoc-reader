@@ -9,7 +9,9 @@ digraph conversions {
     p -> "DOCX" [xlabel="Pandoc writers    \n + Lua    " fontsize=13];
     p -> "ODT";
     p -> "HTML";
+    p -> "EPUB";
     p -> "Markdown";
     p -> "AsciiDoc";
-    p -> "etc.";
+    etc [shape=octagon label="etc."]
+    p -> etc;
 }

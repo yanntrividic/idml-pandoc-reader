@@ -94,7 +94,7 @@
 <li><p>Utiliser le <em>writer</em> de Pandoc souhaité.</p></li>
 </ol>
 <figure class="align-center" id="id1">
-<div class="graphviz"><object data="_images/graphviz-7d731fd55fe41a4424592c2ecfb26e3500f37fb4.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="_images/graphviz-33b28947432d511b9c0ff5f379470da769374413.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph conversions {
     bgcolor=&quot;transparent&quot;
     rankdir=&quot;LR&quot;
@@ -106,9 +106,11 @@
     p -&gt; &quot;DOCX&quot; [xlabel=&quot;Pandoc writers    \n + Lua    &quot; fontsize=13];
     p -&gt; &quot;ODT&quot;;
     p -&gt; &quot;HTML&quot;;
+    p -&gt; &quot;EPUB&quot;;
     p -&gt; &quot;Markdown&quot;;
     p -&gt; &quot;AsciiDoc&quot;;
-    p -&gt; &quot;etc.&quot;;
+    etc [shape=octagon label=&quot;etc.&quot;]
+    p -&gt; etc;
 }</p></object></div>
 <figcaption>
 <p><span class="caption-text"><em>Graphe des conversions à l’œuvre dans ce projet.</em></span><a class="headerlink" href="#id1" title="Lien vers cette image"></a></p>
