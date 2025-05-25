@@ -1,0 +1,10 @@
+digraph simplified_conversions {
+    bgcolor="transparent"
+    p [shape=box label="Pandoc"]
+    "IDML" -> p [label=""];
+    p -> "ODT";
+    p -> "HTML";
+    p -> "Markdown";
+    p -> "AsciiDoc";
+    p -> "etc.";
+}

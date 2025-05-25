@@ -2,6 +2,15 @@ footer [role="contentinfo"] {
   display: none;
 }
 
+.rst-content figure .caption-text {
+  font-style: normal;
+  margin-top: .5em;
+}
+
+figcaption {
+  margin-top: .5em;
+}
+
 /* Taken from https://club1.fr/docs/en/_static/club1.css */
 /* Style links on hover */
 a:not(.btn):hover {

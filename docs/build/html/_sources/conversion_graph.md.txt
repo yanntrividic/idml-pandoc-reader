@@ -12,5 +12,6 @@ Ces deux premières étapes sont les objectifs du paquet `idml2docbook` dévelop
 5. Utiliser le _writer_ de Pandoc souhaité.
 
 ```{graphviz} conversions.dot
-:caption: "Graphe des conversions à l'œuvre dans ce projet."
+:caption: _Graphe des conversions à l'œuvre dans ce projet._
+:align: center
 ```
