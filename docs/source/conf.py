@@ -17,7 +17,8 @@ release = '0.1.0'
 extensions = [
     'myst_parser',
     'sphinx_rtd_theme',
-    'sphinx.ext.autosectionlabel'
+    'sphinx.ext.autosectionlabel',
+    'sphinx.ext.graphviz'
 ]
 
 templates_path = ['_templates']
@@ -69,3 +70,5 @@ html_static_path = ['_static']
 html_css_files = [
     'custom.css',
 ]
+
+graphviz_output_format="svg"

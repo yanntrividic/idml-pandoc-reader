@@ -19,6 +19,7 @@ contents
 prerequisites
 usage
 formatting_guide
+conversion_graph
 contribute
 licence
 ```

@@ -1,0 +1,15 @@
+digraph conversions {
+    bgcolor="transparent"
+    rankdir="LR"
+    p [shape=box label="Pandoc AST"]
+    "IDML" -> "HubXML" [xlabel="\nidml2xml" style="dotted" fontsize=13];
+    "HubXML" -> "DocBook" [xlabel="\nhubxml2docbook" style="dotted" fontsize=13];
+    "IDML" -> "DocBook" [label="\n\nidml2docbook" labelloc="b" fontsize=13];
+    "DocBook" -> p [label="Pandoc\nDocBook\nreader" fontsize=13];
+    p -> "DOCX" [xlabel="Pandoc writers    \n + Lua    " fontsize=13];
+    p -> "ODT";
+    p -> "HTML";
+    p -> "Markdown";
+    p -> "AsciiDoc";
+    p -> "etc.";
+}

@@ -1,5 +1,7 @@
 # Prérequis
 
+Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de conversions](/conversion_graph).
+
 ## Dépendances
 
 Le format IDML est complexe, et il est difficile d'en extraire les informations. Dans l'idéal, ce dépôt consisterait en un seul fichier Haskell, comme [les autres lecteurs de Pandoc](https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers). Cependant, cela prendrait un temps fou à développer.

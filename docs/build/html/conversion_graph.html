@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Licence &mdash; Documentation IDML Pandoc reader 0.1.0</title>
+  <title>Graphe de conversions &mdash; Documentation IDML Pandoc reader 0.1.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -22,7 +22,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
-    <link rel="prev" title="Contribuer" href="contribute.html" /> 
+    <link rel="next" title="Contribuer" href="contribute.html" />
+    <link rel="prev" title="Guide de formatage" href="formatting_guide.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -50,9 +51,9 @@
 <li class="toctree-l1"><a class="reference internal" href="prerequisites.html">Prérequis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="formatting_guide.html">Guide de formatage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="conversion_graph.html">Graphe de conversions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Graphe de conversions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="contribute.html">Contribuer</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Licence</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licence.html">Licence</a></li>
 </ul>
 
         </div>
@@ -69,9 +70,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Licence</li>
+      <li class="breadcrumb-item active">Graphe de conversions</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/licence.md.txt" rel="nofollow"> Afficher la source de la page</a>
+            <a href="_sources/conversion_graph.md.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
   </ul>
   <hr/>
@@ -79,16 +80,48 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="licence">
-<h1>Licence<a class="headerlink" href="#licence" title="Lien vers cette rubrique"></a></h1>
-<p><a href="https://gitlab.com/deborderbollore/idml-pandoc-reader">IDML Pandoc Reader</a> © 2025 par <a href="https://yanntrividic.fr">Yann Trividic</a> est distribué sous licence <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="graphe-de-conversions">
+<h1>Graphe de conversions<a class="headerlink" href="#graphe-de-conversions" title="Lien vers cette rubrique"></a></h1>
+<p>La logique derrière ce projet est la suivante :</p>
+<ol class="arabic simple">
+<li><p>Prendre un fichier IDML en entrée, et le donner à <a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a> pour obtenir un fichier <a class="reference external" href="https://github.com/le-tex/Hub">HubXML</a> ;</p></li>
+<li><p>À partir de ce fichier, le “nettoyer” pour obtenir un document dans la spécification DocBook 5.1, supportée par Pandoc ;</p></li>
+</ol>
+<p>Ces deux premières étapes sont les objectifs du paquet <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> développé pour ce projet.</p>
+<ol class="arabic simple" start="3">
+<li><p>Lire le fichier DocBook produit avec la <a class="reference external" href="https://github.com/yanntrividic/pandoc/">version modifiée de Pandoc</a> ;</p></li>
+<li><p>Appliquer des filtres Lua pour correctement structurer l’<a class="reference external" href="https://fr.wikipedia.org/wiki/Arbre_de_la_syntaxe_abstraite">arbre de syntaxe abstraite</a> (AST) de Pandoc ;</p></li>
+<li><p>Utiliser le <em>writer</em> de Pandoc souhaité.</p></li>
+</ol>
+<figure class="align-default" id="id1">
+<div class="graphviz"><object data="_images/graphviz-7d731fd55fe41a4424592c2ecfb26e3500f37fb4.svg" type="image/svg+xml" class="graphviz">
+<p class="warning">digraph conversions {
+    bgcolor=&quot;transparent&quot;
+    rankdir=&quot;LR&quot;
+    p [shape=box label=&quot;Pandoc AST&quot;]
+    &quot;IDML&quot; -&gt; &quot;HubXML&quot; [xlabel=&quot;\nidml2xml&quot; style=&quot;dotted&quot; fontsize=13];
+    &quot;HubXML&quot; -&gt; &quot;DocBook&quot; [xlabel=&quot;\nhubxml2docbook&quot; style=&quot;dotted&quot; fontsize=13];
+    &quot;IDML&quot; -&gt; &quot;DocBook&quot; [label=&quot;\n\nidml2docbook&quot; labelloc=&quot;b&quot; fontsize=13];
+    &quot;DocBook&quot; -&gt; p [label=&quot;Pandoc\nDocBook\nreader&quot; fontsize=13];
+    p -&gt; &quot;DOCX&quot; [xlabel=&quot;Pandoc writers    \n + Lua    &quot; fontsize=13];
+    p -&gt; &quot;ODT&quot;;
+    p -&gt; &quot;HTML&quot;;
+    p -&gt; &quot;Markdown&quot;;
+    p -&gt; &quot;AsciiDoc&quot;;
+    p -&gt; &quot;etc.&quot;;
+}</p></object></div>
+<figcaption>
+<p><span class="caption-text">Graphe des conversions à l’œuvre dans ce projet.</span><a class="headerlink" href="#id1" title="Lien vers cette image"></a></p>
+</figcaption>
+</figure>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
-        <a href="contribute.html" class="btn btn-neutral float-left" title="Contribuer" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="formatting_guide.html" class="btn btn-neutral float-left" title="Guide de formatage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="contribute.html" class="btn btn-neutral float-right" title="Contribuer" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
