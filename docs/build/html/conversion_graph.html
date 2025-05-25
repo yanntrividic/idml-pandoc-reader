@@ -84,7 +84,7 @@
 <h1>Graphe de conversions<a class="headerlink" href="#graphe-de-conversions" title="Lien vers cette rubrique"></a></h1>
 <p>La logique derrière ce projet est la suivante :</p>
 <ol class="arabic simple">
-<li><p>Prendre un fichier IDML en entrée, et le donner à <a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a> pour obtenir un fichier <a class="reference external" href="https://github.com/le-tex/Hub">HubXML</a> ;</p></li>
+<li><p>Prendre un fichier IDML en entrée, et le donner à <a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a> pour obtenir un fichier <a class="reference external" href="https://github.com/le-tex/Hub">Hub XML</a> ;</p></li>
 <li><p>À partir de ce fichier, le “nettoyer” pour obtenir un document dans la spécification DocBook 5.1, supportée par Pandoc ;</p></li>
 </ol>
 <p>Ces deux premières étapes sont les objectifs du paquet <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> développé pour ce projet.</p>
@@ -94,13 +94,13 @@
 <li><p>Utiliser le <em>writer</em> de Pandoc souhaité.</p></li>
 </ol>
 <figure class="align-center" id="id1">
-<div class="graphviz"><object data="_images/graphviz-33b28947432d511b9c0ff5f379470da769374413.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="_images/graphviz-9ec94c423b8070603811eb5ca5cb3431ac3ddff4.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph conversions {
-    bgcolor=&quot;transparent&quot;
+    // bgcolor=&quot;transparent&quot;
     rankdir=&quot;LR&quot;
     p [shape=box label=&quot;Pandoc AST&quot;]
-    &quot;IDML&quot; -&gt; &quot;HubXML&quot; [xlabel=&quot;\nidml2xml&quot; style=&quot;dotted&quot; fontsize=13];
-    &quot;HubXML&quot; -&gt; &quot;DocBook&quot; [xlabel=&quot;\nhubxml2docbook&quot; style=&quot;dotted&quot; fontsize=13];
+    &quot;IDML&quot;:e -&gt; &quot;Hub XML&quot;:sw [xlabel=&quot;\nidml2xml&quot; style=&quot;dotted&quot; fontsize=13 arrowhead=none];
+    &quot;Hub XML&quot;:se -&gt; &quot;DocBook&quot;:w [xlabel=&quot;\nhubxml2docbook&quot; style=&quot;dotted&quot; fontsize=13 arrowhead=none];
     &quot;IDML&quot; -&gt; &quot;DocBook&quot; [label=&quot;\n\nidml2docbook&quot; labelloc=&quot;b&quot; fontsize=13];
     &quot;DocBook&quot; -&gt; p [label=&quot;Pandoc\nDocBook\nreader&quot; fontsize=13];
     p -&gt; &quot;DOCX&quot; [xlabel=&quot;Pandoc writers    \n + Lua    &quot; fontsize=13];

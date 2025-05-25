@@ -6,7 +6,7 @@ Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de conve
 
 Le format IDML est complexe, et il est difficile d'en extraire les informations. Dans l'idéal, ce dépôt consisterait en un seul fichier Haskell, comme [les autres lecteurs de Pandoc](https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers). Cependant, cela prendrait un temps fou à développer.
 
-D'autres se sont penché·es sur la question de la lecture de fichiers IDML, en particulier le projet [`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend), distribué sous licence FreeBSD. Nous construisons notre convertisseur en continuant ce travail, en proposant un [_binding_](https://fr.wikipedia.org/wiki/Binding) entre `idml2xml-frontend` et Pandoc, c'est-à-dire en convertissant la sortie HubXML de `idml2xml-frontend` vers le format DocBook 5.1.
+D'autres se sont penché·es sur la question de la lecture de fichiers IDML, en particulier le projet [`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend), distribué sous licence FreeBSD. Nous construisons notre convertisseur en continuant ce travail, en proposant un [_binding_](https://fr.wikipedia.org/wiki/Binding) entre `idml2xml-frontend` et Pandoc, c'est-à-dire en convertissant la sortie Hub XML de `idml2xml-frontend` vers le format DocBook 5.1.
 
 Les dépendances sont :
 

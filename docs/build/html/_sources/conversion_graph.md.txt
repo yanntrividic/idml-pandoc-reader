@@ -2,7 +2,7 @@
 
 La logique derrière ce projet est la suivante :
 
-1. Prendre un fichier IDML en entrée, et le donner à [`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend) pour obtenir un fichier [HubXML](https://github.com/le-tex/Hub) ;
+1. Prendre un fichier IDML en entrée, et le donner à [`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend) pour obtenir un fichier [Hub XML](https://github.com/le-tex/Hub) ;
 2. À partir de ce fichier, le "nettoyer" pour obtenir un document dans la spécification DocBook 5.1, supportée par Pandoc ;
 
 Ces deux premières étapes sont les objectifs du paquet `idml2docbook` développé pour ce projet.
