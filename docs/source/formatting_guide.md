@@ -14,7 +14,7 @@ Par-delà cette complexité, le fait qu'InDesign soit un logiciel WYSIWYG[^wysiw
 
 [^direct]: Le formatage direct est le formatage appliqué sans structure, par exemple en identifiant un titre uniquement en gras avec un corps de texte important, ou placer un bloc dans la page (comme une image) sans l'ancrer dans le flux du texte.
 
-Pour ces différentes raisons, **ce convertisseur fonctionne mieux lorsque certaines bonnes pratiques de formatage sont appliquées.** De manière générale, la plupart de ces recommandations sont aussi émises par Adobe pour structurer un ficheir InDesign.
+Pour ces différentes raisons, **ce convertisseur fonctionne mieux lorsque certaines bonnes pratiques de formatage sont appliquées.** De manière générale, la plupart de ces recommandations sont aussi émises par Adobe pour structurer un fichier InDesign.
 
 ## Recommandations
 
@@ -62,7 +62,7 @@ Sera converti en [https://www.example.org](https://www.example.org), mais pas `h
 
 Les retours à la ligne sont automatiquement convertis en caractères espace ` `.
 
-Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont supprimés, sauf si l'option `--empty` est active, ou que le bloc porte un style de parapraphe portant l'attribut `empty` dans le fichier JSON de correspondance. Voir [Correspondance des styles](https://outdesign.deborderbollore.fr/usage.html/#correspondance_des_styles).
+Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont supprimés, sauf si l'option `--empty` est active, ou que le bloc porte un style de parapraphe portant l'attribut `empty` dans le fichier JSON de correspondance. Voir [Correspondance des styles](https://outdesign.deborderbollore.fr/usage.html#correspondance_des_styles).
 
 ## Limitations
 
