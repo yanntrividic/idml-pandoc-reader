@@ -17,8 +17,8 @@ caption: Documentation
 ---
 contents
 prerequisites
-formatting_guide
 usage
+formatting_guide
 contribute
 licence
 ```
