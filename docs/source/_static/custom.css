@@ -1,0 +1,9 @@
+footer [role="contentinfo"] {
+  display: none;
+}
+
+/* Taken from https://club1.fr/docs/en/_static/club1.css */
+/* Style links on hover */
+a:not(.btn):hover {
+	text-decoration: underline solid 1px !important;
+}
