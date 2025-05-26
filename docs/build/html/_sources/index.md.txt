@@ -9,7 +9,7 @@ Le dépôt [deborderbollore/idml-pandoc-reader](https://gitlab.com/deborderbollo
 
 Le développement de ce programme a été effectué dans le contexte du projet [Déborder Bolloré](https://deborderbollore.fr), où il était nécessaire de faire coexister les compétences expertes de graphistes utilisateurices d'Adobe InDesign et de développeureuses web, dans l'idée de produire une publication multiformat accessible quel que soit le contexte de lecture. 
 
-<div style="color:orangered">
+<div style="color:#cb3a3c;">
 
 À terme, une interface web viendra faciliter l'utilisation de ce programme. Cette interface s'appellera **OutDesign**.
 
