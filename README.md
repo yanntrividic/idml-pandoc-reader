@@ -4,11 +4,7 @@ Ce dépôt contient un programme en ligne de commande automatisant la lecture de
 
 Le développement de ce programme a été effectué dans le contexte du projet [Déborder Bolloré](https://deborderbollore.fr), où il était nécessaire de faire coexister les compétences expertes de graphistes utilisateurices d'Adobe InDesign et de développeureuses web, dans l'idée de produire une publication multiformat accessible quel que soit le contexte de lecture. 
 
-<div style="color:#e24329;">
-
-À terme, une interface web viendra faciliter l'utilisation de ce programme. Cette interface s'appellera **OutDesign**, en réponse à la concentration dans les logiciels d'édition.
-
-</div>
+🚨 À terme, une interface web viendra faciliter l'utilisation de ce programme. Cette interface s'appellera **OutDesign**, en réponse à la concentration dans les logiciels d'édition.
 
 Une documentation de ce dépôt est déployée en ligne sur [outdesign.deborderbollore.fr](https://outdesign.deborderbollore.fr).
 
