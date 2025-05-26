@@ -6,7 +6,7 @@ Le développement de ce programme a été effectué dans le contexte du projet [
 
 🚨 À terme, une interface web viendra faciliter l'utilisation de ce programme. Cette interface s'appellera **OutDesign**, en réponse à la concentration dans les logiciels d'édition.
 
-Une documentation de ce dépôt est déployée en ligne sur [outdesign.deborderbollore.fr](https://outdesign.deborderbollore.fr).
+La documentation de ce dépôt (`docs`) est déployée en ligne sur [outdesign.deborderbollore.fr](https://outdesign.deborderbollore.fr).
 
 ::include{file=./docs/source/contribute.md}
 

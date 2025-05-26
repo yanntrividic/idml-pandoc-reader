@@ -5,7 +5,7 @@ sources
 output
 *.log
 bollo.*
-*.json
+map.json
 *.native
 idml2hubxml
 articles

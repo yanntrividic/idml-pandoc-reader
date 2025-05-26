@@ -10,22 +10,23 @@ sys.path.append(os.path.dirname(os.path.realpath(__file__)))
 
 VERSION = __version__ = "0.1.0"
 
-IDML2HUBXML_OUTPUT = os.getenv("IDML2HUBXML_OUTPUT_FOLDER") if os.getenv("IDML2HUBXML_OUTPUT_FOLDER") else "idml2hubxml"
+def getEnvOrDefault(envConst, default=False):
+    return os.getenv(envConst) if os.getenv(envConst) else default
 
 DEFAULT_OPTIONS = {
     'idml2hubxml_file': False,
     'map': os.getenv("MAP"),
-    'empty': False,
-    'hierarchy': False,
-    'cut': False,
-    'names': False,
-    'typography': False,
-    'linebreaks': False,
-    'prettify': False,
-    'media': "Links",
-    'raster': None,
-    'vector': None,
-    'idml2hubxml_output': IDML2HUBXML_OUTPUT,
+    'empty': getEnvOrDefault("EMPTY"),
+    'hierarchy': getEnvOrDefault("HIERARCHY"),
+    'cut': getEnvOrDefault("CUT"),
+    'names': getEnvOrDefault("NAMES"),
+    'typography': getEnvOrDefault("TYPOGRAPHY"),
+    'linebreaks': getEnvOrDefault("LINEBREAKS"),
+    'prettify': getEnvOrDefault("PRETTIFY"),
+    'media': getEnvOrDefault("MEDIA", "Links"),
+    'raster': getEnvOrDefault("RASTER", None),
+    'vector': getEnvOrDefault("VECTOR", None),
+    'idml2hubxml_output': getEnvOrDefault("IDML2HUBXML_OUTPUT_FOLDER", "idml2hubxml"),
     'idml2hubxml_script': os.getenv("IDML2HUBXML_SCRIPT_FOLDER"),
 }
 

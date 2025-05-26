@@ -1,0 +1,27 @@
+[{
+    "Courant_01": { "role": "space-para" },
+    "Courant_02": {},
+    "Citations": { "role" : "blockquote" },
+
+    "Titre": { "type": "title", "level": 1, "role": "" },
+    "Titre_02": { "type": "title", "level": 2, "role": "" },
+    "Titre_sans_auteurice" : { "cut": true, "empty": true, "role": "author", "type": "title", "level": 1 },
+    "intertitre": { "type": "title", "level": 2, "role": "subhead" },
+    "Nom_de_l_auteur": { "role" : "author", "cut": true, "type": "title", "level": 1 },
+
+    "Italique": { "type" : "emphasis", "role": "italics" },
+    "exposant": { "type": "superscript" },
+    "Small_Caps": { "role": "small-caps" },
+    "Italique_soulign_": { "role": "italics underline" },
+    "Small_Caps_Italique" : {"role": "italics small-caps" },
+    "Aalter_9_5": { "role": "aalter"},
+
+    "Titre_courant": { "delete": true },
+    "Num_rotation_notes": { "delete": true },
+    "Chiffres_diagramme": { "delete": true },
+    "Appels_de_notes": { "unwrap": true },
+
+    "Appel_de_notes_titre": { "unwrap": true },
+    "Note_de_bas_de_pages": {},
+    "CAPITALES": { "unwrap": true }
+}]

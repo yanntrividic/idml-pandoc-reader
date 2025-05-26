@@ -8,7 +8,7 @@ Un [guide de formatage](/formatting_guide) indique comment préparer les fichier
 
 Une fois la [version modifiée de Pandoc](https://github.com/yanntrividic/pandoc/) installée, Pandoc sera en mesure d'interpréter les attributs `role` des éléments des fichiers DocBook obtenus après conversion. Ces rôles sont ensuite considérés comme des classes par Pandoc grâce au filtre `roles-to-classes.lua`.
 
-Les attributs `role` correspondent aux styles de paragraphes et de caractères précisés dans InDesign. Comme illustré dans le fichier `map.json.sample`, il est possible d'associer ces styles de paragraphes et de caractères à des traitements particuliers :
+Les attributs `role` correspondent aux styles de paragraphes et de caractères précisés dans InDesign. Comme illustré dans le fichier `maps/sample.json`, il est possible d'associer ces styles de paragraphes et de caractères à des traitements particuliers :
 
 * `role` : remplace le rôle du fichier source par une ou plusieurs classes ;
 * `type` : change le type d'élément (par défaut, `para` pour tous les éléments) vers un nouveau type ;
@@ -16,7 +16,8 @@ Les attributs `role` correspondent aux styles de paragraphes et de caractères p
 * `delete` : supprime les éléments avec cet attribut `role` ;
 * `unwrap` : déplie le contenu de ces éléments dans l'élément parent ;
 * `cut` : crée un nouveau fichier avant chaque élément ayant ce `role` ;
-* `empty` : conserve les éléments vides portant ce `role` (tous les autres éléments vides sont supprimés, sauf si l'option `-e`/`--empty` est active).
+* `empty` : conserve les éléments vides portant ce `role` (tous les autres éléments vides sont supprimés, sauf si l'option `-e`/`--empty` est active) ;
+* Si l'entrée est vide (`{}`) alors l'attribute `role` est supprimé.
 
 Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :
 
