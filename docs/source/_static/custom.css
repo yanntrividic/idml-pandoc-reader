@@ -14,7 +14,16 @@ footer [role="contentinfo"] {
   border-color: #cb3a3c; /* #2472a4; */
 }
 
-.wy-menu-vertical header, .wy-menu-vertical p.caption {
+a {
+  color: #cb3a3c;
+}
+
+a.reference.internal:active {
+  background-color: #ba3235; /* #2980b9; */
+}
+
+.wy-menu-vertical header, .wy-menu-vertical p.caption,
+a:hover {
   color: #db7678; /* #55a5d9; */
 }
 
