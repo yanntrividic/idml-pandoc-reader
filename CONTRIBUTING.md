@@ -20,6 +20,9 @@ This project is an ongoing work. Want to contribute? You can:
 * [ ] Write a `setup.py` file
 * [ ] Add every option to the `.env` file so that the `idml.lua` file is usable on its own
 * [ ] Enable CSS selectors in map files
+* [ ] Translate the docs to english
+* [ ] Publish the package on [PyPI](https://pypi.org/)
+* [ ] Mirror the repo on GitHub
 
 ### Issues to publish on jgm/pandoc
 
