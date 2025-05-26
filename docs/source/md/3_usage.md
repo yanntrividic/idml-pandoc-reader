@@ -2,7 +2,7 @@
 
 ## Préparation des fichiers IDML
 
-Un [guide de formatage](/formatting_guide) indique comment préparer les fichiers InDesign. Même s'il n'est pas obligatoire de suivre ces recommandations pour utiliser le convertisseur, la qualité du résultat obtenu peut varier grandement selon la manière dont vous avez conçu votre document.
+Un [guide de formatage](/md/4_formatting_guide) indique comment préparer les fichiers InDesign. Même s'il n'est pas obligatoire de suivre ces recommandations pour utiliser le convertisseur, la qualité du résultat obtenu peut varier grandement selon la manière dont vous avez conçu votre document.
 
 ## Correspondance des styles
 

@@ -1,6 +1,6 @@
 # Prérequis
 
-Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de conversions](/conversion_graph).
+Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de conversions](/md/5_conversion_graph).
 
 ## Dépendances
 

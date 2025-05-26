@@ -1,21 +1,5 @@
 # Guide de formatage
 
-## En guise d'introduction : à propos du format IDML
-
-IDML est le format "ouvert"[^cookbook] d'Adobe InDesign, le format de retrocompabilité d'InDesign (c'est-à-dire le format que toutes les versions d'InDesign peuvent lire), a contrario du format INDD qui est spécifique à chaque version. IDML est aussi le format que l'on peut lire et interpréter sans avoir besoin de lancer InDesign, car un fichier IDML est en fait une sorte d'[archive zippée](https://fr.wikipedia.org/wiki/ZIP_(format_de_fichier)) d'une arborescence de fichiers [XML](https://fr.wikipedia.org/wiki/Extensible_Markup_Language).
-
-[^cookbook]: La spécification du format IDML n'est plus maintenue (publiquement du moins) depuis 2012. Elle est contenue dans la documentation du _InDesign SDK_ sous le nom de _InDesign Markup Language (IDML) Cookbook_, et il faut un compte Adobe pour pouvoir la [télécharger](https://developer.adobe.com/console/servicesandapis).
-
-Même si ce format est théoriquement ouvert, il reste assez complexe, et le ramener à un format plus simple, plus largement utilisé et supporté, nécessite de nombreuses opérations, d'où la nécessité de ce convertisseur.
-
-Par-delà cette complexité, le fait qu'InDesign soit un logiciel WYSIWYG[^wysiwyg] où l'on peut faire du formatage direct[^direct] rend extrêmement complexe la conversion vers des formats plus "structurés".
-
-[^wysiwyg]: *What you see is what you get.*
-
-[^direct]: Le formatage direct est le formatage appliqué sans structure, par exemple en identifiant un titre uniquement en gras avec un corps de texte important, ou placer un bloc dans la page (comme une image) sans l'ancrer dans le flux du texte.
-
-Pour ces différentes raisons, **ce convertisseur fonctionne mieux lorsque certaines bonnes pratiques de formatage sont appliquées.** De manière générale, la plupart de ces recommandations sont aussi émises par Adobe pour structurer un fichier InDesign.
-
 ## Recommandations
 
 Cette liste est non exhaustive, et sera complétée au fur et à mesure que des cas singuliers apparaîtront.
