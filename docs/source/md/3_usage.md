@@ -11,8 +11,8 @@ Une fois la [version modifiée de Pandoc](https://github.com/yanntrividic/pandoc
 Les attributs `role` correspondent aux styles de paragraphes et de caractères précisés dans InDesign. Comme illustré dans le fichier `maps/sample.json`, il est possible d'associer ces styles de paragraphes et de caractères à des traitements particuliers :
 
 * `role` : remplace le rôle du fichier source par une ou plusieurs classes ;
-* `type` : change le type d'élément (par défaut, `para` pour tous les éléments) vers un nouveau type ;
-* `level` : si `type` est un titre DocBook (`title`), `level` spécifie le niveau du titre ;
+* `type` : change le type d'élément [DocBook](https://fr.wikipedia.org/wiki/DocBook) (par défaut, `para` pour tous les éléments) vers un nouveau type ;
+* `level` : si `type` est un titre DocBook (balise `title`), `level` spécifie le niveau du titre ;
 * `delete` : supprime les éléments avec cet attribut `role` ;
 * `unwrap` : déplie le contenu de ces éléments dans l'élément parent ;
 * `cut` : crée un nouveau fichier avant chaque élément ayant ce `role` ;
