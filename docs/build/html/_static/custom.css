@@ -14,12 +14,16 @@ footer [role="contentinfo"] {
   border-color: #cb3a3c; /* #2472a4; */
 }
 
-a {
+a, .rst-content code.literal, .rst-content tt.literal {
   color: #cb3a3c;
 }
 
 a.reference.internal:active {
   background-color: #ba3235; /* #2980b9; */
+}
+
+a.icon.icon-home:hover {
+  background: inherit;
 }
 
 .wy-menu-vertical header, .wy-menu-vertical p.caption,
