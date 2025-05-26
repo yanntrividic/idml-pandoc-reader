@@ -89,8 +89,11 @@
 <!-- etc -->
 <g id="node9" class="node">
 <title>etc</title>
+<g id="a_node9"><a xlink:href="https://pandoc.org/diagram.svgz" xlink:title="etc.">
 <polygon fill="none" stroke="black" points="616.6,-10.54 616.6,-25.46 600.78,-36 578.41,-36 562.6,-25.46 562.6,-10.54 578.41,0 600.78,0 616.6,-10.54"/>
 <text text-anchor="middle" x="589.6" y="-14.3" font-family="Times,serif" font-size="14.00">etc.</text>
+</a>
+</g>
 </g>
 <!-- p&#45;&gt;etc -->
 <g id="edge8" class="edge">

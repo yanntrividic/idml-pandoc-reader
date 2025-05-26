@@ -81,7 +81,7 @@ Cette commande prend deux dossiers en arguments : un dossier d'entrée et un de 
 python -m idml2docbook file.idml --output docbook_folder --cut ; ./batch.sh docbook_folder md_folder
 ```
 
-## Détail de la commande permettant de convertir le recueil _Déborder Bolloré_
+## Détail de la commande de conversion du recueil _Déborder Bolloré_
 
 La commande pour compiler les contributions du recueil _Déborder Bolloré_, dont on peut retrouver le résultat sur le dépôt [deborderbollore/articles](https://gitlab.com/deborderbollore/articles), est la suivante :
 

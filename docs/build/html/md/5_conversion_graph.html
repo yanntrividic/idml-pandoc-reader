@@ -6,11 +6,11 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Graphe de conversions &mdash; Documentation IDML Pandoc reader 0.1.0</title>
+  <title>5. Graphe de conversions &mdash; Documentation IDML Pandoc reader 0.1.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e9309db0" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=0d434e92" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -23,7 +23,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
     <link rel="next" title="À propos d’InDesign" href="6_about_indesign.html" />
-    <link rel="prev" title="Guide de formatage" href="4_formatting_guide.html" /> 
+    <link rel="prev" title="4. Guide de formatage" href="4_formatting_guide.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -47,11 +47,14 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="1_contents.html">Contenus du dépôt</a></li>
-<li class="toctree-l1"><a class="reference internal" href="2_prerequisites.html">Prérequis</a></li>
-<li class="toctree-l1"><a class="reference internal" href="3_usage.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">Guide de formatage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Graphe de conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Contenus du dépôt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_prerequisites.html">2. Prérequis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_usage.html">3. Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. Guide de formatage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Graphe de conversions</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aller plus loin</span></p>
+<ul>
 <li class="toctree-l1"><a class="reference internal" href="6_about_indesign.html">À propos d’InDesign</a></li>
 <li class="toctree-l1"><a class="reference internal" href="7_contribute.html">Contribuer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="8_licence.html">Licence</a></li>
@@ -71,7 +74,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Graphe de conversions</li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>Graphe de conversions</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/md/5_conversion_graph.md.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
@@ -82,7 +85,7 @@
            <div itemprop="articleBody">
              
   <section class="tex2jax_ignore mathjax_ignore" id="graphe-de-conversions">
-<h1>Graphe de conversions<a class="headerlink" href="#graphe-de-conversions" title="Lien vers cette rubrique"></a></h1>
+<h1><span class="section-number">5. </span>Graphe de conversions<a class="headerlink" href="#graphe-de-conversions" title="Lien vers cette rubrique"></a></h1>
 <p>La logique derrière ce projet est la suivante :</p>
 <ol class="arabic simple">
 <li><p>Prendre un fichier IDML en entrée, et le donner à <a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a> pour obtenir un fichier <a class="reference external" href="https://github.com/le-tex/Hub">Hub XML</a> ;</p></li>
@@ -95,7 +98,7 @@
 <li><p>Utiliser le <em>writer</em> de Pandoc souhaité.</p></li>
 </ol>
 <figure class="align-center" id="id1">
-<div class="graphviz"><object data="../_images/graphviz-147a0ffce1174de9b01f6d15897fc825ab96174a.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="../_images/graphviz-bf23b8611c60f6f4685db9cef49251e15986a70e.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph conversions {
     bgcolor=&quot;transparent&quot;
     rankdir=&quot;LR&quot;
@@ -110,7 +113,7 @@
     p -&gt; &quot;EPUB&quot;;
     p -&gt; &quot;Markdown&quot;;
     p -&gt; &quot;AsciiDoc&quot;;
-    etc [shape=octagon label=&quot;etc.&quot;]
+    etc [shape=octagon label=&quot;etc.&quot; href=&quot;https://pandoc.org/diagram.svgz&quot;]
     p -&gt; etc;
 }</p></object></div>
 <figcaption>
@@ -123,7 +126,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
-        <a href="4_formatting_guide.html" class="btn btn-neutral float-left" title="Guide de formatage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="4_formatting_guide.html" class="btn btn-neutral float-left" title="4. Guide de formatage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
         <a href="6_about_indesign.html" class="btn btn-neutral float-right" title="À propos d’InDesign" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

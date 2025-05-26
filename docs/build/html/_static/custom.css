@@ -1,7 +1,9 @@
+/* Hide footer */
 footer [role="contentinfo"] {
   display: none;
 }
 
+/* Change blue to red */
 .wy-nav-top {
   background: #ba3235; /* #2980b9; */
 }
@@ -18,7 +20,7 @@ a, .rst-content code.literal, .rst-content tt.literal {
   color: #cb3a3c;
 }
 
-a.reference.internal:active {
+div.wy-menu.wy-menu-vertical a.reference.internal:active {
   background-color: #ba3235; /* #2980b9; */
 }
 
@@ -31,6 +33,7 @@ a:hover {
   color: #db7678; /* #55a5d9; */
 }
 
+/* Increase space below image with caption */
 .rst-content figure .caption-text {
   font-style: normal;
   margin-top: .5em;
@@ -44,4 +47,16 @@ figcaption {
 /* Style links on hover */
 a:not(.btn):hover {
 	text-decoration: underline solid 1px !important;
+}
+
+/* Decrease margin in nested lists */
+li.toctree-l1 a.reference.internal + ul {
+  margin-top: 0;
+}
+
+blockquote {
+  border-left: #bbb solid 2px;
+  color: #555;
+  margin-left: 0;
+  padding-left: 10px;
 }

@@ -12,6 +12,6 @@ digraph conversions {
     p -> "EPUB";
     p -> "Markdown";
     p -> "AsciiDoc";
-    etc [shape=octagon label="etc."]
+    etc [shape=octagon label="etc." href="https://pandoc.org/diagram.svgz"]
     p -> etc;
 }

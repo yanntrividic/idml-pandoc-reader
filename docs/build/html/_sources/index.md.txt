@@ -17,14 +17,22 @@ Le développement de ce programme a été effectué dans le contexte du projet [
 
 ```{toctree}
 ---
-maxdepth: 2
 caption: Documentation
+maxdepth: 2
+numbered: 1
 ---
 md/1_contents
 md/2_prerequisites
 md/3_usage
 md/4_formatting_guide
 md/5_conversion_graph
+```
+
+```{toctree}
+---
+caption: "Aller plus loin"
+maxdepth: 2
+---
 md/6_about_indesign
 md/7_contribute
 md/8_licence
