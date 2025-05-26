@@ -2,6 +2,22 @@ footer [role="contentinfo"] {
   display: none;
 }
 
+.wy-nav-top {
+  background: #ba3235; /* #2980b9; */
+}
+
+.wy-side-nav-search {
+  background-color: #ba3235; /* #2980b9; */
+}
+
+.wy-side-nav-search input[type="text"] {
+  border-color: #cb3a3c; /* #2472a4; */
+}
+
+.wy-menu-vertical header, .wy-menu-vertical p.caption {
+  color: #db7678; /* #55a5d9; */
+}
+
 .rst-content figure .caption-text {
   font-style: normal;
   margin-top: .5em;
