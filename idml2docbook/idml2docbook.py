@@ -129,7 +129,7 @@ def cleanURLsFromLineBreaks(soup):
     return BeautifulSoup(re.sub(url_regex_with_br, replacer, s), "xml")
 
 
-def removeOrthotypography(soup):
+def remove_orthotypography(soup):
     logging.info("Removing input's orthotypography...")
     s = str(soup)
 
@@ -149,14 +149,17 @@ def removeOrthotypography(soup):
 
     return BeautifulSoup(s, "xml")
 
-def addOrthotypography(soup):
-    logging.info("Adding new orthotypography...")
+def add_french_orthotypography(soup, thin_spaces):
+    """Applies a series of regex to comply to French orthotypography rules
+    if thin_spaces, it only uses non-breaking thin spaces.
+    """
+    logging.info("Adding new french orthotypography...")
 
     s = str(soup)
 
     s = re.sub(r"\s([!\?;€\$%])", u"\u202f" + r'\1', s) # thin spaces
-    s = re.sub(r"\s\:", u"\u00a0" + r':', s) # nbsp, doesn't seem to work...
-    s = re.sub(r"(\d)\s(\d\d\d)", r'\1' + u"\u202f", s) # numbers
+    s = re.sub(r"\s\:", (u"\u202f" if thin_spaces else u"\u00a0") + r':', s) # nbsp, doesn't seem to work...
+    s = re.sub(r"(\d)\s(\d\d\d)", r'\1' + u"\u202f" + r'\2', s) # numbers
     s = re.sub(r"«\s?", r'«' + u"\u202f", s) # quotes
     s = re.sub(r"\s?»", u"\u202f" + r'»', s) # quotes
     s = re.sub(r"°\s?", r'°' + u"\u202f", s) # degrees
@@ -328,9 +331,9 @@ def hubxml2docbook(file, **options):
     if not options["linebreaks"]: removeLinebreaks(soup)
     soup = removeHyphens(soup, "xml")
 
-    if not options["typography"]:
-        soup = removeOrthotypography(soup)
-        soup = addOrthotypography(soup)
+    if options["typography"]:
+        soup = remove_orthotypography(soup)
+        soup = add_french_orthotypography(soup, options["thin_spaces"])
 
     if options["prettify"]:
         logging.warning("Prettifying can result in errors depending on whatcha wanna do afterwards!")

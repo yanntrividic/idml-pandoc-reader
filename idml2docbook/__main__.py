@@ -75,7 +75,12 @@ PARSER.add_argument(
     'only used in pair with --cut')
 PARSER.add_argument(
     '-t', '--typography', action='store_true',
-    help='do not redo the orthotypography (thin spaces, nbsp...)')
+    help='redo the orthotypography '
+    '(french typography rules, with thin spaces, nbsp...)')
+PARSER.add_argument(
+    '-l', '--thin-spaces', action='store_true',
+    help='only use thin spaces in the refactoring of the '
+    'orthotography, works in pair with --typography')
 PARSER.add_argument(
     '-b', '--linebreaks', action='store_true',
     help='do not replace <br> tags with spaces')

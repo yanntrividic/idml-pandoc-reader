@@ -21,6 +21,7 @@ DEFAULT_OPTIONS = {
     'cut': getEnvOrDefault("CUT"),
     'names': getEnvOrDefault("NAMES"),
     'typography': getEnvOrDefault("TYPOGRAPHY"),
+    'thin_spaces': getEnvOrDefault("THIN_SPACES"),
     'linebreaks': getEnvOrDefault("LINEBREAKS"),
     'prettify': getEnvOrDefault("PRETTIFY"),
     'media': getEnvOrDefault("MEDIA", "Links"),
