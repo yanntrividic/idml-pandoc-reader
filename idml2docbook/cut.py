@@ -12,7 +12,7 @@ def get_cuts(file):
     They have a positive "cut" entry in the map."""
     logging.info("Retrieving cuts from: " + file)
     cuts = []
-    for key, value in getMap(file).items():
+    for key, value in get_map(file).items():
         if "cut" in value:
             if "role" in value: cuts.append(value[f"role"])
             else: cuts.append(key)

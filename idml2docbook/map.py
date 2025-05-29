@@ -8,7 +8,7 @@ END = '\033[0m'
 OKGREEN = '\033[92m'
 WARNING = '\033[93m'
 
-def getMap(file):
+def get_map(file):
     logging.info("Reading map file at: " + file)
     f = open(file)
     # returns JSON object as a list 
@@ -25,13 +25,13 @@ def log_map_entry(entry):
     if "unwrap" in entry: return "unwrapped!"
     return s
 
-def boldprint(s):
+def bold_print(s):
     print(BOLD + s + END)
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:
         file = sys.argv[1]
-        map = getMap(sys.argv[2])
+        map = get_map(sys.argv[2])
 
         # Read the HTML input file
         with open(file, "r") as f:
@@ -51,7 +51,7 @@ if __name__ == "__main__":
         except:
             raise ValueError("This file doesn't seem to be coming from idml2xml...")
 
-        boldprint("Role/tag couples present in " + file + ":")
+        bold_print("Role/tag couples present in " + file + ":")
         for couple in sorted(roles):
             print("- " + couple[0] + " (" + couple[1] + ")")
             if couple[0] in map:
@@ -61,15 +61,15 @@ if __name__ == "__main__":
 
         print(OKGREEN)
         if len(covered) > 0 :
-            boldprint("Applied mapping:")
+            bold_print("Applied mapping:")
             for c in covered:
                 print("- " + c + " => " + log_map_entry(map[c]))
         else:
-            boldprint(WARNING + (sys.argv[2] if (len(sys.argv) == 3) else DEFAULT_MAP) + " does not apply to " + file)
+            bold_print(WARNING + (sys.argv[2] if (len(sys.argv) == 3) else DEFAULT_MAP) + " does not apply to " + file)
 
         if len(uncovered) > 0 :
             print(WARNING)
-            boldprint("Unhandled elements:")
+            bold_print("Unhandled elements:")
             for c in uncovered:
                 print("- " + c[0] + " (" + c[1] + ")")
         else:

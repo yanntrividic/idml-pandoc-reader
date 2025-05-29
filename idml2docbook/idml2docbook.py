@@ -33,27 +33,27 @@ ATTRIBUTES_TO_REMOVE = [
     # "xmlns:idml2xml",
 ]
 
-def removeUnnecessaryLayers(soup):
+def remove_unnecessary_layer(soup):
     for layer in LAYERS_TO_REMOVE:
         for el in soup.find_all(attrs={"idml2xml:layer": layer}): el.decompose()
 
-def removeUnnecessaryNodes(soup):
+def remove_unnecessary_nodes(soup):
     for tag in NODES_TO_REMOVE:
         for el in soup.find_all(tag): el.decompose()
 
-def removeUnnecessaryAttributes(soup):
+def remove_unnecessary_attributes(soup):
     for attr in ATTRIBUTES_TO_REMOVE:
         for el in soup.find_all(attrs={attr: True}): del el[attr]
 
-def unwrapUnnecessaryNodes(soup):
+def unwrap_unnecessary_nodes(soup):
     for tag in NODES_TO_UNWRAP:
         for el in soup.find_all(tag):
             logging.debug("Unwrapping " + tag)
             el.unwrap()
 
-def removeEmptyElements(soup, map):
+def remove_empty_elements(soup, map):
     """Removes empty paras, except when the para has a "empty" entry
-    in the map. Must be called before mapList so that it is applied on all elements.
+    in the map. Must be called before map_list so that it is applied on all elements.
     """
     logging.info("Removing empty elements...")
     for el in soup.find_all("para"):
@@ -65,7 +65,7 @@ def removeEmptyElements(soup, map):
                 else:
                     logging.warning("Empty \"" + role + "\" has been kept.")
 
-def processImages(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
+def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
     logging.info("Processing media filenames...")
     RASTER_EXTS = [".tif", ".tiff", ".png", ".jpg", ".jpeg", ".psd"]
     VECTOR_EXTS = [".svg", ".eps", ".ai", ".pdf"]
@@ -96,26 +96,26 @@ def processImages(soup, wrap_fig = False, rep_raster = None, rep_vector = None, 
         if(wrap_fig): tag.parent.name = "figure"
         else: tag.parent.unwrap() # no need for a figure!
 
-def removeNsAttributes(soup):
+def remove_ns_attributes(soup):
     # Remove all css nodes
     for tag in soup.select('css|*'):
         tag.decompose()
     # Remove attributes
     for tag in soup.select("*"):
-        toRemove = []
+        to_remove = []
         for attr, _ in tag.attrs.items():
             if attr.startswith("css:") or attr.startswith("xmlns:") or attr.startswith("idml2xml:"):
-                toRemove.append(attr)
-        for attr in toRemove:
+                to_remove.append(attr)
+        for attr in to_remove:
             del tag[attr]
 
-def removeLinebreaks(soup):
+def remove_linebreaks(soup):
     logging.info("Removing linebreaks...")
     for tag in soup.select("br"):
         tag.string = " "
         tag.unwrap()
 
-def cleanURLsFromLineBreaks(soup):
+def clean_urls_from_linebreaks(soup):
     """URLs can have line breaks within to compose correct rags.
     This method removes those line breaks by joining the strings that start with http and
     that are separated by a <br/> tag. The URL can't end with a line break in the source file."""
@@ -166,7 +166,7 @@ def add_french_orthotypography(soup, thin_spaces):
 
     return BeautifulSoup(s, "xml")
 
-def mapList(soup, map):
+def map_list(soup, map):
     """Takes a soup and a map as arguments.
     Performs a series of operations depending
     on what the map describes.
@@ -189,7 +189,7 @@ def mapList(soup, map):
                 if el.has_attr("role"):
                     del el["role"]
 
-def generateXmlId(title_text, xml_ids):
+def generate_xml_id(title_text, xml_ids):
     xml_id = custom_slugify(title_text)
     if xml_id in xml_ids:
         count = sum(xml_id in s for s in xml_ids)
@@ -197,7 +197,7 @@ def generateXmlId(title_text, xml_ids):
     xml_ids.append(xml_id)
     return xml_id
 
-def generateSections(soup):
+def generate_sections(soup):
     """Transform soup to hierarchical sections up to 6 levels deep."""
     logging.info("Generating nested sections' hierarchy...")
 
@@ -219,7 +219,7 @@ def generateSections(soup):
             level = 1  # Default to level 1 if invalid
 
         title_text = element.get_text(strip=True, separator=" ")
-        xml_id = generateXmlId(title_text, xml_ids)
+        xml_id = generate_xml_id(title_text, xml_ids)
 
         # Create new section
         section = soup.new_tag("section", **{"xml:id": xml_id})
@@ -291,7 +291,7 @@ def hubxml2docbook(file, **options):
 
     map = {}
     if options["map"]:
-        map = getMap(options["map"])
+        map = get_map(options["map"])
     else:
         logging.warning("No map was specified. The conversion might not result in what you want.")
 
@@ -306,30 +306,30 @@ def hubxml2docbook(file, **options):
         tag.extract()
     # <article version="5.0" xml:lang="fr-FR" xmlns="http://docbook.org/ns/docbook">
 
-    removeUnnecessaryNodes(soup)
-    # removeUnnecessaryLayers(soup)
-    removeUnnecessaryAttributes(soup)
-    removeNsAttributes(soup)
+    remove_unnecessary_nodes(soup)
+    # remove_unnecessary_layer(soup)
+    remove_unnecessary_attributes(soup)
+    remove_ns_attributes(soup)
 
     if not options["empty"]:
-        removeEmptyElements(soup, map)
+        remove_empty_elements(soup, map)
     else:
         logging.warning("Keeping empty elements with roles... It might keep unwanted residuous elements!")
 
-    if options["map"]: mapList(soup, map)
+    if options["map"]: map_list(soup, map)
 
-    if not options["hierarchy"]: generateSections(soup)
+    if not options["hierarchy"]: generate_sections(soup)
 
-    processImages(soup,
+    process_images(soup,
         False,
         options["raster"],
         options["vector"],
         options["media"])
 
-    soup = cleanURLsFromLineBreaks(soup) # must be done before removeLineBreaks and removeHyphens
+    soup = clean_urls_from_linebreaks(soup) # must be done before remove_linebreaks and removeHyphens
 
-    if not options["linebreaks"]: removeLinebreaks(soup)
-    soup = removeHyphens(soup, "xml")
+    if not options["linebreaks"]: remove_linebreaks(soup)
+    soup = remove_hyphens(soup, "xml")
 
     if options["typography"]:
         soup = remove_orthotypography(soup)
