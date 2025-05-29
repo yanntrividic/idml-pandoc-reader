@@ -90,6 +90,8 @@ python -m idml2docbook db.idml \
   --output docbook \
   --map maps/db.json \
   --cut \
+  --typography \
+  --thin-spaces \
   --names \
   --raster jpg \
   --vector svg \
@@ -102,6 +104,8 @@ En détails :
 * `-o`/`--output` : permet de préciser le dossier où seront contenus les fichiers DocBook produits ;
 * `-m`/`--map` : spécifie les opérations à effectuer sur certains styles de caractères et de paragraphes, voir [Correspondance des styles](#correspondance-des-styles) ;
 * `-c`/`--cut` : coupe le résultat en plusieurs fichiers DocBook autonomes ;
+* `-t`/`--typography` : refait totalement l'orthotypographie (espaces autour des signes de ponctuation, etc.) ;
+* `-l`/`--thin-spaces` : l'orthotypographie utilise seulement des espaces fines ;
 * `-n`/`--names` : génère les noms des fichiers finaux à partir des contenus des titres de niveau 1 ;
 * `-r`/`--raster` : remplace les extensions des images matricielles par `jpg` dans les URL des fichiers de sortie ;
 * `-v`/`--vector` : idem pour les images vectorielles ;
