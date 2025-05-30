@@ -14,7 +14,9 @@ Les attributs `role` correspondent aux styles de paragraphes et de caractères p
 * `type` : change le type d'élément [DocBook](https://fr.wikipedia.org/wiki/DocBook) (par défaut, `para` pour tous les éléments) vers un nouveau type ;
 * `level` : si `type` est un titre DocBook (balise `title`), `level` spécifie le niveau du titre ;
 * `delete` : supprime les éléments avec cet attribut `role` ;
+* `wrap` : enveloppe l'élément dans un autre, nécessaire pour les listes lorsqu'elles sont juste spécifiées par un simple style de paragraphe (`itemizedlist`, `orderedlist`) et les citations (`blockquote`) ;
 * `unwrap` : déplie le contenu de ces éléments dans l'élément parent ;
+* `br` : ajoute un saut de ligne avant l'élément concerné ;
 * `cut` : crée un nouveau fichier avant chaque élément ayant ce `role` ;
 * `empty` : conserve les éléments vides portant ce `role` (tous les autres éléments vides sont supprimés, sauf si l'option `-e`/`--empty` est active) ;
 * Si l'entrée est vide (`{}`) alors l'attribute `role` est supprimé.
@@ -113,5 +115,4 @@ En détails :
 
 D'autres paramétrages encore sont exposés via les options de ce package (voir l'aide avec `-h`/`--help`).
 
-Enfin, le script `batch.sh` convertit les fichiers DocBook obtenus en Markdown, en précisant la saveur `markdown_phpextra`, et avec les filtres Lua nécessaires.
-guide de le·a contributeurice
+Enfin, le script `batch.sh` convertit les fichiers DocBook obtenus en Markdown, en précisant la saveur `markdown_phpextra`, et avec les filtres Lua nécessaires. Il transforme aussi les sauts de ligne Markdown `  ` (espaces doubles) en des balises HTML `<br/>`.

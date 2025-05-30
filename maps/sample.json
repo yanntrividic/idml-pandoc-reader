@@ -1,13 +1,16 @@
 [{
-    "Courant_01": { "role": "space-para" },
+    "Courant_01": { "br": true },
     "Courant_02": {},
-    "Citations": { "role" : "blockquote" },
-
+    
     "Titre": { "type": "title", "level": 1, "role": "" },
     "Titre_02": { "type": "title", "level": 2, "role": "" },
     "Titre_sans_auteurice" : { "cut": true, "empty": true, "role": "author", "type": "title", "level": 1 },
     "intertitre": { "type": "title", "level": 2, "role": "subhead" },
     "Nom_de_l_auteur": { "role" : "author", "cut": true, "type": "title", "level": 1 },
+    
+    "Liste": { "type": "listitem", "role": "", "wrap": "itemizedlist" },
+    "Entretien_Questions": {"role": "question", "wrap": "blockquote" },
+    "Citations": { "role" : "", "wrap": "blockquote" },
 
     "Italique": { "type" : "emphasis", "role": "italics" },
     "exposant": { "type": "superscript" },
