@@ -115,6 +115,7 @@ def wrap_consecutive_elements(soup, role, wrap_name):
             wrapper = soup.new_tag(wrap_name)
             wrapper["role"] = role
             for item in group:
+                del item["role"]
                 wrapper.append(item.extract())
             article.insert(insert_index, wrapper)
 
