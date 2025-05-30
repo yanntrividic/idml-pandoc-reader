@@ -23,4 +23,5 @@ for i in "$1"/*.xml; do
     --lua-filter=lua-filters/collapse-sections-into-headers.lua \
     -o "$2/$filename.md" \
     "$i"
+  sed -i -E 's/^  $/<br\/>/' $2/$filename.md
 done
