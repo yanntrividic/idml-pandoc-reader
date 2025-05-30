@@ -96,6 +96,11 @@ def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None,
         if(wrap_fig): tag.parent.name = "figure"
         else: tag.parent.unwrap() # no need for a figure!
 
+def process_listitems(soup, map):
+    logging.info("Wrapping listitem...")
+    for el in soup.find_all("listitem"):
+        el = wrap_element_content_in_new_element(soup, el, "para")
+
 def remove_ns_attributes(soup):
     # Remove all css nodes
     for tag in soup.select('css|*'):
@@ -110,10 +115,15 @@ def remove_ns_attributes(soup):
             del tag[attr]
 
 def remove_linebreaks(soup):
+    """When working with ragged paragraphs, some <br> tags might be added
+    It can be handy to replace them with spaces to have more reflowable content."""
     logging.info("Removing linebreaks...")
     for tag in soup.select("br"):
         tag.string = " "
         tag.unwrap()
+
+def replace_linebreaks(string):
+    return string.replace("<br/>", "<simpara><?asciidoc-br?></simpara>")
 
 def clean_urls_from_linebreaks(soup):
     """URLs can have line breaks within to compose correct rags.
@@ -171,17 +181,35 @@ def map_list(soup, map):
     Performs a series of operations depending
     on what the map describes.
     """
-    logging.info("Starting to apply the roles' mapping...")
+    logging.info("Starting to apply the styles' mapping...")
     for key, value in map.items():
         for el in soup.find_all(attrs={"role": key}):
             if "unwrap" in value and value["unwrap"]:
                 el.unwrap()
             if "delete" in value and value["delete"]:
                 el.decompose()
+            if "br" in value and value["br"]:
+                el.insert_before(soup.new_tag("br"))
             if "level" in value and value["type"] == "title":
                 el["level"] = value["level"]
             if "type" in value:
                 el.name = value["type"]
+            # If the map's "wrap" entry is on, wraps all consecutive
+            # elements with the same role in a "wrap" element wrapper.
+            # Their role is passed to the wrapper element.
+            if "wrap" in value and value["wrap"]:
+                wrap_consecutive_elements(soup, key, value["wrap"])
+
+def apply_new_roles(soup, map):
+    """Apply new roles after every other operation is done.
+    It removes the roles on empty entries, removes it when role="",
+    or changes it to the new proposed value.
+    It must be done in the end to keep the original paragraph and
+    character styles from the IDML document in the rest of the
+    computation process"""
+    logging.info("Starting to cleaning the roles...")
+    for key, value in map.items():
+        for el in soup.find_all(attrs={"role": key}):
             if "role" in value:
                 el["role"] = value["role"]
                 if el["role"] == "": del el["role"]
@@ -189,13 +217,15 @@ def map_list(soup, map):
                 if el.has_attr("role"):
                     del el["role"]
 
-def generate_xml_id(title_text, xml_ids):
-    xml_id = custom_slugify(title_text)
-    if xml_id in xml_ids:
-        count = sum(xml_id in s for s in xml_ids)
-        xml_id = xml_id + "_" + str(count + 1)
-    xml_ids.append(xml_id)
-    return xml_id
+def wrap_consecutive_elements_from_map(soup, map):
+    """If the map's "wrap" entry is on, wraps all consecutive
+    elements with the same role in a "wrap" element wrapper.
+    Their role is passed to the wrapper element."""
+    logging.info("Starting to wrap elements with specific roles...")
+    for key, value in map.items():
+        if "wrap" in value and value["wrap"]:
+            wrap_consecutive_elements(soup, key, value["wrap"])
+
 
 def generate_sections(soup):
     """Transform soup to hierarchical sections up to 6 levels deep."""
@@ -316,10 +346,6 @@ def hubxml2docbook(file, **options):
     else:
         logging.warning("Keeping empty elements with roles... It might keep unwanted residuous elements!")
 
-    if options["map"]: map_list(soup, map)
-
-    if not options["hierarchy"]: generate_sections(soup)
-
     process_images(soup,
         False,
         options["raster"],
@@ -328,26 +354,38 @@ def hubxml2docbook(file, **options):
 
     soup = clean_urls_from_linebreaks(soup) # must be done before remove_linebreaks and removeHyphens
 
-    if not options["linebreaks"]: remove_linebreaks(soup)
+    if not options["linebreaks"]: remove_linebreaks(soup) # must be done before mapèlist
+
     soup = remove_hyphens(soup, "xml")
 
     if options["typography"]:
         soup = remove_orthotypography(soup)
         soup = add_french_orthotypography(soup, options["thin_spaces"])
 
+    if options["map"]: map_list(soup, map)
+
+    process_listitems(soup, map)
+    # join_elements(soup)
+
+    if not options["hierarchy"]: generate_sections(soup)
+
+    apply_new_roles(soup, map)
+
     if options["prettify"]:
         logging.warning("Prettifying can result in errors depending on whatcha wanna do afterwards!")
-        result = soup.prettify()
+        docbook = soup.prettify()
         # prettify adds `\n` around inline elements,
         # which is parsed as spaces in Pandoc.
         # str(soup) does it less, but to ensure we don't have
         # this problem, we just remove linebreaks entirely.
     else:
-        result = str(soup).replace("\n", "")
+        docbook = str(soup).replace("\n", "")
+
+    docbook = replace_linebreaks(docbook)
 
     logging.info("hubxml2docbook done.")
 
-    return result
+    return docbook
 
 def idml2docbook(input, **options):
     logging.info("idml2docbook starting...")

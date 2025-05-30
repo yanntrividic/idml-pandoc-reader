@@ -1,4 +1,4 @@
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, Tag
 import re
 import unidecode
 import json
@@ -72,3 +72,54 @@ def slugify(value, regex_subs=(), preserve_case=False, use_unicode=False):
         value = value.lower()
 
     return value.strip()
+
+def wrap_element_content_in_new_element(soup, el, type, role=None):
+    """Takes an element, and wrap its content in a new element.
+    is useful to construct valid listitem and blockquote elements."""
+    wrapper = soup.new_tag(type)
+    if role: wrapper["role"] = role
+    wrapper.extend(el.contents)
+    el.clear()
+    el.append(wrapper)
+    return el
+
+def generate_xml_id(title_text, xml_ids):
+    xml_id = custom_slugify(title_text)
+    if xml_id in xml_ids:
+        count = sum(xml_id in s for s in xml_ids)
+        xml_id = xml_id + "_" + str(count + 1)
+    xml_ids.append(xml_id)
+    return xml_id
+
+def wrap_consecutive_elements(soup, role, wrap_name):
+    article = soup.find("article")
+    if not article:
+        return
+
+    # Only direct children that are Tags
+    def is_target(el):
+        return isinstance(el, Tag) and el.get("role") == role
+
+    children = [child for child in article.children if isinstance(child, Tag)]
+    i = 0
+
+    while i < len(children):
+        group = []
+        # Only collect consecutive unwrapped targets
+        while i < len(children) and is_target(children[i]) and children[i].name != wrap_name:
+            group.append(children[i])
+            i += 1
+
+        if group:
+            insert_index = article.contents.index(group[0])
+            wrapper = soup.new_tag(wrap_name)
+            wrapper["role"] = role
+            for item in group:
+                wrapper.append(item.extract())
+            article.insert(insert_index, wrapper)
+
+            # Refresh children and restart after wrapper
+            children = [child for child in article.children if isinstance(child, Tag)]
+            i = children.index(wrapper) + 1
+        else:
+            i += 1
