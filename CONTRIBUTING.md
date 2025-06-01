@@ -23,6 +23,7 @@ This project is an ongoing work. Want to contribute? You can:
 * [ ] Translate the docs to english
 * [ ] Publish the package on [PyPI](https://pypi.org/)
 * [ ] Mirror the repo on GitHub
+* [ ] Add a `merge` operator to the map, that merge together consecutive elements with the same selector
 
 ### Issues to publish on jgm/pandoc
 
