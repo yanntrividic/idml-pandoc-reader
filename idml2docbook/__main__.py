@@ -135,7 +135,7 @@ def main(argv=None, stdout=None, stdin=None):
             for i, section in enumerate(sections):
                 filename = args.output + "/{:02d}_".format(i)
 
-                if(args.names): filename = filename + names[i] + ".xml"
+                if(args.names): filename = filename + (names[i] if names[i] else "notitle") + ".xml"
                 else: filename = filename + "cut.xml"
 
                 logging.info("Writing file: " + filename)
