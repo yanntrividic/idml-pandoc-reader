@@ -8,6 +8,6 @@ Le développement de ce programme a été effectué dans le contexte du projet [
 
 La documentation de ce dépôt (`docs`) est déployée en ligne sur [outdesign.deborderbollore.fr](https://outdesign.deborderbollore.fr).
 
-::include{file=./docs/source/md/contribute.md}
+::include{file=./docs/source/md/7_contribute.md}
 
-::include{file=./docs/source/md/licence.md}
+::include{file=./docs/source/md/8_licence.md}
