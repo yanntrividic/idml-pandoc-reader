@@ -1,0 +1,209 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Yann Trividic
+# This file is distributed under the same license as the IDML Pandoc reader package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: IDML Pandoc reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-20 16:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Yann Trividic\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/md/3_usage.md:1
+msgid "Usage"
+msgstr ""
+
+#: ../../source/md/3_usage.md:3
+msgid "Préparation des fichiers IDML"
+msgstr ""
+
+#: ../../source/md/3_usage.md:5
+msgid "Un [guide de formatage](/md/4_formatting_guide) indique comment préparer les fichiers InDesign. Même s'il n'est pas obligatoire de suivre ces recommandations pour utiliser le convertisseur, la qualité du résultat obtenu peut varier grandement selon la manière dont vous avez conçu votre document."
+msgstr ""
+
+#: ../../source/md/3_usage.md:7
+msgid "Correspondance des styles"
+msgstr ""
+
+#: ../../source/md/3_usage.md:9
+msgid "Une fois la [version modifiée de Pandoc](https://github.com/yanntrividic/pandoc/) installée, Pandoc sera en mesure d'interpréter les attributs `role` des éléments des fichiers DocBook obtenus après conversion. Ces rôles sont ensuite considérés comme des classes par Pandoc grâce au filtre `roles-to-classes.lua`."
+msgstr ""
+
+#: ../../source/md/3_usage.md:11
+msgid "Les attributs `role` correspondent aux styles de paragraphes et de caractères précisés dans InDesign. Comme illustré dans le fichier `maps/sample.json`, il est possible d'associer ces styles de paragraphes et de caractères à des traitements particuliers :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:13
+msgid "`role` : remplace le rôle du fichier source par une ou plusieurs classes ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:14
+msgid "`type` : change le type d'élément [DocBook](https://fr.wikipedia.org/wiki/DocBook) (par défaut, `para` pour tous les éléments) vers un nouveau type ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:15
+msgid "`level` : si `type` est un titre DocBook (balise `title`), `level` spécifie le niveau du titre ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:16
+msgid "`delete` : supprime les éléments avec cet attribut `role` ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:17
+msgid "`wrap` : enveloppe l'élément dans un autre, nécessaire pour les listes lorsqu'elles sont juste spécifiées par un simple style de paragraphe (`itemizedlist`, `orderedlist`) et les citations (`blockquote`) ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:18
+msgid "`unwrap` : déplie le contenu de ces éléments dans l'élément parent ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:19
+msgid "`br` : ajoute un saut de ligne avant l'élément concerné ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:20
+msgid "`cut` : crée un nouveau fichier avant chaque élément ayant ce `role` ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:21
+msgid "`empty` : conserve les éléments vides portant ce `role` (tous les autres éléments vides sont supprimés, sauf si l'option `-e`/`--empty` est active) ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:22
+msgid "Si l'entrée est vide (`{}`) alors l'attribute `role` est supprimé."
+msgstr ""
+
+#: ../../source/md/3_usage.md:24
+msgid "Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:30
+msgid "Commandes de base"
+msgstr ""
+
+#: ../../source/md/3_usage.md:32
+msgid "Il est possible d'utiliser ce convertisseur de diverses manières :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:34
+msgid "Avec le package `idml2docbook`, puis en exécutant Pandoc sur le résultat produit ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:35
+msgid "Avec le lecteur Lua `idml.lua` ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:36
+msgid "Avec le script `batch.sh`."
+msgstr ""
+
+#: ../../source/md/3_usage.md:38
+msgid "idml2docbook"
+msgstr ""
+
+#: ../../source/md/3_usage.md:40
+msgid "Ce package Python est la contribution principale de ce dépôt. Il offre une API permettant de convertir un fichier fichier IDML en un ou plusieurs fichiers DocBook."
+msgstr ""
+
+#: ../../source/md/3_usage.md:42
+msgid "Convertir un fichier IDML et l'enregistrer dans un fichier DocBook :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:48
+msgid "Il est aussi possible de directement envoyer le résultat de la conversion dans l'entrée standard de Pandoc :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:54
+msgid "Afficher l'aide à l'utilisation avec l'option `-h`/`--help` :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:60
+msgid "idml.lua"
+msgstr ""
+
+#: ../../source/md/3_usage.md:62
+msgid "Ce fichier fait le pont entre Pandoc et `idml2docbook`. Il permet de prendre le résultat de ce dernier pour l'insérer dans Pandoc. [Pandoc ne permet pas de spécifier d'arguments arbitraires en ligne de commande](https://github.com/jgm/pandoc/discussions/9689), ce qui implique que seul modifier le fichier `.env` peut influencer le comportement de `idml2docbook` quand exécuté au travers de `idml.lua`."
+msgstr ""
+
+#: ../../source/md/3_usage.md:64
+msgid "Convertir un fichier IDML vers Markdown, avec par exemple le filtre `roles-to-classes.lua` :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:70
+msgid "batch\\.sh"
+msgstr ""
+
+#: ../../source/md/3_usage.md:72
+msgid "Avant toute chose, il est nécessaire de spécifier la version de Pandoc à utiliser dans le fichier `.env`. Il est aussi nécessaire de donner les droits d'exécution à ce script :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:78
+msgid "Ce petit script shell permet de faciliter la liaison entre Pandoc et `idml2docbook` lorsque ce dernier est utilisé avec l'option `-c`/`--cut` pour séparer le résultat de la conversion en plusieurs fichiers (ou chapitres)."
+msgstr ""
+
+#: ../../source/md/3_usage.md:80
+msgid "Cette commande prend deux dossiers en arguments : un dossier d'entrée et un de sortie. Il est ainsi possible de chaîner les commandes, par exemple :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:86
+msgid "Détail de la commande de conversion du recueil _Déborder Bolloré_"
+msgstr ""
+
+#: ../../source/md/3_usage.md:88
+msgid "La commande pour compiler les contributions du recueil _Déborder Bolloré_, dont on peut retrouver le résultat sur le dépôt [deborderbollore/articles](https://gitlab.com/deborderbollore/articles), est la suivante :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:104
+msgid "En détails :"
+msgstr ""
+
+#: ../../source/md/3_usage.md:106
+msgid "`-o`/`--output` : permet de préciser le dossier où seront contenus les fichiers DocBook produits ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:107
+msgid "`-m`/`--map` : spécifie les opérations à effectuer sur certains styles de caractères et de paragraphes, voir [Correspondance des styles](#correspondance-des-styles) ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:108
+msgid "`-c`/`--cut` : coupe le résultat en plusieurs fichiers DocBook autonomes ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:109
+msgid "`-t`/`--typography` : refait totalement l'orthotypographie (espaces autour des signes de ponctuation, etc.) ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:110
+msgid "`-l`/`--thin-spaces` : l'orthotypographie utilise seulement des espaces fines ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:111
+msgid "`-n`/`--names` : génère les noms des fichiers finaux à partir des contenus des titres de niveau 1 ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:112
+msgid "`-r`/`--raster` : remplace les extensions des images matricielles par `jpg` dans les URL des fichiers de sortie ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:113
+msgid "`-v`/`--vector` : idem pour les images vectorielles ;"
+msgstr ""
+
+#: ../../source/md/3_usage.md:114
+msgid "`-f`/`--media-folder` : remplace l'URL absolue des médias dans les fichiers de sortie par `images/`."
+msgstr ""
+
+#: ../../source/md/3_usage.md:116
+msgid "D'autres paramétrages encore sont exposés via les options de ce package (voir l'aide avec `-h`/`--help`)."
+msgstr ""
+
+#: ../../source/md/3_usage.md:118
+msgid "Enfin, le script `batch.sh` convertit les fichiers DocBook obtenus en Markdown, en précisant la saveur `markdown_phpextra`, et avec les filtres Lua nécessaires. Il transforme aussi les sauts de ligne Markdown `  ` (espaces doubles) en des balises HTML `<br/>`."
+msgstr ""

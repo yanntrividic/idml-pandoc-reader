@@ -26,6 +26,13 @@ exclude_patterns = []
 
 language = 'fr'
 
+# Internationalisation
+locale_dirs = ['locale/']
+gettext_compact = False
+gettext_last_translator = "Yann Trividic"
+last_translator = "Yann Trividic <bonjour@yanntrividic.fr>"
+language_team = "English <>"
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 

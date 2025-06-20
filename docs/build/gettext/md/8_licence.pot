@@ -1,0 +1,25 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Yann Trividic
+# This file is distributed under the same license as the IDML Pandoc reader package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: IDML Pandoc reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-20 16:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Yann Trividic\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/md/8_licence.md:1
+msgid "Licence"
+msgstr ""
+
+#: ../../source/md/8_licence.md:3
+msgid "<a href=\"https://gitlab.com/deborderbollore/idml-pandoc-reader\">IDML Pandoc Reader</a> (2025) par <a href=\"https://yanntrividic.fr\">Yann Trividic</a> est distribué sous licence <a href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>."
+msgstr ""

@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Yann Trividic
+# This file is distributed under the same license as the IDML Pandoc reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: IDML Pandoc reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-20 16:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Yann Trividic\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/md/2_prerequisites.md:1
+msgid "Prérequis"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:3
+msgid ""
+"Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de "
+"conversions](/md/5_conversion_graph)."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:5
+msgid "Dépendances"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:7
+msgid ""
+"Le format IDML est complexe, et il est difficile d'en extraire les "
+"informations. Dans l'idéal, ce dépôt consisterait en un seul fichier "
+"Haskell, comme [les autres lecteurs de "
+"Pandoc](https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers)."
+" Cependant, cela prendrait un temps fou à développer."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:9
+msgid ""
+"D'autres se sont penché·es sur la question de la lecture de fichiers "
+"IDML, en particulier le projet [`idml2xml-"
+"frontend`](https://github.com/transpect/idml2xml-frontend), distribué "
+"sous licence FreeBSD. Nous construisons notre convertisseur en continuant"
+" ce travail, en proposant un "
+"[_binding_](https://fr.wikipedia.org/wiki/Binding) entre `idml2xml-"
+"frontend` et Pandoc, c'est-à-dire en convertissant la sortie Hub XML de "
+"`idml2xml-frontend` vers le format DocBook 5.1."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:11
+msgid "Les dépendances sont :"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:13
+msgid "Python 3.x ;"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:14
+msgid "Java 1.7+ ;"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:15
+msgid ""
+"les dépendances du package Python (avec la commande `pip install -r "
+"requirements.txt`)"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:16
+msgid ""
+"[`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend) "
+"(s'installe avec `git` via la commande `git clone "
+"https://github.com/transpect/idml2xml-frontend --recurse-submodules`) ;"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:17
+msgid ""
+"avoir précisé dans un fichier `.env` le chemin vers `idml2xml-frontend` "
+"(voir l'exemple fourni avec `.env.sample`)."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:19
+msgid ""
+"Pandoc n'est pas une dépendance à proprement parler étant donné que "
+"`idml2docbook` n'en a pas besoin. Cependant, [une version un peu modifiée"
+" de Pandoc](https://github.com/yanntrividic/pandoc/) a été développée "
+"pour supporter la lecture des styles de paragraphes et de caractères. "
+"Pour l'utiliser, il faut [la compiler depuis la "
+"source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md). Il "
+"est aussi possible d'utiliser la version principale de Pandoc, mais alors"
+" sans [Correspondance des "
+"styles](https://outdesign.deborderbollore.fr/md/3_usage.html"
+"#correspondance-des-styles). Une [_pull "
+"request_](https://github.com/jgm/pandoc/pull/10665) est en cours pour "
+"intégrer ces nouvelles fonctionnalités dans la branche principale de "
+"Pandoc."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:21
+msgid ""
+"**Note :** Pour les fichiers IDML les plus lourds, il peut être "
+"nécessaire d'[augmenter la taille du tas "
+"Java](https://github.com/transpect/idml2xml-"
+"frontend/blob/master/idml2xml.sh#L33), par exemple à `2048m` ou `4096m`."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:23
+msgid "Configuration de l'environnement .env"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:25
+msgid ""
+"Le fichier `.env.sample` montre l'exemple d'un fichier de fichier de "
+"configuration."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:27
+msgid ""
+"A minima, pour fonctionner, ce convertisseur nécessite d'exécuter "
+"`idml2xml-frontend`. La ligne `IDML2HUBXML_SCRIPT_FOLDER` du fichier "
+"`.env` correspond donc au chemin absolu menant au dossier `idml2xml-"
+"frontend` présent sur votre machine. Seule cette entrée est "
+"**obligatoire** pour le fonctionnement de `idml2docbook`."
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:29
+msgid ""
+"Les autres valeurs du fichier `.env` permettent de remplacer les valeurs "
+"par défaut du package `idml2docbook`. Pour plus d'informations sur ces "
+"différentes variables, consultez l'aide du package avec l'option "
+"`-h`/`--help` :"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:35
+msgid "Test de la configuration"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:37
+msgid ""
+"Pour vérifier que les dépendances ont bien été installées et le fichier "
+"`.env` bien paramétré, vous pouvez tester le convertisseur dans votre "
+"terminal avec la commande suivante :"
+msgstr ""
+
+#: ../../source/md/2_prerequisites.md:43
+msgid "Le résultat devrait alors être :"
+msgstr ""
+

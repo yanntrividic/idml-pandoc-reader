@@ -1,0 +1,45 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Yann Trividic
+# This file is distributed under the same license as the IDML Pandoc reader package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: IDML Pandoc reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-20 16:36+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Yann Trividic\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../../source/index.md:18
+msgid "Documentation"
+msgstr ""
+
+#: ../../source/index.md:31
+msgid "Aller plus loin"
+msgstr ""
+
+#: ../../source/index.md:1
+msgid "IDML Pandoc reader"
+msgstr ""
+
+#: ../../source/index.md:3
+msgid "Le dépôt [deborderbollore/idml-pandoc-reader](https://gitlab.com/deborderbollore/idml-pandoc-reader) contient un programme en ligne de commande automatisant la lecture de fichiers IDML (InDesign Markup Language) pour [Pandoc](https://pandoc.org). Pandoc est un convertisseur universel pouvant convertir énormément de formats de fichiers d'entrée vers énormément de formats de fichiers de sortie, dont DOCX, ODT, HTML, Markdown, AsciiDoc, [etc.](https://pandoc.org/diagram.svgz) **Seule la structure du document est convertie, la mise en forme est totalement ignorée.**"
+msgstr ""
+
+#: ../../source/index.md:5
+msgid "_La volonté derrière_ IDML Pandoc reader 🤯"
+msgstr ""
+
+#: ../../source/index.md:10
+msgid "Le développement de ce programme a été effectué dans le contexte du projet [Déborder Bolloré](https://deborderbollore.fr), où il était nécessaire de faire coexister les compétences expertes de graphistes utilisateurices d'Adobe InDesign et de développeureuses web, dans l'idée de produire une publication multiformat accessible quel que soit le contexte de lecture."
+msgstr ""
+
+#: ../../source/index.md:14
+msgid "À terme, une interface web viendra faciliter l'utilisation de ce programme. Cette interface s'appellera **OutDesign**, en réponse à la concentration dans les logiciels d'édition."
+msgstr ""
