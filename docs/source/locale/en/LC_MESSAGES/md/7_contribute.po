@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/md/7_contribute.md:1
 msgid "Contribuer"
-msgstr ""
+msgstr "Contribute"
 
 #: ../../source/md/7_contribute.md:3
 msgid ""
@@ -30,4 +30,7 @@ msgid ""
 "[guide de le·a contributeurice](https://gitlab.com/deborderbollore/idml-"
 "pandoc-reader/-/blob/main/CONTRIBUTING.md). Toute aide est la bienvenue !"
 msgstr ""
+"To contribute to the development of this converter, please refer to the "
+"[contributor guide](https://gitlab.com/deborderbollore/idml-pandoc-reader/-/blob/main/CONTRIBUTING.md). "
+"Any help is greatly appreciated!"
 

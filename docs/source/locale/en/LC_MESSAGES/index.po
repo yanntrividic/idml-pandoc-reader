@@ -22,15 +22,15 @@ msgstr ""
 
 #: ../../source/index.md:18
 msgid "Documentation"
-msgstr ""
+msgstr "Documentation"
 
 #: ../../source/index.md:31
 msgid "Aller plus loin"
-msgstr ""
+msgstr "Go further"
 
 #: ../../source/index.md:1
 msgid "IDML Pandoc reader"
-msgstr ""
+msgstr "IDML Pandoc reader"
 
 #: ../../source/index.md:3
 msgid ""
@@ -44,10 +44,18 @@ msgid ""
 "[etc.](https://pandoc.org/diagram.svgz) **Seule la structure du document "
 "est convertie, la mise en forme est totalement ignorée.**"
 msgstr ""
+"The repository [deborderbollore/idml-pandoc-reader](https://gitlab.com/"
+"deborderbollore/idml-pandoc-reader) contains a command-line program that "
+"automates the reading of IDML (InDesign Markup Language) files for "
+"[Pandoc](https://pandoc.org). Pandoc is a universal converter capable of "
+"transforming many input formats into many output formats, including DOCX, "
+"ODT, HTML, Markdown, AsciiDoc, "
+"[etc.](https://pandoc.org/diagram.svgz) **Only the document structure is "
+"converted; formatting is entirely ignored.**"
 
 #: ../../source/index.md:5
 msgid "_La volonté derrière_ IDML Pandoc reader 🤯"
-msgstr ""
+msgstr "_The motivation behind_ IDML Pandoc reader 🤯"
 
 #: ../../source/index.md:10
 msgid ""
@@ -58,6 +66,11 @@ msgid ""
 "de produire une publication multiformat accessible quel que soit le "
 "contexte de lecture."
 msgstr ""
+"This program was developed in the context of the "
+"[Déborder Bolloré](https://deborderbollore.fr) project, where it was "
+"necessary to bring together the expert skills of graphic designers using "
+"Adobe InDesign and web developers, with the goal of producing a "
+"multiformat publication accessible in any reading context."
 
 #: ../../source/index.md:14
 msgid ""
@@ -65,4 +78,6 @@ msgid ""
 "programme. Cette interface s'appellera **OutDesign**, en réponse à la "
 "concentration dans les logiciels d'édition."
 msgstr ""
-
+"In the long term, a web interface will make using this program easier. "
+"This interface will be called **OutDesign**, as a response to the "
+"consolidation in publishing software."

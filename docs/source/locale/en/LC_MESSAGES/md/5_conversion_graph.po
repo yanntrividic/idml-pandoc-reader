@@ -22,15 +22,15 @@ msgstr ""
 
 #: ../../source/md/5_conversion_graph.md:1
 msgid "Chaîne de conversions"
-msgstr ""
+msgstr "Conversion Pipeline"
 
 #: ../../source/md/5_conversion_graph.md:3
 msgid "Graphe"
-msgstr ""
+msgstr "Graph"
 
 #: ../../source/md/5_conversion_graph.md:5
 msgid "La logique derrière ce projet est la suivante :"
-msgstr ""
+msgstr "The logic behind this project is as follows:"
 
 #: ../../source/md/5_conversion_graph.md:7
 msgid ""
@@ -38,24 +38,33 @@ msgid ""
 "frontend`](https://github.com/transpect/idml2xml-frontend) pour obtenir "
 "un fichier [Hub XML](https://github.com/le-tex/Hub) ;"
 msgstr ""
+"Take an IDML file as input and pass it to "
+"[`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend) to "
+"generate a [Hub XML](https://github.com/le-tex/Hub) file;"
 
 #: ../../source/md/5_conversion_graph.md:8
 msgid ""
 "À partir de ce fichier, le \"nettoyer\" pour obtenir un document dans la "
 "spécification DocBook 5.1, supportée par Pandoc ;"
 msgstr ""
+"From this file, 'clean' it to obtain a document in the DocBook 5.1 "
+"specification, which is supported by Pandoc;"
 
 #: ../../source/md/5_conversion_graph.md:10
 msgid ""
 "Ces deux premières étapes sont les objectifs du paquet `idml2docbook` "
 "développé pour ce projet."
 msgstr ""
+"These first two steps are the purpose of the `idml2docbook` package "
+"developed for this project."
 
 #: ../../source/md/5_conversion_graph.md:12
 msgid ""
 "Lire le fichier DocBook produit avec la [version modifiée de "
 "Pandoc](https://github.com/yanntrividic/pandoc/) ;"
 msgstr ""
+"Read the resulting DocBook file using the "
+"[modified version of Pandoc](https://github.com/yanntrividic/pandoc/);"
 
 #: ../../source/md/5_conversion_graph.md:13
 msgid ""
@@ -64,18 +73,21 @@ msgid ""
 "abstraite](https://fr.wikipedia.org/wiki/Arbre_de_la_syntaxe_abstraite) "
 "(AST) de Pandoc ;"
 msgstr ""
+"Apply Lua filters to correctly structure Pandoc’s "
+"[abstract syntax tree](https://fr.wikipedia.org/wiki/Arbre_de_la_syntaxe_abstraite) "
+"(AST);"
 
 #: ../../source/md/5_conversion_graph.md:14
 msgid "Utiliser le _writer_ de Pandoc souhaité."
-msgstr ""
+msgstr "Use the desired Pandoc _writer_."
 
 #: ../../source/md/5_conversion_graph.md:16
 msgid "_Graphe des conversions à l'œuvre dans ce projet._"
-msgstr ""
+msgstr "_Graph of the conversions used in this project._"
 
 #: ../../source/md/5_conversion_graph.md:21
 msgid "Détail des conversions"
-msgstr ""
+msgstr "Conversion details"
 
 #: ../../source/md/5_conversion_graph.md:23
 msgid ""
@@ -84,12 +96,18 @@ msgid ""
 "commence donc avec le fichier IDML (34 Ko pour un \"Hello world!\"), qui "
 "consiste en un ensemble de fichiers XML dont voici l'arborescence :"
 msgstr ""
+"This section outlines the series of operations performed on the "
+"`hello_world.idml` file to obtain its Markdown version. It starts with the "
+"IDML file (34 KB for a \"Hello world!\"), which consists of a set of XML "
+"files, organized as follows:"
 
 #: ../../source/md/5_conversion_graph.md:48
 msgid ""
 "Les informations nous intéressant sont d'abord contenues dans le fichier "
 "`designmap.xml` :"
 msgstr ""
+"The information we are interested in is initially contained in the "
+"`designmap.xml` file:"
 
 #: ../../source/md/5_conversion_graph.md:305
 msgid ""
@@ -98,6 +116,10 @@ msgid ""
 " qu'un seul bloc, donc une seule _story_,  soit le fichier "
 "`Story_ue7.xml`, dans lequel figure bien bien `Hello world!` :"
 msgstr ""
+"This file indicates the order of the _stories_ (threaded blocks), which "
+"cannot be inferred from the `stories` folder alone. In this case, there is "
+"only one block, thus one _story_—the `Story_ue7.xml` file—which indeed "
+"contains `Hello world!`:"
 
 #: ../../source/md/5_conversion_graph.md:325
 msgid ""
@@ -105,22 +127,25 @@ msgid ""
 "frontend`. Le fichier obtenu est déjà bien moins lourd, et contient les "
 "informations suivantes :"
 msgstr ""
+"It is mainly this information that will be retained by `idml2xml-frontend`. "
+"The resulting file is already much lighter and contains the following data:"
 
 #: ../../source/md/5_conversion_graph.md:387
 msgid "La conversion vers DocBook par la méthode `hubxml2docbook` donne :"
-msgstr ""
+msgstr "The conversion to DocBook using the `hubxml2docbook` method gives:"
 
 #: ../../source/md/5_conversion_graph.md:400
 msgid "Et ce résultat peut être donné à Pandoc. Son AST est le suivant :"
-msgstr ""
+msgstr "And this result can be passed to Pandoc. Its AST is as follows:"
 
 #: ../../source/md/5_conversion_graph.md:414
 msgid ""
 "En transformant l'attribut `role` par une classe via un filtre Lua, on "
 "obtient :"
 msgstr ""
+"By transforming the `role` attribute into a class using a Lua filter, we "
+"get:"
 
 #: ../../source/md/5_conversion_graph.md:426
 msgid "Et ainsi le résultat final :"
-msgstr ""
-
+msgstr "And finally, the resulting output:"

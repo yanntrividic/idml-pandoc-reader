@@ -22,7 +22,7 @@ msgstr ""
 
 #: ../../source/md/8_licence.md:1
 msgid "Licence"
-msgstr ""
+msgstr "License"
 
 #: ../../source/md/8_licence.md:3
 msgid ""
@@ -32,4 +32,7 @@ msgid ""
 "href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA "
 "4.0</a>."
 msgstr ""
-
+"<a href=\"https://gitlab.com/deborderbollore/idml-pandoc-reader\">IDML "
+"Pandoc Reader</a> (2025) by <a href=\"https://yanntrividic.fr\">Yann "
+"Trividic</a> is licensed under the <a "
+"href=\"https://creativecommons.org/licenses/by-sa/4.0/\">CC BY-SA 4.0</a>."

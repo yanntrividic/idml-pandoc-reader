@@ -22,17 +22,19 @@ msgstr ""
 
 #: ../../source/md/2_prerequisites.md:1
 msgid "Prérequis"
-msgstr ""
+msgstr "Prerequisites"
 
 #: ../../source/md/2_prerequisites.md:3
 msgid ""
 "Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de "
 "conversions](/md/5_conversion_graph)."
 msgstr ""
+"To understand the purpose of each dependency, see the [conversion graph](/md/"
+"5_conversion_graph)."
 
 #: ../../source/md/2_prerequisites.md:5
 msgid "Dépendances"
-msgstr ""
+msgstr "Dependencies"
 
 #: ../../source/md/2_prerequisites.md:7
 msgid ""
@@ -42,6 +44,11 @@ msgid ""
 "Pandoc](https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers)."
 " Cependant, cela prendrait un temps fou à développer."
 msgstr ""
+"The IDML format is complex, and extracting information from it is "
+"difficult. Ideally, this repository would consist of a single Haskell file, "
+"like [Pandoc’s other readers](https://github.com/jgm/pandoc/tree/main/src/"
+"Text/Pandoc/Readers). However, that would take an enormous amount of time "
+"to develop."
 
 #: ../../source/md/2_prerequisites.md:9
 msgid ""
@@ -54,24 +61,33 @@ msgid ""
 "frontend` et Pandoc, c'est-à-dire en convertissant la sortie Hub XML de "
 "`idml2xml-frontend` vers le format DocBook 5.1."
 msgstr ""
+"Others have explored reading IDML files, notably the project "
+"[`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend), "
+"distributed under the FreeBSD license. We build our converter by "
+"continuing that work, offering a "
+"[_binding_](https://en.wikipedia.org/wiki/Binding) between `idml2xml-"
+"frontend` and Pandoc—i.e., converting the Hub XML output of "
+"`idml2xml-frontend` into DocBook 5.1 format."
 
 #: ../../source/md/2_prerequisites.md:11
 msgid "Les dépendances sont :"
-msgstr ""
+msgstr "The dependencies are:"
 
 #: ../../source/md/2_prerequisites.md:13
 msgid "Python 3.x ;"
-msgstr ""
+msgstr "Python 3.x;"
 
 #: ../../source/md/2_prerequisites.md:14
 msgid "Java 1.7+ ;"
-msgstr ""
+msgstr "Java 1.7+;"
 
 #: ../../source/md/2_prerequisites.md:15
 msgid ""
 "les dépendances du package Python (avec la commande `pip install -r "
 "requirements.txt`)"
 msgstr ""
+"the Python package dependencies (with the command `pip install -r "
+"requirements.txt`)"
 
 #: ../../source/md/2_prerequisites.md:16
 msgid ""
@@ -79,12 +95,17 @@ msgid ""
 "(s'installe avec `git` via la commande `git clone "
 "https://github.com/transpect/idml2xml-frontend --recurse-submodules`) ;"
 msgstr ""
+"[`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend) "
+"(installed with `git` via the command `git clone https://github.com/"
+"transpect/idml2xml-frontend --recurse-submodules`);"
 
 #: ../../source/md/2_prerequisites.md:17
 msgid ""
 "avoir précisé dans un fichier `.env` le chemin vers `idml2xml-frontend` "
 "(voir l'exemple fourni avec `.env.sample`)."
 msgstr ""
+"specify in a `.env` file the path to `idml2xml-frontend` (see the example "
+"provided with `.env.sample`)."
 
 #: ../../source/md/2_prerequisites.md:19
 msgid ""
@@ -102,6 +123,15 @@ msgid ""
 "intégrer ces nouvelles fonctionnalités dans la branche principale de "
 "Pandoc."
 msgstr ""
+"Pandoc is not strictly a dependency since `idml2docbook` does not require it. "
+"However, [a slightly modified version of Pandoc](https://github.com/"
+"yanntrividic/pandoc/) has been developed to support reading paragraph and "
+"character styles. To use it, you must [compile it from source](https://github."
+"com/yanntrividic/pandoc/blob/main/INSTALL.md). You can also use the official "
+"version of Pandoc, but without [style mapping](https://outdesign."
+"deborderbollore.fr/md/3_usage.html#correspondance-des-styles). A "
+"[_pull request_](https://github.com/jgm/pandoc/pull/10665) is in progress to "
+"include these new features in the main Pandoc branch."
 
 #: ../../source/md/2_prerequisites.md:21
 msgid ""
@@ -110,16 +140,20 @@ msgid ""
 "Java](https://github.com/transpect/idml2xml-"
 "frontend/blob/master/idml2xml.sh#L33), par exemple à `2048m` ou `4096m`."
 msgstr ""
+"**Note:** For large IDML files, it may be necessary to [increase the Java heap "
+"size](https://github.com/transpect/idml2xml-frontend/blob/master/idml2xml.sh"
+"#L33), for example to `2048m` or `4096m`."
 
 #: ../../source/md/2_prerequisites.md:23
 msgid "Configuration de l'environnement .env"
-msgstr ""
+msgstr "Environment configuration (.env)"
 
 #: ../../source/md/2_prerequisites.md:25
 msgid ""
 "Le fichier `.env.sample` montre l'exemple d'un fichier de fichier de "
 "configuration."
 msgstr ""
+"The `.env.sample` file shows an example configuration file."
 
 #: ../../source/md/2_prerequisites.md:27
 msgid ""
@@ -129,6 +163,10 @@ msgid ""
 "frontend` présent sur votre machine. Seule cette entrée est "
 "**obligatoire** pour le fonctionnement de `idml2docbook`."
 msgstr ""
+"At a minimum, this converter requires `idml2xml-frontend` to run. The "
+"`IDML2HUBXML_SCRIPT_FOLDER` line in the `.env` file should point to the "
+"absolute path of the `idml2xml-frontend` directory on your machine. This is "
+"the only entry that is **required** for `idml2docbook` to function."
 
 #: ../../source/md/2_prerequisites.md:29
 msgid ""
@@ -137,10 +175,13 @@ msgid ""
 "différentes variables, consultez l'aide du package avec l'option "
 "`-h`/`--help` :"
 msgstr ""
+"The other values in the `.env` file can override the default settings of the "
+"`idml2docbook` package. For more information on these variables, consult the "
+"package help with the `-h`/`--help` option:"
 
 #: ../../source/md/2_prerequisites.md:35
 msgid "Test de la configuration"
-msgstr ""
+msgstr "Configuration test"
 
 #: ../../source/md/2_prerequisites.md:37
 msgid ""
@@ -148,8 +189,9 @@ msgid ""
 "`.env` bien paramétré, vous pouvez tester le convertisseur dans votre "
 "terminal avec la commande suivante :"
 msgstr ""
+"To verify that the dependencies are installed and the `.env` file is correctly "
+"set up, you can test the converter in your terminal with the following command:"
 
 #: ../../source/md/2_prerequisites.md:43
 msgid "Le résultat devrait alors être :"
-msgstr ""
-
+msgstr "The result should then be:"

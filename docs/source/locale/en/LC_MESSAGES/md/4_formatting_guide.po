@@ -22,21 +22,22 @@ msgstr ""
 
 #: ../../source/md/4_formatting_guide.md:1
 msgid "Guide de formatage"
-msgstr ""
+msgstr "Formatting Guide"
 
 #: ../../source/md/4_formatting_guide.md:3
 msgid "Recommandations"
-msgstr ""
+msgstr "Recommendations"
 
 #: ../../source/md/4_formatting_guide.md:5
 msgid ""
 "Cette liste est non exhaustive, et sera complétée au fur et à mesure que "
 "des cas singuliers apparaîtront."
 msgstr ""
+"This list is not exhaustive and will be expanded as special cases arise."
 
 #: ../../source/md/4_formatting_guide.md:7
 msgid "Éviter les surcharges de style"
-msgstr ""
+msgstr "Avoid style overrides"
 
 #: ../../source/md/4_formatting_guide.md:9
 msgid ""
@@ -45,10 +46,14 @@ msgid ""
 "[facilement enlever ces surcharges](https://www.rockymountaintraining.com"
 "/adobe-indesign-quickly-recognizing-and-removing-overrides/)."
 msgstr ""
+"As it stands, the converter ignores style overrides (when an element has "
+"a paragraph style with a `+`). There are ways to "
+"[easily remove these overrides](https://www.rockymountaintraining.com/"
+"adobe-indesign-quickly-recognizing-and-removing-overrides/)."
 
 #: ../../source/md/4_formatting_guide.md:11
 msgid "Une unité sémantique = un style de paragraphe ou de caractère"
-msgstr ""
+msgstr "One semantic unit = one paragraph or character style"
 
 #: ../../source/md/4_formatting_guide.md:13
 msgid ""
@@ -59,6 +64,10 @@ msgid ""
 "quoi chaque style de paragraphe et de caractère correspond "
 "sémantiquement."
 msgstr ""
+"InDesign allows a certain form of semantic structure through paragraph and "
+"character styles. In InDesign, concepts commonly found in markup languages "
+"(headings, quotes, emphasis, etc.) do not exist. It is therefore necessary "
+"to specify the semantic meaning of each paragraph and character style."
 
 #: ../../source/md/4_formatting_guide.md:15
 msgid ""
@@ -68,21 +77,28 @@ msgid ""
 "être associée à une unité sémantique. En d'autres termes, que chaque "
 "style puisse être associé à un type d'élément en sortie."
 msgstr ""
+"The JSON files loaded into the converter allow mapping paragraph and "
+"character styles to element types, but each stylistic unit must be "
+"associated with a semantic unit. In other words, each style must correspond "
+"to an output element type."
 
 #: ../../source/md/4_formatting_guide.md:17
 msgid "Chaînage des contenus"
-msgstr ""
+msgstr "Threading content"
 
 #: ../../source/md/4_formatting_guide.md:19
 msgid ""
-"Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le"
-" résultat de la conversion, le mieux est de correctement chaîner les "
-"blocs entre eux, et d'ancrer les images dans les blocs."
+"Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le "
+"résultat de la conversion, le mieux est de correctement chaîner les blocs "
+"entre eux, et d'ancrer les images dans les blocs."
 msgstr ""
+"To ensure that content appears in the correct order in the converted result, "
+"it is best to properly thread the blocks together and anchor images within "
+"the blocks."
 
 #: ../../source/md/4_formatting_guide.md:21
 msgid "Nommage des fichiers et des styles"
-msgstr ""
+msgstr "Naming files and styles"
 
 #: ../../source/md/4_formatting_guide.md:23
 msgid ""
@@ -90,16 +106,20 @@ msgid ""
 "alphadécimaux non-accentués dans vos noms de fichiers et noms de styles, "
 "par exemple :"
 msgstr ""
+"To avoid any issues, it's best to use only unaccented alphanumeric characters "
+"in your filenames and style names, for example:"
 
 #: ../../source/md/4_formatting_guide.md:25
 msgid ""
 "❌ `Mon super-étonnant fichier InDesign.indd` \\ ✔️ "
 "`Mon_super_etonnant_fichier_InDesign.indd`"
 msgstr ""
+"❌ `Mon super-étonnant fichier InDesign.indd` \\ ✔️ "
+"`Mon_super_etonnant_fichier_InDesign.indd`"
 
 #: ../../source/md/4_formatting_guide.md:28
 msgid "Notes de bas de page, listes, textes alternatifs"
-msgstr ""
+msgstr "Footnotes, lists, and alternative text"
 
 #: ../../source/md/4_formatting_guide.md:30
 msgid ""
@@ -107,43 +127,55 @@ msgid ""
 "listes et les textes alternatifs. Cependant, pour que cela soit bien "
 "reconnu, il faut en premier lieu les formater correctement dans InDesign."
 msgstr ""
+"The converter supports footnotes, lists, and alternative text. However, for "
+"these to be recognized properly, they must first be correctly formatted in "
+"InDesign."
 
 #: ../../source/md/4_formatting_guide.md:32
 msgid "Hyperliens"
-msgstr ""
+msgstr "Hyperlinks"
 
 #: ../../source/md/4_formatting_guide.md:34
 msgid ""
 "Dans le cas d'un PDF pour l'impression, il est souvent nécessaire de "
-"faire figurer l'URL au complet. Si l'URL est correctement renseignée dans"
-" InDesign (c'est-à-dire, en spécifiant que l'URL et son texte de "
+"faire figurer l'URL au complet. Si l'URL est correctement renseignée dans "
+"InDesign (c'est-à-dire, en spécifiant que l'URL et son texte de "
 "remplacement sont les mêmes), alors cela fonctionnera sans problème."
 msgstr ""
+"In the case of a print-ready PDF, it is often necessary to display the full "
+"URL. If the URL is properly entered in InDesign (i.e., with the URL and its "
+"display text being the same), then this will work without issues."
 
 #: ../../source/md/4_formatting_guide.md:36
 msgid ""
 "Cependant, cette tâche peut-être laborieuse. Pour permettre de plus "
 "simplement travailler les URL (par exemple dans des paragraphes en "
-"drapeaux), nous reconstituons automatiquement les URL contenant des sauts"
-" de ligne à condition que celle-ci commence par `http://` ou `https://`. "
+"drapeaux), nous reconstituons automatiquement les URL contenant des sauts "
+"de ligne à condition que celle-ci commence par `http://` ou `https://`. "
 "Par exemple :"
 msgstr ""
+"However, this task can be tedious. To make handling URLs easier (e.g., in "
+"justified paragraphs), we automatically reconstruct URLs that contain line "
+"breaks, provided they start with `http://` or `https://`. For example:"
 
 #: ../../source/md/4_formatting_guide.md:43
 msgid ""
-"Sera converti en [https://www.example.org](https://www.example.org), mais"
-" pas `https://www.example .org` si le `https://` n'était pas présent."
+"Sera converti en [https://www.example.org](https://www.example.org), mais "
+"pas `https://www.example .org` si le `https://` n'était pas présent."
 msgstr ""
+"Will be converted to [https://www.example.org](https://www.example.org), "
+"but not `https://www.example .org` if the `https://` was not present."
 
 #: ../../source/md/4_formatting_guide.md:45
 msgid "Retour à la ligne et saut de paragraphe"
-msgstr ""
+msgstr "Line breaks and paragraph breaks"
 
 #: ../../source/md/4_formatting_guide.md:47
 msgid ""
 "Les retours à la ligne sont automatiquement convertis en caractères "
 "espace ` `."
 msgstr ""
+"Line breaks are automatically converted to space characters ` `."
 
 #: ../../source/md/4_formatting_guide.md:49
 msgid ""
@@ -154,12 +186,16 @@ msgid ""
 "styles](https://outdesign.deborderbollore.fr/md/3_usage.html"
 "#correspondance-des-styles)."
 msgstr ""
+"Paragraph breaks—two blocks separated by **an empty block**—are removed, "
+"unless the `--empty` option is enabled or the block has a paragraph style "
+"with the `empty` attribute in the JSON mapping file. See "
+"[Style Mapping](https://outdesign.deborderbollore.fr/md/3_usage.html"
+"#correspondance-des-styles)."
 
 #: ../../source/md/4_formatting_guide.md:51
 msgid "Limitations"
-msgstr ""
+msgstr "Limitations"
 
 #: ../../source/md/4_formatting_guide.md:53
 msgid "Les tabulations sont actuellement ignorées par le convertisseur."
-msgstr ""
-
+msgstr "Tabs are currently ignored by the converter."
