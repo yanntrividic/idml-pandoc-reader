@@ -13,5 +13,7 @@ articles
 
 # docs
 doctrees
+.doctrees
 objects.inv
 *.mo
+gettext

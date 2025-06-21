@@ -1,3 +1,5 @@
+import os
+
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -27,6 +29,8 @@ exclude_patterns = []
 language = 'fr'
 
 # Internationalisation
+language = os.environ.get('LOCALE', 'fr')
+languages = os.environ.get('LANGUAGES', 'fr').split(' ')
 locale_dirs = ['locale/']
 gettext_compact = False
 gettext_last_translator = "Yann Trividic"
@@ -66,6 +70,10 @@ html_theme_options = {
     'navigation_depth': 4,
     'includehidden': True,
     'titles_only': False
+}
+
+html_context = {
+    'languages': [(lang, f'../{lang}/') for lang in languages],
 }
 
 

@@ -60,3 +60,9 @@ blockquote {
   margin-left: 0;
   padding-left: 10px;
 }
+
+/* Intl */
+.rst-versions a.active {
+  text-decoration: underline;
+  font-weight: bold;
+}

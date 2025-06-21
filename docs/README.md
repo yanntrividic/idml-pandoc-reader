@@ -11,5 +11,13 @@ pip install -r requirements.txt
 Pour compiler la documentation :
 
 ```bash
-sphinx-build -M html source build
+make all
 ```
+
+Pour mettre à jour les fichiers d'internationalisation (pour traduire la documentation vers l'anglais) :
+
+```bash
+make gettext ; sphinx-intl update -p build/gettext -l en
+```
+
+La customisation de cette documentation Sphinx est librement inspirée de celle de [Club1](https://club1.fr/docs/).

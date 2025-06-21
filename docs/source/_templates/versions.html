@@ -1,0 +1,9 @@
+{# Add rst-badge after rst-versions for small badge style. #}
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+	<span class="rst-current-version" data-toggle="rst-current-version">
+		<span class="fa fa-book"> {{_('Langages')}}</span>
+			{% for slug, url in languages %}
+                <a {% if slug == language %} class="active" {% endif %} href="{{ pathto(url + pagename) }}">{{ slug }}</a>
+            {% endfor %}
+	</span>
+</div>
