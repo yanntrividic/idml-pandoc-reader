@@ -25,3 +25,4 @@ all: $(LANGUAGES)
 $(LANGUAGES):
 	@echo "Building language: $@"
 	@$(SPHINXBUILD) -b html -D language=$@ $(SPHINXOPTS) $(SOURCEDIR) $(BUILDDIR)/$@
+	cp $(SOURCEDIR)/.htaccess $(BUILDDIR)/.htaccess
