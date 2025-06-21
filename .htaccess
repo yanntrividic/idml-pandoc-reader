@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Redirect from root to /fr/
+RewriteCond %{REQUEST_URI} ^/$
+RewriteRule ^$ fr/ [R=302,L]
