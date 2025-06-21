@@ -1,0 +1,62 @@
+/* Hide footer */
+footer [role="contentinfo"] {
+  display: none;
+}
+
+/* Change blue to red */
+.wy-nav-top {
+  background: #ba3235; /* #2980b9; */
+}
+
+.wy-side-nav-search {
+  background-color: #ba3235; /* #2980b9; */
+}
+
+.wy-side-nav-search input[type="text"] {
+  border-color: #cb3a3c; /* #2472a4; */
+}
+
+a, .rst-content code.literal, .rst-content tt.literal {
+  color: #cb3a3c;
+}
+
+div.wy-menu.wy-menu-vertical a.reference.internal:active {
+  background-color: #ba3235; /* #2980b9; */
+}
+
+a.icon.icon-home:hover {
+  background: inherit;
+}
+
+.wy-menu-vertical header, .wy-menu-vertical p.caption,
+a:hover {
+  color: #db7678; /* #55a5d9; */
+}
+
+/* Increase space below image with caption */
+.rst-content figure .caption-text {
+  font-style: normal;
+  margin-top: .5em;
+}
+
+figcaption {
+  margin-top: .5em;
+}
+
+/* Taken from https://club1.fr/docs/en/_static/club1.css */
+/* Style links on hover */
+a:not(.btn):hover {
+	text-decoration: underline solid 1px !important;
+}
+
+/* Decrease margin in nested lists */
+li.toctree-l1 a.reference.internal + ul {
+  margin-top: 0;
+}
+
+blockquote {
+  border-left: #bbb solid 2px;
+  color: #555;
+  margin-left: 0;
+  padding-left: 10px;
+}

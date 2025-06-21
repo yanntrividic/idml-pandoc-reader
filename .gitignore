@@ -10,5 +10,8 @@ map.json
 idml2hubxml
 articles
 *.xml
+
+# docs
 doctrees
 objects.inv
+*.mo

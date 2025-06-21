@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3. Usage &mdash; IDML Pandoc reader 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=0d434e92" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. Formatting Guide" href="4_formatting_guide.html" />
+    <link rel="prev" title="2. Prerequisites" href="2_prerequisites.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            IDML Pandoc reader
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Repository Contents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_prerequisites.html">2. Prerequisites</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#preparation-des-fichiers-idml">Preparing IDML Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#correspondance-des-styles">Style Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#commandes-de-base">Basic Commands</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#idml2docbook">idml2docbook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#idml-lua">idml.lua</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#batch-sh">batch.sh</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#detail-de-la-commande-de-conversion-du-recueil-deborder-bollore">Details of the conversion command for the <em>Déborder Bolloré</em> collection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. Formatting Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5_conversion_graph.html">5. Conversion Pipeline</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Go further</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="6_about_indesign.html">About InDesign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_contribute.html">Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_licence.html">License</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">IDML Pandoc reader</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">3. </span>Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/md/3_usage.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="usage">
+<h1><span class="section-number">3. </span>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
+<section id="preparation-des-fichiers-idml">
+<h2>Preparing IDML Files<a class="headerlink" href="#preparation-des-fichiers-idml" title="Link to this heading"></a></h2>
+<p>A <a class="reference internal" href="4_formatting_guide.html"><span class="doc std std-doc">formatting guide</span></a> explains how to prepare InDesign files. While it is not mandatory to follow these recommendations to use the converter, the quality of the result may vary greatly depending on how your document is structured.</p>
+</section>
+<section id="correspondance-des-styles">
+<h2>Style Mapping<a class="headerlink" href="#correspondance-des-styles" title="Link to this heading"></a></h2>
+<p>Once the <a class="reference external" href="https://github.com/yanntrividic/pandoc/">modified version of Pandoc</a> is installed, Pandoc can interpret the <code class="docutils literal notranslate"><span class="pre">role</span></code> attributes of the elements in the DocBook files generated after conversion. These roles are then treated as classes by Pandoc using the <code class="docutils literal notranslate"><span class="pre">roles-to-classes.lua</span></code> filter.</p>
+<p><code class="docutils literal notranslate"><span class="pre">role</span></code> attributes correspond to the paragraph and character styles defined in InDesign. As shown in the file <code class="docutils literal notranslate"><span class="pre">maps/sample.json</span></code>, these styles can be mapped to specific treatments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">role</span></code>: replaces the source role with one or more classes;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: changes the <a class="reference external" href="https://en.wikipedia.org/wiki/DocBook">DocBook</a> element type (default is <code class="docutils literal notranslate"><span class="pre">para</span></code> for all elements) to a new type;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: if <code class="docutils literal notranslate"><span class="pre">type</span></code> is a DocBook title (<code class="docutils literal notranslate"><span class="pre">title</span></code> tag), <code class="docutils literal notranslate"><span class="pre">level</span></code> sets its heading level;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">delete</span></code>: removes elements with this <code class="docutils literal notranslate"><span class="pre">role</span></code> attribute;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wrap</span></code>: wraps the element in another container, needed for lists defined only by a paragraph style (<code class="docutils literal notranslate"><span class="pre">itemizedlist</span></code>, <code class="docutils literal notranslate"><span class="pre">orderedlist</span></code>) and for blockquotes (<code class="docutils literal notranslate"><span class="pre">blockquote</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">unwrap</span></code>: unwraps the content into the parent element;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">br</span></code>: adds a line break before the element;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cut</span></code>: creates a new file before each element with this <code class="docutils literal notranslate"><span class="pre">role</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">empty</span></code>: retains empty elements with this <code class="docutils literal notranslate"><span class="pre">role</span></code> (all other empty elements are removed, unless the <code class="docutils literal notranslate"><span class="pre">-e</span></code>/<code class="docutils literal notranslate"><span class="pre">--empty</span></code> option is enabled);</p></li>
+<li><p>If the entry is empty (<code class="docutils literal notranslate"><span class="pre">{}</span></code>), the <code class="docutils literal notranslate"><span class="pre">role</span></code> attribute is removed.</p></li>
+</ul>
+<p>The script <code class="docutils literal notranslate"><span class="pre">idml2docbook/map.py</span></code> helps create these JSON files. It takes a file generated by <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> and a mapping JSON file, and shows the style mappings that will be applied, for example using the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>idml2docbook/map.py<span class="w"> </span>file.xml<span class="w"> </span>maps/db.json
+</pre></div>
+</div>
+</section>
+<section id="commandes-de-base">
+<h2>Basic Commands<a class="headerlink" href="#commandes-de-base" title="Link to this heading"></a></h2>
+<p>This converter can be used in several ways:</p>
+<ol class="arabic simple">
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> package, then running Pandoc on the output;</p></li>
+<li><p>Using the Lua reader <code class="docutils literal notranslate"><span class="pre">idml.lua</span></code>;</p></li>
+<li><p>Using the <code class="docutils literal notranslate"><span class="pre">batch.sh</span></code> script.</p></li>
+</ol>
+<section id="idml2docbook">
+<h3>idml2docbook<a class="headerlink" href="#idml2docbook" title="Link to this heading"></a></h3>
+<p>This Python package is the main contribution of this repository. It provides an API to convert an IDML file into one or more DocBook files.</p>
+<p>Convert an IDML file and save it to a DocBook file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>hello_world.idml<span class="w"> </span>-o<span class="w"> </span>hello_world.xml
+</pre></div>
+</div>
+<p>It is also possible to send the conversion result directly to Pandoc’s standard input:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pandoc<span class="w"> </span>-f<span class="w"> </span>docbook<span class="w"> </span>-t<span class="w"> </span>markdown<span class="w"> </span>&lt;<span class="o">(</span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>hello_world.idml<span class="o">)</span>
+</pre></div>
+</div>
+<p>Display usage help with the <code class="docutils literal notranslate"><span class="pre">-h</span></code>/<code class="docutils literal notranslate"><span class="pre">--help</span></code> option:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>-h<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="idml-lua">
+<h3>idml.lua<a class="headerlink" href="#idml-lua" title="Link to this heading"></a></h3>
+<p>This file bridges Pandoc and <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>. It allows Pandoc to use the output of <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>. <a class="reference external" href="https://github.com/jgm/pandoc/discussions/9689">Pandoc does not allow arbitrary arguments on the command line</a>, which means only modifying the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file can affect the behavior of <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> when executed through <code class="docutils literal notranslate"><span class="pre">idml.lua</span></code>.</p>
+<p>Convert an IDML file to Markdown, using for example the <code class="docutils literal notranslate"><span class="pre">roles-to-classes.lua</span></code> filter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pandoc</span> <span class="o">-</span><span class="n">f</span> <span class="n">idml</span><span class="o">.</span><span class="n">lua</span> <span class="o">-</span><span class="n">t</span> <span class="n">markdown</span> <span class="o">--</span><span class="n">lua</span><span class="o">-</span><span class="nb">filter</span><span class="o">=</span><span class="n">lua</span><span class="o">-</span><span class="n">filters</span><span class="o">/</span><span class="n">roles</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">classes</span><span class="o">.</span><span class="n">lua</span> <span class="n">hello_world</span><span class="o">.</span><span class="n">idml</span>
+</pre></div>
+</div>
+</section>
+<section id="batch-sh">
+<h3>batch.sh<a class="headerlink" href="#batch-sh" title="Link to this heading"></a></h3>
+<p>First, you must specify the Pandoc version to use in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file. You must also make this script executable:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>batch.sh
+</pre></div>
+</div>
+<p>This small shell script makes it easier to link Pandoc with <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>, particularly when using the <code class="docutils literal notranslate"><span class="pre">-c</span></code>/<code class="docutils literal notranslate"><span class="pre">--cut</span></code> option to split the output into multiple files (or chapters).</p>
+<p>This command takes two arguments: an input folder and an output folder. You can then chain commands, for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>file.idml<span class="w"> </span>--output<span class="w"> </span>docbook_folder<span class="w"> </span>--cut<span class="w"> </span><span class="p">;</span><span class="w"> </span>./batch.sh<span class="w"> </span>docbook_folder<span class="w"> </span>md_folder
+</pre></div>
+</div>
+</section>
+</section>
+<section id="detail-de-la-commande-de-conversion-du-recueil-deborder-bollore">
+<h2>Details of the conversion command for the <em>Déborder Bolloré</em> collection<a class="headerlink" href="#detail-de-la-commande-de-conversion-du-recueil-deborder-bollore" title="Link to this heading"></a></h2>
+<p>The command used to compile the contributions of the <em>Déborder Bolloré</em> collection, whose result can be found on the repository <a class="reference external" href="https://gitlab.com/deborderbollore/articles">deborderbollore/articles</a>, is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>db.idml<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--output<span class="w"> </span>docbook<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--map<span class="w"> </span>maps/db.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cut<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--typography<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--thin-spaces<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--names<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--raster<span class="w"> </span>jpg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--vector<span class="w"> </span>svg<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--media-folder<span class="w"> </span>images<span class="w"> </span><span class="p">;</span>
+./batch.sh<span class="w"> </span>docbook<span class="w"> </span>articles
+</pre></div>
+</div>
+<p>In detail:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-o</span></code>/<code class="docutils literal notranslate"><span class="pre">--output</span></code>: specifies the folder where the output DocBook files will be saved;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-m</span></code>/<code class="docutils literal notranslate"><span class="pre">--map</span></code>: defines the operations to apply to certain character and paragraph styles, see <a class="reference internal" href="#correspondance-des-styles">Style Mapping</a>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-c</span></code>/<code class="docutils literal notranslate"><span class="pre">--cut</span></code>: splits the result into multiple standalone DocBook files;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-t</span></code>/<code class="docutils literal notranslate"><span class="pre">--typography</span></code>: completely redoes typographic spacing (around punctuation, etc.);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-l</span></code>/<code class="docutils literal notranslate"><span class="pre">--thin-spaces</span></code>: typography uses only thin spaces;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-n</span></code>/<code class="docutils literal notranslate"><span class="pre">--names</span></code>: generates filenames based on level-1 heading content;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-r</span></code>/<code class="docutils literal notranslate"><span class="pre">--raster</span></code>: replaces raster image extensions with <code class="docutils literal notranslate"><span class="pre">jpg</span></code> in the output file URLs;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code>/<code class="docutils literal notranslate"><span class="pre">--vector</span></code>: same for vector images;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code>/<code class="docutils literal notranslate"><span class="pre">--media-folder</span></code>: replaces the absolute media URLs in the output files with <code class="docutils literal notranslate"><span class="pre">images/</span></code>.</p></li>
+</ul>
+<p>Other configuration options are available via this package’s options (see the help with <code class="docutils literal notranslate"><span class="pre">-h</span></code>/<code class="docutils literal notranslate"><span class="pre">--help</span></code>).</p>
+<p>Finally, the <code class="docutils literal notranslate"><span class="pre">batch.sh</span></code> script converts the resulting DocBook files into Markdown using the <code class="docutils literal notranslate"><span class="pre">markdown_phpextra</span></code> flavor and the necessary Lua filters. It also transforms Markdown line breaks (<code class="docutils literal notranslate">&#160; </code>, double spaces) into HTML <code class="docutils literal notranslate"><span class="pre">&lt;br/&gt;</span></code> tags.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="2_prerequisites.html" class="btn btn-neutral float-left" title="2. Prerequisites" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="4_formatting_guide.html" class="btn btn-neutral float-right" title="4. Formatting Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Yann Trividic.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
