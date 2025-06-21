@@ -12,8 +12,8 @@ articles
 *.xml
 
 # docs
-doctrees
-.doctrees
+build/en/.doctrees
+build//.doctrees
 objects.inv
 *.mo
 gettext

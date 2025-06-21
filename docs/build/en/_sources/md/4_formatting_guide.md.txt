@@ -46,7 +46,7 @@ Sera converti en [https://www.example.org](https://www.example.org), mais pas `h
 
 Les retours à la ligne sont automatiquement convertis en caractères espace ` `.
 
-Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont supprimés, sauf si l'option `--empty` est active, ou que le bloc porte un style de parapraphe portant l'attribut `empty` dans le fichier JSON de correspondance. Voir [Correspondance des styles](https://outdesign.deborderbollore.fr/md/3_usage.html#correspondance-des-styles).
+Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont supprimés, sauf si l'option `--empty` est active, ou que le bloc porte un style de parapraphe portant l'attribut `empty` dans le fichier JSON de correspondance. Voir [Correspondance des styles](https://outdesign.deborderbollore.fr/fr/3_usage.html#correspondance-des-styles).
 
 ## Limitations
 
