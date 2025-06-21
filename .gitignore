@@ -17,3 +17,5 @@ doctrees
 objects.inv
 *.mo
 gettext
+*.pickle
+*.doctree
