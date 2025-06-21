@@ -124,14 +124,3 @@ def wrap_consecutive_elements(soup, role, wrap_name):
             i = children.index(wrapper) + 1
         else:
             i += 1
-
-def merge_consecutive_elements(soup, role, type, joiner):
-    print(role, type, joiner)
-    wrap_consecutive_elements(soup, role, type)
-    article = soup.find("article")
-    # find all the elements resulting from this wrapping
-    for el in article.find_all(type, attrs={"role": role}, recursive=False):
-        print(el)
-        # for child in el.children:
-            # print(child)
-            # if isinstance(child, Tag): child.unwrap()

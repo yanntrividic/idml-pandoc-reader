@@ -227,14 +227,6 @@ def wrap_consecutive_elements_from_map(soup, map):
         if "wrap" in value and value["wrap"]:
             wrap_consecutive_elements(soup, key, value["wrap"])
 
-def merge_consecutive_elements_from_map(soup, map):
-    """If the map's "merge" entry is on, merges all consecutive elements
-    elements with the same role.
-    The value in the "merge" specifies a joiner."""
-    logging.info("Starting to wrap elements with specific roles...")
-    for key, value in map.items():
-        if "merge" in value and value["merge"] and "type" in value and "role" in value:
-            merge_consecutive_elements(soup, value["role"], value["type"], value["merge"])
 
 def generate_sections(soup):
     """Transform soup to hierarchical sections up to 6 levels deep."""
@@ -376,12 +368,9 @@ def hubxml2docbook(file, **options):
     process_listitems(soup, map)
     # join_elements(soup)
 
-    apply_new_roles(soup, map)
-
-    # merge_consecutive_elements_from_map(soup, map)
-
     if not options["hierarchy"]: generate_sections(soup)
 
+    apply_new_roles(soup, map)
 
     if options["prettify"]:
         logging.warning("Prettifying can result in errors depending on whatcha wanna do afterwards!")
