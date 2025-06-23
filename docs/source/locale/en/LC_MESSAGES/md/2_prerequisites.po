@@ -64,7 +64,7 @@ msgstr ""
 "Others have explored reading IDML files, notably the project [`idml2xml-"
 "frontend`](https://github.com/transpect/idml2xml-frontend), distributed "
 "under the FreeBSD license. We build our converter by continuing that "
-"work, offering a [_binding_](https://en.wikipedia.org/wiki/Binding) "
+"work, offering a [_binding_](https://en.wikipedia.org/wiki/Binding#Computing) "
 "between `idml2xml-frontend` and Pandoc—i.e., converting the Hub XML "
 "output of `idml2xml-frontend` into DocBook 5.1 format."
 

@@ -151,9 +151,9 @@ msgstr ""
 "compatible format (i.e., one readable by all versions of InDesign), "
 "unlike INDD which is version-specific. IDML can also be read and "
 "interpreted without launching InDesign, since it is actually a kind of "
-"[zipped archive](https://fr.wikipedia.org/wiki/ZIP_(format_de_fichier)) "
+"[zipped archive](https://en.wikipedia.org/wiki/ZIP_(file_format)) "
 "containing a tree of [XML "
-"files](https://fr.wikipedia.org/wiki/Extensible_Markup_Language)."
+"files](https://en.wikipedia.org/wiki/XML)."
 
 #: ../../source/md/6_about_indesign.md:31
 msgid ""

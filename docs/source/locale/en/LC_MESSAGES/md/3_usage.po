@@ -256,7 +256,7 @@ msgstr ""
 
 #: ../../source/md/3_usage.md:86
 msgid "Détail de la commande de conversion du recueil _Déborder Bolloré_"
-msgstr "Details of the conversion command for the _Déborder Bolloré_ collection"
+msgstr "Details of the conversion command for the _Déborder Bolloré_ reader"
 
 #: ../../source/md/3_usage.md:88
 msgid ""
@@ -266,7 +266,7 @@ msgid ""
 "est la suivante :"
 msgstr ""
 "The command used to compile the contributions of the _Déborder Bolloré_ "
-"collection, whose result can be found on the repository "
+"reader, whose result can be found on the repository "
 "[deborderbollore/articles](https://gitlab.com/deborderbollore/articles), "
 "is as follows:"
 
