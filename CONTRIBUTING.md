@@ -24,6 +24,8 @@ This project is an ongoing work. Want to contribute? You can:
 * [ ] Publish the package on [PyPI](https://pypi.org/)
 * [ ] Mirror the repo on GitHub
 * [ ] Add a `merge` operator to the map, that merge together consecutive elements with the same selector
+* [ ] Add a "Motivations" documentation page that illustrates where this project can be useful
+* [ ] Merge all PO files into one for easier maintainance
 
 ### Issues to publish on jgm/pandoc
 
