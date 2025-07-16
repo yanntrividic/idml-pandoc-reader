@@ -12,8 +12,12 @@ def get_map(file):
     logging.info("Reading map file at: " + file)
     f = open(file)
     # returns JSON object as a list 
-    data = json.load(f)[0]
-    logging.debug("Data read from map file: " + str(data))
+    data = None
+    try:
+        data = json.load(f)[0]
+        logging.debug("Data read from map file: " + str(data))
+    except:
+        logging.warning("No data was read from map file.")
     return data
 
 def log_map_entry(entry):
@@ -54,27 +58,30 @@ if __name__ == "__main__":
         bold_print("Role/tag couples present in " + file + ":")
         for couple in sorted(roles):
             print("- " + couple[0] + " (" + couple[1] + ")")
-            if couple[0] in map:
-                covered.append(couple[0])
-            else:
+            if map and couple[0] not in map:
                 uncovered.append(couple)
+            else:
+                covered.append(couple[0])
 
-        print(OKGREEN)
-        if len(covered) > 0 :
-            bold_print("Applied mapping:")
-            for c in covered:
-                print("- " + c + " => " + log_map_entry(map[c]))
-        else:
-            bold_print(WARNING + (sys.argv[2] if (len(sys.argv) == 3) else DEFAULT_MAP) + " does not apply to " + file)
+        if map:
+            print(OKGREEN)
+            if len(covered) > 0 :
+                bold_print("Applied mapping:")
+                for c in covered:
+                    print("- " + c + " => " + log_map_entry(map[c]))
+            else:
+                bold_print(WARNING + (sys.argv[2] if (len(sys.argv) == 3) else DEFAULT_MAP) + " does not apply to " + file)
 
-        if len(uncovered) > 0 :
-            print(WARNING)
-            bold_print("Unhandled elements:")
-            for c in uncovered:
-                print("- " + c[0] + " (" + c[1] + ")")
+            if len(uncovered) > 0 :
+                print(WARNING)
+                bold_print("Unhandled elements:")
+                for c in uncovered:
+                    print("- " + c[0] + " (" + c[1] + ")")
+            else:
+                print(OKGREEN + "All elements are covered!")
+            print(END)
         else:
-            print(OKGREEN + "All elements are covered!")
-        print(END)
+            print("\nNo data was read from the map file!")
     else:
         print("This script takes to arguments:")
         print("1) an output XML file from Transpect's idml2xml")
