@@ -119,7 +119,7 @@
 <li><p>Si l’entrée est vide (<code class="docutils literal notranslate"><span class="pre">{}</span></code>) alors l’attribute <code class="docutils literal notranslate"><span class="pre">role</span></code> est supprimé.</p></li>
 </ul>
 <p>Le script <code class="docutils literal notranslate"><span class="pre">idml2docbook/map.py</span></code> aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>idml2docbook/map.py<span class="w"> </span>file.xml<span class="w"> </span>maps/db.json
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>idml2docbook/map.py<span class="w"> </span>file.xml<span class="w"> </span>maps/map.json
 </pre></div>
 </div>
 </section>
@@ -181,7 +181,7 @@
 <p>La commande pour compiler les contributions du recueil <em>Déborder Bolloré</em>, dont on peut retrouver le résultat sur le dépôt <a class="reference external" href="https://gitlab.com/deborderbollore/articles">deborderbollore/articles</a>, est la suivante :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>db.idml<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--output<span class="w"> </span>docbook<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--map<span class="w"> </span>maps/db.json<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--map<span class="w"> </span>maps/map.json<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--cut<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--typography<span class="w"> </span><span class="se">\</span>
 <span class="w">  </span>--thin-spaces<span class="w"> </span><span class="se">\</span>

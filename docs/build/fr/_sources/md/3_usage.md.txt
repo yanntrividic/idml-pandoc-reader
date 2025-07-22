@@ -24,7 +24,7 @@ Les attributs `role` correspondent aux styles de paragraphes et de caractères p
 Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :
 
 ```bash
-python idml2docbook/map.py file.xml maps/db.json
+python idml2docbook/map.py file.xml maps/map.json
 ```
 
 ## Commandes de base
@@ -100,7 +100,7 @@ La commande pour compiler les contributions du recueil _Déborder Bolloré_, don
 ```bash
 python -m idml2docbook db.idml \
   --output docbook \
-  --map maps/db.json \
+  --map maps/map.json \
   --cut \
   --typography \
   --thin-spaces \
