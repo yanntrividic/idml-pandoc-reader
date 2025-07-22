@@ -7,12 +7,14 @@ import re
 import logging
 
 from utils import *
+from slugs import *
 from map import *
 
 
 NODES_TO_REMOVE = [
     "info",
-    "sidebar"
+    "sidebar",
+    "link"
     # "xml-model"
     # "StoryPreference",
     # "InCopyExportOption",
@@ -67,8 +69,6 @@ def remove_empty_elements(soup, map):
 
 def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
     logging.info("Processing media filenames...")
-    RASTER_EXTS = [".tif", ".tiff", ".png", ".jpg", ".jpeg", ".psd"]
-    VECTOR_EXTS = [".svg", ".eps", ".ai", ".pdf"]
 
     for tag in soup.select("para > mediaobject"):
         imagedata = tag.find_next("imagedata")
@@ -76,16 +76,19 @@ def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None,
         new_fileref = ""
 
         base, file_ext = os.path.splitext(fileref)
+    
+        # Decode the base
+        base = decode_path(base)
+
+        # Slugify the filename
+        filename = base.split("/").pop()
+        filename = custom_slugify(filename, 100)
+        base = "/".join(base.split("/")[:-1]) + "/" + filename
+
         if rep_raster and (file_ext.lower() in RASTER_EXTS): new_fileref = base + "." + rep_raster
         elif rep_vector and (file_ext.lower() in VECTOR_EXTS): new_fileref = base + "." + rep_vector
         else: new_fileref = base + file_ext.lower()
 
-        # Replace spaces with underscores
-        filename = new_fileref.split("/").pop()
-        if "%20" in filename:
-            logging.warning("Replacing space character in filename by '_': " + filename)
-            filename = filename.replace("%20", "_")
-            new_fileref = "/".join(new_fileref.split("/")[:-1]) + "/" + filename
 
         if folder: imagedata["fileref"] = folder + "/" + new_fileref.split("/").pop()
         else: imagedata["fileref"] = new_fileref
