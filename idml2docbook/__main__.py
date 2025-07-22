@@ -45,7 +45,7 @@ PARSER = Parser(
 PARSER.add_argument(
     'input', help='filename of the IDML input')
 PARSER.add_argument(
-    '-x', '--idml2hubxml_file', action='store_true',
+    '-x', '--idml2hubxml-file', action='store_true',
     help='consider this file as a hubxml file, '
     'this can be handy to gain computing time if you '
     'have already performed idml2xml on your IDML source file')
