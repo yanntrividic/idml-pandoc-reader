@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4. Guide de formatage &mdash; Documentation IDML Pandoc reader 0.1.0</title>
+  <title>4. Guide de formatage pour InDesign &mdash; Documentation IDML Pandoc reader 0.1.0</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -50,7 +50,7 @@
 <li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Contenus du dépôt</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_prerequisites.html">2. Prérequis</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_usage.html">3. Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Guide de formatage</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Guide de formatage pour InDesign</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#recommandations">Recommandations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#eviter-les-surcharges-de-style">Éviter les surcharges de style</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#une-unite-semantique-un-style-de-paragraphe-ou-de-caractere">Une unité sémantique = un style de paragraphe ou de caractère</a></li>
@@ -87,7 +87,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">4. </span>Guide de formatage</li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>Guide de formatage pour InDesign</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/md/4_formatting_guide.md.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
@@ -97,8 +97,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="guide-de-formatage">
-<h1><span class="section-number">4. </span>Guide de formatage<a class="headerlink" href="#guide-de-formatage" title="Lien vers cette rubrique"></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="guide-de-formatage-pour-indesign">
+<h1><span class="section-number">4. </span>Guide de formatage pour InDesign<a class="headerlink" href="#guide-de-formatage-pour-indesign" title="Lien vers cette rubrique"></a></h1>
+<p>Pour que la qualité de la conversion d’un fichier IDML soit au rendez-vous, il est nécessaire que ce denier soit formaté correctement. Autrement, la qualité de la conversion sera moindre, et cela entraînera nécessairement un travail supplémentaire à effectuer sur les fichiers produits. <strong>Pour minimiser la quantité de travail suite à la conversion, il est recommandé de suivre quelques bonnes pratiques lorsque vous travaillez dans InDesign.</strong></p>
 <section id="recommandations">
 <h2>Recommandations<a class="headerlink" href="#recommandations" title="Lien vers cette rubrique"></a></h2>
 <p>Cette liste est non exhaustive, et sera complétée au fur et à mesure que des cas singuliers apparaîtront.</p>
@@ -113,7 +114,7 @@
 </section>
 <section id="chainage-des-contenus">
 <h3>Chaînage des contenus<a class="headerlink" href="#chainage-des-contenus" title="Lien vers cette rubrique"></a></h3>
-<p>Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le résultat de la conversion, le mieux est de correctement chaîner les blocs entre eux, et d’ancrer les images dans les blocs.</p>
+<p>Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le résultat de la conversion, le mieux est de correctement chaîner les blocs entre eux, et d’<a class="reference external" href="https://helpx.adobe.com/indesign/using/anchored-objects.html">ancrer les images dans les blocs</a>.</p>
 </section>
 <section id="nommage-des-fichiers-et-des-styles">
 <h3>Nommage des fichiers et des styles<a class="headerlink" href="#nommage-des-fichiers-et-des-styles" title="Lien vers cette rubrique"></a></h3>
@@ -123,7 +124,7 @@
 </section>
 <section id="notes-de-bas-de-page-listes-textes-alternatifs">
 <h3>Notes de bas de page, listes, textes alternatifs<a class="headerlink" href="#notes-de-bas-de-page-listes-textes-alternatifs" title="Lien vers cette rubrique"></a></h3>
-<p>Le convertisseur supporte entre autres les notes de bas de page, les listes et les textes alternatifs. Cependant, pour que cela soit bien reconnu, il faut en premier lieu les formater correctement dans InDesign.</p>
+<p>Le convertisseur supporte entre autres les notes de bas de page, les listes et les textes alternatifs pour les images. Cependant, pour que cela soit bien reconnu, il faut en premier lieu les formater correctement dans InDesign.</p>
 </section>
 <section id="hyperliens">
 <h3>Hyperliens<a class="headerlink" href="#hyperliens" title="Lien vers cette rubrique"></a></h3>
@@ -143,7 +144,7 @@
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Lien vers cette rubrique"></a></h2>
-<p>Les tabulations sont actuellement ignorées par le convertisseur.</p>
+<p>Les <a class="reference external" href="https://helpx.adobe.com/fr/indesign/using/tabs-indents.html">tabulations</a> et les métadonnées du fichier IDML sont actuellement ignorées par le convertisseur.</p>
 </section>
 </section>
 

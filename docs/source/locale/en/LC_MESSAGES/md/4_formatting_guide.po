@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-21 16:14+0200\n"
+"POT-Creation-Date: 2025-07-22 15:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -21,24 +21,40 @@ msgstr ""
 "Generated-By: Babel 2.17.0\n"
 
 #: ../../source/md/4_formatting_guide.md:1
-msgid "Guide de formatage"
-msgstr "Formatting Guide"
+msgid "Guide de formatage pour InDesign"
+msgstr "InDesign Formatting Guide"
 
 #: ../../source/md/4_formatting_guide.md:3
+msgid ""
+"Pour que la qualité de la conversion d'un fichier IDML soit au rendez-"
+"vous, il est nécessaire que ce denier soit formaté correctement. "
+"Autrement, la qualité de la conversion sera moindre, et cela entraînera "
+"nécessairement un travail supplémentaire à effectuer sur les fichiers "
+"produits. **Pour minimiser la quantité de travail suite à la conversion, "
+"il est recommandé de suivre quelques bonnes pratiques lorsque vous "
+"travaillez dans InDesign.**"
+msgstr ""
+"To ensure high-quality conversion of an IDML file, it must be properly "
+"formatted. Otherwise, the quality of the conversion will be lower, and "
+"this will inevitably lead to additional work on the resulting files. **To"
+" minimize the amount of work after conversion, it is recommended to "
+"follow a few best practices when working in InDesign.**"
+
+#: ../../source/md/4_formatting_guide.md:5
 msgid "Recommandations"
 msgstr "Recommendations"
 
-#: ../../source/md/4_formatting_guide.md:5
+#: ../../source/md/4_formatting_guide.md:7
 msgid ""
 "Cette liste est non exhaustive, et sera complétée au fur et à mesure que "
 "des cas singuliers apparaîtront."
 msgstr "This list is not exhaustive and will be expanded as special cases arise."
 
-#: ../../source/md/4_formatting_guide.md:7
+#: ../../source/md/4_formatting_guide.md:9
 msgid "Éviter les surcharges de style"
 msgstr "Avoid style overrides"
 
-#: ../../source/md/4_formatting_guide.md:9
+#: ../../source/md/4_formatting_guide.md:11
 msgid ""
 "En l'état, le convertisseur ignore les surcharges de styles (lorsque un "
 "élément a un style de paragraphe avec un `+`). Il existe des manières de "
@@ -50,11 +66,11 @@ msgstr ""
 "overrides](https://www.rockymountaintraining.com/adobe-indesign-quickly-"
 "recognizing-and-removing-overrides/)."
 
-#: ../../source/md/4_formatting_guide.md:11
+#: ../../source/md/4_formatting_guide.md:13
 msgid "Une unité sémantique = un style de paragraphe ou de caractère"
 msgstr "One semantic unit = one paragraph or character style"
 
-#: ../../source/md/4_formatting_guide.md:13
+#: ../../source/md/4_formatting_guide.md:15
 msgid ""
 "InDesign permet une certaine forme de sémantisation via les styles de "
 "paragraphes et les styles de caractères. Dans InDesign, les notions que "
@@ -69,7 +85,7 @@ msgstr ""
 "therefore necessary to specify the semantic meaning of each paragraph and"
 " character style."
 
-#: ../../source/md/4_formatting_guide.md:15
+#: ../../source/md/4_formatting_guide.md:17
 msgid ""
 "Les fichiers JSON chargés dans le convertisseur permettent de faire "
 "correspondre les styles de paragraphes et de caractères à des types "
@@ -82,25 +98,27 @@ msgstr ""
 "associated with a semantic unit. In other words, each style must "
 "correspond to an output element type."
 
-#: ../../source/md/4_formatting_guide.md:17
+#: ../../source/md/4_formatting_guide.md:19
 msgid "Chaînage des contenus"
 msgstr "Threading content"
 
-#: ../../source/md/4_formatting_guide.md:19
+#: ../../source/md/4_formatting_guide.md:21
 msgid ""
 "Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le"
 " résultat de la conversion, le mieux est de correctement chaîner les "
-"blocs entre eux, et d'ancrer les images dans les blocs."
+"blocs entre eux, et d'[ancrer les images dans les "
+"blocs](https://helpx.adobe.com/indesign/using/anchored-objects.html)."
 msgstr ""
 "To ensure that content appears in the correct order in the converted "
-"result, it is best to properly thread the blocks together and anchor "
-"images within the blocks."
+"result, it is best to properly thread the blocks together and [anchor "
+"images within the blocks](https://helpx.adobe.com/indesign/using"
+"/anchored-objects.html."
 
-#: ../../source/md/4_formatting_guide.md:21
+#: ../../source/md/4_formatting_guide.md:23
 msgid "Nommage des fichiers et des styles"
 msgstr "Naming files and styles"
 
-#: ../../source/md/4_formatting_guide.md:23
+#: ../../source/md/4_formatting_guide.md:25
 msgid ""
 "Pour éviter tout problème, mieux vaut utiliser seulement des caractères "
 "alphadécimaux non-accentués dans vos noms de fichiers et noms de styles, "
@@ -109,7 +127,7 @@ msgstr ""
 "To avoid any issues, it's best to use only unaccented alphanumeric "
 "characters in your filenames and style names, for example:"
 
-#: ../../source/md/4_formatting_guide.md:25
+#: ../../source/md/4_formatting_guide.md:27
 msgid ""
 "❌ `Mon super-étonnant fichier InDesign.indd` \\ ✔️ "
 "`Mon_super_etonnant_fichier_InDesign.indd`"
@@ -117,25 +135,26 @@ msgstr ""
 "❌ `Mon super-étonnant fichier InDesign.indd` \\ ✔️ "
 "`Mon_super_etonnant_fichier_InDesign.indd`"
 
-#: ../../source/md/4_formatting_guide.md:28
+#: ../../source/md/4_formatting_guide.md:30
 msgid "Notes de bas de page, listes, textes alternatifs"
 msgstr "Footnotes, lists, and alternative text"
 
-#: ../../source/md/4_formatting_guide.md:30
+#: ../../source/md/4_formatting_guide.md:32
 msgid ""
 "Le convertisseur supporte entre autres les notes de bas de page, les "
-"listes et les textes alternatifs. Cependant, pour que cela soit bien "
-"reconnu, il faut en premier lieu les formater correctement dans InDesign."
+"listes et les textes alternatifs pour les images. Cependant, pour que "
+"cela soit bien reconnu, il faut en premier lieu les formater correctement"
+" dans InDesign."
 msgstr ""
-"The converter supports footnotes, lists, and alternative text. However, "
-"for these to be recognized properly, they must first be correctly "
-"formatted in InDesign."
+"The converter supports footnotes, lists, and alternative text for images."
+" However, for these to be recognized properly, they must first be "
+"correctly formatted in InDesign."
 
-#: ../../source/md/4_formatting_guide.md:32
+#: ../../source/md/4_formatting_guide.md:34
 msgid "Hyperliens"
 msgstr "Hyperlinks"
 
-#: ../../source/md/4_formatting_guide.md:34
+#: ../../source/md/4_formatting_guide.md:36
 msgid ""
 "Dans le cas d'un PDF pour l'impression, il est souvent nécessaire de "
 "faire figurer l'URL au complet. Si l'URL est correctement renseignée dans"
@@ -146,7 +165,7 @@ msgstr ""
 "full URL. If the URL is properly entered in InDesign (i.e., with the URL "
 "and its display text being the same), then this will work without issues."
 
-#: ../../source/md/4_formatting_guide.md:36
+#: ../../source/md/4_formatting_guide.md:38
 msgid ""
 "Cependant, cette tâche peut-être laborieuse. Pour permettre de plus "
 "simplement travailler les URL (par exemple dans des paragraphes en "
@@ -159,7 +178,7 @@ msgstr ""
 "line breaks, provided they start with `http://` or `https://`. For "
 "example:"
 
-#: ../../source/md/4_formatting_guide.md:43
+#: ../../source/md/4_formatting_guide.md:45
 msgid ""
 "Sera converti en [https://www.example.org](https://www.example.org), mais"
 " pas `https://www.example .org` si le `https://` n'était pas présent."
@@ -167,17 +186,17 @@ msgstr ""
 "Will be converted to [https://www.example.org](https://www.example.org), "
 "but not `https://www.example .org` if the `https://` was not present."
 
-#: ../../source/md/4_formatting_guide.md:45
+#: ../../source/md/4_formatting_guide.md:47
 msgid "Retour à la ligne et saut de paragraphe"
 msgstr "Line breaks and paragraph breaks"
 
-#: ../../source/md/4_formatting_guide.md:47
+#: ../../source/md/4_formatting_guide.md:49
 msgid ""
 "Les retours à la ligne sont automatiquement convertis en caractères "
 "espace ` `."
 msgstr "Line breaks are automatically converted to space characters ` `."
 
-#: ../../source/md/4_formatting_guide.md:49
+#: ../../source/md/4_formatting_guide.md:51
 msgid ""
 "Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, "
 "sont supprimés, sauf si l'option `--empty` est active, ou que le bloc "
@@ -192,11 +211,16 @@ msgstr ""
 "Mapping](https://outdesign.deborderbollore.fr/en/md/3_usage.html"
 "#correspondance-des-styles)."
 
-#: ../../source/md/4_formatting_guide.md:51
+#: ../../source/md/4_formatting_guide.md:53
 msgid "Limitations"
 msgstr "Limitations"
 
-#: ../../source/md/4_formatting_guide.md:53
-msgid "Les tabulations sont actuellement ignorées par le convertisseur."
-msgstr "Tabs are currently ignored by the converter."
+#: ../../source/md/4_formatting_guide.md:55
+msgid ""
+"Les [tabulations](https://helpx.adobe.com/fr/indesign/using/tabs-"
+"indents.html) et les métadonnées du fichier IDML sont actuellement "
+"ignorées par le convertisseur."
+msgstr ""
+"[Tabs](https://helpx.adobe.com/fr/indesign/using/tabs-indents.html) and "
+"IDML metadata are currently ignored by the converter."
 

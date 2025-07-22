@@ -42,7 +42,7 @@ Ce package Python est la contribution principale de ce dépôt. Il offre une API
 Convertir un fichier IDML et l'enregistrer dans un fichier DocBook :
 
 ```bash
-python -m idml2docbook hello_world.idml -o hello_world.xml
+python -m idml2docbook hello_world.idml -o hello_world.dbk
 ```
 
 Il est aussi possible de directement envoyer le résultat de la conversion dans l'entrée standard de Pandoc :
@@ -55,6 +55,16 @@ Afficher l'aide à l'utilisation avec l'option `-h`/`--help` :
 
 ```bash
 python -m idml2docbook -h 
+```
+
+### Temps de calcul de idml2xml-frontend
+
+Le convertisseur `idml2xml-frontend` est l'étape du processus qui prend de loin le plus de temps de calcul. Celle-ci n'ayant pas besoin d'être personnalisée, il n'est généralement nécessaire de l'exécuter qu'une seule fois par fichier IDML. Le résultat obtenu en exécutant `idml2xml-frontend` sur un fichier `hello_world.idml` est sauvegardé dans le dossier `idml2hubxml`. 
+
+L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier d'entrée de la conversion. Afin de significativement gagner du temps de calcul, il est ainsi possible de reprendre la conversion à partir de ce résultat intermédiaire :
+
+```bash
+python -m idml2docbook -x hello_world.xml -o hello_world.dbk
 ```
 
 ### idml.lua

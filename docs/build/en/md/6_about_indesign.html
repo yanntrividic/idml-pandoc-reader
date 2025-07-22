@@ -49,7 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Repository Contents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_prerequisites.html">2. Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_usage.html">3. Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. Formatting Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. InDesign Formatting Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_conversion_graph.html">5. Conversion Pipeline</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Go further</span></p>
@@ -115,7 +115,7 @@
 </section>
 <section id="le-format-idml">
 <h2>The IDML format<a class="headerlink" href="#le-format-idml" title="Link to this heading"></a></h2>
-<p>IDML is Adobe InDesign’s “open”<a class="footnote-reference brackets" href="#cookbook" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> format, and its backward-compatible format (i.e., one readable by all versions of InDesign), unlike INDD which is version-specific. IDML can also be read and interpreted without launching InDesign, since it is actually a kind of <a class="reference external" href="https://en.wikipedia.org/wiki/ZIP_(file_format)">zipped archive</a> containing a tree of <a class="reference external" href="https://en.wikipedia.org/wiki/XML">XML files</a>.</p>
+<p>IDML is Adobe InDesign’s “open”<a class="footnote-reference brackets" href="#cookbook" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> format—its backward-compatible format (that is, the format most versions of InDesign can read), as opposed to the INDD format, which is specific to each version. By default, packaging an InDesign project generates an IDML file, meaning many projects, even older ones, exist as IDML files. IDML is also a format that can be read and interpreted without launching InDesign, because an IDML file is actually a kind of <a class="reference external" href="https://en.wikipedia.org/wiki/ZIP_(file_format)">zipped archive</a> containing a tree structure of <a class="reference external" href="https://en.wikipedia.org/wiki/Extensible_Markup_Language">XML files</a>.</p>
 <p>Even though the format is theoretically open, it remains quite complex. Converting it to a simpler, more widely used and supported format requires many steps—which is why this converter is needed.</p>
 <p>Beyond this complexity, the fact that InDesign is a WYSIWYG<a class="footnote-reference brackets" href="#wysiwyg" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> tool that allows direct formatting<a class="footnote-reference brackets" href="#direct" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> makes conversion to more ‘structured’ formats extremely difficult.</p>
 <p>For all these reasons, <strong>this converter works better when certain formatting best practices are applied</strong> (see the <a class="reference internal" href="4_formatting_guide.html"><span class="doc std std-doc">formatting guide</span></a>). In general, most of these recommendations are also issued by Adobe for structuring an InDesign file.</p>

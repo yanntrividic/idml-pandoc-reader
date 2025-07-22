@@ -24,7 +24,7 @@ Dans le cadre du recueil _Déborder Bolloré_, les fichiers Markdown sortis du p
 
 ## Le format IDML
 
-IDML est le format "ouvert"[^cookbook] d'Adobe InDesign, son format de retrocompabilité (c'est-à-dire le format que toutes les versions d'InDesign peuvent lire), _a contrario_ du format INDD qui est spécifique à chaque version. IDML est aussi le format que l'on peut lire et interpréter sans avoir besoin de lancer InDesign, car un fichier IDML est en fait une sorte d'[archive zippée](https://fr.wikipedia.org/wiki/ZIP_(format_de_fichier)) d'une arborescence de fichiers [XML](https://fr.wikipedia.org/wiki/Extensible_Markup_Language).
+IDML est le format "ouvert"[^cookbook] d'Adobe InDesign, son format de retrocompabilité (c'est-à-dire le format que la plupart des versions d'InDesign peuvent lire), _a contrario_ du format INDD qui est spécifique à chaque version. Par défaut, l'assemblage d'un projet InDesign génère un fichier IDML, ce qui fait que de nombreux projets, même anciens, existent sous la forme d'un fichier IDML. IDML est aussi le format que l'on peut lire et interpréter sans avoir besoin de lancer InDesign, car un fichier IDML est en fait une sorte d'[archive zippée](https://fr.wikipedia.org/wiki/ZIP_(format_de_fichier)) d'une arborescence de fichiers [XML](https://fr.wikipedia.org/wiki/Extensible_Markup_Language).
 
 [^cookbook]: La spécification du format IDML n'est plus maintenue (publiquement du moins) depuis 2012. Elle est contenue dans la documentation du _InDesign SDK_ sous le nom de _InDesign Markup Language (IDML) Cookbook_. Il faut un compte Adobe pour pouvoir la [télécharger](https://developer.adobe.com/console/servicesandapis).
 

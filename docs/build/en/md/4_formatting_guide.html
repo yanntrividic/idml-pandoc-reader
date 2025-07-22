@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>4. Formatting Guide &mdash; IDML Pandoc reader 0.1.0 documentation</title>
+  <title>4. InDesign Formatting Guide &mdash; IDML Pandoc reader 0.1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -49,7 +49,7 @@
 <li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Repository Contents</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_prerequisites.html">2. Prerequisites</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_usage.html">3. Usage</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Formatting Guide</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. InDesign Formatting Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#recommandations">Recommendations</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#eviter-les-surcharges-de-style">Avoid style overrides</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#une-unite-semantique-un-style-de-paragraphe-ou-de-caractere">One semantic unit = one paragraph or character style</a></li>
@@ -86,7 +86,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active"><span class="section-number">4. </span>Formatting Guide</li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>InDesign Formatting Guide</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/md/4_formatting_guide.md.txt" rel="nofollow"> View page source</a>
       </li>
@@ -96,8 +96,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section class="tex2jax_ignore mathjax_ignore" id="guide-de-formatage">
-<h1><span class="section-number">4. </span>Formatting Guide<a class="headerlink" href="#guide-de-formatage" title="Link to this heading"></a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="guide-de-formatage-pour-indesign">
+<h1><span class="section-number">4. </span>InDesign Formatting Guide<a class="headerlink" href="#guide-de-formatage-pour-indesign" title="Link to this heading"></a></h1>
+<p>To ensure high-quality conversion of an IDML file, it must be properly formatted. Otherwise, the quality of the conversion will be lower, and this will inevitably lead to additional work on the resulting files. <strong>To minimize the amount of work after conversion, it is recommended to follow a few best practices when working in InDesign.</strong></p>
 <section id="recommandations">
 <h2>Recommendations<a class="headerlink" href="#recommandations" title="Link to this heading"></a></h2>
 <p>This list is not exhaustive and will be expanded as special cases arise.</p>
@@ -112,7 +113,7 @@
 </section>
 <section id="chainage-des-contenus">
 <h3>Threading content<a class="headerlink" href="#chainage-des-contenus" title="Link to this heading"></a></h3>
-<p>To ensure that content appears in the correct order in the converted result, it is best to properly thread the blocks together and anchor images within the blocks.</p>
+<p>To ensure that content appears in the correct order in the converted result, it is best to properly thread the blocks together and [anchor images within the blocks](<a class="reference external" href="https://helpx.adobe.com/indesign/using/anchored-objects.html">https://helpx.adobe.com/indesign/using/anchored-objects.html</a>.</p>
 </section>
 <section id="nommage-des-fichiers-et-des-styles">
 <h3>Naming files and styles<a class="headerlink" href="#nommage-des-fichiers-et-des-styles" title="Link to this heading"></a></h3>
@@ -122,7 +123,7 @@
 </section>
 <section id="notes-de-bas-de-page-listes-textes-alternatifs">
 <h3>Footnotes, lists, and alternative text<a class="headerlink" href="#notes-de-bas-de-page-listes-textes-alternatifs" title="Link to this heading"></a></h3>
-<p>The converter supports footnotes, lists, and alternative text. However, for these to be recognized properly, they must first be correctly formatted in InDesign.</p>
+<p>The converter supports footnotes, lists, and alternative text for images. However, for these to be recognized properly, they must first be correctly formatted in InDesign.</p>
 </section>
 <section id="hyperliens">
 <h3>Hyperlinks<a class="headerlink" href="#hyperliens" title="Link to this heading"></a></h3>
@@ -142,7 +143,7 @@
 </section>
 <section id="limitations">
 <h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
-<p>Tabs are currently ignored by the converter.</p>
+<p><a class="reference external" href="https://helpx.adobe.com/fr/indesign/using/tabs-indents.html">Tabs</a> and IDML metadata are currently ignored by the converter.</p>
 </section>
 </section>
 

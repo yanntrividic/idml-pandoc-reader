@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-21 16:14+0200\n"
+"POT-Creation-Date: 2025-07-22 15:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -26,17 +26,30 @@ msgstr "Prerequisites"
 
 #: ../../source/md/2_prerequisites.md:3
 msgid ""
+"L'un des objectifs à court terme est de faciliter l'installation de ce "
+"logiciel. Si cette procédure d'installation vous semble trop laborieuse, "
+"vous pouvez soit [contribuer](/md/7_contribute) à ce chantier, soit "
+"revenir dans quelques temps et profiter d'une procédure d'installation "
+"simplifiée 😇"
+msgstr ""
+"One of the short-term goals is to make installing this"
+" software easier. If this installation process feels too tedious, you can"
+" either [contribute](/md/7_contribute) to improving it, or come back "
+"later and enjoy a simplified installation process 😇"
+
+#: ../../source/md/2_prerequisites.md:5
+msgid ""
 "Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de "
 "conversions](/md/5_conversion_graph)."
 msgstr ""
 "To understand the purpose of each dependency, see the [conversion "
 "graph](/md/5_conversion_graph)."
 
-#: ../../source/md/2_prerequisites.md:5
+#: ../../source/md/2_prerequisites.md:7
 msgid "Dépendances"
 msgstr "Dependencies"
 
-#: ../../source/md/2_prerequisites.md:7
+#: ../../source/md/2_prerequisites.md:9
 msgid ""
 "Le format IDML est complexe, et il est difficile d'en extraire les "
 "informations. Dans l'idéal, ce dépôt consisterait en un seul fichier "
@@ -50,7 +63,7 @@ msgstr ""
 "readers](https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers)."
 " However, that would take an enormous amount of time to develop."
 
-#: ../../source/md/2_prerequisites.md:9
+#: ../../source/md/2_prerequisites.md:11
 msgid ""
 "D'autres se sont penché·es sur la question de la lecture de fichiers "
 "IDML, en particulier le projet [`idml2xml-"
@@ -64,23 +77,24 @@ msgstr ""
 "Others have explored reading IDML files, notably the project [`idml2xml-"
 "frontend`](https://github.com/transpect/idml2xml-frontend), distributed "
 "under the FreeBSD license. We build our converter by continuing that "
-"work, offering a [_binding_](https://en.wikipedia.org/wiki/Binding#Computing) "
-"between `idml2xml-frontend` and Pandoc—i.e., converting the Hub XML "
-"output of `idml2xml-frontend` into DocBook 5.1 format."
+"work, offering a "
+"[_binding_](https://en.wikipedia.org/wiki/Binding#Computing) between "
+"`idml2xml-frontend` and Pandoc—i.e., converting the Hub XML output of "
+"`idml2xml-frontend` into DocBook 5.1 format."
 
-#: ../../source/md/2_prerequisites.md:11
+#: ../../source/md/2_prerequisites.md:13
 msgid "Les dépendances sont :"
 msgstr "The dependencies are:"
 
-#: ../../source/md/2_prerequisites.md:13
+#: ../../source/md/2_prerequisites.md:15
 msgid "Python 3.x ;"
 msgstr "Python 3.x;"
 
-#: ../../source/md/2_prerequisites.md:14
+#: ../../source/md/2_prerequisites.md:16
 msgid "Java 1.7+ ;"
 msgstr "Java 1.7+;"
 
-#: ../../source/md/2_prerequisites.md:15
+#: ../../source/md/2_prerequisites.md:17
 msgid ""
 "les dépendances du package Python (avec la commande `pip install -r "
 "requirements.txt`)"
@@ -88,7 +102,7 @@ msgstr ""
 "the Python package dependencies (with the command `pip install -r "
 "requirements.txt`)"
 
-#: ../../source/md/2_prerequisites.md:16
+#: ../../source/md/2_prerequisites.md:18
 msgid ""
 "[`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend) "
 "(s'installe avec `git` via la commande `git clone "
@@ -98,7 +112,7 @@ msgstr ""
 "(installed with `git` via the command `git clone "
 "https://github.com/transpect/idml2xml-frontend --recurse-submodules`);"
 
-#: ../../source/md/2_prerequisites.md:17
+#: ../../source/md/2_prerequisites.md:19
 msgid ""
 "avoir précisé dans un fichier `.env` le chemin vers `idml2xml-frontend` "
 "(voir l'exemple fourni avec `.env.sample`)."
@@ -106,7 +120,7 @@ msgstr ""
 "specify in a `.env` file the path to `idml2xml-frontend` (see the example"
 " provided with `.env.sample`)."
 
-#: ../../source/md/2_prerequisites.md:19
+#: ../../source/md/2_prerequisites.md:21
 msgid ""
 "Pandoc n'est pas une dépendance à proprement parler étant donné que "
 "`idml2docbook` n'en a pas besoin. Cependant, [une version un peu modifiée"
@@ -134,7 +148,7 @@ msgstr ""
 "request_](https://github.com/jgm/pandoc/pull/10665) is in progress to "
 "include these new features in the main Pandoc branch."
 
-#: ../../source/md/2_prerequisites.md:21
+#: ../../source/md/2_prerequisites.md:23
 msgid ""
 "**Note :** Pour les fichiers IDML les plus lourds, il peut être "
 "nécessaire d'[augmenter la taille du tas "
@@ -145,17 +159,17 @@ msgstr ""
 " heap size](https://github.com/transpect/idml2xml-"
 "frontend/blob/master/idml2xml.sh#L33), for example to `2048m` or `4096m`."
 
-#: ../../source/md/2_prerequisites.md:23
+#: ../../source/md/2_prerequisites.md:25
 msgid "Configuration de l'environnement .env"
 msgstr "Environment configuration (.env)"
 
-#: ../../source/md/2_prerequisites.md:25
+#: ../../source/md/2_prerequisites.md:27
 msgid ""
 "Le fichier `.env.sample` montre l'exemple d'un fichier de fichier de "
 "configuration."
 msgstr "The `.env.sample` file shows an example configuration file."
 
-#: ../../source/md/2_prerequisites.md:27
+#: ../../source/md/2_prerequisites.md:29
 msgid ""
 "A minima, pour fonctionner, ce convertisseur nécessite d'exécuter "
 "`idml2xml-frontend`. La ligne `IDML2HUBXML_SCRIPT_FOLDER` du fichier "
@@ -168,7 +182,7 @@ msgstr ""
 "absolute path of the `idml2xml-frontend` directory on your machine. This "
 "is the only entry that is **required** for `idml2docbook` to function."
 
-#: ../../source/md/2_prerequisites.md:29
+#: ../../source/md/2_prerequisites.md:31
 msgid ""
 "Les autres valeurs du fichier `.env` permettent de remplacer les valeurs "
 "par défaut du package `idml2docbook`. Pour plus d'informations sur ces "
@@ -179,11 +193,11 @@ msgstr ""
 "the `idml2docbook` package. For more information on these variables, "
 "consult the package help with the `-h`/`--help` option:"
 
-#: ../../source/md/2_prerequisites.md:35
+#: ../../source/md/2_prerequisites.md:37
 msgid "Test de la configuration"
 msgstr "Configuration test"
 
-#: ../../source/md/2_prerequisites.md:37
+#: ../../source/md/2_prerequisites.md:39
 msgid ""
 "Pour vérifier que les dépendances ont bien été installées et le fichier "
 "`.env` bien paramétré, vous pouvez tester le convertisseur dans votre "
@@ -193,7 +207,7 @@ msgstr ""
 "correctly set up, you can test the converter in your terminal with the "
 "following command:"
 
-#: ../../source/md/2_prerequisites.md:43
+#: ../../source/md/2_prerequisites.md:45
 msgid "Le résultat devrait alors être :"
 msgstr "The result should then be:"
 

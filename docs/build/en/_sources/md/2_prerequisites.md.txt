@@ -1,5 +1,7 @@
 # Prérequis
 
+L'un des objectifs à court terme est de faciliter l'installation de ce logiciel. Si cette procédure d'installation vous semble trop laborieuse, vous pouvez soit [contribuer](/md/7_contribute) à ce chantier, soit revenir dans quelques temps et profiter d'une procédure d'installation simplifiée 😇
+
 Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de conversions](/md/5_conversion_graph).
 
 ## Dépendances

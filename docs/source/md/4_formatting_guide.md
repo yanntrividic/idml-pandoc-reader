@@ -1,4 +1,6 @@
-# Guide de formatage
+# Guide de formatage pour InDesign
+
+Pour que la qualité de la conversion d'un fichier IDML soit au rendez-vous, il est nécessaire que ce denier soit formaté correctement. Autrement, la qualité de la conversion sera moindre, et cela entraînera nécessairement un travail supplémentaire à effectuer sur les fichiers produits. **Pour minimiser la quantité de travail suite à la conversion, il est recommandé de suivre quelques bonnes pratiques lorsque vous travaillez dans InDesign.**
 
 ## Recommandations
 
@@ -16,7 +18,7 @@ Les fichiers JSON chargés dans le convertisseur permettent de faire correspondr
 
 ### Chaînage des contenus
 
-Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le résultat de la conversion, le mieux est de correctement chaîner les blocs entre eux, et d'ancrer les images dans les blocs.
+Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le résultat de la conversion, le mieux est de correctement chaîner les blocs entre eux, et d'[ancrer les images dans les blocs](https://helpx.adobe.com/indesign/using/anchored-objects.html).
 
 ### Nommage des fichiers et des styles
 
@@ -27,7 +29,7 @@ Pour éviter tout problème, mieux vaut utiliser seulement des caractères alpha
 
 ### Notes de bas de page, listes, textes alternatifs
 
-Le convertisseur supporte entre autres les notes de bas de page, les listes et les textes alternatifs. Cependant, pour que cela soit bien reconnu, il faut en premier lieu les formater correctement dans InDesign.
+Le convertisseur supporte entre autres les notes de bas de page, les listes et les textes alternatifs pour les images. Cependant, pour que cela soit bien reconnu, il faut en premier lieu les formater correctement dans InDesign.
 
 ### Hyperliens
 
@@ -50,4 +52,4 @@ Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont s
 
 ## Limitations
 
-Les tabulations sont actuellement ignorées par le convertisseur.
+Les [tabulations](https://helpx.adobe.com/fr/indesign/using/tabs-indents.html) et les métadonnées du fichier IDML sont actuellement ignorées par le convertisseur.

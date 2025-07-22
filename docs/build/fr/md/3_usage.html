@@ -22,7 +22,7 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="4. Guide de formatage" href="4_formatting_guide.html" />
+    <link rel="next" title="4. Guide de formatage pour InDesign" href="4_formatting_guide.html" />
     <link rel="prev" title="2. Prérequis" href="2_prerequisites.html" /> 
 </head>
 
@@ -54,6 +54,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#correspondance-des-styles">Correspondance des styles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#commandes-de-base">Commandes de base</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#idml2docbook">idml2docbook</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#temps-de-calcul-de-idml2xml-frontend">Temps de calcul de idml2xml-frontend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#idml-lua">idml.lua</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#batch-sh">batch.sh</a></li>
 </ul>
@@ -61,7 +62,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#detail-de-la-commande-de-conversion-du-recueil-deborder-bollore">Détail de la commande de conversion du recueil <em>Déborder Bolloré</em></a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. Guide de formatage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. Guide de formatage pour InDesign</a></li>
 <li class="toctree-l1"><a class="reference internal" href="5_conversion_graph.html">5. Chaîne de conversions</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Aller plus loin</span></p>
@@ -134,7 +135,7 @@
 <h3>idml2docbook<a class="headerlink" href="#idml2docbook" title="Lien vers cette rubrique"></a></h3>
 <p>Ce package Python est la contribution principale de ce dépôt. Il offre une API permettant de convertir un fichier fichier IDML en un ou plusieurs fichiers DocBook.</p>
 <p>Convertir un fichier IDML et l’enregistrer dans un fichier DocBook :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>hello_world.idml<span class="w"> </span>-o<span class="w"> </span>hello_world.xml
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>hello_world.idml<span class="w"> </span>-o<span class="w"> </span>hello_world.dbk
 </pre></div>
 </div>
 <p>Il est aussi possible de directement envoyer le résultat de la conversion dans l’entrée standard de Pandoc :</p>
@@ -143,6 +144,14 @@
 </div>
 <p>Afficher l’aide à l’utilisation avec l’option <code class="docutils literal notranslate"><span class="pre">-h</span></code>/<code class="docutils literal notranslate"><span class="pre">--help</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>-h<span class="w"> </span>
+</pre></div>
+</div>
+</section>
+<section id="temps-de-calcul-de-idml2xml-frontend">
+<h3>Temps de calcul de idml2xml-frontend<a class="headerlink" href="#temps-de-calcul-de-idml2xml-frontend" title="Lien vers cette rubrique"></a></h3>
+<p>Le convertisseur <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> est l’étape du processus qui prend de loin le plus de temps de calcul. Celle-ci n’ayant pas besoin d’être personnalisée, il n’est généralement nécessaire de l’exécuter qu’une seule fois par fichier IDML. Le résultat obtenu en exécutant <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> sur un fichier <code class="docutils literal notranslate"><span class="pre">hello_world.idml</span></code> est sauvegardé dans le dossier <code class="docutils literal notranslate"><span class="pre">idml2hubxml</span></code>.</p>
+<p>L’option <code class="docutils literal notranslate"><span class="pre">-x</span></code>/<code class="docutils literal notranslate"><span class="pre">--idml2hubxml-file</span></code> permet de spécifier un fichier intermédiaire tel que <code class="docutils literal notranslate"><span class="pre">idml2hubxml/hello_world.xml</span></code> en tant que fichier d’entrée de la conversion. Afin de significativement gagner du temps de calcul, il est ainsi possible de reprendre la conversion à partir de ce résultat intermédiaire :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>-x<span class="w"> </span>hello_world.xml<span class="w"> </span>-o<span class="w"> </span>hello_world.dbk
 </pre></div>
 </div>
 </section>
@@ -205,7 +214,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
         <a href="2_prerequisites.html" class="btn btn-neutral float-left" title="2. Prérequis" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
-        <a href="4_formatting_guide.html" class="btn btn-neutral float-right" title="4. Guide de formatage" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="4_formatting_guide.html" class="btn btn-neutral float-right" title="4. Guide de formatage pour InDesign" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

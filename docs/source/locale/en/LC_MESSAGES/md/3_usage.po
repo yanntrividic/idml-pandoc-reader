@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-21 16:05+0200\n"
+"POT-Creation-Date: 2025-07-22 15:55+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -195,10 +195,42 @@ msgid "Afficher l'aide à l'utilisation avec l'option `-h`/`--help` :"
 msgstr "Display usage help with the `-h`/`--help` option:"
 
 #: ../../source/md/3_usage.md:60
+msgid "Temps de calcul de idml2xml-frontend"
+msgstr "Computing time of idml2xml-frontend"
+
+#: ../../source/md/3_usage.md:62
+msgid ""
+"Le convertisseur `idml2xml-frontend` est l'étape du processus qui prend "
+"de loin le plus de temps de calcul. Celle-ci n'ayant pas besoin d'être "
+"personnalisée, il n'est généralement nécessaire de l'exécuter qu'une "
+"seule fois par fichier IDML. Le résultat obtenu en exécutant `idml2xml-"
+"frontend` sur un fichier `hello_world.idml` est sauvegardé dans le "
+"dossier `idml2hubxml`."
+msgstr ""
+"The `idml2xml-frontend` converter is by far the most time-consuming step "
+"of the process. Since it doesn’t need to be customized, it usually only "
+"needs to be run once per IDML file. The intermediate result obtained by "
+"running `idml2xml-frontend` on a `hello_world.idml` file is saved in the "
+"`idml2hubxml` folder."
+
+#: ../../source/md/3_usage.md:64
+msgid ""
+"L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier "
+"intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier "
+"d'entrée de la conversion. Afin de significativement gagner du temps de "
+"calcul, il est ainsi possible de reprendre la conversion à partir de ce "
+"résultat intermédiaire :"
+msgstr ""
+"The `-x`/`--idml2hubxml-file` option lets you specify an intermediary file "
+"such as `idml2hubxml/hello_world.xml` as the input file for the conversion. "
+"To significantly save processing time, it is possible to resume the "
+"conversion from the intermediate result:"
+
+#: ../../source/md/3_usage.md:70
 msgid "idml.lua"
 msgstr "idml.lua"
 
-#: ../../source/md/3_usage.md:62
+#: ../../source/md/3_usage.md:72
 msgid ""
 "Ce fichier fait le pont entre Pandoc et `idml2docbook`. Il permet de "
 "prendre le résultat de ce dernier pour l'insérer dans Pandoc. [Pandoc ne "
@@ -213,7 +245,7 @@ msgstr ""
 "means only modifying the `.env` file can affect the behavior of "
 "`idml2docbook` when executed through `idml.lua`."
 
-#: ../../source/md/3_usage.md:64
+#: ../../source/md/3_usage.md:74
 msgid ""
 "Convertir un fichier IDML vers Markdown, avec par exemple le filtre "
 "`roles-to-classes.lua` :"
@@ -221,11 +253,11 @@ msgstr ""
 "Convert an IDML file to Markdown, using for example the `roles-to-"
 "classes.lua` filter:"
 
-#: ../../source/md/3_usage.md:70
+#: ../../source/md/3_usage.md:80
 msgid "batch\\.sh"
 msgstr "batch\\.sh"
 
-#: ../../source/md/3_usage.md:72
+#: ../../source/md/3_usage.md:82
 msgid ""
 "Avant toute chose, il est nécessaire de spécifier la version de Pandoc à "
 "utiliser dans le fichier `.env`. Il est aussi nécessaire de donner les "
@@ -234,7 +266,7 @@ msgstr ""
 "First, you must specify the Pandoc version to use in the `.env` file. You"
 " must also make this script executable:"
 
-#: ../../source/md/3_usage.md:78
+#: ../../source/md/3_usage.md:88
 msgid ""
 "Ce petit script shell permet de faciliter la liaison entre Pandoc et "
 "`idml2docbook` lorsque ce dernier est utilisé avec l'option `-c`/`--cut` "
@@ -245,7 +277,7 @@ msgstr ""
 "`idml2docbook`, particularly when using the `-c`/`--cut` option to split "
 "the output into multiple files (or chapters)."
 
-#: ../../source/md/3_usage.md:80
+#: ../../source/md/3_usage.md:90
 msgid ""
 "Cette commande prend deux dossiers en arguments : un dossier d'entrée et "
 "un de sortie. Il est ainsi possible de chaîner les commandes, par exemple"
@@ -254,11 +286,11 @@ msgstr ""
 "This command takes two arguments: an input folder and an output folder. "
 "You can then chain commands, for example:"
 
-#: ../../source/md/3_usage.md:86
+#: ../../source/md/3_usage.md:96
 msgid "Détail de la commande de conversion du recueil _Déborder Bolloré_"
 msgstr "Details of the conversion command for the _Déborder Bolloré_ reader"
 
-#: ../../source/md/3_usage.md:88
+#: ../../source/md/3_usage.md:98
 msgid ""
 "La commande pour compiler les contributions du recueil _Déborder "
 "Bolloré_, dont on peut retrouver le résultat sur le dépôt "
@@ -270,11 +302,11 @@ msgstr ""
 "[deborderbollore/articles](https://gitlab.com/deborderbollore/articles), "
 "is as follows:"
 
-#: ../../source/md/3_usage.md:104
+#: ../../source/md/3_usage.md:114
 msgid "En détails :"
 msgstr "In detail:"
 
-#: ../../source/md/3_usage.md:106
+#: ../../source/md/3_usage.md:116
 msgid ""
 "`-o`/`--output` : permet de préciser le dossier où seront contenus les "
 "fichiers DocBook produits ;"
@@ -282,7 +314,7 @@ msgstr ""
 "`-o`/`--output`: specifies the folder where the output DocBook files will"
 " be saved;"
 
-#: ../../source/md/3_usage.md:107
+#: ../../source/md/3_usage.md:117
 msgid ""
 "`-m`/`--map` : spécifie les opérations à effectuer sur certains styles de"
 " caractères et de paragraphes, voir [Correspondance des styles"
@@ -291,11 +323,11 @@ msgstr ""
 "`-m`/`--map`: defines the operations to apply to certain character and "
 "paragraph styles, see [Style Mapping](#correspondance-des-styles);"
 
-#: ../../source/md/3_usage.md:108
+#: ../../source/md/3_usage.md:118
 msgid "`-c`/`--cut` : coupe le résultat en plusieurs fichiers DocBook autonomes ;"
 msgstr "`-c`/`--cut`: splits the result into multiple standalone DocBook files;"
 
-#: ../../source/md/3_usage.md:109
+#: ../../source/md/3_usage.md:119
 msgid ""
 "`-t`/`--typography` : refait totalement l'orthotypographie (espaces "
 "autour des signes de ponctuation, etc.) ;"
@@ -303,19 +335,19 @@ msgstr ""
 "`-t`/`--typography`: completely redoes typographic spacing (around "
 "punctuation, etc.);"
 
-#: ../../source/md/3_usage.md:110
+#: ../../source/md/3_usage.md:120
 msgid ""
 "`-l`/`--thin-spaces` : l'orthotypographie utilise seulement des espaces "
 "fines ;"
 msgstr "`-l`/`--thin-spaces`: typography uses only thin spaces;"
 
-#: ../../source/md/3_usage.md:111
+#: ../../source/md/3_usage.md:121
 msgid ""
 "`-n`/`--names` : génère les noms des fichiers finaux à partir des "
 "contenus des titres de niveau 1 ;"
 msgstr "`-n`/`--names`: generates filenames based on level-1 heading content;"
 
-#: ../../source/md/3_usage.md:112
+#: ../../source/md/3_usage.md:122
 msgid ""
 "`-r`/`--raster` : remplace les extensions des images matricielles par "
 "`jpg` dans les URL des fichiers de sortie ;"
@@ -323,11 +355,11 @@ msgstr ""
 "`-r`/`--raster`: replaces raster image extensions with `jpg` in the "
 "output file URLs;"
 
-#: ../../source/md/3_usage.md:113
+#: ../../source/md/3_usage.md:123
 msgid "`-v`/`--vector` : idem pour les images vectorielles ;"
 msgstr "`-v`/`--vector`: same for vector images;"
 
-#: ../../source/md/3_usage.md:114
+#: ../../source/md/3_usage.md:124
 msgid ""
 "`-f`/`--media-folder` : remplace l'URL absolue des médias dans les "
 "fichiers de sortie par `images/`."
@@ -335,7 +367,7 @@ msgstr ""
 "`-f`/`--media-folder`: replaces the absolute media URLs in the output "
 "files with `images/`."
 
-#: ../../source/md/3_usage.md:116
+#: ../../source/md/3_usage.md:126
 msgid ""
 "D'autres paramétrages encore sont exposés via les options de ce package "
 "(voir l'aide avec `-h`/`--help`)."
@@ -343,7 +375,7 @@ msgstr ""
 "Other configuration options are available via this package's options (see"
 " the help with `-h`/`--help`)."
 
-#: ../../source/md/3_usage.md:118
+#: ../../source/md/3_usage.md:128
 msgid ""
 "Enfin, le script `batch.sh` convertit les fichiers DocBook obtenus en "
 "Markdown, en précisant la saveur `markdown_phpextra`, et avec les filtres"

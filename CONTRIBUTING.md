@@ -26,11 +26,11 @@ This project is an ongoing work. Want to contribute? You can:
 * [ ] Add a `merge` operator to the map, that merge together consecutive elements with the same selector
 * [ ] Add a "Motivations" documentation page that illustrates where this project can be useful
 * [ ] Merge all PO files into one for easier maintainance
-* [ ] Add to the docs the alt-text of the images is to be done
-* [ ] Replace URLencoded strings in filenames
-* [ ] Add "InDesign files" to the formatting guide title
-* [ ] Add a note on the difficulty of the installation
-* [ ] Add a command documentation on the duration of idml2hubxml
+* [x] Add to the docs the alt-text of the images is to be done
+* [x] Replace URLencoded strings in filenames
+* [x] Add "InDesign files" to the formatting guide title
+* [x] Add a note on the difficulty of the installation
+* [x] Add a command documentation on the duration of idml2hubxml
 
 ### Issues to publish on jgm/pandoc
 
