@@ -1,5 +1,5 @@
-sphinx
-myst-parser
-linkify-it-py
-sphinx_rtd_theme
-sphinx-intl
+sphinx == 8.2.3
+myst-parser == 4.0.1
+linkify-it-py == 2.0.3
+sphinx_rtd_theme == 3.0.2
+sphinx-intl == 2.3.1
