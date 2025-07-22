@@ -1,15 +1,14 @@
 import subprocess
-from pathlib import Path
 from bs4 import BeautifulSoup
 import copy
 import os
 import re
 import logging
 
+from idml2hubxml import *
 from utils import *
 from slugs import *
 from map import *
-
 
 NODES_TO_REMOVE = [
     "info",
@@ -301,30 +300,6 @@ def generate_sections(soup):
         article.append(sec)
 
     return soup
-
-def idml2hubxml(input, **options):
-    logging.info("idml2hubxml starting...")
-
-    filename = Path(input).stem
-
-    output_folder = options["idml2hubxml_output"]
-
-    if options["idml2hubxml_script"] is None:
-        e = NameError("Your .env file is missing the IDML2HUBXML_SCRIPT_FOLDER entry")
-        logging.error(e)
-        raise e
-    else:
-        cmd = [options["idml2hubxml_script"] + "/idml2xml.sh", "-o", output_folder, input]
-        logging.info("Now running: " + " ".join(cmd))
-        subprocess.run(cmd, capture_output=True) # comment out this line to just get the previous run of idml2xml
-
-    outputfile = output_folder + "/" + filename + ".xml"
-    logfile = output_folder + "/" + filename + ".log"
-
-    logging.info("Output of idml2xml written at: " + outputfile)
-    logging.info("idml2xml log file written at: " + logfile)
-    logging.info("idml2hubxml done.")
-    return outputfile
 
 def hubxml2docbook(file, **options):
     logging.info("hubxml2docbook starting...")
