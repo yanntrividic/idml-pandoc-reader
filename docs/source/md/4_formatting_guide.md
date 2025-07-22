@@ -22,10 +22,10 @@ Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le résu
 
 ### Nommage des fichiers et des styles
 
-Pour éviter tout problème, mieux vaut utiliser seulement des caractères alphadécimaux non-accentués dans vos noms de fichiers et noms de styles, par exemple :
+Pour éviter les problèmes, mieux vaut utiliser seulement des caractères alphadécimaux non-accentués dans vos noms de fichiers IDML, d'images (les liens cassant facilement), et de noms de styles, un exemple :
 
-❌ `Mon super-étonnant fichier InDesign.indd` \
-✔️ `Mon_super_etonnant_fichier_InDesign.indd`
+❌ `Mon super-étonnant fichier InDesign d'la mort.idml` \
+✔️ `Mon_super_etonnant_fichier_InDesign_dla_mort.idml`
 
 ### Notes de bas de page, listes, textes alternatifs
 

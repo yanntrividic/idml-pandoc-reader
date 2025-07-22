@@ -274,7 +274,6 @@ msgstr ""
 "`idml2hubxml` folder."
 
 #: ../../source/md/3_usage.md:90
-#, fuzzy
 msgid ""
 "L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier "
 "intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier "
