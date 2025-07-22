@@ -53,9 +53,9 @@
 <li class="toctree-l2"><a class="reference internal" href="#correspondance-des-styles">Style Mapping</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#commandes-de-base">Basic Commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#idml2docbook">idml2docbook</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#temps-de-calcul-de-idml2xml-frontend">Computing time of idml2xml-frontend</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#idml-lua">idml.lua</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#batch-sh">batch.sh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#temps-de-calcul-de-idml2xml-frontend">Computing time of idml2xml-frontend</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#detail-de-la-commande-de-conversion-du-recueil-deborder-bollore">Details of the conversion command for the <em>Déborder Bolloré</em> reader</a></li>
@@ -146,14 +146,6 @@
 </pre></div>
 </div>
 </section>
-<section id="temps-de-calcul-de-idml2xml-frontend">
-<h3>Computing time of idml2xml-frontend<a class="headerlink" href="#temps-de-calcul-de-idml2xml-frontend" title="Link to this heading"></a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> converter is by far the most time-consuming step of the process. Since it doesn’t need to be customized, it usually only needs to be run once per IDML file. The intermediate result obtained by running <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> on a <code class="docutils literal notranslate"><span class="pre">hello_world.idml</span></code> file is saved in the <code class="docutils literal notranslate"><span class="pre">idml2hubxml</span></code> folder.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">-x</span></code>/<code class="docutils literal notranslate"><span class="pre">--idml2hubxml-file</span></code> option lets you specify an intermediary file such as <code class="docutils literal notranslate"><span class="pre">idml2hubxml/hello_world.xml</span></code> as the input file for the conversion. To significantly save processing time, it is possible to resume the conversion from the intermediate result:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>-x<span class="w"> </span>hello_world.xml<span class="w"> </span>-o<span class="w"> </span>hello_world.dbk
-</pre></div>
-</div>
-</section>
 <section id="idml-lua">
 <h3>idml.lua<a class="headerlink" href="#idml-lua" title="Link to this heading"></a></h3>
 <p>This file bridges Pandoc and <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>. It allows Pandoc to use the output of <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>. <a class="reference external" href="https://github.com/jgm/pandoc/discussions/9689">Pandoc does not allow arbitrary arguments on the command line</a>, which means only modifying the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file can affect the behavior of <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> when executed through <code class="docutils literal notranslate"><span class="pre">idml.lua</span></code>.</p>
@@ -171,6 +163,14 @@
 <p>This small shell script makes it easier to link Pandoc with <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>, particularly when using the <code class="docutils literal notranslate"><span class="pre">-c</span></code>/<code class="docutils literal notranslate"><span class="pre">--cut</span></code> option to split the output into multiple files (or chapters).</p>
 <p>This command takes two arguments: an input folder and an output folder. You can then chain commands, for example:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>file.idml<span class="w"> </span>--output<span class="w"> </span>docbook_folder<span class="w"> </span>--cut<span class="w"> </span><span class="p">;</span><span class="w"> </span>./batch.sh<span class="w"> </span>docbook_folder<span class="w"> </span>md_folder
+</pre></div>
+</div>
+</section>
+<section id="temps-de-calcul-de-idml2xml-frontend">
+<h3>Computing time of idml2xml-frontend<a class="headerlink" href="#temps-de-calcul-de-idml2xml-frontend" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> converter is by far the most time-consuming step of the process. Since it doesn’t need to be customized, it usually only needs to be run once per IDML file. The intermediate result obtained by running <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> on a <code class="docutils literal notranslate"><span class="pre">hello_world.idml</span></code> file is saved in the <code class="docutils literal notranslate"><span class="pre">idml2hubxml</span></code> folder.</p>
+<p>L’option <code class="docutils literal notranslate"><span class="pre">-x</span></code>/<code class="docutils literal notranslate"><span class="pre">--idml2hubxml-file</span></code> permet de spécifier un fichier intermédiaire tel que <code class="docutils literal notranslate"><span class="pre">idml2hubxml/hello_world.xml</span></code> en tant que fichier d’entrée de la conversion. Afin de significativement gagner du temps de calcul, il est ainsi possible de reprendre la conversion à partir de ce résultat intermédiaire :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>-x<span class="w"> </span>idml2hubxml/hello_world.xml<span class="w"> </span>-o<span class="w"> </span>hello_world.dbk
 </pre></div>
 </div>
 </section>

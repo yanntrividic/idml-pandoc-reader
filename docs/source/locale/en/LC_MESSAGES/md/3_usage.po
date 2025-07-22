@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 15:55+0200\n"
+"POT-Creation-Date: 2025-07-22 16:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -195,42 +195,10 @@ msgid "Afficher l'aide à l'utilisation avec l'option `-h`/`--help` :"
 msgstr "Display usage help with the `-h`/`--help` option:"
 
 #: ../../source/md/3_usage.md:60
-msgid "Temps de calcul de idml2xml-frontend"
-msgstr "Computing time of idml2xml-frontend"
-
-#: ../../source/md/3_usage.md:62
-msgid ""
-"Le convertisseur `idml2xml-frontend` est l'étape du processus qui prend "
-"de loin le plus de temps de calcul. Celle-ci n'ayant pas besoin d'être "
-"personnalisée, il n'est généralement nécessaire de l'exécuter qu'une "
-"seule fois par fichier IDML. Le résultat obtenu en exécutant `idml2xml-"
-"frontend` sur un fichier `hello_world.idml` est sauvegardé dans le "
-"dossier `idml2hubxml`."
-msgstr ""
-"The `idml2xml-frontend` converter is by far the most time-consuming step "
-"of the process. Since it doesn’t need to be customized, it usually only "
-"needs to be run once per IDML file. The intermediate result obtained by "
-"running `idml2xml-frontend` on a `hello_world.idml` file is saved in the "
-"`idml2hubxml` folder."
-
-#: ../../source/md/3_usage.md:64
-msgid ""
-"L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier "
-"intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier "
-"d'entrée de la conversion. Afin de significativement gagner du temps de "
-"calcul, il est ainsi possible de reprendre la conversion à partir de ce "
-"résultat intermédiaire :"
-msgstr ""
-"The `-x`/`--idml2hubxml-file` option lets you specify an intermediary file "
-"such as `idml2hubxml/hello_world.xml` as the input file for the conversion. "
-"To significantly save processing time, it is possible to resume the "
-"conversion from the intermediate result:"
-
-#: ../../source/md/3_usage.md:70
 msgid "idml.lua"
 msgstr "idml.lua"
 
-#: ../../source/md/3_usage.md:72
+#: ../../source/md/3_usage.md:62
 msgid ""
 "Ce fichier fait le pont entre Pandoc et `idml2docbook`. Il permet de "
 "prendre le résultat de ce dernier pour l'insérer dans Pandoc. [Pandoc ne "
@@ -245,7 +213,7 @@ msgstr ""
 "means only modifying the `.env` file can affect the behavior of "
 "`idml2docbook` when executed through `idml.lua`."
 
-#: ../../source/md/3_usage.md:74
+#: ../../source/md/3_usage.md:64
 msgid ""
 "Convertir un fichier IDML vers Markdown, avec par exemple le filtre "
 "`roles-to-classes.lua` :"
@@ -253,11 +221,11 @@ msgstr ""
 "Convert an IDML file to Markdown, using for example the `roles-to-"
 "classes.lua` filter:"
 
-#: ../../source/md/3_usage.md:80
+#: ../../source/md/3_usage.md:70
 msgid "batch\\.sh"
 msgstr "batch\\.sh"
 
-#: ../../source/md/3_usage.md:82
+#: ../../source/md/3_usage.md:72
 msgid ""
 "Avant toute chose, il est nécessaire de spécifier la version de Pandoc à "
 "utiliser dans le fichier `.env`. Il est aussi nécessaire de donner les "
@@ -266,7 +234,7 @@ msgstr ""
 "First, you must specify the Pandoc version to use in the `.env` file. You"
 " must also make this script executable:"
 
-#: ../../source/md/3_usage.md:88
+#: ../../source/md/3_usage.md:78
 msgid ""
 "Ce petit script shell permet de faciliter la liaison entre Pandoc et "
 "`idml2docbook` lorsque ce dernier est utilisé avec l'option `-c`/`--cut` "
@@ -277,7 +245,7 @@ msgstr ""
 "`idml2docbook`, particularly when using the `-c`/`--cut` option to split "
 "the output into multiple files (or chapters)."
 
-#: ../../source/md/3_usage.md:90
+#: ../../source/md/3_usage.md:80
 msgid ""
 "Cette commande prend deux dossiers en arguments : un dossier d'entrée et "
 "un de sortie. Il est ainsi possible de chaîner les commandes, par exemple"
@@ -285,6 +253,39 @@ msgid ""
 msgstr ""
 "This command takes two arguments: an input folder and an output folder. "
 "You can then chain commands, for example:"
+
+#: ../../source/md/3_usage.md:86
+msgid "Temps de calcul de idml2xml-frontend"
+msgstr "Computing time of idml2xml-frontend"
+
+#: ../../source/md/3_usage.md:88
+msgid ""
+"Le convertisseur `idml2xml-frontend` est l'étape du processus qui prend "
+"de loin le plus de temps de calcul. Celle-ci n'ayant pas besoin d'être "
+"personnalisée, il n'est généralement nécessaire de l'exécuter qu'une "
+"seule fois par fichier IDML. Le résultat obtenu en exécutant `idml2xml-"
+"frontend` sur un fichier `hello_world.idml` est sauvegardé dans le "
+"dossier `idml2hubxml`."
+msgstr ""
+"The `idml2xml-frontend` converter is by far the most time-consuming step "
+"of the process. Since it doesn’t need to be customized, it usually only "
+"needs to be run once per IDML file. The intermediate result obtained by "
+"running `idml2xml-frontend` on a `hello_world.idml` file is saved in the "
+"`idml2hubxml` folder."
+
+#: ../../source/md/3_usage.md:90
+#, fuzzy
+msgid ""
+"L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier "
+"intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier "
+"d'entrée de la conversion. Afin de significativement gagner du temps de "
+"calcul, il est ainsi possible de reprendre la conversion à partir de ce "
+"résultat intermédiaire :"
+msgstr ""
+"The `-x`/`--idml2hubxml-file` option lets you specify an intermediary "
+"file such as `idml2hubxml/hello_world.xml` as the input file for the "
+"conversion. To significantly save processing time, it is possible to "
+"resume the conversion from the intermediate result:"
 
 #: ../../source/md/3_usage.md:96
 msgid "Détail de la commande de conversion du recueil _Déborder Bolloré_"

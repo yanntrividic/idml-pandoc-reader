@@ -57,16 +57,6 @@ Afficher l'aide à l'utilisation avec l'option `-h`/`--help` :
 python -m idml2docbook -h 
 ```
 
-### Temps de calcul de idml2xml-frontend
-
-Le convertisseur `idml2xml-frontend` est l'étape du processus qui prend de loin le plus de temps de calcul. Celle-ci n'ayant pas besoin d'être personnalisée, il n'est généralement nécessaire de l'exécuter qu'une seule fois par fichier IDML. Le résultat obtenu en exécutant `idml2xml-frontend` sur un fichier `hello_world.idml` est sauvegardé dans le dossier `idml2hubxml`. 
-
-L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier d'entrée de la conversion. Afin de significativement gagner du temps de calcul, il est ainsi possible de reprendre la conversion à partir de ce résultat intermédiaire :
-
-```bash
-python -m idml2docbook -x hello_world.xml -o hello_world.dbk
-```
-
 ### idml.lua
 
 Ce fichier fait le pont entre Pandoc et `idml2docbook`. Il permet de prendre le résultat de ce dernier pour l'insérer dans Pandoc. [Pandoc ne permet pas de spécifier d'arguments arbitraires en ligne de commande](https://github.com/jgm/pandoc/discussions/9689), ce qui implique que seul modifier le fichier `.env` peut influencer le comportement de `idml2docbook` quand exécuté au travers de `idml.lua`.
@@ -91,6 +81,16 @@ Cette commande prend deux dossiers en arguments : un dossier d'entrée et un de 
 
 ```bash
 python -m idml2docbook file.idml --output docbook_folder --cut ; ./batch.sh docbook_folder md_folder
+```
+
+### Temps de calcul de idml2xml-frontend
+
+Le convertisseur `idml2xml-frontend` est l'étape du processus qui prend de loin le plus de temps de calcul. Celle-ci n'ayant pas besoin d'être personnalisée, il n'est généralement nécessaire de l'exécuter qu'une seule fois par fichier IDML. Le résultat obtenu en exécutant `idml2xml-frontend` sur un fichier `hello_world.idml` est sauvegardé dans le dossier `idml2hubxml`. 
+
+L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier d'entrée de la conversion. Afin de significativement gagner du temps de calcul, il est ainsi possible de reprendre la conversion à partir de ce résultat intermédiaire :
+
+```bash
+python -m idml2docbook -x idml2hubxml/hello_world.xml -o hello_world.dbk
 ```
 
 ## Détail de la commande de conversion du recueil _Déborder Bolloré_
