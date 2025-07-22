@@ -1,0 +1,8 @@
+[{
+    "NormalParagraphStyle": {"role": ""},
+    "note_de_bas_de_page": {"role": "fn"},
+    "po_mes": {"wrap": "verse"},
+    "pr_face_et_note_de_trad": {"type": "title", "level":1},
+    "titre_po_me": {"type": "title", "level":1, "role": "title_poeme"},
+    "italics": {"type": "emphasis", "role": "italics"}
+}]

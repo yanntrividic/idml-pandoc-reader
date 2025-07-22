@@ -1,8 +1,8 @@
 [{
-    "h1": { "type": "title", "level": 1 },
+    "h1": { "type": "title", "level": 2 },
     "txt1": { "type": "para", "role": "firstParagraph" },
     "txt2": { "type": "para", "role": "firstParagraph" },
-    "Pr_face__avant-propos": { "type": "title", "level": 1, "role": "pretitre" },
+    "Pr_face__avant-propos": { "type": "title", "level": 1, "role": "pretitre", "cut": true },
     "h2": { "type": "title", "level": 2 },
     "H2_partie_20": { "type": "title", "level": 2 },
     "h2_0_avant_0_apr_s": { "type": "title", "level": 2 },
@@ -18,5 +18,11 @@
     "NormalParagraphStyle": { "type": "para" },
     "No_paragraph_style": { "type": "para" },
     "firstParagraph": { "type": "para" },
-    "toc_1": { "delete": true }
+    "toc_1": { "delete": true },
+    "Caboton": { "unwrap": true},
+    "Paratexte": {"delete": true},
+    "Paratexte_n2": {"delete": true},
+    "indent": {"delete": true},
+    "barlow_d_but_NBP": {"role": "li"},
+    "puce01": {"delete": true}
 }]
