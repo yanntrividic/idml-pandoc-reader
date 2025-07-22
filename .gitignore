@@ -9,6 +9,8 @@ bollo.*
 idml2hubxml
 articles
 *.xml
+build
+*.egg-info/
 
 # docs
 build/en/.doctrees
