@@ -17,7 +17,7 @@ This project is an ongoing work. Want to contribute? You can:
 * [x] Handle the nested sections
 * [x] Make a wrapper script so that it is possible to specify a map through the command line, expose other options...
 * [x] Write the documentation
-* [ ] Write a `setup.py` file
+* [x] Write a `setup.py` file
 * [x] Add every option to the `.env` file so that the `idml.lua` file is usable on its own
 * [ ] Enable CSS selectors in map files
 * [x] Translate the docs to english

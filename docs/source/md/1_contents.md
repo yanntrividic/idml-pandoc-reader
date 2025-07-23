@@ -8,3 +8,4 @@ Les fichiers et dossiers les plus importants du dépôt sont :
 * `.env.sample` est un fichier de configuration permettant de donner des valeurs par défaut au convertisseur ;
 * `batch.sh` est le script utilisé pour faciliter la conversion de fichiers en lots via Pandoc des fichiers source du recueil _Déborder Bolloré_ ;
 * `idml.lua` fait le lien entre `idml2docbook` et Pandoc, voir [Commandes de base](https://outdesign.deborderbollore.fr/fr/3_usage.html#commandes-de-base) ;
+* `install.sh` est le script d'installation du projet.

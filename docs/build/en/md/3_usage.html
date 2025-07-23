@@ -58,7 +58,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#temps-de-calcul-de-idml2xml-frontend">Computing time of idml2xml-frontend</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#detail-de-la-commande-de-conversion-du-recueil-deborder-bollore">Details of the conversion command for the <em>Déborder Bolloré</em> reader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#liste-des-options">List of options</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemple-avec-la-commande-de-conversion-du-recueil-deborder-bollore">Details of the conversion command for the <em>Déborder Bolloré</em> reader</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. InDesign Formatting Guide</a></li>
@@ -175,18 +176,42 @@
 </div>
 </section>
 </section>
-<section id="detail-de-la-commande-de-conversion-du-recueil-deborder-bollore">
-<h2>Details of the conversion command for the <em>Déborder Bolloré</em> reader<a class="headerlink" href="#detail-de-la-commande-de-conversion-du-recueil-deborder-bollore" title="Link to this heading"></a></h2>
+<section id="liste-des-options">
+<h2>List of options<a class="headerlink" href="#liste-des-options" title="Link to this heading"></a></h2>
+<p>All options detailed here are also documented in the command-line tool (see the help with <code class="docutils literal notranslate"><span class="pre">-h</span></code>/<code class="docutils literal notranslate"><span class="pre">--help</span></code>).</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-x</span></code>, <code class="docutils literal notranslate"><span class="pre">--idml2hubxml-file</span></code></strong> \ Treats the input file as a Hub XML file. \ Useful for saving processing time if <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> has already been run on the source IDML file.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">&lt;file&gt;</span></code></strong> \ Name to assign to the output file. \ By default, output is sent to standard output (<em>stdout</em>).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-m</span></code>, <code class="docutils literal notranslate"><span class="pre">--map</span> <span class="pre">&lt;JSON</span> <span class="pre">file&gt;</span></code></strong> \ Name of the JSON mapping file to use for role-specific processing. \ Default: <code class="docutils literal notranslate"><span class="pre">maps/sample.json</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-e</span></code>, <code class="docutils literal notranslate"><span class="pre">--empty</span></code></strong> \ Do not remove empty elements with roles \ Example: <code class="docutils literal notranslate"><span class="pre">&lt;para</span> <span class="pre">role=&quot;r&quot;&gt;&lt;/para&gt;</span></code> \ ⚠️ May retain unwanted residual elements!</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-g</span></code>, <code class="docutils literal notranslate"><span class="pre">--hierarchy</span></code></strong> \ Do not generate nested sections from a flat hierarchy. \ Should be used together with <code class="docutils literal notranslate"><span class="pre">--map</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-c</span></code>, <code class="docutils literal notranslate"><span class="pre">--cut</span></code></strong> \ Splits the input file into multiple output files. \ Works with <code class="docutils literal notranslate"><span class="pre">--map</span></code> (to define the splits). \ If used with <code class="docutils literal notranslate"><span class="pre">--output</span></code>, the latter is treated as a directory.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-n</span></code>, <code class="docutils literal notranslate"><span class="pre">--names</span></code></strong> \ Generates output filenames from section identifiers. \ Should be used only with <code class="docutils literal notranslate"><span class="pre">--cut</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-t</span></code>, <code class="docutils literal notranslate"><span class="pre">--typography</span></code></strong> \ Applies French typographic refinements \ (thin spaces, non-breaking spaces, etc.).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-l</span></code>, <code class="docutils literal notranslate"><span class="pre">--thin-spaces</span></code></strong> \ Use only thin spaces for typography refinement. \ Should be used together with <code class="docutils literal notranslate"><span class="pre">--typography</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-b</span></code>, <code class="docutils literal notranslate"><span class="pre">--linebreaks</span></code></strong> \ Do not replace <code class="docutils literal notranslate"><span class="pre">&lt;br&gt;</span></code> tags with spaces.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-p</span></code>, <code class="docutils literal notranslate"><span class="pre">--prettify</span></code></strong> \ Beautify the DocBook output. \ ⚠️ May introduce unwanted spaces in the output.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-f</span></code>, <code class="docutils literal notranslate"><span class="pre">--media</span> <span class="pre">&lt;path&gt;</span></code></strong> \ Path to the folder containing media files. \ Default: <code class="docutils literal notranslate"><span class="pre">Links</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-r</span></code>, <code class="docutils literal notranslate"><span class="pre">--raster</span> <span class="pre">&lt;extension&gt;</span></code></strong> \ Extension to use when replacing that of <em>raster</em> images. \ Example: <code class="docutils literal notranslate"><span class="pre">jpg</span></code>. \ Default: none.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-v</span></code>, <code class="docutils literal notranslate"><span class="pre">--vector</span> <span class="pre">&lt;extension&gt;</span></code></strong> \ Extension to use when replacing that of <em>vector</em> images. \ Example: <code class="docutils literal notranslate"><span class="pre">svg</span></code>. \ Default: none.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-i</span></code>, <code class="docutils literal notranslate"><span class="pre">--idml2hubxml-output</span> <span class="pre">&lt;path&gt;</span></code></strong> \ Path to the output from Transpect’s <code class="docutils literal notranslate"><span class="pre">idml2hubxml</span></code> converter. \ Default: <code class="docutils literal notranslate"><span class="pre">idml2hubxml</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">-s</span></code>, <code class="docutils literal notranslate"><span class="pre">--idml2hubxml-script</span> <span class="pre">&lt;path&gt;</span></code></strong> \ Path to the script of Transpect’s <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> converter. \ Default: <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">--env</span> <span class="pre">&lt;file&gt;</span></code></strong> \ Path to a <code class="docutils literal notranslate"><span class="pre">.env</span></code> environment file for <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>. \ By default, it looks for a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in the current directory. \ All key/value pairs in this file override the program’s default values.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">--version</span></code></strong> \ Displays the version of <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> and exits the program.</p></li>
+</ul>
+</section>
+<section id="exemple-avec-la-commande-de-conversion-du-recueil-deborder-bollore">
+<h2>Details of the conversion command for the <em>Déborder Bolloré</em> reader<a class="headerlink" href="#exemple-avec-la-commande-de-conversion-du-recueil-deborder-bollore" title="Link to this heading"></a></h2>
 <p>The command used to compile the contributions of the <em>Déborder Bolloré</em> reader, whose result can be found on the repository <a class="reference external" href="https://gitlab.com/deborderbollore/articles">deborderbollore/articles</a>, is as follows:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>db.idml<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--output<span class="w"> </span>docbook<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--map<span class="w"> </span>maps/map.json<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--cut<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--typography<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--thin-spaces<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--names<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--raster<span class="w"> </span>jpg<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>--vector<span class="w"> </span>svg<span class="w"> </span><span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>idml2docbook<span class="w"> </span>db.idml
+<span class="w">  </span>--output<span class="w"> </span>docbook
+<span class="w">  </span>--map<span class="w"> </span>maps/map.json
+<span class="w">  </span>--cut
+<span class="w">  </span>--typography
+<span class="w">  </span>--thin-spaces
+<span class="w">  </span>--names
+<span class="w">  </span>--raster<span class="w"> </span>jpg
+<span class="w">  </span>--vector<span class="w"> </span>svg
 <span class="w">  </span>--media-folder<span class="w"> </span>images<span class="w"> </span><span class="p">;</span>
 ./batch.sh<span class="w"> </span>docbook<span class="w"> </span>articles
 </pre></div>
@@ -203,7 +228,6 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code>/<code class="docutils literal notranslate"><span class="pre">--vector</span></code>: same for vector images;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code>/<code class="docutils literal notranslate"><span class="pre">--media-folder</span></code>: replaces the absolute media URLs in the output files with <code class="docutils literal notranslate"><span class="pre">images/</span></code>.</p></li>
 </ul>
-<p>Other configuration options are available via this package’s options (see the help with <code class="docutils literal notranslate"><span class="pre">-h</span></code>/<code class="docutils literal notranslate"><span class="pre">--help</span></code>).</p>
 <p>Finally, the <code class="docutils literal notranslate"><span class="pre">batch.sh</span></code> script converts the resulting DocBook files into Markdown using the <code class="docutils literal notranslate"><span class="pre">markdown_phpextra</span></code> flavor and the necessary Lua filters. It also transforms Markdown line breaks (<code class="docutils literal notranslate">&#160; </code>, double spaces) into HTML <code class="docutils literal notranslate"><span class="pre">&lt;br/&gt;</span></code> tags.</p>
 </section>
 </section>

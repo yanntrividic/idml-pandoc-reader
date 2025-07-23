@@ -93,20 +93,99 @@ L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier intermédiair
 python -m idml2docbook -x idml2hubxml/hello_world.xml -o hello_world.dbk
 ```
 
-## Détail de la commande de conversion du recueil _Déborder Bolloré_
+## Liste des options
+
+Toutes les options détaillées ici sont aussi documentées dans le logiciel en ligne de commande (voir l'aide avec `-h`/`--help`).
+
+* **`-x`, `--idml2hubxml-file`** \
+  Considère le fichier en entrée comme un fichier Hub XML. \
+  Utile pour gagner du temps de traitement si `idml2xml-frontend` a déjà été exécuté sur le fichier IDML source. 
+
+* **`-o`, `--output <fichier>`** \
+  Nom à attribuer au fichier de sortie. \
+  Par défaut, la sortie est redirigée vers la sortie standard (*stdout*). 
+
+* **`-m`, `--map <fichier JSON>`** \
+  Nom du fichier de mappage JSON à utiliser pour des traitements spécifiques au rôle. \
+  Par défaut : `maps/sample.json`. 
+
+* **`-e`, `--empty`** \
+  Ne pas supprimer les éléments vides avec des rôles \
+  Exemple : `<para role="r"></para>` \
+  ⚠️ Peut conserver des éléments résiduels non désirés ! 
+
+* **`-g`, `--hierarchy`** \
+  Ne pas générer de sections imbriquées à partir d'une hiérarchie plate. \
+  À utiliser conjointement avec `--map`. 
+
+* **`-c`, `--cut`** \
+  Découpe le fichier d’entrée en plusieurs fichiers de sortie. \
+  Fonctionne avec `--map` (pour spécifier les découpes). \
+  Si utilisé avec `--output`, ce dernier est considéré comme un dossier. 
+
+* **`-n`, `--names`** \
+  Génère les noms de fichiers de sortie à partir des identifiants de sections. \
+  À utiliser uniquement avec `--cut`. 
+
+* **`-t`, `--typography`** \
+  Refonte de l’orthotypographie selon les règles françaises \
+  (espaces fines, espaces insécables, etc.). 
+
+* **`-l`, `--thin-spaces`** \
+  N’utiliser que des espaces fines pour la refonte de l’orthotypographie. \
+  À utiliser conjointement avec `--typography`. 
+
+* **`-b`, `--linebreaks`** \
+  Ne pas remplacer les balises `<br>` par des espaces. 
+
+* **`-p`, `--prettify`** \
+  Embellir la sortie DocBook. \
+  ⚠️ Peut ajouter des espaces indésirables dans la sortie. 
+
+* **`-f`, `--media <chemin>`** \
+  Chemin vers le dossier contenant les fichiers médias. \
+  Par défaut : `Links`. 
+
+* **`-r`, `--raster <extension>`** \
+  Extension à utiliser pour remplacer celles des images *matricielles*. \
+  Exemple : `jpg`. \
+  Par défaut : aucune. 
+
+* **`-v`, `--vector <extension>`** \
+  Extension à utiliser pour remplacer celles des images *vectorielles*. \
+  Exemple : `svg`. \
+  Par défaut : aucune. 
+
+* **`-i`, `--idml2hubxml-output <chemin>`** \
+  Chemin vers la sortie du convertisseur `idml2hubxml` de Transpect. \
+  Par défaut : `idml2hubxml`. 
+
+* **`-s`, `--idml2hubxml-script <chemin>`** \
+  Chemin vers le script du convertisseur `idml2xml-frontend` de Transpect. \
+  Par défaut : `idml2xml-frontend`. 
+
+* **`--env <fichier>`** \
+  Chemin vers un fichier d’environnement `.env` pour `idml2docbook`. \
+  Par défaut, cherche un fichier `.env` dans le répertoire courant. \
+  Toutes les paires clé/valeur spécifiées dans ce fichier `.env` remplacent les valeurs par défaut du programme. 
+
+* **`--version`** \
+  Affiche la version de `idml2docbook` et quitte le programme. 
+
+## Exemple avec la commande de conversion du recueil _Déborder Bolloré_
 
 La commande pour compiler les contributions du recueil _Déborder Bolloré_, dont on peut retrouver le résultat sur le dépôt [deborderbollore/articles](https://gitlab.com/deborderbollore/articles), est la suivante :
 
 ```bash
-python -m idml2docbook db.idml \
-  --output docbook \
-  --map maps/map.json \
-  --cut \
-  --typography \
-  --thin-spaces \
-  --names \
-  --raster jpg \
-  --vector svg \
+python -m idml2docbook db.idml
+  --output docbook
+  --map maps/map.json
+  --cut
+  --typography
+  --thin-spaces
+  --names
+  --raster jpg
+  --vector svg
   --media-folder images ;
 ./batch.sh docbook articles
 ```
@@ -122,7 +201,5 @@ En détails :
 * `-r`/`--raster` : remplace les extensions des images matricielles par `jpg` dans les URL des fichiers de sortie ;
 * `-v`/`--vector` : idem pour les images vectorielles ;
 * `-f`/`--media-folder` : remplace l'URL absolue des médias dans les fichiers de sortie par `images/`.
-
-D'autres paramétrages encore sont exposés via les options de ce package (voir l'aide avec `-h`/`--help`).
 
 Enfin, le script `batch.sh` convertit les fichiers DocBook obtenus en Markdown, en précisant la saveur `markdown_phpextra`, et avec les filtres Lua nécessaires. Il transforme aussi les sauts de ligne Markdown `  ` (espaces doubles) en des balises HTML `<br/>`.

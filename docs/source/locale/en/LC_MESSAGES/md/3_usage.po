@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 16:03+0200\n"
+"POT-Creation-Date: 2025-07-23 15:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -287,10 +287,181 @@ msgstr ""
 "resume the conversion from the intermediate result:"
 
 #: ../../source/md/3_usage.md:96
-msgid "Détail de la commande de conversion du recueil _Déborder Bolloré_"
-msgstr "Details of the conversion command for the _Déborder Bolloré_ reader"
+msgid "Liste des options"
+msgstr "List of options"
 
 #: ../../source/md/3_usage.md:98
+msgid ""
+"Toutes les options détaillées ici sont aussi documentées dans le logiciel"
+" en ligne de commande (voir l'aide avec `-h`/`--help`)."
+msgstr ""
+"All options detailed here are also documented in the command-line tool "
+"(see the help with `-h`/`--help`)."
+
+#: ../../source/md/3_usage.md:100
+msgid ""
+"**`-x`, `--idml2hubxml-file`** \\ Considère le fichier en entrée comme un"
+" fichier Hub XML. \\ Utile pour gagner du temps de traitement si "
+"`idml2xml-frontend` a déjà été exécuté sur le fichier IDML source."
+msgstr ""
+"**`-x`, `--idml2hubxml-file`** \\ Treats the input file as a Hub XML "
+"file. \\ Useful for saving processing time if `idml2xml-frontend` has "
+"already been run on the source IDML file."
+
+#: ../../source/md/3_usage.md:104
+msgid ""
+"**`-o`, `--output <fichier>`** \\ Nom à attribuer au fichier de sortie. "
+"\\ Par défaut, la sortie est redirigée vers la sortie standard "
+"(*stdout*)."
+msgstr ""
+"**`-o`, `--output <file>`** \\ Name to assign to the output file. \\ By "
+"default, output is sent to standard output (*stdout*)."
+
+#: ../../source/md/3_usage.md:108
+msgid ""
+"**`-m`, `--map <fichier JSON>`** \\ Nom du fichier de mappage JSON à "
+"utiliser pour des traitements spécifiques au rôle. \\ Par défaut : "
+"`maps/sample.json`."
+msgstr ""
+"**`-m`, `--map <JSON file>`** \\ Name of the JSON mapping file to use for"
+" role-specific processing. \\ Default: `maps/sample.json`."
+
+#: ../../source/md/3_usage.md:112
+msgid ""
+"**`-e`, `--empty`** \\ Ne pas supprimer les éléments vides avec des rôles"
+" \\ Exemple : `<para role=\"r\"></para>` \\ ⚠️ Peut conserver des "
+"éléments résiduels non désirés !"
+msgstr ""
+"**`-e`, `--empty`** \\ Do not remove empty elements with roles \\ "
+"Example: `<para role=\"r\"></para>` \\ ⚠️ May retain unwanted residual "
+"elements!"
+
+#: ../../source/md/3_usage.md:117
+msgid ""
+"**`-g`, `--hierarchy`** \\ Ne pas générer de sections imbriquées à partir"
+" d'une hiérarchie plate. \\ À utiliser conjointement avec `--map`."
+msgstr ""
+"**`-g`, `--hierarchy`** \\ Do not generate nested sections from a flat "
+"hierarchy. \\ Should be used together with `--map`."
+
+#: ../../source/md/3_usage.md:121
+msgid ""
+"**`-c`, `--cut`** \\ Découpe le fichier d’entrée en plusieurs fichiers de"
+" sortie. \\ Fonctionne avec `--map` (pour spécifier les découpes). \\ Si "
+"utilisé avec `--output`, ce dernier est considéré comme un dossier."
+msgstr ""
+"**`-c`, `--cut`** \\ Splits the input file into multiple output files. \\"
+" Works with `--map` (to define the splits). \\ If used with `--output`, "
+"the latter is treated as a directory."
+
+#: ../../source/md/3_usage.md:126
+msgid ""
+"**`-n`, `--names`** \\ Génère les noms de fichiers de sortie à partir des"
+" identifiants de sections. \\ À utiliser uniquement avec `--cut`."
+msgstr ""
+"**`-n`, `--names`** \\ Generates output filenames from section "
+"identifiers. \\ Should be used only with `--cut`."
+
+#: ../../source/md/3_usage.md:130
+msgid ""
+"**`-t`, `--typography`** \\ Refonte de l’orthotypographie selon les "
+"règles françaises \\ (espaces fines, espaces insécables, etc.)."
+msgstr ""
+"**`-t`, `--typography`** \\ Applies French typographic refinements \\ "
+"(thin spaces, non-breaking spaces, etc.)."
+
+#: ../../source/md/3_usage.md:134
+msgid ""
+"**`-l`, `--thin-spaces`** \\ N’utiliser que des espaces fines pour la "
+"refonte de l’orthotypographie. \\ À utiliser conjointement avec "
+"`--typography`."
+msgstr ""
+"**`-l`, `--thin-spaces`** \\ Use only thin spaces for typography "
+"refinement. \\ Should be used together with `--typography`."
+
+#: ../../source/md/3_usage.md:138
+msgid ""
+"**`-b`, `--linebreaks`** \\ Ne pas remplacer les balises `<br>` par des "
+"espaces."
+msgstr "**`-b`, `--linebreaks`** \\ Do not replace `<br>` tags with spaces."
+
+#: ../../source/md/3_usage.md:141
+msgid ""
+"**`-p`, `--prettify`** \\ Embellir la sortie DocBook. \\ ⚠️ Peut ajouter "
+"des espaces indésirables dans la sortie."
+msgstr ""
+"**`-p`, `--prettify`** \\ Beautify the DocBook output. \\ ⚠️ May "
+"introduce unwanted spaces in the output."
+
+#: ../../source/md/3_usage.md:145
+msgid ""
+"**`-f`, `--media <chemin>`** \\ Chemin vers le dossier contenant les "
+"fichiers médias. \\ Par défaut : `Links`."
+msgstr ""
+"**`-f`, `--media <path>`** \\ Path to the folder containing media files. "
+"\\ Default: `Links`."
+
+#: ../../source/md/3_usage.md:149
+msgid ""
+"**`-r`, `--raster <extension>`** \\ Extension à utiliser pour remplacer "
+"celles des images *matricielles*. \\ Exemple : `jpg`. \\ Par défaut : "
+"aucune."
+msgstr ""
+"**`-r`, `--raster <extension>`** \\ Extension to use when replacing that "
+"of *raster* images. \\ Example: `jpg`. \\ Default: none."
+
+#: ../../source/md/3_usage.md:154
+msgid ""
+"**`-v`, `--vector <extension>`** \\ Extension à utiliser pour remplacer "
+"celles des images *vectorielles*. \\ Exemple : `svg`. \\ Par défaut : "
+"aucune."
+msgstr ""
+"**`-v`, `--vector <extension>`** \\ Extension to use when replacing that "
+"of *vector* images. \\ Example: `svg`. \\ Default: none."
+
+#: ../../source/md/3_usage.md:159
+msgid ""
+"**`-i`, `--idml2hubxml-output <chemin>`** \\ Chemin vers la sortie du "
+"convertisseur `idml2hubxml` de Transpect. \\ Par défaut : `idml2hubxml`."
+msgstr ""
+"**`-i`, `--idml2hubxml-output <path>`** \\ Path to the output from "
+"Transpect's `idml2hubxml` converter. \\ Default: `idml2hubxml`."
+
+#: ../../source/md/3_usage.md:163
+msgid ""
+"**`-s`, `--idml2hubxml-script <chemin>`** \\ Chemin vers le script du "
+"convertisseur `idml2xml-frontend` de Transpect. \\ Par défaut : "
+"`idml2xml-frontend`."
+msgstr ""
+"**`-s`, `--idml2hubxml-script <path>`** \\ Path to the script of "
+"Transpect's `idml2xml-frontend` converter. \\ Default: `idml2xml-"
+"frontend`."
+
+#: ../../source/md/3_usage.md:167
+msgid ""
+"**`--env <fichier>`** \\ Chemin vers un fichier d’environnement `.env` "
+"pour `idml2docbook`. \\ Par défaut, cherche un fichier `.env` dans le "
+"répertoire courant. \\ Toutes les paires clé/valeur spécifiées dans ce "
+"fichier `.env` remplacent les valeurs par défaut du programme."
+msgstr ""
+"**`--env <file>`** \\ Path to a `.env` environment file for "
+"`idml2docbook`. \\ By default, it looks for a `.env` file in the current "
+"directory. \\ All key/value pairs in this file override the program’s "
+"default values."
+
+#: ../../source/md/3_usage.md:172
+msgid ""
+"**`--version`** \\ Affiche la version de `idml2docbook` et quitte le "
+"programme."
+msgstr ""
+"**`--version`** \\ Displays the version of `idml2docbook` and exits the "
+"program."
+
+#: ../../source/md/3_usage.md:175
+msgid "Exemple avec la commande de conversion du recueil _Déborder Bolloré_"
+msgstr "Details of the conversion command for the _Déborder Bolloré_ reader"
+
+#: ../../source/md/3_usage.md:177
 msgid ""
 "La commande pour compiler les contributions du recueil _Déborder "
 "Bolloré_, dont on peut retrouver le résultat sur le dépôt "
@@ -302,11 +473,11 @@ msgstr ""
 "[deborderbollore/articles](https://gitlab.com/deborderbollore/articles), "
 "is as follows:"
 
-#: ../../source/md/3_usage.md:114
+#: ../../source/md/3_usage.md:193
 msgid "En détails :"
 msgstr "In detail:"
 
-#: ../../source/md/3_usage.md:116
+#: ../../source/md/3_usage.md:195
 msgid ""
 "`-o`/`--output` : permet de préciser le dossier où seront contenus les "
 "fichiers DocBook produits ;"
@@ -314,7 +485,7 @@ msgstr ""
 "`-o`/`--output`: specifies the folder where the output DocBook files will"
 " be saved;"
 
-#: ../../source/md/3_usage.md:117
+#: ../../source/md/3_usage.md:196
 msgid ""
 "`-m`/`--map` : spécifie les opérations à effectuer sur certains styles de"
 " caractères et de paragraphes, voir [Correspondance des styles"
@@ -323,11 +494,11 @@ msgstr ""
 "`-m`/`--map`: defines the operations to apply to certain character and "
 "paragraph styles, see [Style Mapping](#correspondance-des-styles);"
 
-#: ../../source/md/3_usage.md:118
+#: ../../source/md/3_usage.md:197
 msgid "`-c`/`--cut` : coupe le résultat en plusieurs fichiers DocBook autonomes ;"
 msgstr "`-c`/`--cut`: splits the result into multiple standalone DocBook files;"
 
-#: ../../source/md/3_usage.md:119
+#: ../../source/md/3_usage.md:198
 msgid ""
 "`-t`/`--typography` : refait totalement l'orthotypographie (espaces "
 "autour des signes de ponctuation, etc.) ;"
@@ -335,19 +506,19 @@ msgstr ""
 "`-t`/`--typography`: completely redoes typographic spacing (around "
 "punctuation, etc.);"
 
-#: ../../source/md/3_usage.md:120
+#: ../../source/md/3_usage.md:199
 msgid ""
 "`-l`/`--thin-spaces` : l'orthotypographie utilise seulement des espaces "
 "fines ;"
 msgstr "`-l`/`--thin-spaces`: typography uses only thin spaces;"
 
-#: ../../source/md/3_usage.md:121
+#: ../../source/md/3_usage.md:200
 msgid ""
 "`-n`/`--names` : génère les noms des fichiers finaux à partir des "
 "contenus des titres de niveau 1 ;"
 msgstr "`-n`/`--names`: generates filenames based on level-1 heading content;"
 
-#: ../../source/md/3_usage.md:122
+#: ../../source/md/3_usage.md:201
 msgid ""
 "`-r`/`--raster` : remplace les extensions des images matricielles par "
 "`jpg` dans les URL des fichiers de sortie ;"
@@ -355,11 +526,11 @@ msgstr ""
 "`-r`/`--raster`: replaces raster image extensions with `jpg` in the "
 "output file URLs;"
 
-#: ../../source/md/3_usage.md:123
+#: ../../source/md/3_usage.md:202
 msgid "`-v`/`--vector` : idem pour les images vectorielles ;"
 msgstr "`-v`/`--vector`: same for vector images;"
 
-#: ../../source/md/3_usage.md:124
+#: ../../source/md/3_usage.md:203
 msgid ""
 "`-f`/`--media-folder` : remplace l'URL absolue des médias dans les "
 "fichiers de sortie par `images/`."
@@ -367,15 +538,7 @@ msgstr ""
 "`-f`/`--media-folder`: replaces the absolute media URLs in the output "
 "files with `images/`."
 
-#: ../../source/md/3_usage.md:126
-msgid ""
-"D'autres paramétrages encore sont exposés via les options de ce package "
-"(voir l'aide avec `-h`/`--help`)."
-msgstr ""
-"Other configuration options are available via this package's options (see"
-" the help with `-h`/`--help`)."
-
-#: ../../source/md/3_usage.md:128
+#: ../../source/md/3_usage.md:205
 msgid ""
 "Enfin, le script `batch.sh` convertit les fichiers DocBook obtenus en "
 "Markdown, en précisant la saveur `markdown_phpextra`, et avec les filtres"

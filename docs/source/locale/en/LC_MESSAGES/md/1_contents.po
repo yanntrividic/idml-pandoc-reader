@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-21 16:14+0200\n"
+"POT-Creation-Date: 2025-07-23 15:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -84,4 +84,8 @@ msgstr ""
 "`idml.lua` links `idml2docbook` with Pandoc, see [Basic "
 "commands](https://outdesign.deborderbollore.fr/en/md/3_usage.html"
 "#commandes-de-base);"
+
+#: ../../source/md/1_contents.md:11
+msgid "`install.sh` est le script d'installation du projet."
+msgstr "`install.sh` is an installation script for this project."
 

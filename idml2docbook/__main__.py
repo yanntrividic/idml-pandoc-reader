@@ -61,7 +61,7 @@ def load_env(argv):
     PARSER.add_argument(
         '-m', '--map', type=str,
         help='filename of the JSON map file to perform role-specific actions, '
-        'reads by default the value of the .env file')
+        'defaults to maps/sample.json')
     PARSER.add_argument(
         '-e', '--empty', action='store_true',
         help='do not remove empty elements with roles, '
@@ -112,11 +112,13 @@ def load_env(argv):
     PARSER.add_argument(
         '-s', '--idml2hubxml-script', type=str,
         help='path to the script of Transpect’s idml2xml converter, '
-        'reads by default the value of the .env file')
+        'defaults to "idml2xml-frontend"')
     PARSER.add_argument(
         '--env', type=str,
         help='path to a .env environement file for idml2docbook, '
-        'looks by default for a .env file in the working directory')
+        'looks by default for a .env file in the working directory. '
+        'All the key/value pairs specified in an .env file override the '
+        'default values of idml2docbook')
     PARSER.add_argument(
         '--version', action='version',
         version=f'idml2docbook version {__version__}',
