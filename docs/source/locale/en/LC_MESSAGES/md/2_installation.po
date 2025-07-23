@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 16:12+0200\n"
+"POT-Creation-Date: 2025-07-23 16:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -98,8 +98,9 @@ msgid ""
 "Premièrement, commencez par cloner le dépôt [`idml-pandoc-"
 "reader`](https://gitlab.com/deborderbollore/idml-pandoc-reader) :"
 msgstr ""
-"First, start by cloning the [`idml-pandoc-reader`]"
-"(https://gitlab.com/deborderbollore/idml-pandoc-reader) repository:"
+"First, start by cloning the [`idml-pandoc-"
+"reader`](https://gitlab.com/deborderbollore/idml-pandoc-reader) "
+"repository:"
 
 #: ../../source/md/2_installation.md:26
 msgid ""
@@ -204,11 +205,11 @@ msgstr ""
 "options](https://outdesign.deborderbollore.fr/en/md/3_usage.html#liste-"
 "des-options)."
 
-#: ../../source/md/2_installation.md:63
+#: ../../source/md/2_installation.md:59
 msgid "Pandoc"
 msgstr "Pandoc"
 
-#: ../../source/md/2_installation.md:65
+#: ../../source/md/2_installation.md:61
 msgid ""
 "Pandoc n'est pas une dépendance à proprement parler étant donné que le "
 "convertisseur `idml2docbook` n'en a pas besoin pour fonctionner."
@@ -216,7 +217,7 @@ msgstr ""
 "Pandoc is not technically a dependency, since the `idml2docbook` "
 "converter does not require it to function."
 
-#: ../../source/md/2_installation.md:67
+#: ../../source/md/2_installation.md:63
 msgid ""
 "Cependant, [une version un peu modifiée de "
 "Pandoc](https://github.com/yanntrividic/pandoc/) a été développée pour "
@@ -230,7 +231,7 @@ msgstr ""
 "from "
 "source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md)."
 
-#: ../../source/md/2_installation.md:69
+#: ../../source/md/2_installation.md:65
 msgid ""
 "Il est aussi possible d'utiliser la version principale de Pandoc, mais "
 "alors sans [Correspondance des "
@@ -246,11 +247,11 @@ msgstr ""
 "request_](https://github.com/jgm/pandoc/pull/10665) is in progress to "
 "integrate these new features into the main Pandoc branch."
 
-#: ../../source/md/2_installation.md:72
+#: ../../source/md/2_installation.md:68
 msgid "Test de la configuration avec la version modifiée de Pandoc"
 msgstr "Configuration test with the modified version of Pandoc"
 
-#: ../../source/md/2_installation.md:74
+#: ../../source/md/2_installation.md:70
 msgid ""
 "Pour vérifier que les dépendances ont bien été installées et le fichier "
 "`.env` bien paramétré, vous pouvez tester le convertisseur dans votre "
@@ -260,6 +261,7 @@ msgstr ""
 "correctly set up, you can test the converter in your terminal with the "
 "following command:"
 
-#: ../../source/md/2_installation.md:80
+#: ../../source/md/2_installation.md:76
 msgid "Le résultat devrait alors être :"
 msgstr "The result should then be:"
+

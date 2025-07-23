@@ -56,10 +56,6 @@ A minima, pour fonctionner, ce convertisseur nécessite d'exécuter `idml2xml-fr
 
 Les paires clé/valeur du fichier `.env` permettent de remplacer les valeurs par défaut du package `idml2docbook`. Pour plus d'informations sur ces différentes variables, consultez [la liste des options](https://outdesign.deborderbollore.fr/fr/md/3_usage.html#liste-des-options).
 
-```bash
-python -m idml2docbook -h
-```
-
 ## Pandoc
 
 Pandoc n'est pas une dépendance à proprement parler étant donné que le convertisseur `idml2docbook` n'en a pas besoin pour fonctionner.
