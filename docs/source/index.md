@@ -25,7 +25,6 @@ md/1_contents
 md/2_installation
 md/3_usage
 md/4_formatting_guide
-md/5_conversion_graph
 ```
 
 ```{toctree}
@@ -33,6 +32,7 @@ md/5_conversion_graph
 caption: "Aller plus loin"
 maxdepth: 2
 ---
+md/5_conversion_graph
 md/6_about_indesign
 md/7_contribute
 md/8_licence
