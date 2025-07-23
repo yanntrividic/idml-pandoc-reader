@@ -12,12 +12,13 @@
 # - Verifies Java (>= 7.0.0) is installed
 # - Verifies Git is installed
 # - Prompts for a target directory to clone the `idml2xml-frontend` repo
-# - Clones the repository (if not already present and correct)
+# - Clones idml2xml-frontend and its submodules (if not already present)
 # - Verifies Python 3 and pip (>= 21.0) are installed
 # - Ensures a virtual environment is active (or warns otherwise)
 # - Installs Python dependencies from `requirements.txt`
-# - Copies `.env.sample` to `.env` if needed, and sets correct frontend path
+# - Copies `.env.sample` to `.env` if needed, and sets correct idml2xml-frontend path
 # - Optionally installs the module using `pip install .`
+# - Optionally execute a test command.
 #
 # Prerequisites:
 # - Bash shell
