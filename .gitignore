@@ -11,6 +11,7 @@ articles
 *.xml
 build
 *.egg-info/
+idml2xml-frontend
 
 # docs
 build/en/.doctrees
