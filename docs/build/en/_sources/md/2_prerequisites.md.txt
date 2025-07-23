@@ -17,7 +17,13 @@ Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de conve
 
 ## Installation avec install\.sh
 
-Un script d'installation `install.sh` pour Mac et Linux a été développé afin de faciliter la prise en main de ce logiciel. Ce script a principalement pour fonctions de :
+Premièrement, commencez par cloner le dépôt [`idml-pandoc-reader`](https://gitlab.com/deborderbollore/idml-pandoc-reader) :
+
+```bash
+git clone https://gitlab.com/deborderbollore/idml-pandoc-reader
+```
+
+Ensuite, un script d'installation `install.sh` pour Mac et Linux a été développé afin de faciliter la prise en main de ce logiciel. L'installation sur Windows est elle aussi possible en adaptant les étapes détaillées ci-dessous, mais celle-ci pas pu être encore testée. Ce script a principalement pour fonctions de :
 
 * vérifier que Java (>= 7.0.0) est installé ;
 * vérifier que Git est installé ;
