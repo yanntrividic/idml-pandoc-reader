@@ -1,20 +1,23 @@
+# source code
 __pycache__
 .venv
 .env
-sources
-output
-*.log
-bollo.*
-*.native
-idml2hubxml
-articles
-*.xml
 build
-!docs/build
 *.egg-info/
 idml2xml-frontend
+idml2hubxml
+
+# dev
+*.native
+bollo.*
+*.xml
+*.log
+sources
+output
+articles
 
 # docs
+!docs/build
 build/en/.doctrees
 build//.doctrees
 objects.inv
