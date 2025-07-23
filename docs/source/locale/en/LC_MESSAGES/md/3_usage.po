@@ -223,7 +223,7 @@ msgstr ""
 
 #: ../../source/md/3_usage.md:70
 msgid "batch\\.sh"
-msgstr "batch\\.sh"
+msgstr "batch\.sh"
 
 #: ../../source/md/3_usage.md:72
 msgid ""
@@ -304,8 +304,8 @@ msgid ""
 " fichier Hub XML. \\ Utile pour gagner du temps de traitement si "
 "`idml2xml-frontend` a déjà été exécuté sur le fichier IDML source."
 msgstr ""
-"**`-x`, `--idml2hubxml-file`** \\ Treats the input file as a Hub XML "
-"file. \\ Useful for saving processing time if `idml2xml-frontend` has "
+"**`-x`, `--idml2hubxml-file`** <br> Treats the input file as a Hub XML "
+"file. <br> Useful for saving processing time if `idml2xml-frontend` has "
 "already been run on the source IDML file."
 
 #: ../../source/md/3_usage.md:104
@@ -314,7 +314,7 @@ msgid ""
 "\\ Par défaut, la sortie est redirigée vers la sortie standard "
 "(*stdout*)."
 msgstr ""
-"**`-o`, `--output <file>`** \\ Name to assign to the output file. \\ By "
+"**`-o`, `--output <file>`** <br> Name to assign to the output file. <br> By "
 "default, output is sent to standard output (*stdout*)."
 
 #: ../../source/md/3_usage.md:108
@@ -323,8 +323,8 @@ msgid ""
 "utiliser pour des traitements spécifiques au rôle. \\ Par défaut : "
 "`maps/sample.json`."
 msgstr ""
-"**`-m`, `--map <JSON file>`** \\ Name of the JSON mapping file to use for"
-" role-specific processing. \\ Default: `maps/sample.json`."
+"**`-m`, `--map <JSON file>`** <br> Name of the JSON mapping file to use for"
+" role-specific processing. <br> Default: `maps/sample.json`."
 
 #: ../../source/md/3_usage.md:112
 msgid ""
@@ -332,8 +332,8 @@ msgid ""
 " \\ Exemple : `<para role=\"r\"></para>` \\ ⚠️ Peut conserver des "
 "éléments résiduels non désirés !"
 msgstr ""
-"**`-e`, `--empty`** \\ Do not remove empty elements with roles \\ "
-"Example: `<para role=\"r\"></para>` \\ ⚠️ May retain unwanted residual "
+"**`-e`, `--empty`** <br> Do not remove empty elements with roles <br> "
+"Example: `<para role=\"r\"></para>` <br> ⚠️ May retain unwanted residual "
 "elements!"
 
 #: ../../source/md/3_usage.md:117
@@ -341,8 +341,8 @@ msgid ""
 "**`-g`, `--hierarchy`** \\ Ne pas générer de sections imbriquées à partir"
 " d'une hiérarchie plate. \\ À utiliser conjointement avec `--map`."
 msgstr ""
-"**`-g`, `--hierarchy`** \\ Do not generate nested sections from a flat "
-"hierarchy. \\ Should be used together with `--map`."
+"**`-g`, `--hierarchy`** <br> Do not generate nested sections from a flat "
+"hierarchy. <br> Should be used together with `--map`."
 
 #: ../../source/md/3_usage.md:121
 msgid ""
@@ -350,8 +350,8 @@ msgid ""
 " sortie. \\ Fonctionne avec `--map` (pour spécifier les découpes). \\ Si "
 "utilisé avec `--output`, ce dernier est considéré comme un dossier."
 msgstr ""
-"**`-c`, `--cut`** \\ Splits the input file into multiple output files. \\"
-" Works with `--map` (to define the splits). \\ If used with `--output`, "
+"**`-c`, `--cut`** <br> Splits the input file into multiple output files. \\"
+" Works with `--map` (to define the splits). <br> If used with `--output`, "
 "the latter is treated as a directory."
 
 #: ../../source/md/3_usage.md:126
@@ -359,15 +359,15 @@ msgid ""
 "**`-n`, `--names`** \\ Génère les noms de fichiers de sortie à partir des"
 " identifiants de sections. \\ À utiliser uniquement avec `--cut`."
 msgstr ""
-"**`-n`, `--names`** \\ Generates output filenames from section "
-"identifiers. \\ Should be used only with `--cut`."
+"**`-n`, `--names`** <br> Generates output filenames from section "
+"identifiers. <br> Should be used only with `--cut`."
 
 #: ../../source/md/3_usage.md:130
 msgid ""
 "**`-t`, `--typography`** \\ Refonte de l’orthotypographie selon les "
 "règles françaises \\ (espaces fines, espaces insécables, etc.)."
 msgstr ""
-"**`-t`, `--typography`** \\ Applies French typographic refinements \\ "
+"**`-t`, `--typography`** <br> Applies French typographic refinements <br> "
 "(thin spaces, non-breaking spaces, etc.)."
 
 #: ../../source/md/3_usage.md:134
@@ -376,21 +376,21 @@ msgid ""
 "refonte de l’orthotypographie. \\ À utiliser conjointement avec "
 "`--typography`."
 msgstr ""
-"**`-l`, `--thin-spaces`** \\ Use only thin spaces for typography "
-"refinement. \\ Should be used together with `--typography`."
+"**`-l`, `--thin-spaces`** <br> Use only thin spaces for typography "
+"refinement. <br> Should be used together with `--typography`."
 
 #: ../../source/md/3_usage.md:138
 msgid ""
 "**`-b`, `--linebreaks`** \\ Ne pas remplacer les balises `<br>` par des "
 "espaces."
-msgstr "**`-b`, `--linebreaks`** \\ Do not replace `<br>` tags with spaces."
+msgstr "**`-b`, `--linebreaks`** <br> Do not replace `<br>` tags with spaces."
 
 #: ../../source/md/3_usage.md:141
 msgid ""
 "**`-p`, `--prettify`** \\ Embellir la sortie DocBook. \\ ⚠️ Peut ajouter "
 "des espaces indésirables dans la sortie."
 msgstr ""
-"**`-p`, `--prettify`** \\ Beautify the DocBook output. \\ ⚠️ May "
+"**`-p`, `--prettify`** <br> Beautify the DocBook output. <br> ⚠️ May "
 "introduce unwanted spaces in the output."
 
 #: ../../source/md/3_usage.md:145
@@ -398,8 +398,8 @@ msgid ""
 "**`-f`, `--media <chemin>`** \\ Chemin vers le dossier contenant les "
 "fichiers médias. \\ Par défaut : `Links`."
 msgstr ""
-"**`-f`, `--media <path>`** \\ Path to the folder containing media files. "
-"\\ Default: `Links`."
+"**`-f`, `--media <path>`** <br> Path to the folder containing media files. "
+"<br> Default: `Links`."
 
 #: ../../source/md/3_usage.md:149
 msgid ""
@@ -407,8 +407,8 @@ msgid ""
 "celles des images *matricielles*. \\ Exemple : `jpg`. \\ Par défaut : "
 "aucune."
 msgstr ""
-"**`-r`, `--raster <extension>`** \\ Extension to use when replacing that "
-"of *raster* images. \\ Example: `jpg`. \\ Default: none."
+"**`-r`, `--raster <extension>`** <br> Extension to use when replacing that "
+"of *raster* images. <br> Example: `jpg`. <br> Default: none."
 
 #: ../../source/md/3_usage.md:154
 msgid ""
@@ -416,16 +416,16 @@ msgid ""
 "celles des images *vectorielles*. \\ Exemple : `svg`. \\ Par défaut : "
 "aucune."
 msgstr ""
-"**`-v`, `--vector <extension>`** \\ Extension to use when replacing that "
-"of *vector* images. \\ Example: `svg`. \\ Default: none."
+"**`-v`, `--vector <extension>`** <br> Extension to use when replacing that "
+"of *vector* images. <br> Example: `svg`. <br> Default: none."
 
 #: ../../source/md/3_usage.md:159
 msgid ""
 "**`-i`, `--idml2hubxml-output <chemin>`** \\ Chemin vers la sortie du "
 "convertisseur `idml2hubxml` de Transpect. \\ Par défaut : `idml2hubxml`."
 msgstr ""
-"**`-i`, `--idml2hubxml-output <path>`** \\ Path to the output from "
-"Transpect's `idml2hubxml` converter. \\ Default: `idml2hubxml`."
+"**`-i`, `--idml2hubxml-output <path>`** <br> Path to the output from "
+"Transpect's `idml2hubxml` converter. <br> Default: `idml2hubxml`."
 
 #: ../../source/md/3_usage.md:163
 msgid ""
@@ -433,8 +433,8 @@ msgid ""
 "convertisseur `idml2xml-frontend` de Transpect. \\ Par défaut : "
 "`idml2xml-frontend`."
 msgstr ""
-"**`-s`, `--idml2hubxml-script <path>`** \\ Path to the script of "
-"Transpect's `idml2xml-frontend` converter. \\ Default: `idml2xml-"
+"**`-s`, `--idml2hubxml-script <path>`** <br> Path to the script of "
+"Transpect's `idml2xml-frontend` converter. <br> Default: `idml2xml-"
 "frontend`."
 
 #: ../../source/md/3_usage.md:167
@@ -444,9 +444,9 @@ msgid ""
 "répertoire courant. \\ Toutes les paires clé/valeur spécifiées dans ce "
 "fichier `.env` remplacent les valeurs par défaut du programme."
 msgstr ""
-"**`--env <file>`** \\ Path to a `.env` environment file for "
-"`idml2docbook`. \\ By default, it looks for a `.env` file in the current "
-"directory. \\ All key/value pairs in this file override the program’s "
+"**`--env <file>`** <br> Path to a `.env` environment file for "
+"`idml2docbook`. <br> By default, it looks for a `.env` file in the current "
+"directory. <br> All key/value pairs in this file override the program’s "
 "default values."
 
 #: ../../source/md/3_usage.md:172
@@ -454,7 +454,7 @@ msgid ""
 "**`--version`** \\ Affiche la version de `idml2docbook` et quitte le "
 "programme."
 msgstr ""
-"**`--version`** \\ Displays the version of `idml2docbook` and exits the "
+"**`--version`** <br> Displays the version of `idml2docbook` and exits the "
 "program."
 
 #: ../../source/md/3_usage.md:175

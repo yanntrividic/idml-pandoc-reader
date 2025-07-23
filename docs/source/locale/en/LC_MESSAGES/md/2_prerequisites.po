@@ -91,7 +91,7 @@ msgstr ""
 
 #: ../../source/md/2_prerequisites.md:18
 msgid "Installation avec install\\.sh"
-msgstr "Installation with install.sh"
+msgstr "Installation with install\.sh"
 
 #: ../../source/md/2_prerequisites.md:20
 msgid ""
