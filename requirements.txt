@@ -2,4 +2,3 @@ bs4 == 0.0.2
 lxml == 6.0.0
 python-dotenv == 1.1.1
 unidecode == 1.4.0
-python == 3.*
