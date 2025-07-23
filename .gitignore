@@ -10,6 +10,7 @@ idml2hubxml
 articles
 *.xml
 build
+!docs/build
 *.egg-info/
 idml2xml-frontend
 
