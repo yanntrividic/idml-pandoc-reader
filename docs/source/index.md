@@ -22,7 +22,7 @@ maxdepth: 2
 numbered: 1
 ---
 md/1_contents
-md/2_prerequisites
+md/2_installation
 md/3_usage
 md/4_formatting_guide
 md/5_conversion_graph
