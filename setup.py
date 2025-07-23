@@ -13,6 +13,7 @@ setup(
         "bs4==0.0.2",
         "lxml>=6.0.0",
         "python-dotenv>=1.1.0",
-        "unidecode>=1.4.0"
+        "unidecode>=1.4.0",
+        "packaging>=25.0"
     ],
 )
