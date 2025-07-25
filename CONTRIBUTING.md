@@ -2,7 +2,7 @@
 
 This project is an ongoing work. Want to contribute? You can:
 
-* Make an issue if you meet a bug (on [GitHub](https://github.com/yanntrividic/idml-pandoc-reader/issues) or on [Gitlab](https://gitlab.com/deborderbollore/idml-pandoc-reader/-/issues));
+* Make an issue if you meet a bug (on [GitHub](https://github.com/yanntrividic/idml-pandoc-reader/issues) or on [Gitlab](https://gitlab.com/deborderbollore/idml-pandoc-reader/-/issues), and please embed the content of the logfile associated with your buggy execution);
 * Submit a pull request (ideally, on [GitLab](https://gitlab.com/deborderbollore/idml-pandoc-reader)) to improve something, to solve an issue, or else (feel free to explain what you want to do beforehand);
 * Contact the maintainer of this projet at [bonjour@yanntrividic.fr](mailto:bonjour@yanntrividic.fr).
 
@@ -35,6 +35,7 @@ This project is an ongoing work. Want to contribute? You can:
 * [ ] Design an interface for OutDesign's frontend
 * [ ] Write tests... Many tests...
 * [ ] Add a "Similar approaches section" in the docs somewhere, with IDML2JSON and such
+* [ ] Add in the docs a reference to the logfile that is generated
 
 ### Issues to publish on jgm/pandoc
 
