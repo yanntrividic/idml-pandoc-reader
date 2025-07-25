@@ -36,6 +36,8 @@ This project is an ongoing work. Want to contribute? You can:
 * [ ] Write tests... Many tests...
 * [ ] Add a "Similar approaches section" in the docs somewhere, with IDML2JSON and such
 * [ ] Add in the docs a reference to the logfile that is generated
+* [ ] Write better docs for the `--typography` option
+* [ ] Enhance customisation options of the `--typography` option (specify regex, presets? en/fr?)
 
 ### Issues to publish on jgm/pandoc
 
