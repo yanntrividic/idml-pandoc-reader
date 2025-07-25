@@ -19,7 +19,7 @@ This project is an ongoing work. Want to contribute? You can:
 * [x] Write the documentation
 * [x] Write a `setup.py` file
 * [x] Add every option to the `.env` file so that the `idml.lua` file is usable on its own
-* [ ] Enable CSS selectors in map files
+* [ ] Enable CSS selectors in map files (maybe by temporarily converting `role` attributes into `class`?)
 * [x] Translate the docs to english
 * [ ] Publish the package on [PyPI](https://pypi.org/)
 * [x] Mirror the repo on GitHub
@@ -31,14 +31,18 @@ This project is an ongoing work. Want to contribute? You can:
 * [x] Add "InDesign files" to the formatting guide title
 * [x] Add a note on the difficulty of the installation
 * [x] Add a command documentation on the duration of idml2hubxml
+* [ ] Add docs on how to use `slug.py`
+* [ ] Design an interface for OutDesign's frontend
+* [ ] Write tests... Many tests...
+* [ ] Add a "Similar approaches section" in the docs somewhere, with IDML2JSON and such
 
 ### Issues to publish on jgm/pandoc
 
 * [ ] Linebreaks in headers isn't supported with the AsciiDoc writer
 * [ ] ID attributes are not supported in headers with the AsciiDoc writer
-* [ ] brackets in asciidoc are broken
+* [ ] Brackets in asciidoc are broken
 
 ### idml2xml
 
-* [ ] Make it so calls to le-tex.de are not needed
+* [ ] Make it so calls to le-tex.de are not needed anymore and gain autonomy
 * [ ] Support accentuated characters in class names
