@@ -2,7 +2,7 @@
 
 Adobe InDesign est un [jardin clos](https://en.wikipedia.org/w/index.php?title=Walled_garden_(technology)), soit une plateforme où le fournisseur contrôle les applications et les contenus, et dont l'accès et restraint. Cela pose problème dès lors que l'on ne souhaite pas tout faire dans leur écosystème.
 
-Cela pose _particulièrement_ problème lorsque l'on veut publier un document multiformat sous des modalités choisies, car extraire des contenus d'InDesign est une tâche ardue.
+Cela pose _particulièrement_ problème lorsqu'Adobe décide de couper l'[accès aux comptes d'une catégorie d'utilisateurices](https://next.ink/brief_article/suite-a-un-decret-presidentiel-adobe-va-couper-les-comptes-de-ses-clients-au-venezuela/), provoquant ainsi l'impossibilité d'ouvrir ses fichiers. Cela pose aussi problème lorsque l'on veut publier un document multiformat sous des modalités choisies, car extraire des contenus d'InDesign est une tâche ardue.
 
 ## Les différents formats d'export
 
@@ -25,6 +25,8 @@ Dans le cadre du recueil _Déborder Bolloré_, les fichiers Markdown sortis du p
 ## Le format IDML
 
 IDML est le format "ouvert"[^cookbook] d'Adobe InDesign, son format de retrocompabilité (c'est-à-dire le format que la plupart des versions d'InDesign peuvent lire), _a contrario_ du format INDD qui est spécifique à chaque version. Par défaut, l'assemblage d'un projet InDesign génère un fichier IDML, ce qui fait que de nombreux projets, même anciens, existent sous la forme d'un fichier IDML. IDML est aussi le format que l'on peut lire et interpréter sans avoir besoin de lancer InDesign, car un fichier IDML est en fait une sorte d'[archive zippée](https://fr.wikipedia.org/wiki/ZIP_(format_de_fichier)) d'une arborescence de fichiers [XML](https://fr.wikipedia.org/wiki/Extensible_Markup_Language).
+
+D'autres logiciels peuveut aussi ouvrir des fichiers IDML, comme Scribus ou Affinity Publisher. Cependant, à l'instar d'InDesign, ils ne proposent que très peu de formats d'export.
 
 [^cookbook]: La spécification du format IDML n'est plus maintenue (publiquement du moins) depuis 2012. Elle est contenue dans la documentation du _InDesign SDK_ sous le nom de _InDesign Markup Language (IDML) Cookbook_. Il faut un compte Adobe pour pouvoir la [télécharger](https://developer.adobe.com/console/servicesandapis).
 

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-22 15:34+0200\n"
+"POT-Creation-Date: 2025-07-27 19:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -40,13 +40,22 @@ msgstr ""
 
 #: ../../source/md/6_about_indesign.md:5
 msgid ""
-"Cela pose _particulièrement_ problème lorsque l'on veut publier un "
-"document multiformat sous des modalités choisies, car extraire des "
-"contenus d'InDesign est une tâche ardue."
+"Cela pose _particulièrement_ problème lorsqu'Adobe décide de couper "
+"l'[accès aux comptes d'une catégorie "
+"d'utilisateurices](https://next.ink/brief_article/suite-a-un-decret-"
+"presidentiel-adobe-va-couper-les-comptes-de-ses-clients-au-venezuela/), "
+"provoquant ainsi l'impossibilité d'ouvrir ses fichiers. Cela pose aussi "
+"problème lorsque l'on veut publier un document multiformat sous des "
+"modalités choisies, car extraire des contenus d'InDesign est une tâche "
+"ardue."
 msgstr ""
-"This is _especially_ problematic when you want to publish a multi-format "
-"document under custom conditions, because extracting content from "
-"InDesign is a difficult task."
+"This becomes _particularly_ problematic when Adobe decides to cut off "
+"[access to the accounts of a category of "
+"users](https://www.theverge.com/2019/10/7/20904030/adobe-"
+"venezuela-photoshop-behance-us-sanctions/), "
+"thus making it impossible to open one's files. It also becomes a problem "
+"when trying to publish a multi-format document under chosen terms, because "
+"extracting content from InDesign is a difficult task."
 
 #: ../../source/md/6_about_indesign.md:7
 msgid "Les différents formats d'export"
@@ -151,16 +160,26 @@ msgid ""
 msgstr ""
 "IDML is Adobe InDesign’s \"open\"[^cookbook] format—its backward-"
 "compatible format (that is, the format most versions of InDesign can "
-"read), as opposed to the INDD format, which is specific to each "
-"version. By default, packaging an InDesign project generates an IDML "
-"file, meaning many projects, even older ones, exist as IDML files. IDML "
-"is also a format that can be read and interpreted without launching "
-"InDesign, because an IDML file is actually a kind of [zipped "
+"read), as opposed to the INDD format, which is specific to each version. "
+"By default, packaging an InDesign project generates an IDML file, meaning"
+" many projects, even older ones, exist as IDML files. IDML is also a "
+"format that can be read and interpreted without launching InDesign, "
+"because an IDML file is actually a kind of [zipped "
 "archive](https://en.wikipedia.org/wiki/ZIP_(file_format)) containing a "
 "tree structure of [XML "
 "files](https://en.wikipedia.org/wiki/Extensible_Markup_Language)."
 
-#: ../../source/md/6_about_indesign.md:31
+#: ../../source/md/6_about_indesign.md:29
+msgid ""
+"D'autres logiciels peuveut aussi ouvrir des fichiers IDML, comme Scribus "
+"ou Affinity Publisher. Cependant, à l'instar d'InDesign, ils ne proposent"
+" que très peu de formats d'export."
+msgstr ""
+"Other software can also open IDML files, such as Scribus or Affinity "
+"Publisher. However, like InDesign, they offer only a very limited range "
+"of export formats."
+
+#: ../../source/md/6_about_indesign.md:33
 msgid ""
 "Même si ce format est théoriquement ouvert, il reste assez complexe, et "
 "le ramener à un format plus simple, plus largement utilisé et supporté, "
@@ -171,7 +190,7 @@ msgstr ""
 "Converting it to a simpler, more widely used and supported format "
 "requires many steps—which is why this converter is needed."
 
-#: ../../source/md/6_about_indesign.md:33
+#: ../../source/md/6_about_indesign.md:35
 msgid ""
 "Par-delà cette complexité, le fait qu'InDesign soit un logiciel "
 "WYSIWYG[^wysiwyg] où l'on peut faire du formatage direct[^direct] rend "
@@ -181,7 +200,7 @@ msgstr ""
 "tool that allows direct formatting[^direct] makes conversion to more "
 "'structured' formats extremely difficult."
 
-#: ../../source/md/6_about_indesign.md:39
+#: ../../source/md/6_about_indesign.md:41
 msgid ""
 "Pour ces différentes raisons, **ce convertisseur fonctionne mieux lorsque"
 " certaines bonnes pratiques de formatage sont appliquées** (voir le "
@@ -195,7 +214,7 @@ msgstr ""
 "recommendations are also issued by Adobe for structuring an InDesign "
 "file."
 
-#: ../../source/md/6_about_indesign.md:29
+#: ../../source/md/6_about_indesign.md:31
 msgid ""
 "La spécification du format IDML n'est plus maintenue (publiquement du "
 "moins) depuis 2012. Elle est contenue dans la documentation du _InDesign "
@@ -209,11 +228,11 @@ msgstr ""
 "required to [download "
 "it](https://developer.adobe.com/console/servicesandapis)."
 
-#: ../../source/md/6_about_indesign.md:35
+#: ../../source/md/6_about_indesign.md:37
 msgid "*What you see is what you get.*"
 msgstr "*What you see is what you get.*"
 
-#: ../../source/md/6_about_indesign.md:37
+#: ../../source/md/6_about_indesign.md:39
 msgid ""
 "Le formatage direct est le formatage appliqué sans structure, par exemple"
 " en identifiant un titre uniquement en gras avec un corps de texte "
@@ -223,4 +242,3 @@ msgstr ""
 "Direct formatting refers to unstructured formatting—such as identifying a"
 " heading simply by making it bold with a larger font, or placing a block "
 "on the page (like an image) without anchoring it in the text flow."
-
