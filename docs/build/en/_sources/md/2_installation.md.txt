@@ -62,7 +62,7 @@ Pandoc n'est pas une dépendance à proprement parler étant donné que le conve
 
 Cependant, [une version un peu modifiée de Pandoc](https://github.com/yanntrividic/pandoc/) a été développée pour supporter la lecture des styles de paragraphes et de caractères. Pour l'utiliser, il faut [la compiler depuis la source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md).
 
-Il est aussi possible d'utiliser la version principale de Pandoc, mais alors sans [Correspondance des styles](https://outdesign.deborderbollore.fr/fr/md/3_usage.html#correspondance-des-styles). Une [_pull request_](https://github.com/jgm/pandoc/pull/10665) est en cours pour intégrer ces nouvelles fonctionnalités dans la branche principale de Pandoc.
+Il est aussi possible d'utiliser la version principale de Pandoc, mais alors sans [Correspondance des styles](https://outdesign.deborderbollore.fr/fr/md/3_usage.html#correspondance-des-styles). Une [_pull request_](https://github.com/jgm/pandoc/pull/10932) est en bonne voix d'intégrer ces nouvelles fonctionnalités dans la branche principale de Pandoc.
 
 
 ## Test de la configuration avec la version modifiée de Pandoc

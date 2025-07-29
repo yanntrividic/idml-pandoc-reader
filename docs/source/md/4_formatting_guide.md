@@ -14,7 +14,7 @@ En l'état, le convertisseur ignore les surcharges de styles (lorsque un éléme
 
 InDesign permet une certaine forme de sémantisation via les styles de paragraphes et les styles de caractères. Dans InDesign, les notions que l'on retrouve habituellement dans les langages de balisages (titres, citations, emphases, etc.) n'existent pas. Il faut donc préciser ce à quoi chaque style de paragraphe et de caractère correspond sémantiquement.
 
-Les fichiers JSON chargés dans le convertisseur permettent de faire correspondre les styles de paragraphes et de caractères à des types d'éléments, mais il faut pour cela que chaque unité stylistique puisse être associée à une unité sémantique. En d'autres termes, que chaque style puisse être associé à un type d'élément en sortie.
+Les [fichiers JSON](https://outdesign.deborderbollore.fr/fr/md/3_usage.html#correspondance-des-styles) chargés dans le convertisseur permettent de faire correspondre les styles de paragraphes et de caractères à des types d'éléments, mais il faut pour cela que chaque unité stylistique puisse être associée à une unité sémantique. En d'autres termes, que chaque style puisse être associé à un type d'élément en sortie.
 
 ### Chaînage des contenus
 
@@ -42,7 +42,7 @@ https://www.example
 .org
 ```
 
-Sera converti en [https://www.example.org](https://www.example.org), mais pas `https://www.example .org` si le `https://` n'était pas présent.
+Sera converti en [https://www.example.org](https://www.example.org), mais pas `https://www.example .org`, ou si le lien ne commençait pas par `https://`.
 
 ### Retour à la ligne et saut de paragraphe
 

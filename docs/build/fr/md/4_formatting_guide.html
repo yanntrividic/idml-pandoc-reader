@@ -110,7 +110,7 @@
 <section id="une-unite-semantique-un-style-de-paragraphe-ou-de-caractere">
 <h3>Une unité sémantique = un style de paragraphe ou de caractère<a class="headerlink" href="#une-unite-semantique-un-style-de-paragraphe-ou-de-caractere" title="Lien vers cette rubrique"></a></h3>
 <p>InDesign permet une certaine forme de sémantisation via les styles de paragraphes et les styles de caractères. Dans InDesign, les notions que l’on retrouve habituellement dans les langages de balisages (titres, citations, emphases, etc.) n’existent pas. Il faut donc préciser ce à quoi chaque style de paragraphe et de caractère correspond sémantiquement.</p>
-<p>Les fichiers JSON chargés dans le convertisseur permettent de faire correspondre les styles de paragraphes et de caractères à des types d’éléments, mais il faut pour cela que chaque unité stylistique puisse être associée à une unité sémantique. En d’autres termes, que chaque style puisse être associé à un type d’élément en sortie.</p>
+<p>Les <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/md/3_usage.html#correspondance-des-styles">fichiers JSON</a> chargés dans le convertisseur permettent de faire correspondre les styles de paragraphes et de caractères à des types d’éléments, mais il faut pour cela que chaque unité stylistique puisse être associée à une unité sémantique. En d’autres termes, que chaque style puisse être associé à un type d’élément en sortie.</p>
 </section>
 <section id="chainage-des-contenus">
 <h3>Chaînage des contenus<a class="headerlink" href="#chainage-des-contenus" title="Lien vers cette rubrique"></a></h3>
@@ -134,7 +134,7 @@
 <span class="o">.</span><span class="n">org</span>
 </pre></div>
 </div>
-<p>Sera converti en <a class="reference external" href="https://www.example.org">https://www.example.org</a>, mais pas <code class="docutils literal notranslate"><span class="pre">https://www.example</span> <span class="pre">.org</span></code> si le <code class="docutils literal notranslate"><span class="pre">https://</span></code> n’était pas présent.</p>
+<p>Sera converti en <a class="reference external" href="https://www.example.org">https://www.example.org</a>, mais pas <code class="docutils literal notranslate"><span class="pre">https://www.example</span> <span class="pre">.org</span></code>, ou si le lien ne commençait pas par <code class="docutils literal notranslate"><span class="pre">https://</span></code>.</p>
 </section>
 <section id="retour-a-la-ligne-et-saut-de-paragraphe">
 <h3>Retour à la ligne et saut de paragraphe<a class="headerlink" href="#retour-a-la-ligne-et-saut-de-paragraphe" title="Lien vers cette rubrique"></a></h3>

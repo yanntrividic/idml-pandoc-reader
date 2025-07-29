@@ -109,7 +109,7 @@
 <section id="une-unite-semantique-un-style-de-paragraphe-ou-de-caractere">
 <h3>One semantic unit = one paragraph or character style<a class="headerlink" href="#une-unite-semantique-un-style-de-paragraphe-ou-de-caractere" title="Link to this heading"></a></h3>
 <p>InDesign allows a certain form of semantic structure through paragraph and character styles. In InDesign, concepts commonly found in markup languages (headings, quotes, emphasis, etc.) do not exist. It is therefore necessary to specify the semantic meaning of each paragraph and character style.</p>
-<p>The JSON files loaded into the converter allow mapping paragraph and character styles to element types, but each stylistic unit must be associated with a semantic unit. In other words, each style must correspond to an output element type.</p>
+<p>The <a class="reference external" href="https://outdesign.deborderbollore.fr/en/md/3_usage.html#correspondance-des-styles">JSON files</a> loaded into the converter allow mapping paragraph and character styles to element types, but each stylistic unit must be associated with a semantic unit. In other words, each style must correspond to an output element type.</p>
 </section>
 <section id="chainage-des-contenus">
 <h3>Threading content<a class="headerlink" href="#chainage-des-contenus" title="Link to this heading"></a></h3>
@@ -118,7 +118,7 @@
 <section id="nommage-des-fichiers-et-des-styles">
 <h3>Naming files and styles<a class="headerlink" href="#nommage-des-fichiers-et-des-styles" title="Link to this heading"></a></h3>
 <p>To avoid any issues, it’s best to use only unaccented alphanumeric characters in your filenames, image file names (links break easily), and style names, for example:</p>
-<p>❌ <code class="docutils literal notranslate"><span class="pre">Jane's</span> <span class="pre">über</span> <span class="pre">super-file.idml</span></code> \ ✔️ <code class="docutils literal notranslate"><span class="pre">Janes_uber_super_file.idml</span></code></p>
+<p>❌ <code class="docutils literal notranslate"><span class="pre">Jane's</span> <span class="pre">über</span> <span class="pre">super-file.idml</span></code> <br> ✔️ <code class="docutils literal notranslate"><span class="pre">Janes_uber_super_file.idml</span></code></p>
 </section>
 <section id="notes-de-bas-de-page-listes-textes-alternatifs">
 <h3>Footnotes, lists, and alternative text<a class="headerlink" href="#notes-de-bas-de-page-listes-textes-alternatifs" title="Link to this heading"></a></h3>
@@ -132,7 +132,7 @@
 <span class="o">.</span><span class="n">org</span>
 </pre></div>
 </div>
-<p>Will be converted to <a class="reference external" href="https://www.example.org">https://www.example.org</a>, but not <code class="docutils literal notranslate"><span class="pre">https://www.example</span> <span class="pre">.org</span></code> if the <code class="docutils literal notranslate"><span class="pre">https://</span></code> was not present.</p>
+<p>Will be converted to <a class="reference external" href="https://www.example.org">https://www.example.org</a>, but not <code class="docutils literal notranslate"><span class="pre">https://www.example</span> <span class="pre">.org</span></code>, or if the URL didn’t start with <code class="docutils literal notranslate"><span class="pre">https://</span></code>.</p>
 </section>
 <section id="retour-a-la-ligne-et-saut-de-paragraphe">
 <h3>Line breaks and paragraph breaks<a class="headerlink" href="#retour-a-la-ligne-et-saut-de-paragraphe" title="Link to this heading"></a></h3>
