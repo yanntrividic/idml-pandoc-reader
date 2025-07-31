@@ -19,7 +19,7 @@ articles
 # docs
 !docs/build
 build/en/.doctrees
-build//.doctrees
+build/fr/.doctrees
 objects.inv
 *.mo
 gettext
