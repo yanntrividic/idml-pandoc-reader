@@ -1,5 +1,11 @@
 RewriteEngine On
 
-# Redirect from root to /fr/
+# Only apply redirection for the root URL
 RewriteCond %{REQUEST_URI} ^/$
+
+# Check if the browser prefers French
+RewriteCond %{HTTP:Accept-Language} ^fr [NC]
 RewriteRule ^$ /fr/ [R=302,L]
+
+# Otherwise, redirect to English (default)
+RewriteRule ^$ /en/ [R=302,L]
