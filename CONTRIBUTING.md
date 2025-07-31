@@ -31,7 +31,7 @@ This project is an ongoing work. Want to contribute? You can:
 * [x] Add "InDesign files" to the formatting guide title
 * [x] Add a note on the difficulty of the installation
 * [x] Add a command documentation on the duration of idml2hubxml
-* [ ] Add docs on how to use `slug.py`
+* [ ] Add docs on how to use `slugs.py`
 * [ ] Design an interface for OutDesign's frontend
 * [ ] Write tests... Many tests...
 * [ ] Add a "Similar approaches section" in the docs somewhere, with IDML2JSON and such
@@ -47,5 +47,5 @@ This project is an ongoing work. Want to contribute? You can:
 
 ### idml2xml
 
-* [ ] Make it so calls to le-tex.de are not needed anymore and gain autonomy
+* [x] ~~Make it so calls to le-tex.de are not needed anymore and gain autonomy~~ Did I dream that?
 * [ ] Support accentuated characters in class names
