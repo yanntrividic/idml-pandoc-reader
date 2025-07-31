@@ -6,7 +6,7 @@ import os
 from dotenv import load_dotenv
 
 from . import __version__, LOGGER
-from .idml2docbook import idml2docbook
+from .core import idml2docbook
 from .cut import split_docbook
 
 def getEnvOrDefault(envConst, default=False):

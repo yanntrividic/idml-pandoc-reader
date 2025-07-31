@@ -1,6 +1,6 @@
 import sys
 from bs4 import BeautifulSoup
-from idml2docbook import idml2docbook
+from core import idml2docbook
 from utils import *
 import subprocess
 import os
