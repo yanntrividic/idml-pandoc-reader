@@ -55,8 +55,13 @@ def update_roles_with_better_slugs(soup, roles):
     """Takes a Hub XML soup and the corresponding roles
     map, and updates the roles."""
     for key, value in roles.items():
+        log = False
         for el in soup.find_all(attrs={"role": value["hub"]}):
-            el["role"] = key
+            if el["role"] != key:
+                el["role"] = key
+                if not log:
+                    logging.debug("Role name for style \"" + value["native"] + "\" was changed: " + value["hub"] + " -> " + key)
+                    log = True
 
 def fix_role_names(soup):
     roles = build_roles_map(soup)
