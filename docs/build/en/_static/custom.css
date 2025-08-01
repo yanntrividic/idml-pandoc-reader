@@ -71,3 +71,11 @@ blockquote {
   color: rgb(252, 252, 252);
   font-weight: normal;
 }
+
+.fa-folder {
+  float: left;
+}
+
+.langs {
+  padding-top: .4em;
+}
