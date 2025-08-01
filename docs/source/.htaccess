@@ -1,3 +1,5 @@
+AddCharset utf-8 .txt
+
 RewriteEngine On
 
 # Redirect URLs like /fr/md/page.html to /fr/page.html
