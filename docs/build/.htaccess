@@ -1,5 +1,8 @@
 RewriteEngine On
 
+# Redirect URLs like /fr/md/page.html to /fr/page.html
+RewriteRule ^([a-z]{2})/md/([^/]+\.html)$ /$1/$2 [R=301,L]
+
 # Only apply redirection for the root URL
 RewriteCond %{REQUEST_URI} ^/$
 
