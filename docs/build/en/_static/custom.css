@@ -79,3 +79,7 @@ blockquote {
 .langs {
   padding-top: .4em;
 }
+
+.version {
+  color: #db7678;
+}
