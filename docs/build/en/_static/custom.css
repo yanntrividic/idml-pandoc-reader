@@ -65,6 +65,11 @@ blockquote {
 .rst-versions a:not(.active) {
   text-decoration: underline;
   font-weight: bold;
+  color: rgb(252, 252, 252);
+}
+
+.rst-versions a:not(.active):hover {
+  color: #db7678;
 }
 
 .rst-versions a.active {
