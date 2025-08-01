@@ -21,10 +21,10 @@ caption: Documentation
 maxdepth: 2
 numbered: 1
 ---
-md/1_contents
-md/2_installation
-md/3_usage
-md/4_formatting_guide
+1_contents
+2_installation
+3_usage
+4_formatting_guide
 ```
 
 ```{toctree}
@@ -32,8 +32,8 @@ md/4_formatting_guide
 caption: "Aller plus loin"
 maxdepth: 2
 ---
-md/5_conversion_graph
-md/6_about_indesign
-md/7_contribute
-md/8_licence
+5_conversion_graph
+6_about_indesign
+7_contribute
+8_licence
 ```

@@ -1,0 +1,267 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Yann Trividic
+# This file is distributed under the same license as the IDML Pandoc reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: IDML Pandoc reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-29 11:11+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Yann Trividic\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/2_installation.md:1
+msgid "Installation"
+msgstr "Installation"
+
+#: ../../source/2_installation.md:3
+msgid "Dépendances"
+msgstr "Dependencies"
+
+#: ../../source/2_installation.md:5
+msgid ""
+"Le format IDML est complexe, et il est difficile d'en extraire les "
+"informations. Dans l'idéal, ce dépôt consisterait en un seul fichier "
+"Haskell, comme [les autres lecteurs de "
+"Pandoc](https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers)."
+" Cependant, cela prendrait un temps fou à développer."
+msgstr ""
+"The IDML format is complex, and extracting information from it is "
+"difficult. Ideally, this repository would consist of a single Haskell "
+"file, like [Pandoc’s other "
+"readers](https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers)."
+" However, that would take an enormous amount of time to develop."
+
+#: ../../source/2_installation.md:7
+msgid ""
+"D'autres se sont penché·es sur la question de la lecture de fichiers "
+"IDML, en particulier le projet [`idml2xml-"
+"frontend`](https://github.com/transpect/idml2xml-frontend), distribué "
+"sous licence FreeBSD. Nous construisons notre convertisseur en continuant"
+" ce travail, en proposant un "
+"[_binding_](https://fr.wikipedia.org/wiki/Binding) entre `idml2xml-"
+"frontend` et Pandoc, c'est-à-dire en convertissant la sortie Hub XML de "
+"`idml2xml-frontend` vers le format DocBook 5.1."
+msgstr ""
+"Others have explored reading IDML files, notably the project [`idml2xml-"
+"frontend`](https://github.com/transpect/idml2xml-frontend), distributed "
+"under the FreeBSD license. We build our converter by continuing that "
+"work, offering a "
+"[_binding_](https://en.wikipedia.org/wiki/Binding#Computing) between "
+"`idml2xml-frontend` and Pandoc—i.e., converting the Hub XML output of "
+"`idml2xml-frontend` into DocBook 5.1 format."
+
+#: ../../source/2_installation.md:9
+msgid "Les principales dépendances sont :"
+msgstr "The principal dependencies are:"
+
+#: ../../source/2_installation.md:11
+msgid "Python 3.x ;"
+msgstr "Python 3.x;"
+
+#: ../../source/2_installation.md:12
+msgid "Java 1.7+ ;"
+msgstr "Java 1.7+;"
+
+#: ../../source/2_installation.md:13
+msgid "les dépendances du package Python `idml2docbook` ;"
+msgstr "the dependencies of the Python package `idml2docbook`;"
+
+#: ../../source/2_installation.md:14
+msgid "[`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend)."
+msgstr "[`idml2xml-frontend`](https://github.com/transpect/idml2xml-frontend)."
+
+#: ../../source/2_installation.md:16
+msgid ""
+"Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de "
+"conversions](/5_conversion_graph)."
+msgstr ""
+"To understand the purpose of each dependency, see the [conversion "
+"graph](/5_conversion_graph)."
+
+#: ../../source/2_installation.md:18
+msgid "Installation avec install\\.sh"
+msgstr "Installation with install\\.sh"
+
+#: ../../source/2_installation.md:20
+msgid ""
+"Premièrement, commencez par cloner le dépôt [`idml-pandoc-"
+"reader`](https://gitlab.com/deborderbollore/idml-pandoc-reader) :"
+msgstr ""
+"First, start by cloning the [`idml-pandoc-"
+"reader`](https://gitlab.com/deborderbollore/idml-pandoc-reader) "
+"repository:"
+
+#: ../../source/2_installation.md:26
+msgid ""
+"Ensuite, un script d'installation `install.sh` pour Mac et Linux a été "
+"développé afin de faciliter la prise en main de ce logiciel. "
+"L'installation sur Windows est elle aussi possible en adaptant les étapes"
+" détaillées ci-dessous, mais celle-ci pas pu être encore testée. Ce "
+"script a principalement pour fonctions de :"
+msgstr ""
+"Next, an `install.sh` script for Mac and Linux has been developed to make"
+" getting started with this software easier. Installation on Windows is "
+"also possible by adapting the steps described below, although it has not "
+"yet been tested. This script mainly serves to:"
+
+#: ../../source/2_installation.md:28
+msgid "vérifier que Java (>= 7.0.0) est installé ;"
+msgstr "check that Java (>= 7.0.0) is installed;"
+
+#: ../../source/2_installation.md:29
+msgid "vérifier que Git est installé ;"
+msgstr "check that Git is installed;"
+
+#: ../../source/2_installation.md:30
+msgid "installer `idml2xml-frontend` ;"
+msgstr "install `idml2xml-frontend`;"
+
+#: ../../source/2_installation.md:31
+msgid "vérifier que Python 3 et pip (>= 21.0) sont installés ;"
+msgstr "check that Python 3 and pip (>= 21.0) are installed;"
+
+#: ../../source/2_installation.md:32
+msgid "installer les dépendances Python à partir de `requirements.txt` ;"
+msgstr "install Python dependencies from `requirements.txt`;"
+
+#: ../../source/2_installation.md:33
+msgid "génèrer un simple fichier d'environnement `.env` ;"
+msgstr "generate a basic `.env` environment file;"
+
+#: ../../source/2_installation.md:34
+msgid "installer éventuellement le module `idml2docbook` via `pip install .` ;"
+msgstr "optionally install the `idml2docbook` module via `pip install .`;"
+
+#: ../../source/2_installation.md:35
+msgid "exécuter une commande de test pour vérifier la validité de l'installation."
+msgstr "run a test command to verify the installation is valid."
+
+#: ../../source/2_installation.md:37
+msgid "Pour exécuter ce script, commencez par lui donner les droits d'exécution :"
+msgstr "To run this script, start by making it executable:"
+
+#: ../../source/2_installation.md:43
+msgid "Vous pouvez ensuite lancer l'installation :"
+msgstr "You can then start the installation:"
+
+#: ../../source/2_installation.md:49
+msgid ""
+"**Note :** Pour les fichiers IDML les plus lourds, il peut être "
+"nécessaire d'[augmenter la taille du tas "
+"Java](https://github.com/transpect/idml2xml-"
+"frontend/blob/master/idml2xml.sh#L33), par exemple à `2048m` ou `4096m`."
+msgstr ""
+"**Note:** For large IDML files, it may be necessary to [increase the Java"
+" heap size](https://github.com/transpect/idml2xml-"
+"frontend/blob/master/idml2xml.sh#L33), for example to `2048m` or `4096m`."
+
+#: ../../source/2_installation.md:51
+msgid "Configuration de l'environnement .env"
+msgstr "Environment configuration (.env)"
+
+#: ../../source/2_installation.md:53
+msgid ""
+"Le fichier `.env.sample` montre l'exemple d'un fichier de fichier de "
+"configuration."
+msgstr "The `.env.sample` file shows an example configuration file."
+
+#: ../../source/2_installation.md:55
+msgid ""
+"A minima, pour fonctionner, ce convertisseur nécessite d'exécuter "
+"`idml2xml-frontend`. La ligne `IDML2HUBXML_SCRIPT_FOLDER` du fichier "
+"`.env` correspond donc au chemin absolu menant au dossier `idml2xml-"
+"frontend` présent sur votre machine. Il s'agit sûrement de la ligne la "
+"plus utile de votre fichier `.env`. Cette ligne est normalement "
+"renseignée automatiquement avec le script d'installation."
+msgstr ""
+"At a minimum, for the converter to work, `idml2xml-frontend` must be "
+"executed. The `IDML2HUBXML_SCRIPT_FOLDER` line in the `.env` file should "
+"therefore point to the absolute path to the `idml2xml-frontend` directory"
+" on your machine. This is likely the most important line in your `.env` "
+"file. It is usually filled in automatically by the installation script."
+
+#: ../../source/2_installation.md:57
+msgid ""
+"Les paires clé/valeur du fichier `.env` permettent de remplacer les "
+"valeurs par défaut du package `idml2docbook`. Pour plus d'informations "
+"sur ces différentes variables, consultez [la liste des "
+"options](https://outdesign.deborderbollore.fr/fr/3_usage.html#liste-"
+"des-options)."
+msgstr ""
+"The key/value pairs in the `.env` file allow you to override the default "
+"values of the `idml2docbook` package. For more information on these "
+"variables, see [the list of "
+"options](https://outdesign.deborderbollore.fr/en/3_usage.html#liste-"
+"des-options)."
+
+#: ../../source/2_installation.md:59
+msgid "Pandoc"
+msgstr "Pandoc"
+
+#: ../../source/2_installation.md:61
+msgid ""
+"Pandoc n'est pas une dépendance à proprement parler étant donné que le "
+"convertisseur `idml2docbook` n'en a pas besoin pour fonctionner."
+msgstr ""
+"Pandoc is not technically a dependency, since the `idml2docbook` "
+"converter does not require it to function."
+
+#: ../../source/2_installation.md:63
+msgid ""
+"Cependant, [une version un peu modifiée de "
+"Pandoc](https://github.com/yanntrividic/pandoc/) a été développée pour "
+"supporter la lecture des styles de paragraphes et de caractères. Pour "
+"l'utiliser, il faut [la compiler depuis la "
+"source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md)."
+msgstr ""
+"However, [a slightly modified version of "
+"Pandoc](https://github.com/yanntrividic/pandoc/) was developed to support"
+" reading paragraph and character styles. To use it, you must [compile it "
+"from "
+"source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md)."
+
+#: ../../source/2_installation.md:65
+msgid ""
+"Il est aussi possible d'utiliser la version principale de Pandoc, mais "
+"alors sans [Correspondance des "
+"styles](https://outdesign.deborderbollore.fr/fr/3_usage.html"
+"#correspondance-des-styles). Une [_pull "
+"request_](https://github.com/jgm/pandoc/pull/10932) est en bonne voix "
+"d'intégrer ces nouvelles fonctionnalités dans la branche principale de "
+"Pandoc."
+msgstr ""
+"It is also possible to use the main version of Pandoc, but without [Style"
+" Mapping](https://outdesign.deborderbollore.fr/en/3_usage.html"
+"#correspondance-des-styles). A [_pull "
+"request_](https://github.com/jgm/pandoc/pull/10665) is close to be merged to "
+"integrate these new features into the main Pandoc branch."
+
+#: ../../source/2_installation.md:68
+msgid "Test de la configuration avec la version modifiée de Pandoc"
+msgstr "Configuration test with the modified version of Pandoc"
+
+#: ../../source/2_installation.md:70
+msgid ""
+"Pour vérifier que les dépendances ont bien été installées et le fichier "
+"`.env` bien paramétré, vous pouvez tester le convertisseur dans votre "
+"terminal avec la commande suivante :"
+msgstr ""
+"To verify that the dependencies are installed and the `.env` file is "
+"correctly set up, you can test the converter in your terminal with the "
+"following command:"
+
+#: ../../source/2_installation.md:76
+msgid "Le résultat devrait alors être :"
+msgstr "The result should then be:"
+

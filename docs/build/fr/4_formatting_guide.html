@@ -1,0 +1,192 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>4. Guide de formatage pour InDesign &mdash; Documentation IDML Pandoc reader 0.2.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=08f1d48e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="Chaîne de conversions" href="5_conversion_graph.html" />
+    <link rel="prev" title="3. Usage" href="3_usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            IDML Pandoc reader
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Contenus du dépôt</a></li>
+<li class="toctree-l1"><a class="reference internal" href="2_installation.html">2. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_usage.html">3. Usage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">4. Guide de formatage pour InDesign</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#recommandations">Recommandations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#eviter-les-surcharges-de-style">Éviter les surcharges de style</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#une-unite-semantique-un-style-de-paragraphe-ou-de-caractere">Une unité sémantique = un style de paragraphe ou de caractère</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chainage-des-contenus">Chaînage des contenus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nommage-des-fichiers-et-des-styles">Nommage des fichiers et des styles</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notes-de-bas-de-page-listes-textes-alternatifs">Notes de bas de page, listes, textes alternatifs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#hyperliens">Hyperliens</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#retour-a-la-ligne-et-saut-de-paragraphe">Retour à la ligne et saut de paragraphe</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aller plus loin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="5_conversion_graph.html">Chaîne de conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_about_indesign.html">À propos d’InDesign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_contribute.html">Contribuer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_licence.html">Licence</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IDML Pandoc reader</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">4. </span>Guide de formatage pour InDesign</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/4_formatting_guide.md.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="guide-de-formatage-pour-indesign">
+<h1><span class="section-number">4. </span>Guide de formatage pour InDesign<a class="headerlink" href="#guide-de-formatage-pour-indesign" title="Lien vers cette rubrique"></a></h1>
+<p>Pour que la qualité de la conversion d’un fichier IDML soit au rendez-vous, il est nécessaire que ce denier soit formaté correctement. Autrement, la qualité de la conversion sera moindre, et cela entraînera nécessairement un travail supplémentaire à effectuer sur les fichiers produits. <strong>Pour minimiser la quantité de travail suite à la conversion, il est recommandé de suivre quelques bonnes pratiques lorsque vous travaillez dans InDesign.</strong></p>
+<section id="recommandations">
+<h2>Recommandations<a class="headerlink" href="#recommandations" title="Lien vers cette rubrique"></a></h2>
+<p>Cette liste est non exhaustive, et sera complétée au fur et à mesure que des cas singuliers apparaîtront.</p>
+<section id="eviter-les-surcharges-de-style">
+<h3>Éviter les surcharges de style<a class="headerlink" href="#eviter-les-surcharges-de-style" title="Lien vers cette rubrique"></a></h3>
+<p>En l’état, le convertisseur ignore les surcharges de styles (lorsque un élément a un style de paragraphe avec un <code class="docutils literal notranslate"><span class="pre">+</span></code>). Il existe des manières de <a class="reference external" href="https://www.rockymountaintraining.com/adobe-indesign-quickly-recognizing-and-removing-overrides/">facilement enlever ces surcharges</a>.</p>
+</section>
+<section id="une-unite-semantique-un-style-de-paragraphe-ou-de-caractere">
+<h3>Une unité sémantique = un style de paragraphe ou de caractère<a class="headerlink" href="#une-unite-semantique-un-style-de-paragraphe-ou-de-caractere" title="Lien vers cette rubrique"></a></h3>
+<p>InDesign permet une certaine forme de sémantisation via les styles de paragraphes et les styles de caractères. Dans InDesign, les notions que l’on retrouve habituellement dans les langages de balisages (titres, citations, emphases, etc.) n’existent pas. Il faut donc préciser ce à quoi chaque style de paragraphe et de caractère correspond sémantiquement.</p>
+<p>Les <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#correspondance-des-styles">fichiers JSON</a> chargés dans le convertisseur permettent de faire correspondre les styles de paragraphes et de caractères à des types d’éléments, mais il faut pour cela que chaque unité stylistique puisse être associée à une unité sémantique. En d’autres termes, que chaque style puisse être associé à un type d’élément en sortie.</p>
+</section>
+<section id="chainage-des-contenus">
+<h3>Chaînage des contenus<a class="headerlink" href="#chainage-des-contenus" title="Lien vers cette rubrique"></a></h3>
+<p>Pour assurer que les contenus apparaîssent dans le bon ordre dans dans le résultat de la conversion, le mieux est de correctement chaîner les blocs entre eux, et d’<a class="reference external" href="https://helpx.adobe.com/indesign/using/anchored-objects.html">ancrer les images dans les blocs</a>.</p>
+</section>
+<section id="nommage-des-fichiers-et-des-styles">
+<h3>Nommage des fichiers et des styles<a class="headerlink" href="#nommage-des-fichiers-et-des-styles" title="Lien vers cette rubrique"></a></h3>
+<p>Pour éviter les problèmes, mieux vaut utiliser seulement des caractères alphadécimaux non-accentués dans vos noms de fichiers IDML, d’images (les liens cassant facilement), et de noms de styles, un exemple :</p>
+<p>❌ <code class="docutils literal notranslate"><span class="pre">Mon</span> <span class="pre">super-étonnant</span> <span class="pre">fichier</span> <span class="pre">InDesign</span> <span class="pre">d'la</span> <span class="pre">mort.idml</span></code> <br />
+✔️ <code class="docutils literal notranslate"><span class="pre">Mon_super_etonnant_fichier_InDesign_dla_mort.idml</span></code></p>
+</section>
+<section id="notes-de-bas-de-page-listes-textes-alternatifs">
+<h3>Notes de bas de page, listes, textes alternatifs<a class="headerlink" href="#notes-de-bas-de-page-listes-textes-alternatifs" title="Lien vers cette rubrique"></a></h3>
+<p>Le convertisseur supporte entre autres les notes de bas de page, les listes et les textes alternatifs pour les images. Cependant, pour que cela soit bien reconnu, il faut en premier lieu les formater correctement dans InDesign.</p>
+</section>
+<section id="hyperliens">
+<h3>Hyperliens<a class="headerlink" href="#hyperliens" title="Lien vers cette rubrique"></a></h3>
+<p>Dans le cas d’un PDF pour l’impression, il est souvent nécessaire de faire figurer l’URL au complet. Si l’URL est correctement renseignée dans InDesign (c’est-à-dire, en spécifiant que l’URL et son texte de remplacement sont les mêmes), alors cela fonctionnera sans problème.</p>
+<p>Cependant, cette tâche peut-être laborieuse. Pour permettre de plus simplement travailler les URL (par exemple dans des paragraphes en drapeaux), nous reconstituons automatiquement les URL contenant des sauts de ligne à condition que celle-ci commence par <code class="docutils literal notranslate"><span class="pre">http://</span></code> ou <code class="docutils literal notranslate"><span class="pre">https://</span></code>. Par exemple :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">example</span>
+<span class="o">.</span><span class="n">org</span>
+</pre></div>
+</div>
+<p>Sera converti en <a class="reference external" href="https://www.example.org">https://www.example.org</a>, mais pas <code class="docutils literal notranslate"><span class="pre">https://www.example</span> <span class="pre">.org</span></code>, ou si le lien ne commençait pas par <code class="docutils literal notranslate"><span class="pre">https://</span></code>.</p>
+</section>
+<section id="retour-a-la-ligne-et-saut-de-paragraphe">
+<h3>Retour à la ligne et saut de paragraphe<a class="headerlink" href="#retour-a-la-ligne-et-saut-de-paragraphe" title="Lien vers cette rubrique"></a></h3>
+<p>Les retours à la ligne sont automatiquement convertis en caractères espace <code class="docutils literal notranslate"> </code>.</p>
+<p>Les sauts de paragraphes, soit deux blocs séparés par <strong>un bloc vide</strong>, sont supprimés, sauf si l’option <code class="docutils literal notranslate"><span class="pre">--empty</span></code> est active, ou que le bloc porte un style de parapraphe portant l’attribut <code class="docutils literal notranslate"><span class="pre">empty</span></code> dans le fichier JSON de correspondance. Voir <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#correspondance-des-styles">Correspondance des styles</a>.</p>
+</section>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Lien vers cette rubrique"></a></h2>
+<p>Les <a class="reference external" href="https://helpx.adobe.com/fr/indesign/using/tabs-indents.html">tabulations</a> et les métadonnées du fichier IDML sont actuellement ignorées par le convertisseur.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="3_usage.html" class="btn btn-neutral float-left" title="3. Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="5_conversion_graph.html" class="btn btn-neutral float-right" title="Chaîne de conversions" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yann Trividic.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+	<span class="rst-current-version" data-toggle="rst-current-version">
+		<span class="fa fa-book"> Langages</span>
+			
+                <a  class="active"  href="../fr/4_formatting_guide.html">fr</a>
+            
+                <a  href="../en/4_formatting_guide.html">en</a>
+            
+	</span>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

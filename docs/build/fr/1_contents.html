@@ -3,13 +3,14 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="fr" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Index &mdash; Documentation IDML Pandoc reader 0.2.0</title>
+  <title>1. Contenus du dépôt &mdash; Documentation IDML Pandoc reader 0.2.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=c921430c" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=08f1d48e" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -19,8 +20,10 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/translations.js?v=e6b791cb"></script>
     <script src="_static/js/theme.js"></script>
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Recherche" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="2. Installation" href="2_installation.html" />
+    <link rel="prev" title="IDML Pandoc reader" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -43,8 +46,8 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Contenus du dépôt</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">1. Contenus du dépôt</a></li>
 <li class="toctree-l1"><a class="reference internal" href="2_installation.html">2. Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_usage.html">3. Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. Guide de formatage pour InDesign</a></li>
@@ -71,8 +74,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Index</li>
+      <li class="breadcrumb-item active"><span class="section-number">1. </span>Contenus du dépôt</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="_sources/1_contents.md.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
   </ul>
   <hr/>
@@ -80,17 +84,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
-</div>
+  <section class="tex2jax_ignore mathjax_ignore" id="contenus-du-depot">
+<h1><span class="section-number">1. </span>Contenus du dépôt<a class="headerlink" href="#contenus-du-depot" title="Lien vers cette rubrique"></a></h1>
+<p>Les fichiers et dossiers les plus importants du dépôt sont :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> est un package Python permettant de faire le pont entre les formats IDML et DocBook, ce dernier pouvant être lu par Pandoc ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lua-filters</span></code> contient des filtres Lua permettant de modifier le comportement du lecteur DocBook afin de mieux correspondre aux attendus de la conversion de fichiers IDML ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">maps</span></code> contient des fichiers JSON exemples montrant comment paramétrer la conversion en fonction des spécificités de chaque document, voir <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#correspondance-des-styles">Correspondance des styles</a> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.env.sample</span></code> est un fichier de configuration permettant de donner des valeurs par défaut au convertisseur ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch.sh</span></code> est le script utilisé pour faciliter la conversion de fichiers en lots via Pandoc des fichiers source du recueil <em>Déborder Bolloré</em> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">idml.lua</span></code> fait le lien entre <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> et Pandoc, voir <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#commandes-de-base">Commandes de base</a> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">install.sh</span></code> est le script d’installation du projet.</p></li>
+</ul>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="index.html" class="btn btn-neutral float-left" title="IDML Pandoc reader" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="2_installation.html" class="btn btn-neutral float-right" title="2. Installation" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 
@@ -113,9 +127,9 @@
 	<span class="rst-current-version" data-toggle="rst-current-version">
 		<span class="fa fa-book"> Langages</span>
 			
-                <a  class="active"  href="../fr/genindex.html">fr</a>
+                <a  class="active"  href="../fr/1_contents.html">fr</a>
             
-                <a  href="../en/genindex.html">en</a>
+                <a  href="../en/1_contents.html">en</a>
             
 	</span>
 </div><script>

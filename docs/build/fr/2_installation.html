@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Installation &mdash; Documentation IDML Pandoc reader 0.2.0</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=08f1d48e" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/translations.js?v=e6b791cb"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="3. Usage" href="3_usage.html" />
+    <link rel="prev" title="1. Contenus du dépôt" href="1_contents.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            IDML Pandoc reader
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="1_contents.html">1. Contenus du dépôt</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#dependances">Dépendances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-avec-install-sh">Installation avec install.sh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-de-lenvironnement-env">Configuration de l’environnement .env</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#pandoc">Pandoc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-de-la-configuration-avec-la-version-modifiee-de-pandoc">Test de la configuration avec la version modifiée de Pandoc</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="3_usage.html">3. Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_formatting_guide.html">4. Guide de formatage pour InDesign</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Aller plus loin</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="5_conversion_graph.html">Chaîne de conversions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="6_about_indesign.html">À propos d’InDesign</a></li>
+<li class="toctree-l1"><a class="reference internal" href="7_contribute.html">Contribuer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="8_licence.html">Licence</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">IDML Pandoc reader</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">2. </span>Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/2_installation.md.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="installation">
+<h1><span class="section-number">2. </span>Installation<a class="headerlink" href="#installation" title="Lien vers cette rubrique"></a></h1>
+<section id="dependances">
+<h2>Dépendances<a class="headerlink" href="#dependances" title="Lien vers cette rubrique"></a></h2>
+<p>Le format IDML est complexe, et il est difficile d’en extraire les informations. Dans l’idéal, ce dépôt consisterait en un seul fichier Haskell, comme <a class="reference external" href="https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers">les autres lecteurs de Pandoc</a>. Cependant, cela prendrait un temps fou à développer.</p>
+<p>D’autres se sont penché·es sur la question de la lecture de fichiers IDML, en particulier le projet <a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a>, distribué sous licence FreeBSD. Nous construisons notre convertisseur en continuant ce travail, en proposant un <a class="reference external" href="https://fr.wikipedia.org/wiki/Binding"><em>binding</em></a> entre <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> et Pandoc, c’est-à-dire en convertissant la sortie Hub XML de <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> vers le format DocBook 5.1.</p>
+<p>Les principales dépendances sont :</p>
+<ul class="simple">
+<li><p>Python 3.x ;</p></li>
+<li><p>Java 1.7+ ;</p></li>
+<li><p>les dépendances du package Python <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> ;</p></li>
+<li><p><a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a>.</p></li>
+</ul>
+<p>Pour comprendre l’utilité de chacune des dépendances, voir le <a class="reference internal" href="5_conversion_graph.html"><span class="doc std std-doc">graphe de conversions</span></a>.</p>
+</section>
+<section id="installation-avec-install-sh">
+<h2>Installation avec install.sh<a class="headerlink" href="#installation-avec-install-sh" title="Lien vers cette rubrique"></a></h2>
+<p>Premièrement, commencez par cloner le dépôt <a class="reference external" href="https://gitlab.com/deborderbollore/idml-pandoc-reader"><code class="docutils literal notranslate"><span class="pre">idml-pandoc-reader</span></code></a> :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://gitlab.com/deborderbollore/idml-pandoc-reader
+</pre></div>
+</div>
+<p>Ensuite, un script d’installation <code class="docutils literal notranslate"><span class="pre">install.sh</span></code> pour Mac et Linux a été développé afin de faciliter la prise en main de ce logiciel. L’installation sur Windows est elle aussi possible en adaptant les étapes détaillées ci-dessous, mais celle-ci pas pu être encore testée. Ce script a principalement pour fonctions de :</p>
+<ul class="simple">
+<li><p>vérifier que Java (&gt;= 7.0.0) est installé ;</p></li>
+<li><p>vérifier que Git est installé ;</p></li>
+<li><p>installer <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> ;</p></li>
+<li><p>vérifier que Python 3 et pip (&gt;= 21.0) sont installés ;</p></li>
+<li><p>installer les dépendances Python à partir de <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> ;</p></li>
+<li><p>génèrer un simple fichier d’environnement <code class="docutils literal notranslate"><span class="pre">.env</span></code> ;</p></li>
+<li><p>installer éventuellement le module <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code> ;</p></li>
+<li><p>exécuter une commande de test pour vérifier la validité de l’installation.</p></li>
+</ul>
+<p>Pour exécuter ce script, commencez par lui donner les droits d’exécution :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>./install.sh
+</pre></div>
+</div>
+<p>Vous pouvez ensuite lancer l’installation :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./install.sh
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note :</strong> Pour les fichiers IDML les plus lourds, il peut être nécessaire d’<a class="reference external" href="https://github.com/transpect/idml2xml-frontend/blob/master/idml2xml.sh#L33">augmenter la taille du tas Java</a>, par exemple à <code class="docutils literal notranslate"><span class="pre">2048m</span></code> ou <code class="docutils literal notranslate"><span class="pre">4096m</span></code>.</p>
+</div></blockquote>
+</section>
+<section id="configuration-de-lenvironnement-env">
+<h2>Configuration de l’environnement .env<a class="headerlink" href="#configuration-de-lenvironnement-env" title="Lien vers cette rubrique"></a></h2>
+<p>Le fichier <code class="docutils literal notranslate"><span class="pre">.env.sample</span></code> montre l’exemple d’un fichier de fichier de configuration.</p>
+<p>A minima, pour fonctionner, ce convertisseur nécessite d’exécuter <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code>. La ligne <code class="docutils literal notranslate"><span class="pre">IDML2HUBXML_SCRIPT_FOLDER</span></code> du fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code> correspond donc au chemin absolu menant au dossier <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> présent sur votre machine. Il s’agit sûrement de la ligne la plus utile de votre fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code>. Cette ligne est normalement renseignée automatiquement avec le script d’installation.</p>
+<p>Les paires clé/valeur du fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code> permettent de remplacer les valeurs par défaut du package <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>. Pour plus d’informations sur ces différentes variables, consultez <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#liste-des-options">la liste des options</a>.</p>
+</section>
+<section id="pandoc">
+<h2>Pandoc<a class="headerlink" href="#pandoc" title="Lien vers cette rubrique"></a></h2>
+<p>Pandoc n’est pas une dépendance à proprement parler étant donné que le convertisseur <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> n’en a pas besoin pour fonctionner.</p>
+<p>Cependant, <a class="reference external" href="https://github.com/yanntrividic/pandoc/">une version un peu modifiée de Pandoc</a> a été développée pour supporter la lecture des styles de paragraphes et de caractères. Pour l’utiliser, il faut <a class="reference external" href="https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md">la compiler depuis la source</a>.</p>
+<p>Il est aussi possible d’utiliser la version principale de Pandoc, mais alors sans <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#correspondance-des-styles">Correspondance des styles</a>. Une <a class="reference external" href="https://github.com/jgm/pandoc/pull/10932"><em>pull request</em></a> est en bonne voix d’intégrer ces nouvelles fonctionnalités dans la branche principale de Pandoc.</p>
+</section>
+<section id="test-de-la-configuration-avec-la-version-modifiee-de-pandoc">
+<h2>Test de la configuration avec la version modifiée de Pandoc<a class="headerlink" href="#test-de-la-configuration-avec-la-version-modifiee-de-pandoc" title="Lien vers cette rubrique"></a></h2>
+<p>Pour vérifier que les dépendances ont bien été installées et le fichier <code class="docutils literal notranslate"><span class="pre">.env</span></code> bien paramétré, vous pouvez tester le convertisseur dans votre terminal avec la commande suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pandoc<span class="w"> </span>hello_world.idml<span class="w"> </span>-f<span class="w"> </span>idml.lua<span class="w"> </span>-t<span class="w"> </span>markdown
+</pre></div>
+</div>
+<p>Le résultat devrait alors être :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>::: {wrapper=&quot;1&quot; role=&quot;NormalParagraphStyle&quot;}
+Hello world!
+:::
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="1_contents.html" class="btn btn-neutral float-left" title="1. Contenus du dépôt" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="3_usage.html" class="btn btn-neutral float-right" title="3. Usage" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Droits d'auteur 2025, Yann Trividic.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+	<span class="rst-current-version" data-toggle="rst-current-version">
+		<span class="fa fa-book"> Langages</span>
+			
+                <a  class="active"  href="../fr/2_installation.html">fr</a>
+            
+                <a  href="../en/2_installation.html">en</a>
+            
+	</span>
+</div><script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -62,7 +62,12 @@ blockquote {
 }
 
 /* Intl */
-.rst-versions a.active {
+.rst-versions a:not(.active) {
   text-decoration: underline;
   font-weight: bold;
+}
+
+.rst-versions a.active {
+  color: rgb(252, 252, 252);
+  font-weight: normal;
 }

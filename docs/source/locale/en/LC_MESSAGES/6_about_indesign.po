@@ -1,0 +1,244 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2025, Yann Trividic
+# This file is distributed under the same license as the IDML Pandoc reader
+# package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: IDML Pandoc reader \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-27 19:29+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Yann Trividic\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: ../../source/6_about_indesign.md:1
+msgid "À propos d'InDesign"
+msgstr "About InDesign"
+
+#: ../../source/6_about_indesign.md:3
+msgid ""
+"Adobe InDesign est un [jardin "
+"clos](https://en.wikipedia.org/w/index.php?title=Walled_garden_(technology)),"
+" soit une plateforme où le fournisseur contrôle les applications et les "
+"contenus, et dont l'accès et restraint. Cela pose problème dès lors que "
+"l'on ne souhaite pas tout faire dans leur écosystème."
+msgstr ""
+"Adobe InDesign is a [walled "
+"garden](https://en.wikipedia.org/w/index.php?title=Walled_garden_(technology))—a"
+" platform where the provider controls applications and content, and "
+"access is restricted. This becomes problematic when you don’t want to do "
+"everything within their ecosystem."
+
+#: ../../source/6_about_indesign.md:5
+msgid ""
+"Cela pose _particulièrement_ problème lorsqu'Adobe décide de couper "
+"l'[accès aux comptes d'une catégorie "
+"d'utilisateurices](https://next.ink/brief_article/suite-a-un-decret-"
+"presidentiel-adobe-va-couper-les-comptes-de-ses-clients-au-venezuela/), "
+"provoquant ainsi l'impossibilité d'ouvrir ses fichiers. Cela pose aussi "
+"problème lorsque l'on veut publier un document multiformat sous des "
+"modalités choisies, car extraire des contenus d'InDesign est une tâche "
+"ardue."
+msgstr ""
+"This becomes _particularly_ problematic when Adobe decides to cut off "
+"[access to the accounts of a category of "
+"users](https://www.theverge.com/2019/10/7/20904030/adobe-"
+"venezuela-photoshop-behance-us-sanctions/), "
+"thus making it impossible to open one's files. It also becomes a problem "
+"when trying to publish a multi-format document under chosen terms, because "
+"extracting content from InDesign is a difficult task."
+
+#: ../../source/6_about_indesign.md:7
+msgid "Les différents formats d'export"
+msgstr "The different export formats"
+
+#: ../../source/6_about_indesign.md:9
+msgid ""
+"Exporter des documents d'InDesign pourrait suffire à réemployer les "
+"contenus travaillés dans InDesign. Seulement, ces exports ne sont pas "
+"faits pour être réemployés, et chacun présente ses inconvénients."
+msgstr ""
+"Exporting documents from InDesign might be enough to reuse content edited"
+" in it. However, these exports are not designed for reuse, and each comes"
+" with drawbacks."
+
+#: ../../source/6_about_indesign.md:11
+msgid "PDF"
+msgstr "PDF"
+
+#: ../../source/6_about_indesign.md:13
+msgid ""
+"Pour exporter un facsimilé de votre espace de travail, InDesign est sans "
+"conteste le meilleur candidat. Seulement, produire un PDF accessible peut"
+" s'avérer assez chronophage, et certains outils comme "
+"[WeasyPrint](https://weasyprint.org) ou [Paged.js](https://pagedjs.org) "
+"peuvent produire des documents accessibles d'une meilleure qualité et à "
+"moindre effort."
+msgstr ""
+"If you're exporting a facsimile of your workspace, InDesign is "
+"undoubtedly the best candidate. However, creating an accessible PDF can "
+"be time-consuming, and tools like [WeasyPrint](https://weasyprint.org) or"
+" [Paged.js](https://pagedjs.org) can produce more accessible documents of"
+" better quality with less effort."
+
+#: ../../source/6_about_indesign.md:15
+msgid "HTML (hérité)"
+msgstr "HTML (legacy)"
+
+#: ../../source/6_about_indesign.md:17
+msgid ""
+"Pour réemployer vos contenus éditorialisés dans InDesign pour la "
+"conception d'un site web, l'export HTML (hérité) peut représenter un bon "
+"point d'entrée. Seulement, InDesign supprime certaines informations (les "
+"espaces de fin et de début de ligne, les sauts de ligne, etc.). Cela peut"
+" résulter en des problèmes totalement insolubles, étant donné qu'il "
+"n'existe aucun levier d'action pour personnaliser cette conversion de "
+"format."
+msgstr ""
+"If you want to reuse your editorial content from InDesign for building a "
+"website, the legacy HTML export might be a good starting point. However, "
+"InDesign removes certain information (such as line-end/start spaces, line"
+" breaks, etc.). This can lead to completely unresolvable issues, since "
+"there is no way to customize this format conversion."
+
+#: ../../source/6_about_indesign.md:19
+msgid "EPUB"
+msgstr "EPUB"
+
+#: ../../source/6_about_indesign.md:21
+msgid ""
+"Générer un livre numérique depuis InDesign est possible, mais cela "
+"nécessite de nombreuses opérations, et produit en sortie un fichier "
+"[difficile à "
+"dénoyauter](https://mastodon.ar.al/@aral/113760088265003444)."
+msgstr ""
+"Generating an ebook from InDesign is possible, but it requires many steps"
+" and produces a file that is [difficult to crack "
+"open](https://mastodon.ar.al/@aral/113760088265003444)."
+
+#: ../../source/6_about_indesign.md:23
+msgid ""
+"Dans le cadre du recueil _Déborder Bolloré_, les fichiers Markdown sortis"
+" du présent convertisseur ont nourri le [Gabarit "
+"Abrüpt](https://codeberg.org/abrupt/gabarit-abrupt/). Cela a permis de "
+"produire un EPUB léger et de qualité, dont le code est disponible sur le "
+"dépôt [deborderbollore/ebook](https://gitlab.com/deborderbollore/ebook)."
+msgstr ""
+"For the collection _Déborder Bolloré_, the Markdown files output by this "
+"converter were fed into the [Gabarit Abrüpt](https://codeberg.org/abrupt"
+"/gabarit-abrupt/). This enabled the production of a lightweight, high-"
+"quality EPUB, with source code available in the "
+"[deborderbollore/ebook](https://gitlab.com/deborderbollore/ebook) "
+"repository."
+
+#: ../../source/6_about_indesign.md:25
+msgid "Le format IDML"
+msgstr "The IDML format"
+
+#: ../../source/6_about_indesign.md:27
+msgid ""
+"IDML est le format \"ouvert\"[^cookbook] d'Adobe InDesign, son format de "
+"retrocompabilité (c'est-à-dire le format que la plupart des versions "
+"d'InDesign peuvent lire), _a contrario_ du format INDD qui est spécifique"
+" à chaque version. Par défaut, l'assemblage d'un projet InDesign génère "
+"un fichier IDML, ce qui fait que de nombreux projets, même anciens, "
+"existent sous la forme d'un fichier IDML. IDML est aussi le format que "
+"l'on peut lire et interpréter sans avoir besoin de lancer InDesign, car "
+"un fichier IDML est en fait une sorte d'[archive "
+"zippée](https://fr.wikipedia.org/wiki/ZIP_(format_de_fichier)) d'une "
+"arborescence de fichiers "
+"[XML](https://fr.wikipedia.org/wiki/Extensible_Markup_Language)."
+msgstr ""
+"IDML is Adobe InDesign’s \"open\"[^cookbook] format—its backward-"
+"compatible format (that is, the format most versions of InDesign can "
+"read), as opposed to the INDD format, which is specific to each version. "
+"By default, packaging an InDesign project generates an IDML file, meaning"
+" many projects, even older ones, exist as IDML files. IDML is also a "
+"format that can be read and interpreted without launching InDesign, "
+"because an IDML file is actually a kind of [zipped "
+"archive](https://en.wikipedia.org/wiki/ZIP_(file_format)) containing a "
+"tree structure of [XML "
+"files](https://en.wikipedia.org/wiki/Extensible_Markup_Language)."
+
+#: ../../source/6_about_indesign.md:29
+msgid ""
+"D'autres logiciels peuveut aussi ouvrir des fichiers IDML, comme Scribus "
+"ou Affinity Publisher. Cependant, à l'instar d'InDesign, ils ne proposent"
+" que très peu de formats d'export."
+msgstr ""
+"Other software can also open IDML files, such as Scribus or Affinity "
+"Publisher. However, like InDesign, they offer only a very limited range "
+"of export formats."
+
+#: ../../source/6_about_indesign.md:33
+msgid ""
+"Même si ce format est théoriquement ouvert, il reste assez complexe, et "
+"le ramener à un format plus simple, plus largement utilisé et supporté, "
+"nécessite de nombreuses opérations, d'où la nécessité de ce "
+"convertisseur."
+msgstr ""
+"Even though the format is theoretically open, it remains quite complex. "
+"Converting it to a simpler, more widely used and supported format "
+"requires many steps—which is why this converter is needed."
+
+#: ../../source/6_about_indesign.md:35
+msgid ""
+"Par-delà cette complexité, le fait qu'InDesign soit un logiciel "
+"WYSIWYG[^wysiwyg] où l'on peut faire du formatage direct[^direct] rend "
+"extrêmement complexe la conversion vers des formats plus \"structurés\"."
+msgstr ""
+"Beyond this complexity, the fact that InDesign is a WYSIWYG[^wysiwyg] "
+"tool that allows direct formatting[^direct] makes conversion to more "
+"'structured' formats extremely difficult."
+
+#: ../../source/6_about_indesign.md:41
+msgid ""
+"Pour ces différentes raisons, **ce convertisseur fonctionne mieux lorsque"
+" certaines bonnes pratiques de formatage sont appliquées** (voir le "
+"[guide de formatage](/4_formatting_guide)). De manière générale, la "
+"plupart de ces recommandations sont aussi émises par Adobe pour "
+"structurer un fichier InDesign."
+msgstr ""
+"For all these reasons, **this converter works better when certain "
+"formatting best practices are applied** (see the [formatting "
+"guide](/4_formatting_guide)). In general, most of these "
+"recommendations are also issued by Adobe for structuring an InDesign "
+"file."
+
+#: ../../source/6_about_indesign.md:31
+msgid ""
+"La spécification du format IDML n'est plus maintenue (publiquement du "
+"moins) depuis 2012. Elle est contenue dans la documentation du _InDesign "
+"SDK_ sous le nom de _InDesign Markup Language (IDML) Cookbook_. Il faut "
+"un compte Adobe pour pouvoir la "
+"[télécharger](https://developer.adobe.com/console/servicesandapis)."
+msgstr ""
+"The IDML format specification has not been maintained (publicly, at "
+"least) since 2012. It is included in the _InDesign SDK_ documentation as "
+"the _InDesign Markup Language (IDML) Cookbook_. An Adobe account is "
+"required to [download "
+"it](https://developer.adobe.com/console/servicesandapis)."
+
+#: ../../source/6_about_indesign.md:37
+msgid "*What you see is what you get.*"
+msgstr "*What you see is what you get.*"
+
+#: ../../source/6_about_indesign.md:39
+msgid ""
+"Le formatage direct est le formatage appliqué sans structure, par exemple"
+" en identifiant un titre uniquement en gras avec un corps de texte "
+"important, ou placer un bloc dans la page (comme une image) sans l'ancrer"
+" dans le flux du texte."
+msgstr ""
+"Direct formatting refers to unstructured formatting—such as identifying a"
+" heading simply by making it bold with a larger font, or placing a block "
+"on the page (like an image) without anchoring it in the text flow."
