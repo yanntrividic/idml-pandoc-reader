@@ -2,8 +2,7 @@ import os
 import sys
 
 # In order to get the module's version
-sys.path.insert(0, os.path.abspath('../../idml2docbook'))
-print(sys.path)
+sys.path.insert(0, os.path.abspath('../../'))
 import idml2docbook
 
 # Configuration file for the Sphinx documentation builder.
@@ -18,6 +17,7 @@ project = 'IDML Pandoc reader'
 copyright = '2025, Yann Trividic'
 author = 'Yann Trividic'
 release = idml2docbook.__version__
+print("Detected idml2docbook version: " + release)
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
