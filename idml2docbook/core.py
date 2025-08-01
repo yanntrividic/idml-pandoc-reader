@@ -317,6 +317,10 @@ def hubxml2docbook(file, **options):
 
     soup = BeautifulSoup(xml_content, "xml")
 
+    # This line fixes the roles names
+    # If your map file was designed using v0.1.0, comment it
+    fix_role_names(soup)
+
     for hub in soup.find_all("hub"):
         hub.name = "article"
         hub["version"] = "5.0"

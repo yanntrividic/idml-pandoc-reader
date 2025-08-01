@@ -2,6 +2,8 @@ import re
 import sys
 import json
 import logging
+from slugs import custom_slugify
+from bs4 import BeautifulSoup
 
 BOLD = '\033[1m'
 END = '\033[0m'
@@ -32,6 +34,34 @@ def log_map_entry(entry):
 def bold_print(s):
     print(BOLD + s + END)
 
+def build_roles_map(soup):
+    """Takes a Hub XML soup as input, and builds a dict
+    containing the exact InDesign style, the Hub role name,
+    if the style is a default one, and a slugified role name as key."""
+    roles = {}
+    for rule in soup.find_all("css:rule"):
+        to_slugify = native = rule.attrs["native-name"]
+        default = False
+        
+        if native.startswith("$ID/"):
+            default = True
+            to_slugify = native[4:]
+        slug = custom_slugify(to_slugify)
+
+        roles[slug] = {"hub": rule.attrs["name"], "native": native, "default": default}
+    return roles
+
+def update_roles_with_better_slugs(soup, roles):
+    """Takes a Hub XML soup and the corresponding roles
+    map, and updates the roles."""
+    for key, value in roles.items():
+        for el in soup.find_all(attrs={"role": value["hub"]}):
+            el["role"] = key
+
+def fix_role_names(soup):
+    roles = build_roles_map(soup)
+    soup = update_roles_with_better_slugs(soup, roles)
+
 if __name__ == "__main__":
     if len(sys.argv) == 3:
         file = sys.argv[1]
@@ -39,7 +69,14 @@ if __name__ == "__main__":
 
         # Read the HTML input file
         with open(file, "r") as f:
-            docbook = f.read()
+            hubxml = f.read()
+
+        # Those three lines fix the roles names
+        # If your map file was designed using v0.1.0
+        # comment those three lines
+        soup = BeautifulSoup(hubxml, "xml")
+        fix_role_names(soup)
+        hubxml = str(soup)
 
         type_and_role = r'<(\w+)[^>]*\brole="(.*?)"[^>]*>'
 
@@ -49,7 +86,7 @@ if __name__ == "__main__":
 
         # We are only interested in what is after the info tag
         try:
-            for el in re.findall(type_and_role, docbook.split("</info>")[1]):
+            for el in re.findall(type_and_role, hubxml.split("</info>")[1]):
                 if not el[1].startswith("hub"): roles.add((el[1], el[0]))
                 # And not interested in hub specific tags
         except:

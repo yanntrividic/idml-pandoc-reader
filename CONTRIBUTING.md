@@ -48,4 +48,4 @@ This project is an ongoing work. Want to contribute? You can:
 ### idml2xml
 
 * [x] ~~Make it so calls to le-tex.de are not needed anymore and gain autonomy~~ Did I dream that?
-* [ ] Support accentuated characters in class names
+* [x] Support accentuated characters in class names
