@@ -63,18 +63,28 @@ blockquote {
 
 /* Intl */
 .rst-versions a:not(.active) {
-  text-decoration: underline;
-  font-weight: bold;
   color: rgb(252, 252, 252);
 }
 
 .rst-versions a:not(.active):hover {
+  font-weight: bold;
+  text-decoration: underline;
   color: #db7678;
 }
 
 .rst-versions a.active {
   color: rgb(252, 252, 252);
-  font-weight: normal;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.rst-versions a.active:hover {
+  text-decoration: none;
+  cursor: initial;
+}
+
+.rst-versions .rst-current-version{
+  cursor: initial;
 }
 
 .fa-folder {
