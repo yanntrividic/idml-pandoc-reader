@@ -26,7 +26,8 @@ extensions = [
     'myst_parser',
     'sphinx_rtd_theme',
     'sphinx.ext.autosectionlabel',
-    'sphinx.ext.graphviz'
+    'sphinx.ext.graphviz',
+    'notfound.extension'
 ]
 
 templates_path = ['_templates']
