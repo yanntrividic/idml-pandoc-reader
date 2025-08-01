@@ -12,3 +12,6 @@ RewriteRule ^$ /fr/ [R=302,L]
 
 # Otherwise, redirect to English (default)
 RewriteRule ^$ /en/ [R=302,L]
+
+# Handle 404 errors with language-based logic
+ErrorDocument 404 /custom_404_handler.php
