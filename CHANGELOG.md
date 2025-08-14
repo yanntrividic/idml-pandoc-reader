@@ -1,6 +1,6 @@
 # Revision history for idml-pandoc-reader
 
-## idml-pandoc-reader 0.2.0 (not released yet)
+## idml-pandoc-reader 0.2.0 (2025-08-01)
 
 * Role names are now using the same `custom_slugify` method as filenames.
 
