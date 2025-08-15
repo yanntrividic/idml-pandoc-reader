@@ -19,7 +19,7 @@ Les attributs `role` correspondent aux styles de paragraphes et de caractères p
 * `br` : ajoute un saut de ligne avant l'élément concerné ;
 * `cut` : crée un nouveau fichier avant chaque élément ayant ce `role` ;
 * `empty` : conserve les éléments vides portant ce `role` (tous les autres éléments vides sont supprimés, sauf si l'option `-e`/`--empty` est active) ;
-* Si l'entrée est vide (`{}`) alors l'attribute `role` est supprimé.
+* Si l'entrée est vide (`{}`) alors l'attribut `role` est supprimé.
 
 Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :
 

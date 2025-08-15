@@ -10,7 +10,7 @@
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=64fc1fe0" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f69cee05" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
@@ -117,7 +117,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">br</span></code> : ajoute un saut de ligne avant l’élément concerné ;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cut</span></code> : crée un nouveau fichier avant chaque élément ayant ce <code class="docutils literal notranslate"><span class="pre">role</span></code> ;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">empty</span></code> : conserve les éléments vides portant ce <code class="docutils literal notranslate"><span class="pre">role</span></code> (tous les autres éléments vides sont supprimés, sauf si l’option <code class="docutils literal notranslate"><span class="pre">-e</span></code>/<code class="docutils literal notranslate"><span class="pre">--empty</span></code> est active) ;</p></li>
-<li><p>Si l’entrée est vide (<code class="docutils literal notranslate"><span class="pre">{}</span></code>) alors l’attribute <code class="docutils literal notranslate"><span class="pre">role</span></code> est supprimé.</p></li>
+<li><p>Si l’entrée est vide (<code class="docutils literal notranslate"><span class="pre">{}</span></code>) alors l’attribut <code class="docutils literal notranslate"><span class="pre">role</span></code> est supprimé.</p></li>
 </ul>
 <p>Le script <code class="docutils literal notranslate"><span class="pre">idml2docbook/map.py</span></code> aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>idml2docbook/map.py<span class="w"> </span>file.xml<span class="w"> </span>maps/map.json

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 15:09+0200\n"
+"POT-Creation-Date: 2025-08-15 17:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -30,8 +30,8 @@ msgstr "Preparing IDML Files"
 
 #: ../../source/3_usage.md:5
 msgid ""
-"Un [guide de formatage](/4_formatting_guide) indique comment préparer "
-"les fichiers InDesign. Même s'il n'est pas obligatoire de suivre ces "
+"Un [guide de formatage](/4_formatting_guide) indique comment préparer les"
+" fichiers InDesign. Même s'il n'est pas obligatoire de suivre ces "
 "recommandations pour utiliser le convertisseur, la qualité du résultat "
 "obtenu peut varier grandement selon la manière dont vous avez conçu votre"
 " document."
@@ -128,7 +128,7 @@ msgstr ""
 
 #: ../../source/3_usage.md:22
 #, python-brace-format
-msgid "Si l'entrée est vide (`{}`) alors l'attribute `role` est supprimé."
+msgid "Si l'entrée est vide (`{}`) alors l'attribut `role` est supprimé."
 msgstr "If the entry is empty (`{}`), the `role` attribute is removed."
 
 #: ../../source/3_usage.md:24
@@ -223,7 +223,7 @@ msgstr ""
 
 #: ../../source/3_usage.md:70
 msgid "batch\\.sh"
-msgstr "batch\.sh"
+msgstr "batch\\.sh"
 
 #: ../../source/3_usage.md:72
 msgid ""
@@ -314,8 +314,8 @@ msgid ""
 "\\ Par défaut, la sortie est redirigée vers la sortie standard "
 "(*stdout*)."
 msgstr ""
-"**`-o`, `--output <file>`** <br> Name to assign to the output file. <br> By "
-"default, output is sent to standard output (*stdout*)."
+"**`-o`, `--output <file>`** <br> Name to assign to the output file. <br> "
+"By default, output is sent to standard output (*stdout*)."
 
 #: ../../source/3_usage.md:108
 msgid ""
@@ -323,8 +323,8 @@ msgid ""
 "utiliser pour des traitements spécifiques au rôle. \\ Par défaut : "
 "`maps/sample.json`."
 msgstr ""
-"**`-m`, `--map <JSON file>`** <br> Name of the JSON mapping file to use for"
-" role-specific processing. <br> Default: `maps/sample.json`."
+"**`-m`, `--map <JSON file>`** <br> Name of the JSON mapping file to use "
+"for role-specific processing. <br> Default: `maps/sample.json`."
 
 #: ../../source/3_usage.md:112
 msgid ""
@@ -350,9 +350,9 @@ msgid ""
 " sortie. \\ Fonctionne avec `--map` (pour spécifier les découpes). \\ Si "
 "utilisé avec `--output`, ce dernier est considéré comme un dossier."
 msgstr ""
-"**`-c`, `--cut`** <br> Splits the input file into multiple output files. \\"
-" Works with `--map` (to define the splits). <br> If used with `--output`, "
-"the latter is treated as a directory."
+"**`-c`, `--cut`** <br> Splits the input file into multiple output files. "
+"\\ Works with `--map` (to define the splits). <br> If used with "
+"`--output`, the latter is treated as a directory."
 
 #: ../../source/3_usage.md:126
 msgid ""
@@ -367,8 +367,8 @@ msgid ""
 "**`-t`, `--typography`** \\ Refonte de l’orthotypographie selon les "
 "règles françaises \\ (espaces fines, espaces insécables, etc.)."
 msgstr ""
-"**`-t`, `--typography`** <br> Applies French typographic refinements <br> "
-"(thin spaces, non-breaking spaces, etc.)."
+"**`-t`, `--typography`** <br> Applies French typographic refinements <br>"
+" (thin spaces, non-breaking spaces, etc.)."
 
 #: ../../source/3_usage.md:134
 msgid ""
@@ -398,8 +398,8 @@ msgid ""
 "**`-f`, `--media <chemin>`** \\ Chemin vers le dossier contenant les "
 "fichiers médias. \\ Par défaut : `Links`."
 msgstr ""
-"**`-f`, `--media <path>`** <br> Path to the folder containing media files. "
-"<br> Default: `Links`."
+"**`-f`, `--media <path>`** <br> Path to the folder containing media "
+"files. <br> Default: `Links`."
 
 #: ../../source/3_usage.md:149
 msgid ""
@@ -407,8 +407,8 @@ msgid ""
 "celles des images *matricielles*. \\ Exemple : `jpg`. \\ Par défaut : "
 "aucune."
 msgstr ""
-"**`-r`, `--raster <extension>`** <br> Extension to use when replacing that "
-"of *raster* images. <br> Example: `jpg`. <br> Default: none."
+"**`-r`, `--raster <extension>`** <br> Extension to use when replacing "
+"that of *raster* images. <br> Example: `jpg`. <br> Default: none."
 
 #: ../../source/3_usage.md:154
 msgid ""
@@ -416,8 +416,8 @@ msgid ""
 "celles des images *vectorielles*. \\ Exemple : `svg`. \\ Par défaut : "
 "aucune."
 msgstr ""
-"**`-v`, `--vector <extension>`** <br> Extension to use when replacing that "
-"of *vector* images. <br> Example: `svg`. <br> Default: none."
+"**`-v`, `--vector <extension>`** <br> Extension to use when replacing "
+"that of *vector* images. <br> Example: `svg`. <br> Default: none."
 
 #: ../../source/3_usage.md:159
 msgid ""
@@ -445,17 +445,17 @@ msgid ""
 "fichier `.env` remplacent les valeurs par défaut du programme."
 msgstr ""
 "**`--env <file>`** <br> Path to a `.env` environment file for "
-"`idml2docbook`. <br> By default, it looks for a `.env` file in the current "
-"directory. <br> All key/value pairs in this file override the program’s "
-"default values."
+"`idml2docbook`. <br> By default, it looks for a `.env` file in the "
+"current directory. <br> All key/value pairs in this file override the "
+"program’s default values."
 
 #: ../../source/3_usage.md:172
 msgid ""
 "**`--version`** \\ Affiche la version de `idml2docbook` et quitte le "
 "programme."
 msgstr ""
-"**`--version`** <br> Displays the version of `idml2docbook` and exits the "
-"program."
+"**`--version`** <br> Displays the version of `idml2docbook` and exits the"
+" program."
 
 #: ../../source/3_usage.md:175
 msgid "Exemple avec la commande de conversion du recueil _Déborder Bolloré_"
