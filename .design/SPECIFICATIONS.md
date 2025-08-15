@@ -1,4 +1,4 @@
-# Specifications
+# Specifications
 
 ## A conversion editor, not a text editor
 
@@ -16,12 +16,12 @@ OutDesign will be here to help composing those operations in order to turn one s
 
 Operators will include (WIP):
 
-* **wrap** -- wrap an element in a new parent element
-* **unwrap** -- unwrap an element in its parent
-* **delete** -- delete an element
-* **merge** -- group the content of sibling elements
-* **simplify** -- remove all attributes from an element
-* **reassign** -- change the value of an attribute
+* **wrap** – wrap an element in a new parent element
+* **unwrap** – unwrap an element in its parent
+* **delete** – delete an element
+* **merge** – group the content of sibling elements
+* **simplify** – remove all attributes from an element
+* **reassign** – change the value of an attribute
 * etc.
 
 ## Flag toggles
