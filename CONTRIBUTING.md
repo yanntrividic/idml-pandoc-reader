@@ -6,6 +6,8 @@ This project is an ongoing work. Want to contribute? You can:
 * Submit a pull request (ideally, on [GitLab](https://gitlab.com/deborderbollore/idml-pandoc-reader)) to improve something, to solve an issue, or else (feel free to explain what you want to do beforehand);
 * Contact the maintainer of this projet at [bonjour@yanntrividic.fr](mailto:bonjour@yanntrividic.fr).
 
+Every contribution to the code must be published under the [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) license.
+
 ## TODO
 
 ### For this project
@@ -32,7 +34,7 @@ This project is an ongoing work. Want to contribute? You can:
 * [x] Add a note on the difficulty of the installation
 * [x] Add a command documentation on the duration of idml2hubxml
 * [ ] Add docs on how to use `slugs.py`
-* [ ] Design an interface for OutDesign's frontend
+* [ ] Design OutDesign, an interface for the IDML Pandoc Reader (see the [design notes](https://github.com/yanntrividic/idml-pandoc-reader/tree/main/.design)!)
 * [ ] Write tests... Many tests...
 * [ ] Add a "Similar approaches section" in the docs somewhere, with IDML2JSON and such
 * [ ] Add in the docs a reference to the logfile that is generated
