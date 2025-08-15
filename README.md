@@ -1,5 +1,9 @@
 # IDML Pandoc reader
 
+[![Design](https://contribute.design/api/shield/yanntrividic/idml-pandoc-reader)](https://contribute.design/yanntrividic/idml-pandoc-reader)
+![CI](https://gitlab.com/deborderbollore/idml-pandoc-reader/badges/main/pipeline.svg)
+![Release](https://gitlab.com/deborderbollore/idml-pandoc-reader/-/badges/release.svg)
+
 [English version [below](#en)!]
 
 Ce dépôt contient un programme en ligne de commande automatisant la lecture de fichiers IDML (InDesign Markup Language) pour [Pandoc](https://pandoc.org). Pandoc est un convertisseur universel pouvant convertir énormément de formats de fichiers d'entrée vers énormément de formats de fichiers de sortie, dont DOCX, ODT, HTML, Markdown, AsciiDoc, [etc.](https://pandoc.org/diagram.svgz) **Seule la structure du document est convertie, la mise en forme est totalement ignorée.**
