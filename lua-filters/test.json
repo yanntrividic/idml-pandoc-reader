@@ -1,4 +1,6 @@
 [{
-    "paragraph-with-a-class": {"class": "cool-paragraph"},
-    "word-with-a-class": {"class": "cool-word"}
+    ".title": {"classes": "cool-title"},
+    ".paragraph-with-a-class.and-another": {"classes": "cool-paragraph"},
+    ".word-with-a-class": {"classes": "cool-word"},
+    ".delete": {"delete": true}
 }]
