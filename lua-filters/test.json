@@ -1,6 +1,6 @@
 [{
-    ".title": {"classes": "cool-title"},
-    ".paragraph-with-a-class.and-another": {"classes": "cool-paragraph"},
-    ".word-with-a-class": {"classes": "cool-word"},
+    ".title": {"classes": "cool-title", "type": "Para", "attrs": { "hey": "oh" }},
+    ".paragraph-with-a-class.and-another": {"classes": "cool-paragraph", "type": "BlockQuote"},
+    ".word-with-a-class": {"classes": "cool-word", "type": "Code", "attrs": { "bli": "bla" }},
     ".delete": {"delete": true}
 }]

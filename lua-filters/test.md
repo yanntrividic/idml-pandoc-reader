@@ -6,13 +6,13 @@ Paragraph with a class!
 
 </div>
 
-<div class="paragraph-with-a-class and-another">
+<div class="paragraph-with-a-class and-another" ble="ble">
 
 Paragraph with two classes!
 
 </div>
 
-And also this <span class="word-with-a-class">word</span> has a class. <span class="delete">This sentence has to be deleted.</span>
+And also this <span class="word-with-a-class" bli="blo">word</span> has a class. <span class="delete">This sentence has to be deleted.</span>
 
 <div class="delete">
 

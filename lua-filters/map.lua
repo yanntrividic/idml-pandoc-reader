@@ -23,13 +23,20 @@ end
 
 local function applyMapping(el)
   for selector, value in pairs(map) do
+    -- We check if the element matches the selector
     if utils.isMatchingSelector(el, value.parsed) then
-      if value.classes then
-        operators.applyClass(el, value.classes)
-      end
+      -- and apply the various operations
       if value.delete then
-        print(el)
         return {}
+      end
+      if value.classes then
+        operators.applyClasses(el, value.classes)
+      end
+      if value.attrs then
+        operators.applyAttrs(el, value.attrs)
+      end
+      if value.type then
+        el = operators.applyType(el, value.type)
       end
     end
   end

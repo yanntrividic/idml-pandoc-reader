@@ -4,16 +4,16 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 
 ## TODO
 
-* [ ] Make a pseudo CSS selector API in Lua, that could support queries such as `Div.class1.class2`
+* [x] Make a pseudo CSS selector API in Lua, that could support queries such as `Div.class1.class2`
 * [ ] Enable support for conversion operators:
     * [ ] **wrap** – wrap an element in a new parent element
     * [ ] **unwrap** – unwrap an element in its parent
     * [x] **delete** – delete an element
     * [ ] **merge** – group the content of sibling elements
     * [ ] **simplify** – remove all attributes from an element
-    * [ ] **reassign** – change the value of an attribute
+    * [x] **reassign** – change the value of an attribute
 * [ ] Enable support for other operators, currently found in the JSON map files (see https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles):
-    * [ ] **type**
+    * [x] **type**
     * [x] **role** [is now `classes`.]
     * [ ] **cut** does it make sense here? Is it possible?
     * [ ] **level**
@@ -91,4 +91,4 @@ Several scenarios have to be met:
 
 And it should also work according to Pandoc types:
 
-* `BlockQuote.class1` is actually refering to the elements that are `BlockQuote` elements wrapped with a `Div` that has a `class1` class
+* `BlockQuote.class1` is actually refering to the elements that are `BlockQuote` elements wrapped with a `Div` that has a `class1` class.
