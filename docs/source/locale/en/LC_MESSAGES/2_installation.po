@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-29 11:11+0200\n"
+"POT-Creation-Date: 2025-08-16 14:48+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -95,14 +95,16 @@ msgstr "Installation with install\\.sh"
 
 #: ../../source/2_installation.md:20
 msgid ""
-"Premièrement, commencez par cloner le dépôt [`idml-pandoc-"
-"reader`](https://gitlab.com/deborderbollore/idml-pandoc-reader) :"
+"Premièrement, commencez par télécharger [la dernière version "
+"publiée](https://gitlab.com/deborderbollore/idml-pandoc-"
+"reader/-/releases/permalink/latest) du logiciel et décompressez l'archive"
+" ZIP obtenue."
 msgstr ""
-"First, start by cloning the [`idml-pandoc-"
-"reader`](https://gitlab.com/deborderbollore/idml-pandoc-reader) "
-"repository:"
+"First, start by downloading [the latest release of this software]"
+"(https://gitlab.com/deborderbollore/idml-pandoc-reader/-/releases"
+"/permalink/latest) and unzip the archive."
 
-#: ../../source/2_installation.md:26
+#: ../../source/2_installation.md:22
 msgid ""
 "Ensuite, un script d'installation `install.sh` pour Mac et Linux a été "
 "développé afin de faciliter la prise en main de ce logiciel. "
@@ -115,47 +117,47 @@ msgstr ""
 "also possible by adapting the steps described below, although it has not "
 "yet been tested. This script mainly serves to:"
 
-#: ../../source/2_installation.md:28
+#: ../../source/2_installation.md:24
 msgid "vérifier que Java (>= 7.0.0) est installé ;"
 msgstr "check that Java (>= 7.0.0) is installed;"
 
-#: ../../source/2_installation.md:29
+#: ../../source/2_installation.md:25
 msgid "vérifier que Git est installé ;"
 msgstr "check that Git is installed;"
 
-#: ../../source/2_installation.md:30
+#: ../../source/2_installation.md:26
 msgid "installer `idml2xml-frontend` ;"
 msgstr "install `idml2xml-frontend`;"
 
-#: ../../source/2_installation.md:31
+#: ../../source/2_installation.md:27
 msgid "vérifier que Python 3 et pip (>= 21.0) sont installés ;"
 msgstr "check that Python 3 and pip (>= 21.0) are installed;"
 
-#: ../../source/2_installation.md:32
+#: ../../source/2_installation.md:28
 msgid "installer les dépendances Python à partir de `requirements.txt` ;"
 msgstr "install Python dependencies from `requirements.txt`;"
 
-#: ../../source/2_installation.md:33
+#: ../../source/2_installation.md:29
 msgid "génèrer un simple fichier d'environnement `.env` ;"
 msgstr "generate a basic `.env` environment file;"
 
-#: ../../source/2_installation.md:34
+#: ../../source/2_installation.md:30
 msgid "installer éventuellement le module `idml2docbook` via `pip install .` ;"
 msgstr "optionally install the `idml2docbook` module via `pip install .`;"
 
-#: ../../source/2_installation.md:35
+#: ../../source/2_installation.md:31
 msgid "exécuter une commande de test pour vérifier la validité de l'installation."
 msgstr "run a test command to verify the installation is valid."
 
-#: ../../source/2_installation.md:37
+#: ../../source/2_installation.md:33
 msgid "Pour exécuter ce script, commencez par lui donner les droits d'exécution :"
 msgstr "To run this script, start by making it executable:"
 
-#: ../../source/2_installation.md:43
+#: ../../source/2_installation.md:39
 msgid "Vous pouvez ensuite lancer l'installation :"
 msgstr "You can then start the installation:"
 
-#: ../../source/2_installation.md:49
+#: ../../source/2_installation.md:45
 msgid ""
 "**Note :** Pour les fichiers IDML les plus lourds, il peut être "
 "nécessaire d'[augmenter la taille du tas "
@@ -166,17 +168,17 @@ msgstr ""
 " heap size](https://github.com/transpect/idml2xml-"
 "frontend/blob/master/idml2xml.sh#L33), for example to `2048m` or `4096m`."
 
-#: ../../source/2_installation.md:51
+#: ../../source/2_installation.md:47
 msgid "Configuration de l'environnement .env"
 msgstr "Environment configuration (.env)"
 
-#: ../../source/2_installation.md:53
+#: ../../source/2_installation.md:49
 msgid ""
 "Le fichier `.env.sample` montre l'exemple d'un fichier de fichier de "
 "configuration."
 msgstr "The `.env.sample` file shows an example configuration file."
 
-#: ../../source/2_installation.md:55
+#: ../../source/2_installation.md:51
 msgid ""
 "A minima, pour fonctionner, ce convertisseur nécessite d'exécuter "
 "`idml2xml-frontend`. La ligne `IDML2HUBXML_SCRIPT_FOLDER` du fichier "
@@ -191,25 +193,25 @@ msgstr ""
 " on your machine. This is likely the most important line in your `.env` "
 "file. It is usually filled in automatically by the installation script."
 
-#: ../../source/2_installation.md:57
+#: ../../source/2_installation.md:53
 msgid ""
 "Les paires clé/valeur du fichier `.env` permettent de remplacer les "
 "valeurs par défaut du package `idml2docbook`. Pour plus d'informations "
 "sur ces différentes variables, consultez [la liste des "
-"options](https://outdesign.deborderbollore.fr/fr/3_usage.html#liste-"
-"des-options)."
+"options](https://outdesign.deborderbollore.fr/fr/3_usage.html#liste-des-"
+"options)."
 msgstr ""
 "The key/value pairs in the `.env` file allow you to override the default "
 "values of the `idml2docbook` package. For more information on these "
 "variables, see [the list of "
-"options](https://outdesign.deborderbollore.fr/en/3_usage.html#liste-"
-"des-options)."
+"options](https://outdesign.deborderbollore.fr/en/3_usage.html#liste-des-"
+"options)."
 
-#: ../../source/2_installation.md:59
+#: ../../source/2_installation.md:55
 msgid "Pandoc"
 msgstr "Pandoc"
 
-#: ../../source/2_installation.md:61
+#: ../../source/2_installation.md:57
 msgid ""
 "Pandoc n'est pas une dépendance à proprement parler étant donné que le "
 "convertisseur `idml2docbook` n'en a pas besoin pour fonctionner."
@@ -217,7 +219,7 @@ msgstr ""
 "Pandoc is not technically a dependency, since the `idml2docbook` "
 "converter does not require it to function."
 
-#: ../../source/2_installation.md:63
+#: ../../source/2_installation.md:59
 msgid ""
 "Cependant, [une version un peu modifiée de "
 "Pandoc](https://github.com/yanntrividic/pandoc/) a été développée pour "
@@ -231,7 +233,7 @@ msgstr ""
 "from "
 "source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md)."
 
-#: ../../source/2_installation.md:65
+#: ../../source/2_installation.md:61
 msgid ""
 "Il est aussi possible d'utiliser la version principale de Pandoc, mais "
 "alors sans [Correspondance des "
@@ -244,14 +246,14 @@ msgstr ""
 "It is also possible to use the main version of Pandoc, but without [Style"
 " Mapping](https://outdesign.deborderbollore.fr/en/3_usage.html"
 "#correspondance-des-styles). A [_pull "
-"request_](https://github.com/jgm/pandoc/pull/10665) is close to be merged to "
-"integrate these new features into the main Pandoc branch."
+"request_](https://github.com/jgm/pandoc/pull/10665) is close to be merged"
+" to integrate these new features into the main Pandoc branch."
 
-#: ../../source/2_installation.md:68
+#: ../../source/2_installation.md:64
 msgid "Test de la configuration avec la version modifiée de Pandoc"
 msgstr "Configuration test with the modified version of Pandoc"
 
-#: ../../source/2_installation.md:70
+#: ../../source/2_installation.md:66
 msgid ""
 "Pour vérifier que les dépendances ont bien été installées et le fichier "
 "`.env` bien paramétré, vous pouvez tester le convertisseur dans votre "
@@ -261,7 +263,17 @@ msgstr ""
 "correctly set up, you can test the converter in your terminal with the "
 "following command:"
 
-#: ../../source/2_installation.md:76
+#: ../../source/2_installation.md:72
 msgid "Le résultat devrait alors être :"
 msgstr "The result should then be:"
+
+#~ msgid ""
+#~ "Premièrement, commencez par cloner le "
+#~ "dépôt [`idml-pandoc-"
+#~ "reader`](https://gitlab.com/deborderbollore/idml-pandoc-"
+#~ "reader) :"
+#~ msgstr ""
+#~ "First, start by cloning the [`idml-"
+#~ "pandoc-reader`](https://gitlab.com/deborderbollore/idml-"
+#~ "pandoc-reader) repository:"
 
