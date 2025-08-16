@@ -15,6 +15,7 @@ bollo.*
 sources
 output
 articles
+*.old
 
 # docs
 !docs/build
