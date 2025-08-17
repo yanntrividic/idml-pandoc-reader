@@ -1,0 +1,43 @@
+::: {#hello-world .cool-title hey="oh" wrapper="1"}
+Hello world!
+:::
+
+## Paragraph with a class that becomes a level 2 header! {.paragraph-with-a-class}
+
+::: {.cool-paragraph ble="ble" wrapper="1"}
+> Paragraph with two classes!
+:::
+
+And also this word has a class and an attribute. This [**code**]{.code
+attr1="hey" wrapper="1"} has an attribute.
+
+And this paragraph has a class that should be removed. And this code
+should be unwrapped!
+
+::: {#header .change-to-paragraph-and-wrap hey="ho" wrapper="1"}
+Header
+:::
+
+::: {.to-merge wrapper="1"}
+Paragraph to merge #0.
+:::
+
+Paragraph to simplify.
+
+## Hello
+
+::: {.to-merge wrapper="1"}
+Paragraph to merge #1.
+:::
+
+::: {.to-merge wrapper="1"}
+Paragraph to merge #2.
+:::
+
+::: {.to-merge wrapper="1"}
+Paragraph to merge #3.
+:::
+
+Paragraph to unwrap.
+
+> Blockquote to unwrap.
