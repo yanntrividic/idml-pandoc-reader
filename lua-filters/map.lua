@@ -1,4 +1,4 @@
--- This is work in progress. This is an attemp at pulling out the mapping logics
+-- This is work in progress. This is an attempt at pulling out the mapping logics
 -- out of Python to turn it into lua scripts, so that the mapping can be applied
 -- to the Pandoc AST instead of the DocBook file.
 -- Thus making it format-agnostic, and making it so Pandoc is the only dependency.
@@ -14,29 +14,37 @@ function Meta(meta)
     map_file = pandoc.utils.stringify(meta.map)
     -- print(map_file)
     content = utils.readMap(map_file)
-    map = json.decode(content)[1] -- We want the first item of the table
-    -- utils.printTable(map)
-    utils.parseSelectors(map)
+    map = json.decode(content)
   end
   return meta
 end
 
 local function applyMapping(el)
-  for selector, value in pairs(map) do
+  for _, entry in pairs(map) do
     -- We check if the element matches the selector
-    if utils.isMatchingSelector(el, value.parsed) then
+    if utils.isMatchingSelector(el, entry.selector) then
+      local o = entry.operation
       -- and apply the various operations
-      if value.delete then
+      if o.delete then
         return {}
       end
-      if value.classes then
-        operators.applyClasses(el, value.classes)
+      if o.simplify then
+        el = operators.simplify(el)
       end
-      if value.attrs then
-        operators.applyAttrs(el, value.attrs)
+      if o.classes then
+        el = operators.applyClasses(el, o.classes)
       end
-      if value.type then
-        el = operators.applyType(el, value.type)
+      if o.attrs then
+        operators.applyAttrs(el, o.attrs)
+      end
+      if o.type then
+        el = operators.applyType(el, o.type)
+      end
+      if o.level then
+        el = operators.applyLevel(el, o.level)
+      end
+      if o.unwrap then
+        el = operators.unwrap(el)
       end
     end
   end

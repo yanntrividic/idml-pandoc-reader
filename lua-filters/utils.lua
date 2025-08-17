@@ -35,7 +35,7 @@ local function split(str, pat)
 end
 
 -- Parse one selector like "BlockQuote.class1.class2"
-function utils.parseSelector(sel)
+local function parseSelector(sel)
     local parts = split(sel, "%.")
     local tag, classes
     if #parts == 0 then
@@ -61,22 +61,11 @@ function utils.parseSelector(sel)
     return tag, classes
 end
 
-function utils.parseSelectors(map)
-  for selector, value in pairs(map) do
-    local tag, classes = utils.parseSelector(selector)
-    value.parsed = {
-      tag = tag,
-      classes = classes
-    }
-  end
-end
-
 -- el: Pandoc element
 -- tag: string or nil
 -- classes: table of strings
-function utils.isMatchingSelector(el, parsed_selector)
-    tag = parsed_selector.tag
-    classes = parsed_selector.classes
+function utils.isMatchingSelector(el, selector)
+    local tag, classes = parseSelector(selector)
     -- Check tag if provided
     if tag and el.t ~= tag then
         return false

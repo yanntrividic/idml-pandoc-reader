@@ -2,21 +2,23 @@
 
 In addition to storing some Lua filters for the IDML Pandoc Reader, this folder is an attempt at adapting some of the code from `idml2docbook` to a Lua filter, so that a part of the API only has Pandoc as a dependency. This file gathers notes about it.
 
+**Disclaimer:** Many choices here are highly opinionated. 
+
 ## TODO
 
 * [x] Make a pseudo CSS selector API in Lua, that could support queries such as `Div.class1.class2`
 * [ ] Enable support for conversion operators:
     * [ ] **wrap** – wrap an element in a new parent element
-    * [ ] **unwrap** – unwrap an element in its parent
+    * [x] **unwrap** – unwrap an element in its parent
     * [x] **delete** – delete an element
     * [ ] **merge** – group the content of sibling elements
-    * [ ] **simplify** – remove all attributes from an element
+    * [x] **simplify** – remove all attributes from an element
     * [x] **reassign** – change the value of an attribute
 * [ ] Enable support for other operators, currently found in the JSON map files (see https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles):
     * [x] **type**
     * [x] **role** [is now `classes`.]
     * [ ] **cut** does it make sense here? Is it possible?
-    * [ ] **level**
+    * [x] **level**
     * [ ] **br**
     * [ ] **empty**
 
@@ -25,7 +27,7 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 To run a test.
 
 ```bash
-pandoc -f markdown test.md -t native --lua-filter=map.lua -M map=test.json
+diff test.output <(pandoc -f markdown test.md -t markdown --lua-filter=map.lua -M map=test.json)
 ```
 
 ## Panflute
@@ -38,7 +40,7 @@ Pandoc's list of types available in Lua is quite short. It can be found [here](h
 
 ### Blocks
 
-When the element can't hold classes or attributes, it must be wrapped in a Div that can.
+When the element can't hold classes or attributes, it must be wrapped in a `Div` that can, and this `Div` must be tagged with a `"wrapper"=1` attribute.
 
 * [ ][class attrs] **Div**
 * [ ][class attrs] **Figure**
@@ -57,7 +59,7 @@ When the element can't hold classes or attributes, it must be wrapped in a Div t
 
 ### Inlines
 
-When an Inline can't have classes or attributes, it must be wrapped in a Span that can.
+When an Inline can't have classes or attributes, it must be wrapped in a `Span` that can, and this `Span` must be tagged with a `"wrapper"=1` attribute.
 
 * [ ][class attrs] **Link**
 * [ ][class attrs] **Code**
