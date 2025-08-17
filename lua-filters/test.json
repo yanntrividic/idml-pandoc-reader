@@ -1,6 +1,14 @@
-[{
-    ".title": {"classes": "cool-title", "type": "Para", "attrs": { "hey": "oh" }},
-    ".paragraph-with-a-class.and-another": {"classes": "cool-paragraph", "type": "BlockQuote"},
-    ".word-with-a-class": {"classes": "cool-word", "type": "Code", "attrs": { "bli": "bla" }},
-    ".delete": {"delete": true}
-}]
+[
+  { "selector": ".title", "operation": { "classes": "cool-title", "type": "Para", "attrs": { "hey": "oh" }} },
+  { "selector": ".paragraph-with-a-class", "operation": { "type": "Header", "level": 2 } },
+  { "selector": ".paragraph-with-another-class.and-another", "operation": { "classes": "cool-paragraph", "type": "BlockQuote" } },
+  { "selector": ".word-with-a-class", "operation": { "classes": "cool-word", "type": "Code", "attrs": { "bli": "bla" }} },
+  { "selector": ".delete", "operation": { "delete": true } },
+  { "selector": ".remove-class", "operation": { "classes": "" } },
+  { "selector": ".code", "operation": { "type": "Strong" } },
+  { "selector": ".change-to-paragraph-and-wrap", "operation": { "type": "Para" } },
+  { "selector": ".to-simplify", "operation": { "simplify": true, "level": 2 } },
+  { "selector": ".to-merge", "operation": { "merge": "LineBreak" } },
+  { "selector": "Code", "operation": { "unwrap": true } },
+  { "selector": ".to-unwrap", "operation": { "unwrap": true } }
+]
