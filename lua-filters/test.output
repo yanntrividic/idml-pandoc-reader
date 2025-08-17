@@ -41,3 +41,10 @@ Paragraph to merge #3.
 Paragraph to unwrap.
 
 > Blockquote to unwrap.
+
+::: wrapper-with-a-class
+# Header to wrap in a wrapper-with-a-class {#header-to-wrap-in-a-wrapper-with-a-class .to-wrap}
+:::
+
+This is a [[string]{.to-wrap}]{.wrapper-with-a-class} to wrap in a
+wrapper-with-a-class

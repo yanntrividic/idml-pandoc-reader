@@ -35,7 +35,7 @@ local function split(str, pat)
 end
 
 -- Parse one selector like "BlockQuote.class1.class2"
-local function parseSelector(sel)
+function utils.parseSelector(sel)
     local parts = split(sel, "%.")
     local tag, classes
     if #parts == 0 then
@@ -65,7 +65,7 @@ end
 -- tag: string or nil
 -- classes: table of strings
 function utils.isMatchingSelector(el, selector)
-    local tag, classes = parseSelector(selector)
+    local tag, classes = utils.parseSelector(selector)
     -- Check tag if provided
     if tag and el.t ~= tag then
         return false

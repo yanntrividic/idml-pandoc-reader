@@ -411,7 +411,9 @@ function operators.unwrap(el)
       return pandoc.Para(el.content)
 
     elseif el.t == "BlockQuote" or el.t == "Note" or
-          el.t == "CodeBlock" or el.t == "RawBlock" then
+          el.t == "CodeBlock" or el.t == "RawBlock" or 
+          el.t == "Div" or el.t == "Header" or
+          el.t == "BulletList" or el.t == "OrderedList" then
       return pandoc.Para(pandoc.utils.blocks_to_inlines({el}))
 
     elseif el.t == "Para" then
@@ -419,6 +421,28 @@ function operators.unwrap(el)
     end
 
     -- Fallback
+    return el
+  end
+end
+
+-- Function that wraps a Block element or an Inline element
+-- in a wrapper element. Not all elements can be wrapper elements.
+-- Many wraps possibilities are actually covered by applyType.
+-- Here, we will consider that a wrapper element has to be a Div
+-- or a Span, and that it can have classes.
+-- The wrapper argument is actually a string that can hold classes,
+-- Note: These wrappers are explicit, not explicit such as elements
+-- with wrapper=1 atributes.
+function operators.wrap(el, wrapper)
+  local tag, classes = utils.parseSelector(wrapper) -- only classes are useful here
+  if blockTypes[el.t] then
+    -- Wrap Blocks in a Div
+    return pandoc.Div({el}, pandoc.Attr("", classes))
+  elseif inlineTypes[el.t] then
+    -- Wrap Inlines in a Span
+    return pandoc.Span({el}, pandoc.Attr("", classes))
+  else
+    -- Not a wrap-able element, return as-is
     return el
   end
 end

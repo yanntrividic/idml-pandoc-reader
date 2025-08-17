@@ -46,6 +46,9 @@ local function applyMapping(el)
       if o.unwrap then
         el = operators.unwrap(el)
       end
+      if o.wrap then
+        el = operators.wrap(el, o.wrap)
+      end
     end
   end
   return el

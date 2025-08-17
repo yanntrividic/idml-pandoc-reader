@@ -10,5 +10,6 @@
   { "selector": ".to-simplify", "operation": { "simplify": true, "level": 2 } },
   { "selector": ".to-merge", "operation": { "merge": "LineBreak" } },
   { "selector": "Code", "operation": { "unwrap": true } },
-  { "selector": ".to-unwrap", "operation": { "unwrap": true } }
+  { "selector": ".to-unwrap", "operation": { "unwrap": true } },
+  { "selector": ".to-wrap", "operation": { "wrap": ".wrapper-with-a-class" } }
 ]

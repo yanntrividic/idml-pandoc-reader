@@ -8,7 +8,7 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 
 * [x] Make a pseudo CSS selector API in Lua, that could support queries such as `Div.class1.class2`
 * [ ] Enable support for conversion operators:
-    * [ ] **wrap** – wrap an element in a new parent element
+    * [x] **wrap** – wrap an element in a new parent element
     * [x] **unwrap** – unwrap an element in its parent
     * [x] **delete** – delete an element
     * [ ] **merge** – group the content of sibling elements

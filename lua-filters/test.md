@@ -71,3 +71,7 @@ Paragraph to unwrap.
 > Blockquote to unwrap.
 
 </div>
+
+# Header to wrap in a wrapper-with-a-class {.to-wrap}
+
+This is a <span class="to-wrap">string</span> to wrap in a wrapper-with-a-class
