@@ -2,6 +2,20 @@
 
 local utils = {}
 
+function utils.timeit(func, ...)
+    local info = debug.getinfo(func, "S")
+    local location = string.format("%s:%d", info.short_src, info.linedefined)
+
+    local start_time = os.clock()
+    local results = {func(...)}
+    local end_time = os.clock()
+
+    print(string.format("Function defined at %s took %.6f seconds",
+        location, end_time - start_time))
+
+    return table.unpack(results)
+end
+
 function utils.printTable(tbl, indent)
     indent = indent or 0
     for k, v in pairs(tbl) do

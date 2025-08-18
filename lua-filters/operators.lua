@@ -171,51 +171,7 @@ function operators.applyAttrs(el, keyvals)
   end
 end
 
-
 -- THIS RELATES TO applyType
-
-
--- Helper to get inlines from a block
-local function toInlines(block)
-  if block.t == "Para" or block.t == "Header" then
-    return block.content
-  elseif block.t == "CodeBlock" then
-    return { pandoc.Str(block.text) }
-  elseif block.t == "Div" or block.t == "BlockQuote" then
-    return block.content[1] and toInlines(block.content[1]) or {}
-  elseif block.t == "BulletList" or block.t == "OrderedList" then
-    local result = {}
-    for _, item in ipairs(block.content or {}) do
-      for _, b in ipairs(item) do
-        for _, inline in ipairs(toInlines(b)) do
-          table.insert(result, inline)
-        end
-      end
-    end
-    return result
-  else
-    return {}
-  end
-end
-
--- Helper to get blocks from a block or inline
--- It covers more cases than necessary IMHO.
-local function toBlocks(el)
-  if el.t == "CodeBlock" then
-    return { pandoc.Para({ pandoc.Str(el.text) }) }
-  elseif el.t == "Para" or el.t == "Header" then
-    return { el }
-  -- In the case we have a wrapper
-  -- elseif el.t == "Div" and el.attributes.wrapper then
-  --   return toBlocks(el.content[1])
-  elseif el.t == "Div" or el.t == "BlockQuote" then
-    return el.content
-  elseif el.t == "BulletList" or el.t == "OrderedList" then
-    return el.content
-  else
-    return { pandoc.Para({ el }) }
-  end
-end
 
 -- This returns a new Attr object with an updated
 -- wrapper attribute value.
@@ -233,20 +189,20 @@ local function blockToBlock(el, newtype)
   attr = getAttrWithWrapper(attr, nil)
   local result
 
-  if newtype == "Div" then
-    result = pandoc.Div(toBlocks(el), attr)
+  if newtype == "Header" then
+    result = pandoc.Header(1, pandoc.utils.blocks_to_inlines({el}), attr)
   elseif newtype == "Para" then
-    result = pandoc.Para(toInlines(el))
-  elseif newtype == "Header" then
-    result = pandoc.Header(1, toInlines(el), attr)
+    result = pandoc.Para(pandoc.utils.blocks_to_inlines({el}))
   elseif newtype == "BlockQuote" then
-    result = pandoc.BlockQuote(toBlocks(el))
+    result = pandoc.BlockQuote(el.content)
+  elseif newtype == "Div" then
+    result = pandoc.Div(el.content, attr)
   elseif newtype == "BulletList" then
-    result = pandoc.BulletList({ toBlocks(el) })
+    result = pandoc.BulletList({ el.content })
   elseif newtype == "OrderedList" then
-    result = pandoc.OrderedList({ toBlocks(el) })
+    result = pandoc.OrderedList({ el.content })
   elseif newtype == "CodeBlock" then
-    result = pandoc.CodeBlock(pandoc.utils.stringify(toInlines(el)), attr)
+    result = pandoc.CodeBlock(pandoc.utils.stringify(pandoc.utils.blocks_to_inlines(el)), attr)
   else
     result = el
   end
@@ -273,22 +229,22 @@ local function inlineToInline(el, newtype)
 
   if newtype == "Span" then
     result = pandoc.Span(inlines, attr)
-  elseif newtype == "Code" then
-    result = pandoc.Code(text, attr)
-  elseif newtype == "Link" then
-    result = pandoc.Link(inlines, el.target or "", el.title or "", attr)
   elseif newtype == "Emph" then
     result = pandoc.Emph(inlines)
   elseif newtype == "Strong" then
     result = pandoc.Strong(inlines)
-  elseif newtype == "Strikeout" then
-    result = pandoc.Strikeout(inlines)
+  elseif newtype == "Link" then
+    result = pandoc.Link(inlines, el.target or "", el.title or "", attr)
   elseif newtype == "Superscript" then
     result = pandoc.Superscript(inlines)
   elseif newtype == "Subscript" then
     result = pandoc.Subscript(inlines)
   elseif newtype == "SmallCaps" then
     result = pandoc.SmallCaps(inlines)
+  elseif newtype == "Code" then
+    result = pandoc.Code(text, attr)
+  elseif newtype == "Strikeout" then
+    result = pandoc.Strikeout(inlines)
   else
     result = el
   end
