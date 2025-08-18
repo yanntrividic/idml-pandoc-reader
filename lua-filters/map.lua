@@ -28,31 +28,24 @@ local function applyMapping(el)
         return {}
       end
       if o.simplify then
-        -- el = utils.timeit("simplify", operators.simplifyel)
         el = operators.simplify(el)
       end
       if o.classes then
-        -- el = utils.timeit("applyClasses", operators.applyClassesel, o.classes)
         el = operators.applyClasses(el, o.classes)
       end
       if o.attrs then
-        -- utils.timeit("applyAttrs", operators.applyAttrsel, o.attrs)
         operators.applyAttrs(el, o.attrs)
       end
       if o.type then
-        -- el = utils.timeit("applyType", operators.applyTypeel, o.type)
         el = operators.applyType(el, o.type)
       end
       if o.level then
-        -- el = utils.timeit("applyLevel", operators.applyLevelel, o.level)
         el = operators.applyLevel(el, o.level)
       end
       if o.unwrap then
-        -- el = utils.timeit("unwrap", operators.unwrapel)
         el = operators.unwrap(el)
       end
       if o.wrap then
-        -- el = utils.timeit("wrap", operators.wrapel, o.wrap)
         el = operators.wrap(el, o.wrap)
       end
     end

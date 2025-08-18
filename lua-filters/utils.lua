@@ -2,6 +2,8 @@
 
 local utils = {}
 
+-- Helper function for timing performances
+-- example call: el = utils.timeit("simplify", operators.simplify, el)
 function utils.timeit(message, func, ...)
     local info = debug.getinfo(func, "S")
     local location = string.format("%s:%d", info.short_src, info.linedefined)
