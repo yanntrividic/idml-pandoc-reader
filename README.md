@@ -1,7 +1,6 @@
 # IDML Pandoc reader
 
 [![Design](https://contribute.design/api/shield/yanntrividic/idml-pandoc-reader)](https://contribute.design/yanntrividic/idml-pandoc-reader)
-![CI](https://gitlab.com/deborderbollore/idml-pandoc-reader/badges/main/pipeline.svg)
 ![Release](https://gitlab.com/deborderbollore/idml-pandoc-reader/-/badges/release.svg)
 
 [English version [below](#en)!]
