@@ -48,3 +48,6 @@ Paragraph to unwrap.
 
 This is a [[string]{.to-wrap}]{.wrapper-with-a-class} to wrap in a
 wrapper-with-a-class
+
+I want this [*word*]{.smallcaps} to be an italicized SmallCaps. I want
+these [**two words**]{.underline} to be an underlined Strong.

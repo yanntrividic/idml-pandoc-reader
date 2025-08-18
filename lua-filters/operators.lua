@@ -27,7 +27,8 @@ inlineTypes = {
   SmallCaps = true,
   Strikeout = true,
   Strong = true,
-  Subscript=true
+  Subscript=true,
+  Underline=true
 }
 
 -- Helper function to get every Attr value as a table
@@ -56,6 +57,25 @@ local function isWrapper(el)
   return false
 end
 
+-- Helper function to check if an Attr is empty
+local function isEmptyAttr(attr)
+  local id, classes, attrs = getAttr(attr)
+  return id == "" and #classes == 0 and #attrs == 0
+end
+
+-- Helper function to remove useless Span and Div around
+local function removeEmptyWrapper(el)
+  if (el.t == "Div" or el.t == "Span") and isEmptyAttr(el.attr) then
+    return el.content
+  end
+  return el
+end
+
+-- Cleans the final returned object.
+function operators.clean(el)
+  return removeEmptyWrapper(el)
+end
+
 -- Function that removes a useless wrapper
 -- i.e. A Div with only a wrapper attribute
 -- or a span with only a wrapper attribute
@@ -76,6 +96,7 @@ local function removeUselessWrapper(el)
   else
     return el
   end
+  return el
 end
 
 function operators.applyClasses(el, classes)
@@ -150,18 +171,6 @@ end
 
 -- Dispatcher
 function operators.applyAttrs(el, keyvals)
-  local blockTypes = {
-    Div=true, Header=true, Para=true,
-    BlockQuote=true, BulletList=true,
-    OrderedList=true, CodeBlock=true
-  }
-  local inlineTypes = {
-    Link=true, Code=true, Span=true,
-    Superscript=true, Emph=true,
-    SmallCaps=true, Strikeout=true,
-    Strong=true, Subscript=true
-  }
-
   if blockTypes[el.t] then
     return applyAttrsBlock(el, keyvals)
   elseif inlineTypes[el.t] then
@@ -221,9 +230,15 @@ end
 
 -- Smart inline conversion
 local function inlineToInline(el, newtype)
-  local attr = el.attr or {"", {}, {}}
-  attr = getAttrWithWrapper(attr, nil)
-  local inlines = el.content or (el.text and { pandoc.Str(el.text) }) or {}
+  local attr
+  is_empty_attr = isEmptyAttr(el.attr)
+  if is_empty_attr then
+    attr = {"", {}, {}}
+  else
+    attr = el.attr
+  end
+
+  local inlines = el.content or ({ pandoc.Str(el.text)}) or {}
   local text = el.text or pandoc.utils.stringify(inlines)
   local result
 
@@ -245,15 +260,17 @@ local function inlineToInline(el, newtype)
     result = pandoc.Code(text, attr)
   elseif newtype == "Strikeout" then
     result = pandoc.Strikeout(inlines)
+  elseif newtype == "Underline" then
+    result = pandoc.Underline(inlines)
   else
     result = el
   end
 
   -- Wrap in Span if new node doesn't support attributes but old node had them
-  if el.attr and el.attr ~= {"", {}, {}} then
+  if not is_empty_attr then
     local attr_supported = (newtype == "Span" or newtype == "Code" or newtype == "Link")
     if not attr_supported then
-      attr_with_wrapper = getAttrWithWrapper(el.attr, 1) -- adding a wrapper attribute to attrs
+      attr_with_wrapper = getAttrWithWrapper(attr, 1) -- adding a wrapper attribute to attrs
       result = pandoc.Span({result}, attr_with_wrapper) 
     end
   end
@@ -333,6 +350,8 @@ function operators.simplify(el)
     return pandoc.Subscript(el.content)
   elseif t == "SmallCaps" then
     return pandoc.SmallCaps(el.content)
+  elseif t == "Underline" then
+    return pandoc.Underline(el.content)
   else
     return el  -- fallback: unknown element, return as-is
   end
@@ -390,15 +409,35 @@ end
 -- Note: These wrappers are explicit, not explicit such as elements
 -- with wrapper=1 atributes.
 function operators.wrap(el, wrapper)
-  local tag, classes = utils.parseSelector(wrapper) -- only classes are useful here
+  local tag, classes = utils.parseSelector(wrapper)
   if blockTypes[el.t] then
     -- Wrap Blocks in a Div
     return pandoc.Div({el}, pandoc.Attr("", classes))
   elseif inlineTypes[el.t] then
-    -- Wrap Inlines in a Span
-    return pandoc.Span({el}, pandoc.Attr("", classes))
+    -- Wrap Inlines in a the corresponding tag
+    -- el = removeUselessWrapper(el)
+    if tag == "Superscript" then
+      el = pandoc.Superscript({el})
+    elseif tag == "Emph" then
+      el = pandoc.Emph({el})
+    elseif tag == "SmallCaps" then
+      el = pandoc.SmallCaps({el})
+    elseif tag == "Strikeout" then
+      el = pandoc.Strikeout({el})
+    elseif tag == "Strong" then
+      el = pandoc.Strong({el})
+    elseif tag == "Underline" then
+      el = pandoc.Underline({el})
+    elseif tag == "Subscript" then
+      el = pandoc.Subscript({el})
+    else -- Then it is wrapped only in a Span
+      return pandoc.Span({el}, pandoc.Attr("", classes))
+    end 
+    -- print("Before removal", el)
+    -- el = removeUselessWrapper(el)
+    -- print("After  removal", el)
+    return pandoc.Span({el}, pandoc.Attr("", classes)) -- wrap in a Span
   else
-    -- Not a wrap-able element, return as-is
     return el
   end
 end

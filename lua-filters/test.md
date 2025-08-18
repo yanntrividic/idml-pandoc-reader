@@ -75,3 +75,5 @@ Paragraph to unwrap.
 # Header to wrap in a wrapper-with-a-class {.to-wrap}
 
 This is a <span class="to-wrap">string</span> to wrap in a wrapper-with-a-class
+
+I want this <span class="to-small-caps-wrapped-in-italics">word</span> to be an italicized SmallCaps. I want these <span class="to-strong-wrapped-in-underline">two words</span> to be an underlined Strong. 

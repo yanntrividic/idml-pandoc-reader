@@ -11,5 +11,7 @@
   { "selector": ".to-merge", "operation": { "merge": "LineBreak" } },
   { "selector": "Code", "operation": { "unwrap": true } },
   { "selector": ".to-unwrap", "operation": { "unwrap": true } },
-  { "selector": ".to-wrap", "operation": { "wrap": ".wrapper-with-a-class" } }
+  { "selector": ".to-wrap", "operation": { "wrap": ".wrapper-with-a-class" } },
+  { "selector": ".to-strong-wrapped-in-underline", "operation": { "wrap": "Underline", "type": "Strong", "classes": "" } },
+  { "selector": ".to-small-caps-wrapped-in-italics", "operation": { "wrap": "SmallCaps", "type": "Emph", "classes": "" } }
 ]

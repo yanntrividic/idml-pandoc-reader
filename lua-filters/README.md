@@ -31,6 +31,12 @@ To run a test.
 diff test.output <(pandoc -f markdown test.md -t markdown --lua-filter=map.lua -M map=test.json)
 ```
 
+To run the conversion command for _Déborder Bolloré_:
+
+```bash
+pandoc -f docbook bollo.dbk -t markdown_phpextra --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua --lua-filter=map.lua -M map=bollo.json -o bollo.output --wrap=none
+```
+
 ## Panflute
 
 It would also be possible to design these filters with a Python framework such as [Panflute](https://github.com/sergiocorreia/panflute), but then it would add a Python dependency, while Pandoc embeds its own Lua interpretor...
