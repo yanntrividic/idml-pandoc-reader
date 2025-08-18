@@ -6,8 +6,6 @@ stages:
 
 doc:
   stage: deploy_doc
-  only:
-    - main
   before_script:
     # Installation de openssh, rsync [et ssh-agent]
     - apk add git curl rsync
