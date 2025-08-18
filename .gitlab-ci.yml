@@ -30,3 +30,5 @@ doc:
       --include='.htpasswd'
       --exclude '.*'
       ./docs/build $USER@$PUBHOST:$PUBDIR
+  rules:
+    - if: '$CI_COMMIT_TAG'
