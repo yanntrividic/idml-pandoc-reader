@@ -40,15 +40,16 @@ def build_roles_map(soup):
     if the style is a default one, and a slugified role name as key."""
     roles = {}
     for rule in soup.find_all("css:rule"):
-        to_slugify = native = rule.attrs["native-name"]
-        default = False
-        
-        if native.startswith("$ID/"):
-            default = True
-            to_slugify = native[4:]
-        slug = custom_slugify(to_slugify)
+        if "native-name" in rule.attrs:
+            to_slugify = native = rule.attrs["native-name"]
+            default = False
+            
+            if native.startswith("$ID/"):
+                default = True
+                to_slugify = native[4:]
+            slug = custom_slugify(to_slugify)
 
-        roles[slug] = {"hub": rule.attrs["name"], "native": native, "default": default}
+            roles[slug] = {"hub": rule.attrs["name"], "native": native, "default": default}
     return roles
 
 def update_roles_with_better_slugs(soup, roles):

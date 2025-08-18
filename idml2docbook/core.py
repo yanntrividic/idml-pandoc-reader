@@ -26,7 +26,7 @@ NODES_TO_REMOVE = [
 # }
 
 LAYERS_TO_REMOVE = [
-    "Ants"
+    # "Ants"
 ]
 
 ATTRIBUTES_TO_REMOVE = [
