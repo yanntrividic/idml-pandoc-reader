@@ -2,7 +2,7 @@
 
 local utils = {}
 
-function utils.timeit(func, ...)
+function utils.timeit(message, func, ...)
     local info = debug.getinfo(func, "S")
     local location = string.format("%s:%d", info.short_src, info.linedefined)
 
@@ -10,7 +10,7 @@ function utils.timeit(func, ...)
     local results = {func(...)}
     local end_time = os.clock()
 
-    print(string.format("Function defined at %s took %.6f seconds",
+    print(string.format(message .. ": Function defined at %s took %.6f seconds",
         location, end_time - start_time))
 
     return table.unpack(results)
@@ -42,67 +42,85 @@ function utils.readMap(map_file)
     return content
 end
 
-local function split(str, pat)
-    local t = {}
-    str:gsub("([^" .. pat .. "]+)", function(c) t[#t+1] = c end)
-    return t
-end
-
 -- Parse one selector like "BlockQuote.class1.class2"
-function utils.parseSelector(sel)
-    local parts = split(sel, "%.")
-    local tag, classes
-    if #parts == 0 then
-        return nil, {}
-    elseif #parts == 1 then
-        if sel:sub(1,1) == "." then
-            tag = nil
-            classes = { sel:sub(2) }
-        else
-            tag = sel
-            classes = {}
-        end
-    else
-        if sel:sub(1,1) == "." then
-            tag = nil
-            classes = parts
-            classes[1] = sel:sub(2, #parts[1]+1)
-        else
-            tag = parts[1]
-            classes = { table.unpack(parts, 2) }
-        end
-    end
-    return tag, classes
+local function split(str, pat)
+  local t = {}
+  str:gsub("([^" .. pat .. "]+)", function(c) t[#t+1] = c end)
+  return t
 end
 
--- el: Pandoc element
--- tag: string or nil
--- classes: table of strings
-function utils.isMatchingSelector(el, selector)
-    local tag, classes = utils.parseSelector(selector)
-    -- Check tag if provided
-    if tag and el.t ~= tag then
+function utils.parseSelector(sel)
+  local parts = split(sel, "%.")
+  local tag, classes
+
+  if #parts == 0 then
+    return nil, {}
+  elseif #parts == 1 then
+    if sel:sub(1,1) == "." then
+      tag = nil
+      classes = { sel:sub(2) }
+    else
+      tag = sel
+      classes = {}
+    end
+  else
+    if sel:sub(1,1) == "." then
+      tag = nil
+      classes = parts
+      classes[1] = sel:sub(2, #parts[1]+1)
+    else
+      tag = parts[1]
+      classes = { table.unpack(parts, 2) }
+    end
+  end
+
+  return tag, classes
+end
+
+-- Cache for memoization: element+selector -> match result
+local matchCache = {}
+
+-- Precompute parsed selectors for map entries
+function utils.preprocessMap(map)
+  for _, entry in ipairs(map) do
+    local tag, classes = utils.parseSelector(entry.selector)
+    entry._tag = tag
+    entry._classes = classes
+  end
+end
+
+-- Memoized matching function
+function utils.isMatchingSelector(el, tag, classes)
+  -- Build a unique key per element + selector
+  local el_tag = el.t or ""
+  local el_classes = el.classes or {}
+  local key = el_tag .. ":" .. table.concat(el_classes, ",") ..
+              "|" .. (tag or "") .. ":" .. table.concat(classes or {}, ",")
+
+  if matchCache[key] ~= nil then
+    return matchCache[key]
+  end
+
+  -- Check tag
+  if tag and el.t ~= tag then
+    matchCache[key] = false
+    return false
+  end
+
+  -- Check classes
+  if classes then
+    local el_class_set = {}
+    for _, c in ipairs(el_classes) do el_class_set[c] = true end
+    for _, class in ipairs(classes) do
+      if not el_class_set[class] then
+        matchCache[key] = false
         return false
+      end
     end
+  end
 
-    -- Check classes if provided
-    if classes then
-        local el_classes = el.classes or {}
-        for _, class in ipairs(classes) do
-            local found = false
-            for _, c in ipairs(el_classes) do
-                if c == class then
-                    found = true
-                    break
-                end
-            end
-            if not found then
-                return false
-            end
-        end
-    end
-
-    return true
+  matchCache[key] = true
+  return true
 end
 
 return utils

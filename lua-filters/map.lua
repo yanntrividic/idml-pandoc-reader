@@ -12,41 +12,47 @@ map = nil -- {} to prevent the nil error, but it will have to be handled differe
 function Meta(meta)
   if meta.map then
     map_file = pandoc.utils.stringify(meta.map)
-    -- print(map_file)
     content = utils.readMap(map_file)
     map = json.decode(content)
+    utils.preprocessMap(map)
   end
   return meta
 end
 
 local function applyMapping(el)
-  for _, entry in pairs(map) do
-    -- We check if the element matches the selector
-    if utils.isMatchingSelector(el, entry.selector) then
+  for _, entry in ipairs(map) do
+    if utils.isMatchingSelector(el, entry._tag, entry._classes) then
       local o = entry.operation
       -- and apply the various operations
       if o.delete then
         return {}
       end
       if o.simplify then
+        -- el = utils.timeit("simplify", operators.simplifyel)
         el = operators.simplify(el)
       end
       if o.classes then
+        -- el = utils.timeit("applyClasses", operators.applyClassesel, o.classes)
         el = operators.applyClasses(el, o.classes)
       end
       if o.attrs then
+        -- utils.timeit("applyAttrs", operators.applyAttrsel, o.attrs)
         operators.applyAttrs(el, o.attrs)
       end
       if o.type then
+        -- el = utils.timeit("applyType", operators.applyTypeel, o.type)
         el = operators.applyType(el, o.type)
       end
       if o.level then
+        -- el = utils.timeit("applyLevel", operators.applyLevelel, o.level)
         el = operators.applyLevel(el, o.level)
       end
       if o.unwrap then
+        -- el = utils.timeit("unwrap", operators.unwrapel)
         el = operators.unwrap(el)
       end
       if o.wrap then
+        -- el = utils.timeit("wrap", operators.wrapel, o.wrap)
         el = operators.wrap(el, o.wrap)
       end
     end
@@ -59,9 +65,22 @@ function Block(el)
   return applyMapping(el)
 end
 
+-- Those Inline tags can be ignored as they are not considered in semantics
+-- and add a tremendous computing time if applyMapping is applied to all of them.
+filtered_inlines = {
+  Str = true,
+  Space = true,
+  Linebreak = true,
+  SoftBreak = true
+}
+
 -- For all Inline elements
 function Inline(el)
-  return applyMapping(el)
+  if filtered_inlines[el.t] then -- No need to apply it to all Inlines
+    return el
+  else
+    return applyMapping(el)
+  end
 end
 
 -- Changing the traversal order, see:
