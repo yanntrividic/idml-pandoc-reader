@@ -76,4 +76,24 @@ Paragraph to unwrap.
 
 This is a <span class="to-wrap">string</span> to wrap in a wrapper-with-a-class
 
-I want this <span class="to-small-caps-wrapped-in-italics">word</span> to be an italicized SmallCaps. I want these <span class="to-strong-wrapped-in-underline">two words</span> to be an underlined Strong. 
+I want this <span class="to-small-caps-wrapped-in-italics">word</span> to be an italicized SmallCaps. I want these <span class="to-strong-wrapped-in-underline">two words</span> to be an underlined Strong.
+
+<div class="blockquote-with-a-class-to-remove" wrapper=1>
+
+> BlockQuote with a class to remove.
+
+</div>
+
+<div class="paragraph-turned-blockquote-class-removed
+" wrapper=1>
+
+Paragraph turned into a BlockQuote and with a class removed.
+
+</div>
+
+<div class="paragraph-turned-codeblock-class-removed
+" wrapper=1>
+
+Paragraph turned into a CodeBlock and with a class removed.
+
+</div>

@@ -51,3 +51,9 @@ wrapper-with-a-class
 
 I want this [*word*]{.smallcaps} to be an italicized SmallCaps. I want
 these [**two words**]{.underline} to be an underlined Strong.
+
+> BlockQuote with a class to remove.
+
+> Paragraph turned into a BlockQuote and with a class removed.
+
+    Paragraph turned into a CodeBlock and with a class removed.

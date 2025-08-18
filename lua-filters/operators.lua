@@ -15,7 +15,8 @@ blockTypes = {
   OrderedList = true,
   CodeBlock = true,
   Note = true,
-  RawBlock = true
+  RawBlock = true,
+  List = true
 }
 
 inlineTypes = {
@@ -35,7 +36,11 @@ inlineTypes = {
 local function getAttr(attr)
   local id, classes, attrs
 
-  if type(attr) == "table" then
+  if not attr then
+    id = ""
+    classes = {}
+    attrs = {}
+  elseif type(attr) == "table" then
     id = attr[1] or ""
     classes = attr[2] or {}
     attrs = attr[3] or {}
@@ -102,10 +107,8 @@ end
 function operators.applyClasses(el, classes)
     local new_classes = {}
     for class in string.gmatch(classes, "%S+") do
-        -- print("matched class", class)
         table.insert(new_classes, class)
     end
-    -- print("new_classes", utils.printTable(new_classes))
     el.classes = new_classes
     return removeUselessWrapper(el)
 end
@@ -193,34 +196,45 @@ local function getAttrWithWrapper(attr, value)
 end
 
 -- Smart block conversion
-local function blockToBlock(el, newtype)
-  local attr = el.attr or {"", {}, {}}
-  attr = getAttrWithWrapper(attr, nil)
-  local result
+local function blockToBlock(el, newtype, is_list)
+  local attr
+  is_empty_attr = isEmptyAttr(el.attr)
+  if is_empty_attr then
+    attr = {"", {}, {}}
+  else
+    attr = el.attr
+  end
+
+  local content
+  if is_list then
+    content = el
+  else
+    content = el.content
+  end
 
   if newtype == "Header" then
-    result = pandoc.Header(1, pandoc.utils.blocks_to_inlines({el}), attr)
+    result = pandoc.Header(1, pandoc.utils.blocks_to_inlines({el}), getAttrWithWrapper(attr, nil))
   elseif newtype == "Para" then
     result = pandoc.Para(pandoc.utils.blocks_to_inlines({el}))
   elseif newtype == "BlockQuote" then
-    result = pandoc.BlockQuote(el.content)
+    result = pandoc.BlockQuote(content)
   elseif newtype == "Div" then
-    result = pandoc.Div(el.content, attr)
+    result = pandoc.Div(content, getAttrWithWrapper(attr, nil))
   elseif newtype == "BulletList" then
-    result = pandoc.BulletList({ el.content })
+    result = pandoc.BulletList({ content })
   elseif newtype == "OrderedList" then
-    result = pandoc.OrderedList({ el.content })
+    result = pandoc.OrderedList({ content })
   elseif newtype == "CodeBlock" then
-    result = pandoc.CodeBlock(pandoc.utils.stringify(pandoc.utils.blocks_to_inlines(el)), attr)
+    result = pandoc.CodeBlock(pandoc.utils.stringify(content), getAttrWithWrapper(attr, nil))
   else
     result = el
   end
 
   -- Wrap in Div if new node doesn't support attributes but old node had them
-  if el.attr and el.attr ~= {"", {}, {}} then
+  if not is_empty_attr then
     local attr_supported = (newtype == "Div" or newtype == "Header" or newtype == "CodeBlock")
     if not attr_supported then
-      attr_with_wrapper = getAttrWithWrapper(el.attr, 1) -- adding a wrapper attribute to attrs
+      attr_with_wrapper = getAttrWithWrapper(attr, 1) -- adding a wrapper attribute to attrs
       result = pandoc.Div({result}, attr_with_wrapper)
     end
   end
@@ -286,10 +300,15 @@ end
 -- the data after conversion.
 function operators.applyType(el, newtype)
   if blockTypes[el.t] and blockTypes[newtype] then
-    return blockToBlock(el, newtype)
+    return blockToBlock(el, newtype, false)
   elseif inlineTypes[el.t] and inlineTypes[newtype] then
     return inlineToInline(el, newtype)
   else
+    -- We are in the context where this is an unwrapped Div that
+    -- contains only one element. It won't work for several elements.
+    if blockTypes[el[1].t] and blockTypes[newtype] then
+      return blockToBlock(el[1], newtype, true)
+    end
     return el
   end
 end
@@ -415,7 +434,6 @@ function operators.wrap(el, wrapper)
     return pandoc.Div({el}, pandoc.Attr("", classes))
   elseif inlineTypes[el.t] then
     -- Wrap Inlines in a the corresponding tag
-    -- el = removeUselessWrapper(el)
     if tag == "Superscript" then
       el = pandoc.Superscript({el})
     elseif tag == "Emph" then
@@ -432,10 +450,7 @@ function operators.wrap(el, wrapper)
       el = pandoc.Subscript({el})
     else -- Then it is wrapped only in a Span
       return pandoc.Span({el}, pandoc.Attr("", classes))
-    end 
-    -- print("Before removal", el)
-    -- el = removeUselessWrapper(el)
-    -- print("After  removal", el)
+    end
     return pandoc.Span({el}, pandoc.Attr("", classes)) -- wrap in a Span
   else
     return el
