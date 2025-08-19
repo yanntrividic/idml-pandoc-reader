@@ -27,6 +27,11 @@ local function applyMapping(el)
       if o.delete then
         return {}
       end
+      if not o.empty then
+        if operators.isContentOneLineBreak(el) then
+          return {}
+        end
+      end
       if o.simplify then
         el = operators.simplify(el)
       end

@@ -99,6 +99,15 @@ local function removeUselessWrapper(el)
   return el
 end
 
+-- This is highly specific to the IDML Pandoc Reader specific.
+-- It can be handy to keep empty elements. The idml2docbook
+-- module sends the data of empty elements to the AST by
+-- just filling it with a LineBreak. (Should it be a SoftBreak?)
+function operators.isContentOneLineBreak(el)
+  div_wrapper_with_one_linebreak = pandoc.Div(pandoc.Para(pandoc.LineBreak()), pandoc.Attr("", el.classes, { wrapper = 1 }))
+  return el == div_wrapper_with_one_linebreak
+end
+
 function operators.applyClasses(el, classes)
     local new_classes = {}
     for class in string.gmatch(classes, "%S+") do
