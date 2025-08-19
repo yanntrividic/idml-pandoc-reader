@@ -466,8 +466,8 @@ function operators.mergeLists(blocks)
   while i <= #blocks do
     local blk = blocks[i]
 
+    -- Case 1: plain BulletList
     if blk.t == "BulletList" then
-      -- Merge BulletLists
       local items = pandoc.List(blk.content)
       i = i + 1
       while i <= #blocks and blocks[i].t == "BulletList" do
@@ -476,14 +476,14 @@ function operators.mergeLists(blocks)
       end
       table.insert(result, pandoc.BulletList(items))
 
+    -- Case 2: plain OrderedList
     elseif blk.t == "OrderedList" then
-      -- blk.content = { attrs, items }
       local attr = blk.content[1]
-      local items = pandoc.List(blk.content)  -- <-- must wrap in pandoc.List
+      local items = pandoc.List(blk.content)
       i = i + 1
       while i <= #blocks and blocks[i].t == "OrderedList" do
         local other_attr = blocks[i].content[1]
-        local other_items = pandoc.List(blocks[i].content) -- <-- wrap here too
+        local other_items = pandoc.List(blocks[i].content)
         if other_attr.style == attr.style and other_attr.delimiter == attr.delimiter then
           items:extend(other_items)
           i = i + 1
@@ -491,10 +491,68 @@ function operators.mergeLists(blocks)
           break
         end
       end
-    local listattr = pandoc.ListAttributes(attr.start, attr.style, attr.delimiter)
-    table.insert(result, pandoc.OrderedList(items, listattr))
+      local listattr = pandoc.ListAttributes(attr.start, attr.style, attr.delimiter)
+      table.insert(result, pandoc.OrderedList(items, listattr))
+
+    -- Case 3: Div-wrapped list
+    elseif blk.t == "Div"
+      and #blk.content == 1
+      and (blk.content[1].t == "BulletList" or blk.content[1].t == "OrderedList")
+    then
+      local div_id, div_classes, div_attrs = getAttr(blk.attr)
+      local inner = blk.content[1]
+
+      if inner.t == "BulletList" then
+        local items = pandoc.List(inner.content)
+        i = i + 1
+        while i <= #blocks do
+          local nxt = blocks[i]
+          if nxt.t == "Div"
+            and nxt.identifier == div_id
+            and pandoc.utils.equals(nxt.classes, div_classes)
+            and pandoc.utils.equals(nxt.attributes, div_attrs)
+            and #nxt.content == 1
+            and nxt.content[1].t == "BulletList"
+          then
+            items:extend(nxt.content[1].content)
+            i = i + 1
+          else
+            break
+          end
+        end
+        table.insert(result, pandoc.Div({ pandoc.BulletList(items) }, pandoc.Attr(div_id, div_classes, div_attrs)))
+
+      elseif inner.t == "OrderedList" then
+        local attr = inner.content[1]
+        local items = pandoc.List(inner.content)
+        i = i + 1
+        while i <= #blocks do
+          local nxt = blocks[i]
+          if nxt.t == "Div"
+            and nxt.identifier == div_id
+            and pandoc.utils.equals(nxt.classes, div_classes)
+            and pandoc.utils.equals(nxt.attributes, div_attrs)
+            and #nxt.content == 1
+            and nxt.content[1].t == "OrderedList"
+          then
+            local other_attr = nxt.content[1].content
+            local other_items = pandoc.List(nxt.content[1].content)
+            if other_attr.style == attr.style and other_attr.delimiter == attr.delimiter then
+              items:extend(other_items)
+              i = i + 1
+            else
+              break
+            end
+          else
+            break
+          end
+        end
+        local listattr = pandoc.ListAttributes(attr.start, attr.style, attr.delimiter)
+        table.insert(result, pandoc.Div({ pandoc.OrderedList(items, listattr) }, pandoc.Attr(div_id, div_classes, div_attrs)))
+      end
 
     else
+      -- default: leave block unchanged
       table.insert(result, blk)
       i = i + 1
     end

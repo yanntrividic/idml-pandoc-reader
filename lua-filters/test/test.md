@@ -116,6 +116,24 @@ Bullet item 3.
 
 </div>
 
+<div class="paragraph-list-item-with-class-to-turn-into-bulletlist" wrapper=1>
+
+Bullet item with class 1.
+
+</div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-bulletlist" wrapper=1>
+
+Bullet item with class 2.
+
+</div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-bulletlist" wrapper=1>
+
+Bullet item with class 3.
+
+</div>
+
 <div class="paragraph-list-item-to-turn-into-orderedlist" wrapper=1>
 
 Ordered item 1.
@@ -131,5 +149,23 @@ Ordered item 2.
 <div class="paragraph-list-item-to-turn-into-orderedlist" wrapper=1>
 
 Ordered item 3.
+
+</div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item with class 1.
+
+</div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item with class 2.
+
+</div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item with class 3.
 
 </div>
