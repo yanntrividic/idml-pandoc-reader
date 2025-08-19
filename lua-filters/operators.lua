@@ -76,11 +76,6 @@ local function removeEmptyWrapper(el)
   return el
 end
 
--- Cleans the final returned object.
-function operators.clean(el)
-  return removeEmptyWrapper(el)
-end
-
 -- Function that removes a useless wrapper
 -- i.e. A Div with only a wrapper attribute
 -- or a span with only a wrapper attribute
@@ -475,6 +470,27 @@ function operators.wrap(el, wrapper)
     return pandoc.Span({el}, pandoc.Attr("", classes)) -- wrap in a Span
   else
     return el
+  end
+end
+
+-- Cleans the final returned object.
+function operators.clean(el)
+  return removeEmptyWrapper(el)
+end
+
+-- Inserts a LineBreak element before the element given
+-- as argument.
+function operators.insertLineBreakBefore(el)
+  -- We are in the context where this is an unwrapped Div that
+  -- contains only one element. It won't work for several elements.
+  if el.t == nil and type(el) ~= "string" then
+    els = { pandoc.LineBreak() }
+    for i, elem in pairs(el) do
+      table.insert(els, elem)
+    end
+    return els
+  else
+    return { pandoc.LineBreak(), el }
   end
 end
 

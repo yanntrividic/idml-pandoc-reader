@@ -49,6 +49,9 @@ local function applyMapping(el)
         el = operators.wrap(el, o.wrap)
       end
       el = operators.clean(el)
+      if o.br then
+        el = operators.insertLineBreakBefore(el)
+      end
     end
   end
   return el

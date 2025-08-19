@@ -205,3 +205,9 @@ Ordered item with added class 2.
 Ordered item with added class 3.
 
 </div>
+
+<div class="insert-linebreak-before" wrapper=1>
+
+A LineBreak should be added before this paragraph.
+
+</div>

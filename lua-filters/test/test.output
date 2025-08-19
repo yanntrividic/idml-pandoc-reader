@@ -8,11 +8,12 @@ Hello world!
 > Paragraph with two classes!
 :::
 
-And also this word has a class and an attribute. This [**code**]{.code
-attr1="hey" wrapper="1"} has an attribute.
+And also this \
+word has a class and an attribute. This [**code**]{.code attr1="hey"
+wrapper="1"} has an attribute.
 
-And this paragraph has a class that should be removed. And this code
-should be unwrapped!
+And this paragraph has a class that should be removed. And this \
+code should be unwrapped!
 
 ::: {#header .change-to-paragraph-and-wrap hey="ho" wrapper="1"}
 Header
@@ -105,3 +106,7 @@ these [**two words**]{.underline} to be an underlined Strong.
 
 3.  Ordered item with added class 3.
 :::
+
+\
+
+A LineBreak should be added before this paragraph.
