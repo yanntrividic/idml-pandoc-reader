@@ -59,21 +59,12 @@ def load_env(argv):
         '-o', '--output', type=str,
         help='filename where output is written, defaults to stdout')
     PARSER.add_argument(
-        '-m', '--map', type=str,
-        help='filename of the JSON map file to perform role-specific actions, '
-        'defaults to maps/sample.json')
-    PARSER.add_argument(
-        '-e', '--empty', action='store_true',
-        help='do not remove empty elements with roles, '
-        'such as <para role="r"></para>, warning: may keep residuous elements!')
-    PARSER.add_argument(
         '-g', '--hierarchy', action='store_true',
-        help='do not generate nested sections out of a flat hierarchy, '
-        'works in pair with --map')
+        help='do not generate nested sections out of a flat hierarchy')
     PARSER.add_argument(
         '-c', '--cut', action='store_true',
         help='cut the input file in several output files '
-        'works in pair with --map (for specifying the cuts), '
+        'works in pair with the mapping file (for specifying the cuts), '
         'if used with --output, output is considered as a folder.')
     PARSER.add_argument(
         '-n', '--names', action='store_true',
@@ -133,8 +124,6 @@ def load_env(argv):
 
     default_options = {
         'idml2hubxml_file': False,
-        'map': getEnvOrDefault("MAP", "maps/sample.json"),
-        'empty': getEnvOrDefault("EMPTY"),
         'hierarchy': getEnvOrDefault("HIERARCHY"),
         'cut': getEnvOrDefault("CUT"),
         'names': getEnvOrDefault("NAMES"),
