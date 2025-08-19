@@ -169,68 +169,6 @@ def add_french_orthotypography(soup, thin_spaces):
 
     return BeautifulSoup(s, "xml")
 
-def generate_sections(soup):
-    """Transform soup to hierarchical sections up to 6 levels deep."""
-    logging.info("Generating nested sections' hierarchy...")
-
-    new_structure = []
-    section_stack = []  # Tracks open sections
-    xml_ids = []
-    first_elements = []
-
-    # All the elements, after a title tag are processed by the rest of the method
-    # this loop is to preserve what comes before the fisrt title tag
-    article_contents = soup.select("article > *")
-    while len(article_contents) > 0 and article_contents[0].name != "title":
-        first_elements.append(article_contents.pop(0))
-
-    for element in soup.find_all("title"):  # Only processing <title> elements
-        try:
-            level = int(element.get("level", 1))  # Ensure level is an integer
-        except ValueError:
-            level = 1  # Default to level 1 if invalid
-
-        title_text = element.get_text(strip=True, separator=" ")
-        xml_id = generate_xml_id(title_text, xml_ids)
-
-        # Create new section
-        section = soup.new_tag("section", **{"xml:id": xml_id})
-        new_title = copy.copy(element) # clone the element to keep it as is.
-        if "role" in new_title.attrs: section["role"] = new_title.attrs["role"]
-        section.append(new_title)
-
-        # Close higher or equal level sections
-        while section_stack and section_stack[-1][0] >= level:
-            section_stack.pop()
-
-        # Nesting logic
-        if section_stack:
-            section_stack[-1][1].append(section)  # Add as child of last open section
-        else:
-            new_structure.append(section)  # Top-level section
-
-        # Push current section to stack
-        section_stack.append((level, section))
-
-        # Move following siblings inside the new section
-        next_elem = element.find_next_sibling()
-        while next_elem and next_elem.name != "title":
-            to_move = next_elem
-            next_elem = next_elem.find_next_sibling()
-            to_move.extract()  # Remove from original place
-            section.append(to_move)  # Append to current section
-
-    # Replace soup's article (or a wrapper element) with the new structure
-    article = soup.find("article") or soup
-    article.clear()
-
-    for elem in first_elements:
-        article.append(elem)
-    for sec in new_structure:
-        article.append(sec)
-
-    return soup
-
 def hubxml2docbook(file, **options):
     logging.info("hubxml2docbook starting...")
     # Read the HTML input file
@@ -274,8 +212,6 @@ def hubxml2docbook(file, **options):
     if options["typography"]:
         soup = remove_orthotypography(soup)
         soup = add_french_orthotypography(soup, options["thin_spaces"])
-
-    if not options["hierarchy"]: generate_sections(soup)
 
     if options["prettify"]:
         logging.warning("Prettifying can result in errors depending on whatcha wanna do afterwards!")

@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 
 from . import __version__, LOGGER
 from .core import idml2docbook
-from .cut import split_docbook
 
 def getEnvOrDefault(envConst, default=False):
     return os.getenv(envConst) if os.getenv(envConst) else default
@@ -58,18 +57,6 @@ def load_env(argv):
     PARSER.add_argument(
         '-o', '--output', type=str,
         help='filename where output is written, defaults to stdout')
-    PARSER.add_argument(
-        '-g', '--hierarchy', action='store_true',
-        help='do not generate nested sections out of a flat hierarchy')
-    PARSER.add_argument(
-        '-c', '--cut', action='store_true',
-        help='cut the input file in several output files '
-        'works in pair with the mapping file (for specifying the cuts), '
-        'if used with --output, output is considered as a folder.')
-    PARSER.add_argument(
-        '-n', '--names', action='store_true',
-        help='infer output file names based on the sections ids, '
-        'only used in pair with --cut')
     PARSER.add_argument(
         '-t', '--typography', action='store_true',
         help='redo the orthotypography '
@@ -124,9 +111,6 @@ def load_env(argv):
 
     default_options = {
         'idml2hubxml_file': False,
-        'hierarchy': getEnvOrDefault("HIERARCHY"),
-        'cut': getEnvOrDefault("CUT"),
-        'names': getEnvOrDefault("NAMES"),
         'typography': getEnvOrDefault("TYPOGRAPHY"),
         'thin_spaces': getEnvOrDefault("THIN_SPACES"),
         'linebreaks': getEnvOrDefault("LINEBREAKS"),
@@ -152,34 +136,12 @@ def main(argv=None, stdout=None, stdin=None):
     }
 
     docbook = idml2docbook(args.input, **options)
-    
-    if(args.cut):
-        if not args.map:
-            e = ValueError("Trying to cut, but no map given as argument...")
-            logging.error(e)
-            raise e
-        names, sections = split_docbook(docbook, **options)
-        if(args.output):
-            logging.info("Creating directory if it does not exist: " + args.output)
-            os.makedirs(args.output, exist_ok=True)
-            for i, section in enumerate(sections):
-                filename = args.output + "/{:02d}_".format(i)
 
-                if(args.names): filename = filename + (names[i] if names[i] else "notitle") + ".xml"
-                else: filename = filename + "cut.xml"
-
-                logging.info("Writing file: " + filename)
-                with open(filename, "w") as file:
-                    file.write(section)
-        else:
-            for i, section in enumerate(sections):
-                print(section)
-    else:
-        if(args.output):
-            logging.info("Writing file: " + args.output)
-            with open(args.output, "w") as file:
-                file.write(docbook)
-        else: print(docbook)
+    if(args.output):
+        logging.info("Writing file: " + args.output)
+        with open(args.output, "w") as file:
+            file.write(docbook)
+    else: print(docbook)
 
 if __name__ == "__main__":
     main()

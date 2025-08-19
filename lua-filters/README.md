@@ -17,11 +17,12 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 * [ ] Enable support for other operators, currently found in the JSON map files (see https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles):
     * [x] **type**
     * [x] **role** [is now `classes`.]
-    * [ ] **cut** does it make sense here? Is it possible? It seems like it's doable.
+    * [ ] **cut** does it make sense here? Is it possible? It seems like it's doable. Also, removing --map from the Python module makes the cuts difficult to do from there.
     * [x] **level**
-    * [x] **br** Currently, this is more for Docbook, but by letting empty paragraphs to Pandoc...
-    * [x] **empty** Currently, this is more for Docbook, but by letting empty paragraphs to Pandoc...
-* [ ] Work on perfs. The map.lua filter currently multiplies by 2 the computing time of a file. _Déborder Bolloré_ takes a bit less than 3.6s, compared to 1.7s without the filter. Leads for optimisation are:
+    * [x] **br**
+    * [x] **empty**
+* [ ] Work on perfs. The map.lua filter currently multiplies by 2 the computing time of a file. _Déborder Bolloré_ takes a bit less than 3.6s, compared to 1.7s without the filter.
+* [ ] Add logging messages with the `pandoc.log` module.
 
 ## Run a test
 

@@ -1,5 +1,12 @@
 # Revision history for idml-pandoc-reader
 
+## idml-pandoc-reader 0.4.0 (to release)
+
+* Mapping functionalities are now written in Lua. That means that they are now format-agnostic, and can work with Pandoc as their only dependency.
+* `idml2docbook` was updated to reflect those changes, and is now closer to a simple IDML to DocBook converter.
+* JSON mapping structure has changed to comply to the new architecture, operators changed as well.
+* Removing the `cut` functionalities for now, as they will be handled in Pandoc as well.
+
 ## idml-pandoc-reader 0.3.0 (2025-08-18)
 
 * A `.design` folder and its content now exist to document the design of OutDesign.
