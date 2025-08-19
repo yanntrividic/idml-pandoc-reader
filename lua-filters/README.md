@@ -14,10 +14,10 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
     * [ ] **merge** – group the content of sibling elements
     * [x] **simplify** – remove all attributes from an element
     * [x] **reassign** – change the value of an attribute
-* [ ] Enable support for other operators, currently found in the JSON map files (see https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles):
+* [x] Enable support for other operators, currently found in the JSON map files (see https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles):
     * [x] **type**
     * [x] **role** [is now `classes`.]
-    * [ ] **cut** does it make sense here? Is it possible? It seems like it's doable. Also, removing --map from the Python module makes the cuts difficult to do from there.
+    * [x] **cut** does it make sense here? Is it possible? It seems like it's doable. Also, removing --map from the Python module makes the cuts difficult to do from there.
     * [x] **level**
     * [x] **br**
     * [x] **empty**

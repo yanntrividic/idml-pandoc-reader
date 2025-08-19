@@ -1,4 +1,6 @@
-# Hello world! {.title}
+# First header
+
+## Hello world! {.title}
 
 <div class="paragraph-with-a-class" wrapper=1>
 
@@ -40,7 +42,9 @@ Paragraph to simplify.
 
 </div>
 
-# Hello {.to-simplify}
+# Hello {.to-simplify hello=hey}
+
+## Header to cut {.cut}
 
 <div class="to-merge" wrapper=1>
 

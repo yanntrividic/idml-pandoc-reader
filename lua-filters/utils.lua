@@ -1,6 +1,100 @@
 -- Utility functions for map.lua
 
+local json = require 'pandoc.json' -- requires Pandoc>=3.1.1
+
 local utils = {}
+
+utils.ext = {
+  -- Markdown family
+  markdown          = "md",
+  commonmark        = "md",
+  gfm               = "md",
+  markdown_mmd      = "md",
+  markdown_phpextra = "md",
+  markdown_strict   = "md",
+
+  -- HTML
+  html   = "html",
+  html4  = "html",
+  html5  = "html",
+
+  -- DocBook
+  docbook      = "xml",
+  docbook4     = "xml",
+  docbook5     = "xml",
+
+  -- LaTeX / TeX
+  latex  = "tex",
+  beamer = "tex",
+  context= "tex",
+
+  -- MS Office
+  docx = "docx",
+  pptx = "pptx",
+  xlsx = "xlsx",
+
+  -- OpenDocument
+  odt = "odt",
+  odp = "odp",
+  ods = "ods",
+
+  -- RTF / TXT
+  rtf = "rtf",
+  plain = "txt",
+
+  -- OPML
+  opml = "opml",
+
+  -- EPUB
+  epub  = "epub",
+  epub2 = "epub",
+  epub3 = "epub",
+
+  -- JSON (Pandoc AST)
+  json = "json",
+
+  -- ICML (Adobe InCopy)
+  icml = "icml",
+
+  -- Man page / roff
+  man  = "1",
+  ms   = "ms",
+
+  -- Textile
+  textile = "textile",
+
+  -- Org
+  org = "org",
+
+  -- AsciiDoc
+  asciidoc  = "adoc",
+  asciidoctor = "adoc",
+
+  -- Other special ones
+  native = "native",
+  pdf    = "pdf"
+}
+
+-- Helper function to slugify Header contents for filenames.
+-- There might be some problems with accentuated chars...
+function utils.slugify(str)
+  str = pandoc.text.lower(str)
+  str = str:gsub("[^%w%s-]", "")    -- drop non-word chars
+  str = str:gsub("%s+", "_")        -- spaces to underscores
+  str = str:gsub("_+", "_")         -- collapse multiple _
+  str = str:gsub("^_*(.-)_*$", "%1")-- trim leading/trailing _
+  return str
+end
+
+-- extract first heading text from a block list
+function utils.firstHeading(blocks)
+  for _, blk in ipairs(blocks) do
+    if blk.t == "Header" then
+      return pandoc.utils.stringify(blk.content)
+    end
+  end
+  return nil
+end
 
 -- Helper function for timing performances
 -- example call: el = utils.timeit("simplify", operators.simplify, el)
@@ -31,7 +125,7 @@ function utils.printTable(tbl, indent)
     end
 end
 
-function utils.readMap(map_file)
+local function readMap(map_file)
     -- Open the file in read mode
     local file = io.open(map_file, "r")
     if not file then
@@ -83,12 +177,22 @@ end
 local matchCache = {}
 
 -- Precompute parsed selectors for map entries
-function utils.preprocessMap(map)
+local function preprocessMap(map)
   for _, entry in ipairs(map) do
     local tag, classes = utils.parseSelector(entry.selector)
     entry._tag = tag
     entry._classes = classes
   end
+end
+
+function utils.readAndPreprocessMap(meta)
+  if meta.map then
+    map_file = pandoc.utils.stringify(meta.map)
+    content = readMap(map_file)
+    map = json.decode(content)
+    preprocessMap(map)
+  end
+  return meta
 end
 
 -- Memoized matching function

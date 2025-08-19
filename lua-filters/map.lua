@@ -3,20 +3,11 @@
 -- to the Pandoc AST instead of the DocBook file.
 -- Thus making it format-agnostic, and making it so Pandoc is the only dependency.
 
-local json = require 'pandoc.json' -- requires Pandoc>=3.1.1
 local utils = require 'utils'
 local operators = require 'operators'
 
-map = nil -- {} to prevent the nil error, but it will have to be handled differently
-
 function Meta(meta)
-  if meta.map then
-    map_file = pandoc.utils.stringify(meta.map)
-    content = utils.readMap(map_file)
-    map = json.decode(content)
-    utils.preprocessMap(map)
-  end
-  return meta
+  return utils.readAndPreprocessMap(meta)
 end
 
 local function applyMapping(el)
