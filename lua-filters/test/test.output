@@ -57,3 +57,15 @@ these [**two words**]{.underline} to be an underlined Strong.
 > Paragraph turned into a BlockQuote and with a class removed.
 
     Paragraph turned into a CodeBlock and with a class removed.
+
+- Bullet item 1.
+
+- Bullet item 2.
+
+- Bullet item 3.
+
+1.  Ordered item 1.
+
+2.  Ordered item 2.
+
+3.  Ordered item 3.

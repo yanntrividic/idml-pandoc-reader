@@ -16,5 +16,7 @@
   { "selector": ".to-small-caps-wrapped-in-italics", "operation": { "wrap": "SmallCaps", "type": "Emph", "classes": "" } },
   { "selector": ".blockquote-with-a-class-to-remove", "operation": { "classes": "" } },
   { "selector": ".paragraph-turned-blockquote-class-removed", "operation": { "classes": "", "type": "BlockQuote" } },
-  { "selector": ".paragraph-turned-codeblock-class-removed", "operation": { "classes": "", "type": "CodeBlock" } }
+  { "selector": ".paragraph-turned-codeblock-class-removed", "operation": { "classes": "", "type": "CodeBlock" } },
+  { "selector": ".paragraph-list-item-to-turn-into-bulletlist", "operation": { "classes": "", "type": "BulletList" } },
+  { "selector": ".paragraph-list-item-to-turn-into-orderedlist", "operation": { "classes": "", "type": "OrderedList" } }
 ]

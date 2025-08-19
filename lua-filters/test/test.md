@@ -97,3 +97,39 @@ Paragraph turned into a BlockQuote and with a class removed.
 Paragraph turned into a CodeBlock and with a class removed.
 
 </div>
+
+<div class="paragraph-list-item-to-turn-into-bulletlist" wrapper=1>
+
+Bullet item 1.
+
+</div>
+
+<div class="paragraph-list-item-to-turn-into-bulletlist" wrapper=1>
+
+Bullet item 2.
+
+</div>
+
+<div class="paragraph-list-item-to-turn-into-bulletlist" wrapper=1>
+
+Bullet item 3.
+
+</div>
+
+<div class="paragraph-list-item-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item 1.
+
+</div>
+
+<div class="paragraph-list-item-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item 2.
+
+</div>
+
+<div class="paragraph-list-item-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item 3.
+
+</div>

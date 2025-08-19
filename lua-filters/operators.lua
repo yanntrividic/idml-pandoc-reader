@@ -457,4 +457,50 @@ function operators.wrap(el, wrapper)
   end
 end
 
+-- Merge consecutive OrderedList and BulletList elements together.
+-- For now, it only considers top-level elements.
+function operators.mergeLists(blocks)
+  local result = {}
+  local i = 1
+
+  while i <= #blocks do
+    local blk = blocks[i]
+
+    if blk.t == "BulletList" then
+      -- Merge BulletLists
+      local items = pandoc.List(blk.content)
+      i = i + 1
+      while i <= #blocks and blocks[i].t == "BulletList" do
+        items:extend(blocks[i].content)
+        i = i + 1
+      end
+      table.insert(result, pandoc.BulletList(items))
+
+    elseif blk.t == "OrderedList" then
+      -- blk.content = { attrs, items }
+      local attr = blk.content[1]
+      local items = pandoc.List(blk.content)  -- <-- must wrap in pandoc.List
+      i = i + 1
+      while i <= #blocks and blocks[i].t == "OrderedList" do
+        local other_attr = blocks[i].content[1]
+        local other_items = pandoc.List(blocks[i].content) -- <-- wrap here too
+        if other_attr.style == attr.style and other_attr.delimiter == attr.delimiter then
+          items:extend(other_items)
+          i = i + 1
+        else
+          break
+        end
+      end
+    local listattr = pandoc.ListAttributes(attr.start, attr.style, attr.delimiter)
+    table.insert(result, pandoc.OrderedList(items, listattr))
+
+    else
+      table.insert(result, blk)
+      i = i + 1
+    end
+  end
+
+  return result
+end
+
 return operators

@@ -77,10 +77,16 @@ function Inline(el)
   end
 end
 
+function Pandoc(doc)
+  doc.blocks = operators.mergeLists(doc.blocks)
+  return doc
+end
+
 -- Changing the traversal order, see:
 -- https://pandoc.org/lua-filters.html#typewise-traversal
 return {
   { Meta = Meta },     -- (1)
   { Inline = Inline }, -- (2)
-  { Block = Block }    -- (3)
+  { Block = Block },   -- (3)
+  { Pandoc = Pandoc }  -- (4)
 }
