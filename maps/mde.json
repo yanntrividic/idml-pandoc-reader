@@ -1,9 +1,0 @@
-[{
-    "No_character_style": { "unwrap": true },
-    "No_paragraph_style": { "unwrap": true },
-    "NormalParagraphStyle": { "unwrap": true },
-    "citations": { "wrap" : "blockquote" },
-    "titre_po_me": { "type": "title", "level": 2, "role": "" },
-    "italic": { "type" : "emphasis", "role": "italics" },
-    "super": { "type": "superscript", "role": "" }
-}]

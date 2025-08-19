@@ -1,30 +1,26 @@
-[{
-    "Courant_01": { "br": true },
-    "Courant_02": {},
-    
-    "Titre": { "type": "title", "level": 1, "role": "" },
-    "Titre_02": { "type": "title", "level": 2, "role": "" },
-    "Titre_sans_auteurice" : { "cut": true, "empty": true, "role": "author", "type": "title", "level": 1 },
-    "intertitre": { "type": "title", "level": 2, "role": "subhead" },
-    "Nom_de_l_auteur": { "role" : "author", "cut": true, "type": "title", "level": 1 },
-    
-    "Liste": { "type": "listitem", "role": "", "wrap": "itemizedlist" },
-    "Entretien_Questions": {"role": "question", "wrap": "blockquote" },
-    "Citations": { "role" : "", "wrap": "blockquote" },
-
-    "Italique": { "type" : "emphasis", "role": "italics" },
-    "exposant": { "type": "superscript" },
-    "Small_Caps": { "role": "small-caps" },
-    "Italique_soulign_": { "role": "italics underline" },
-    "Small_Caps_Italique" : {"role": "italics small-caps" },
-    "Aalter_9_5": { "role": "aalter"},
-
-    "Titre_courant": { "delete": true },
-    "Num_rotation_notes": { "delete": true },
-    "Chiffres_diagramme": { "delete": true },
-    "Appels_de_notes": { "unwrap": true },
-
-    "Appel_de_notes_titre": { "unwrap": true },
-    "Note_de_bas_de_pages": {},
-    "CAPITALES": { "unwrap": true }
-}]
+[
+  { "selector": ".title", "operation": { "classes": "cool-title", "type": "Para", "attrs": { "hey": "oh" }} },
+  { "selector": ".paragraph-with-a-class", "operation": { "type": "Header", "level": 2 } },
+  { "selector": ".paragraph-with-another-class.and-another", "operation": { "classes": "cool-paragraph", "type": "BlockQuote" } },
+  { "selector": ".word-with-a-class", "operation": { "classes": "cool-word", "type": "Code", "attrs": { "bli": "bla" }} },
+  { "selector": ".delete", "operation": { "delete": true } },
+  { "selector": ".remove-class", "operation": { "classes": "" } },
+  { "selector": ".code", "operation": { "type": "Strong" } },
+  { "selector": ".change-to-paragraph-and-wrap", "operation": { "type": "Para" } },
+  { "selector": ".to-simplify", "operation": { "simplify": true, "level": 2 } },
+  { "selector": ".to-merge", "operation": { "merge": "LineBreak" } },
+  { "selector": "Code", "operation": { "unwrap": true, "br": true } },
+  { "selector": ".to-unwrap", "operation": { "unwrap": true } },
+  { "selector": ".to-wrap", "operation": { "wrap": ".wrapper-with-a-class" } },
+  { "selector": ".to-strong-wrapped-in-underline", "operation": { "wrap": "Underline", "type": "Strong", "classes": "" } },
+  { "selector": ".to-small-caps-wrapped-in-italics", "operation": { "wrap": "SmallCaps", "type": "Emph", "classes": "" } },
+  { "selector": ".blockquote-with-a-class-to-remove", "operation": { "classes": "" } },
+  { "selector": ".paragraph-turned-blockquote-class-removed", "operation": { "classes": "", "type": "BlockQuote" } },
+  { "selector": ".paragraph-turned-codeblock-class-removed", "operation": { "classes": "", "type": "CodeBlock" } },
+  { "selector": ".paragraph-list-item-to-turn-into-bulletlist", "operation": { "classes": "", "type": "BulletList" } },
+  { "selector": ".paragraph-list-item-with-class-to-turn-into-bulletlist", "operation": { "type": "BulletList" } },
+  { "selector": ".paragraph-list-item-to-turn-into-orderedlist", "operation": { "classes": "", "type": "OrderedList" } },
+  { "selector": ".paragraph-list-item-with-class-to-turn-into-orderedlist", "operation": { "type": "OrderedList" } },
+  { "selector": ".paragraph-list-item-with-added-class-to-turn-into-orderedlist", "operation": { "type": "OrderedList", "classes": "ordered-list" } },
+  { "selector": ".insert-linebreak-before", "operation": { "br": true, "simplify": true } }
+]
