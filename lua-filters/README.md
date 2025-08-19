@@ -28,7 +28,7 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 To run a test.
 
 ```bash
-diff test.output <(pandoc -f markdown test.md -t markdown --lua-filter=map.lua -M map=test.json)
+diff test/test.output <(pandoc -f markdown test/test.md -t markdown --lua-filter=map.lua -M map=test/test.json)
 ```
 
 To run the conversion command for _Déborder Bolloré_:
