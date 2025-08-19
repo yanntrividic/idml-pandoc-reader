@@ -5,6 +5,10 @@
 
 -- pandoc -f markdown -t native --lua-filter=cut.lua -M map=test/test.json test/test.md
 
+-- Enables relative imports
+local script_dir = debug.getinfo(1, "S").source:match("@?(.*)/") or "."
+package.path = script_dir .. "/?.lua;" .. package.path
+
 local utils = require 'utils'
 
 function Meta(meta)
@@ -45,6 +49,7 @@ function Pandoc(doc)
                                      outdir, basename, file_index, slug, extension)
 
       local fh = io.open(filename, "w")
+      
       fh:write(pandoc.write(subdoc, FORMAT))
       fh:close()
 

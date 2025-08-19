@@ -3,6 +3,10 @@
 -- to the Pandoc AST instead of the DocBook file.
 -- Thus making it format-agnostic, and making it so Pandoc is the only dependency.
 
+-- Enables relative imports
+local script_dir = debug.getinfo(1, "S").source:match("@?(.*)/") or "."
+package.path = script_dir .. "/?.lua;" .. package.path
+
 local utils = require 'utils'
 local operators = require 'operators'
 
