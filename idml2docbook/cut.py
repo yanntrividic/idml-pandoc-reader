@@ -12,17 +12,18 @@ def get_cuts(file):
     They have a positive "cut" entry in the map."""
     logging.info("Retrieving cuts from: " + file)
     cuts = []
-    for key, value in get_map(file).items():
-        if "cut" in value:
-            if "role" in value: cuts.append(value[f"role"])
-            else: cuts.append(key)
+    for entry in get_map(file):
+        if "cut" in entry["operation"]:
+            # this won't work if several classes are specified
+            if "classes" in entry: cuts.append(entry[f"classes"][1:])
+            else: cuts.append(entry["selector"][1:])
     logging.info("Cuts are: " + str(cuts))
     return cuts
 
 def split_docbook(docbook, **options):
     logging.info("Splitting DocBook file...")
     soup = BeautifulSoup(docbook, "xml")
-    cuts = get_cuts(options["map"])
+    cuts = get_cuts(options["cut"])
     article_contents = soup.select("article > *")
     sections = [[]]
 
