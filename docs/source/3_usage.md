@@ -10,21 +10,21 @@ Une fois la [version modifiée de Pandoc](https://github.com/yanntrividic/pandoc
 
 Les attributs `role` correspondent aux styles de paragraphes et de caractères précisés dans InDesign. Comme illustré dans le fichier `maps/sample.json`, il est possible d'associer ces styles de paragraphes et de caractères à des traitements particuliers :
 
-* `role` : remplace le rôle du fichier source par une ou plusieurs classes ;
-* `type` : change le type d'élément [DocBook](https://fr.wikipedia.org/wiki/DocBook) (par défaut, `para` pour tous les éléments) vers un nouveau type ;
-* `level` : si `type` est un titre DocBook (balise `title`), `level` spécifie le niveau du titre ;
-* `delete` : supprime les éléments avec cet attribut `role` ;
-* `wrap` : enveloppe l'élément dans un autre, nécessaire pour les listes lorsqu'elles sont juste spécifiées par un simple style de paragraphe (`itemizedlist`, `orderedlist`) et les citations (`blockquote`) ;
+* `classes` : remplace le style de paragraphe ou de caractère source par une ou plusieurs classes ;
+* `type` : change le type d'élément (par défaut, tous les éléments sont des `Para` ou des `Span`) vers [un nouveau type](https://pandoc.org/lua-filters.html#type-pandoc) (un titre, une emphase, une citation...) ;
+* `level` : si `type` est un titre (élément `Header`), `level` spécifie le niveau du titre ;
+* `delete` : supprime les éléments avec ce style de paragraphe ou de caractère ;
+* `simplify` : enlève tous les attributs et classes des éléments avec ce style de paragraphe ou de caractère ;
+* `wrap` : enveloppe l'élément dans un autre ;
 * `unwrap` : déplie le contenu de ces éléments dans l'élément parent ;
 * `br` : ajoute un saut de ligne avant l'élément concerné ;
-* `cut` : crée un nouveau fichier avant chaque élément ayant ce `role` ;
-* `empty` : conserve les éléments vides portant ce `role` (tous les autres éléments vides sont supprimés, sauf si l'option `-e`/`--empty` est active) ;
-* Si l'entrée est vide (`{}`) alors l'attribut `role` est supprimé.
+* `cut` : crée un nouveau fichier avant chaque élément ayant le style de paragraphe sélectionné ;
+* `empty` : conserve les éléments vides portant ce style de paragraphe (tous les autres éléments vides sont supprimés par défaut) ;
 
 Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :
 
 ```bash
-python idml2docbook/map.py file.xml maps/map.json
+python idml2docbook/map.py file.xml maps/sample.json
 ```
 
 ## Commandes de base
@@ -63,24 +63,20 @@ Ce fichier fait le pont entre Pandoc et `idml2docbook`. Il permet de prendre le 
 
 Convertir un fichier IDML vers Markdown, avec par exemple le filtre `roles-to-classes.lua` :
 
-```
+```bash
 pandoc -f idml.lua -t markdown --lua-filter=lua-filters/roles-to-classes.lua hello_world.idml
 ```
 
-### batch\.sh
-
-Avant toute chose, il est nécessaire de spécifier la version de Pandoc à utiliser dans le fichier `.env`. Il est aussi nécessaire de donner les droits d'exécution à ce script :
+Spécifier un fichier JSON de correspondance et l'utiliser pour personnaliser votre commande de conversion avec le filtre `map.lua` : 
 
 ```bash
-chmod +x batch.sh
+pandoc -f idml.lua -t markdown --lua-filter=lua-filters/map.lua -M map=maps/sample.json hello_world.idml
 ```
 
-Ce petit script shell permet de faciliter la liaison entre Pandoc et `idml2docbook` lorsque ce dernier est utilisé avec l'option `-c`/`--cut` pour séparer le résultat de la conversion en plusieurs fichiers (ou chapitres).
-
-Cette commande prend deux dossiers en arguments : un dossier d'entrée et un de sortie. Il est ainsi possible de chaîner les commandes, par exemple :
+Découper un fichier d'entrée en plusieurs fichiers de sortie ayant pour nom de base `output` avec le filtre `cut.lua` :
 
 ```bash
-python -m idml2docbook file.idml --output docbook_folder --cut ; ./batch.sh docbook_folder md_folder
+pandoc -f idml.lua -t markdown --lua-filter=lua-filters/cut.lua -M map=maps/sample.json hello_world.idml -o output
 ```
 
 ### Temps de calcul de idml2xml-frontend
@@ -93,7 +89,7 @@ L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier intermédiair
 python -m idml2docbook -x idml2hubxml/hello_world.xml -o hello_world.dbk
 ```
 
-## Liste des options
+## Liste des options de idml2docbook
 
 Toutes les options détaillées ici sont aussi documentées dans le logiciel en ligne de commande (voir l'aide avec `-h`/`--help`).
 
@@ -104,28 +100,6 @@ Toutes les options détaillées ici sont aussi documentées dans le logiciel en 
 * **`-o`, `--output <fichier>`** \
   Nom à attribuer au fichier de sortie. \
   Par défaut, la sortie est redirigée vers la sortie standard (*stdout*). 
-
-* **`-m`, `--map <fichier JSON>`** \
-  Nom du fichier de mappage JSON à utiliser pour des traitements spécifiques au rôle. \
-  Par défaut : `maps/sample.json`. 
-
-* **`-e`, `--empty`** \
-  Ne pas supprimer les éléments vides avec des rôles \
-  Exemple : `<para role="r"></para>` \
-  ⚠️ Peut conserver des éléments résiduels non désirés ! 
-
-* **`-g`, `--hierarchy`** \
-  Ne pas générer de sections imbriquées à partir d'une hiérarchie plate. \
-  À utiliser conjointement avec `--map`. 
-
-* **`-c`, `--cut`** \
-  Découpe le fichier d’entrée en plusieurs fichiers de sortie. \
-  Fonctionne avec `--map` (pour spécifier les découpes). \
-  Si utilisé avec `--output`, ce dernier est considéré comme un dossier. 
-
-* **`-n`, `--names`** \
-  Génère les noms de fichiers de sortie à partir des identifiants de sections. \
-  À utiliser uniquement avec `--cut`. 
 
 * **`-t`, `--typography`** \
   Refonte de l’orthotypographie selon les règles françaises \
@@ -177,29 +151,31 @@ Toutes les options détaillées ici sont aussi documentées dans le logiciel en 
 La commande pour compiler les contributions du recueil _Déborder Bolloré_, dont on peut retrouver le résultat sur le dépôt [deborderbollore/articles](https://gitlab.com/deborderbollore/articles), est la suivante :
 
 ```bash
-python -m idml2docbook db.idml
-  --output docbook
-  --map maps/map.json
-  --cut
-  --typography
-  --thin-spaces
-  --names
-  --raster jpg
-  --vector svg
-  --media-folder images ;
-./batch.sh docbook articles
+pandoc -f docbook \
+       -t markdown_phpextra \
+       --wrap=none \
+       --lua-filter=lua-filters/roles-to-classes.lua \
+       --lua-filter=lua-filters/map.lua \
+       --lua-filter=lua-filters/cut.lua \
+       -M map=maps/db.json \
+       -o output/db.md \
+       <(python -m idml2docbook db.idml \
+                --typography \
+                --thin-spaces \
+                --raster jpg \
+                --vector svg \
+                --media images)
 ```
 
-En détails :
+En détails, les options pour Pandoc :
 
 * `-o`/`--output` : permet de préciser le dossier où seront contenus les fichiers DocBook produits ;
 * `-m`/`--map` : spécifie les opérations à effectuer sur certains styles de caractères et de paragraphes, voir [Correspondance des styles](#correspondance-des-styles) ;
-* `-c`/`--cut` : coupe le résultat en plusieurs fichiers DocBook autonomes ;
+
+Et celles pour `idml2docbook` :
+
 * `-t`/`--typography` : refait totalement l'orthotypographie (espaces autour des signes de ponctuation, etc.) ;
 * `-l`/`--thin-spaces` : l'orthotypographie utilise seulement des espaces fines ;
-* `-n`/`--names` : génère les noms des fichiers finaux à partir des contenus des titres de niveau 1 ;
 * `-r`/`--raster` : remplace les extensions des images matricielles par `jpg` dans les URL des fichiers de sortie ;
 * `-v`/`--vector` : idem pour les images vectorielles ;
 * `-f`/`--media-folder` : remplace l'URL absolue des médias dans les fichiers de sortie par `images/`.
-
-Enfin, le script `batch.sh` convertit les fichiers DocBook obtenus en Markdown, en précisant la saveur `markdown_phpextra`, et avec les filtres Lua nécessaires. Il transforme aussi les sauts de ligne Markdown `  ` (espaces doubles) en des balises HTML `<br/>`.
