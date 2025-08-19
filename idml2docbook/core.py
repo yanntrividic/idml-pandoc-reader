@@ -52,19 +52,13 @@ def unwrap_unnecessary_nodes(soup):
             logging.debug("Unwrapping " + tag)
             el.unwrap()
 
-def remove_empty_elements(soup, map):
-    """Removes empty paras, except when the para has a "empty" entry
-    in the map. Must be called before map_list so that it is applied on all elements.
+def fill_empty_elements_with_br(soup):
+    """Adds a <br> tag in every empty para element.
     """
     logging.info("Removing empty elements...")
     for el in soup.find_all("para"):
         if el.is_empty_element:
-            if "role" in el.attrs:
-                role = el.attrs["role"]
-                if role in map and "empty" not in map[role]:
-                    el.decompose()
-                else:
-                    logging.warning("Empty \"" + role + "\" has been kept.")
+            el.append(soup.new_tag("br"))
 
 def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
     logging.info("Processing media filenames...")
@@ -98,11 +92,6 @@ def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None,
 
         if(wrap_fig): tag.parent.name = "figure"
         else: tag.parent.unwrap() # no need for a figure!
-
-def process_listitems(soup, map):
-    logging.info("Wrapping listitem...")
-    for el in soup.find_all("listitem"):
-        el = wrap_element_content_in_new_element(soup, el, "para")
 
 def remove_ns_attributes(soup):
     # Remove all css nodes
@@ -180,65 +169,6 @@ def add_french_orthotypography(soup, thin_spaces):
 
     return BeautifulSoup(s, "xml")
 
-def map_list(soup, map):
-    """Takes a soup and a map as arguments.
-    Performs a series of operations depending
-    on what the map describes.
-    """
-    logging.info("Starting to apply the styles' mapping...")
-    for key, value in map.items():
-        for el in soup.find_all(attrs={"role": key}):
-            if "unwrap" in value and value["unwrap"]:
-                el.unwrap()
-            if "delete" in value and value["delete"]:
-                el.decompose()
-            if "br" in value and value["br"]:
-                el.insert_before(soup.new_tag("br"))
-            if "level" in value and value["type"] == "title":
-                el["level"] = value["level"]
-            if "type" in value:
-                el.name = value["type"]
-            # If the map's "wrap" entry is on, wraps all consecutive
-            # elements with the same role in a "wrap" element wrapper.
-            # Their role is passed to the wrapper element.
-            if "wrap" in value and value["wrap"]:
-                wrap_consecutive_elements(soup, key, value["wrap"])
-
-def apply_new_roles(soup, map):
-    """Apply new roles after every other operation is done.
-    It removes the roles on empty entries, removes it when role="",
-    or changes it to the new proposed value.
-    It must be done in the end to keep the original paragraph and
-    character styles from the IDML document in the rest of the
-    computation process"""
-    logging.info("Starting to cleaning the roles...")
-    for key, value in map.items():
-        for el in soup.find_all(attrs={"role": key}):
-            if "role" in value:
-                el["role"] = value["role"]
-                if el["role"] == "": del el["role"]
-            if not value: # when the dict is empty, remove the role
-                if el.has_attr("role"):
-                    del el["role"]
-
-def wrap_consecutive_elements_from_map(soup, map):
-    """If the map's "wrap" entry is on, wraps all consecutive
-    elements with the same role in a "wrap" element wrapper.
-    Their role is passed to the wrapper element."""
-    logging.info("Starting to wrap elements with specific roles...")
-    for key, value in map.items():
-        if "wrap" in value and value["wrap"]:
-            wrap_consecutive_elements(soup, key, value["wrap"])
-
-def merge_consecutive_elements_from_map(soup, map):
-    """If the map's "merge" entry is on, merges all consecutive elements
-    elements with the same role.
-    The value in the "merge" specifies a joiner."""
-    logging.info("Starting to wrap elements with specific roles...")
-    for key, value in map.items():
-        if "merge" in value and value["merge"] and "type" in value and "role" in value:
-            merge_consecutive_elements(soup, value["role"], value["type"], value["merge"])
-
 def generate_sections(soup):
     """Transform soup to hierarchical sections up to 6 levels deep."""
     logging.info("Generating nested sections' hierarchy...")
@@ -307,12 +237,6 @@ def hubxml2docbook(file, **options):
     with open(file, "r") as f:
         xml_content = f.read()
 
-    map = {}
-    if options["map"]:
-        map = get_map(options["map"])
-    else:
-        logging.warning("No map was specified. The conversion might not result in what you want.")
-
     logging.info(file + " read succesfully!")
 
     soup = BeautifulSoup(xml_content, "xml")
@@ -333,11 +257,6 @@ def hubxml2docbook(file, **options):
     remove_unnecessary_attributes(soup)
     remove_ns_attributes(soup)
 
-    if not options["empty"]:
-        remove_empty_elements(soup, map)
-    else:
-        logging.warning("Keeping empty elements with roles... It might keep unwanted residuous elements!")
-
     process_images(soup,
         False,
         options["raster"],
@@ -346,7 +265,9 @@ def hubxml2docbook(file, **options):
 
     soup = clean_urls_from_linebreaks(soup) # must be done before remove_linebreaks and removeHyphens
 
-    if not options["linebreaks"]: remove_linebreaks(soup) # must be done before mapèlist
+    if not options["linebreaks"]: remove_linebreaks(soup)
+
+    fill_empty_elements_with_br(soup)
 
     soup = remove_hyphens(soup, "xml")
 
@@ -354,17 +275,7 @@ def hubxml2docbook(file, **options):
         soup = remove_orthotypography(soup)
         soup = add_french_orthotypography(soup, options["thin_spaces"])
 
-    if options["map"]: map_list(soup, map)
-
-    process_listitems(soup, map)
-    # join_elements(soup)
-
-    apply_new_roles(soup, map)
-
-    # merge_consecutive_elements_from_map(soup, map)
-
     if not options["hierarchy"]: generate_sections(soup)
-
 
     if options["prettify"]:
         logging.warning("Prettifying can result in errors depending on whatcha wanna do afterwards!")
