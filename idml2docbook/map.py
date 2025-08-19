@@ -16,7 +16,7 @@ def get_map(file):
     # returns JSON object as a list 
     data = None
     try:
-        data = json.load(f)[0]
+        data = json.load(f)
         logging.debug("Data read from map file: " + str(data))
     except:
         logging.warning("No data was read from map file.")
@@ -25,8 +25,13 @@ def get_map(file):
 def log_map_entry(entry):
     s = ""
     if "type" in entry: s = s + entry.get("type")
-    if "role" in entry: s = s + "." + entry.get("role").replace(" ", ".")
-    if "level" in entry: s = s + " (level " + str(entry.get("level")) + ")"
+    if "classes" in entry: s = s + ("." + entry.get("classes") if entry.get("classes") else "" )
+    if "level" in entry: s = s + " [level " + str(entry.get("level")) + "]"
+    if "simplify" in entry: s = s + "[simplified!]"
+    if "empty" in entry: s = s + "[empty kept]"
+    if "br" in entry: s = s + "[linebreak inserted]"
+    if "wrap" in entry: s = s + "[in " + str(entry.get("wrap")) + "]"
+    if "attrs" in entry: s = s + "[attrs added " + str(entry.get("attrs")) + "]"
     if "delete" in entry: return "deleted!"
     if "unwrap" in entry: return "unwrapped!"
     return s
@@ -68,10 +73,17 @@ def fix_role_names(soup):
     roles = build_roles_map(soup)
     soup = update_roles_with_better_slugs(soup, roles)
 
+def build_dict_from_map_array(map):
+    map_dict = {}
+    for entry in map:
+        map_dict[entry["selector"][1:]] = entry["operation"]
+    return map_dict
+
 if __name__ == "__main__":
     if len(sys.argv) == 3:
         file = sys.argv[1]
         map = get_map(sys.argv[2])
+        map = build_dict_from_map_array(map)
 
         # Read the HTML input file
         with open(file, "r") as f:
