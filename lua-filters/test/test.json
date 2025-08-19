@@ -20,5 +20,6 @@
   { "selector": ".paragraph-list-item-to-turn-into-bulletlist", "operation": { "classes": "", "type": "BulletList" } },
   { "selector": ".paragraph-list-item-with-class-to-turn-into-bulletlist", "operation": { "type": "BulletList" } },
   { "selector": ".paragraph-list-item-to-turn-into-orderedlist", "operation": { "classes": "", "type": "OrderedList" } },
-  { "selector": ".paragraph-list-item-with-class-to-turn-into-orderedlist", "operation": { "type": "OrderedList" } }
+  { "selector": ".paragraph-list-item-with-class-to-turn-into-orderedlist", "operation": { "type": "OrderedList" } },
+  { "selector": ".paragraph-list-item-with-added-class-to-turn-into-orderedlist", "operation": { "type": "OrderedList", "classes": "ordered-list" } }
 ]

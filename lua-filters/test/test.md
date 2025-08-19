@@ -169,3 +169,39 @@ Ordered item with class 2.
 Ordered item with class 3.
 
 </div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-orderedlist">
+
+Ordered item with class but not in wrapper 1.
+
+</div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-orderedlist">
+
+Ordered item with class but not in wrapper 2.
+
+</div>
+
+<div class="paragraph-list-item-with-class-to-turn-into-orderedlist">
+
+Ordered item with class but not in wrapper 3.
+
+</div>
+
+<div class="paragraph-list-item-with-added-class-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item with added class 1.
+
+</div>
+
+<div class="paragraph-list-item-with-added-class-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item with added class 2.
+
+</div>
+
+<div class="paragraph-list-item-with-added-class-to-turn-into-orderedlist" wrapper=1>
+
+Ordered item with added class 3.
+
+</div>

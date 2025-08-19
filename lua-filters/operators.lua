@@ -196,13 +196,18 @@ local function getAttrWithWrapper(attr, value)
 end
 
 -- Smart block conversion
-local function blockToBlock(el, newtype, is_list)
+local function blockToBlock(el, newtype, wrapper_attr, is_list)
   local attr
-  is_empty_attr = isEmptyAttr(el.attr)
-  if is_empty_attr then
-    attr = {"", {}, {}}
+  if wrapper_attr ~= nil then
+    attr = wrapper_attr
   else
     attr = el.attr
+  end
+
+  local is_empty_attr = isEmptyAttr(attr)
+
+  if is_empty_attr then
+    attr = {"", {}, {}}
   end
 
   local content
@@ -215,15 +220,15 @@ local function blockToBlock(el, newtype, is_list)
   if newtype == "Header" then
     result = pandoc.Header(1, pandoc.utils.blocks_to_inlines({el}), getAttrWithWrapper(attr, nil))
   elseif newtype == "Para" then
-    result = pandoc.Para(pandoc.utils.blocks_to_inlines({el}))
+    result = pandoc.Para(content)
   elseif newtype == "BlockQuote" then
-    result = pandoc.BlockQuote(content)
+    result = pandoc.BlockQuote(el)
   elseif newtype == "Div" then
     result = pandoc.Div(content, getAttrWithWrapper(attr, nil))
   elseif newtype == "BulletList" then
-    result = pandoc.BulletList({ content })
+    result = pandoc.BulletList({ el })
   elseif newtype == "OrderedList" then
-    result = pandoc.OrderedList({ content })
+    result = pandoc.OrderedList({ el })
   elseif newtype == "CodeBlock" then
     result = pandoc.CodeBlock(pandoc.utils.stringify(content), getAttrWithWrapper(attr, nil))
   else
@@ -235,7 +240,7 @@ local function blockToBlock(el, newtype, is_list)
     local attr_supported = (newtype == "Div" or newtype == "Header" or newtype == "CodeBlock")
     if not attr_supported then
       attr_with_wrapper = getAttrWithWrapper(attr, 1) -- adding a wrapper attribute to attrs
-      result = pandoc.Div({result}, attr_with_wrapper)
+      result = pandoc.Div({result}, attr_with_wrapper) 
     end
   end
 
@@ -243,7 +248,7 @@ local function blockToBlock(el, newtype, is_list)
 end
 
 -- Smart inline conversion
-local function inlineToInline(el, newtype)
+local function inlineToInline(el, newtype, wrapper_attr)
   local attr
   is_empty_attr = isEmptyAttr(el.attr)
   if is_empty_attr then
@@ -299,15 +304,31 @@ end
 -- a wrapper Div or Span is created around the new element type to keep all
 -- the data after conversion.
 function operators.applyType(el, newtype)
-  if blockTypes[el.t] and blockTypes[newtype] then
-    return blockToBlock(el, newtype, false)
-  elseif inlineTypes[el.t] and inlineTypes[newtype] then
-    return inlineToInline(el, newtype)
+  if isWrapper(el) then
+    local wrapper_id, wrapper_classes, wrapper_attributes = getAttr(el)
+    local wrapper_attr = pandoc.Attr(wrapper_id, wrapper_classes, wrapper_attributes)
+
+    el = el.content[1]
+
+    if blockTypes[el.t] and blockTypes[newtype] then
+      return blockToBlock(el, newtype, wrapper_attr, false)
+    elseif inlineTypes[el.t] and inlineTypes[newtype] then
+      return inlineToInline(el, newtype, wrapper_attr)
+    else
+      return el
+    end
   else
-    -- We are in the context where this is an unwrapped Div that
-    -- contains only one element. It won't work for several elements.
-    if blockTypes[el[1].t] and blockTypes[newtype] then
-      return blockToBlock(el[1], newtype, true)
+    if blockTypes[el.t] and blockTypes[newtype] then
+      -- print("hello", wrapper_attr)
+      return blockToBlock(el, newtype, nil, false)
+    elseif inlineTypes[el.t] and inlineTypes[newtype] then
+      return inlineToInline(el, newtype, nil)
+    else
+      -- We are in the context where this is an unwrapped Div that
+      -- contains only one element. It won't work for several elements.
+      if blockTypes[el[1].t] and blockTypes[newtype] then
+        return blockToBlock(el[1], newtype, wrapper_attr, true)
+      end
     end
     return el
   end
@@ -459,6 +480,8 @@ end
 
 -- Merge consecutive OrderedList and BulletList elements together.
 -- For now, it only considers top-level elements.
+-- It works for both "simple" series of Lists, and also with
+-- Div-wrapped lists (and ignores it if the Div is not a wrapper.)
 function operators.mergeLists(blocks)
   local result = {}
   local i = 1
@@ -495,7 +518,7 @@ function operators.mergeLists(blocks)
       table.insert(result, pandoc.OrderedList(items, listattr))
 
     -- Case 3: Div-wrapped list
-    elseif blk.t == "Div"
+    elseif blk.t == "Div" and isWrapper(blk)
       and #blk.content == 1
       and (blk.content[1].t == "BulletList" or blk.content[1].t == "OrderedList")
     then
@@ -507,10 +530,8 @@ function operators.mergeLists(blocks)
         i = i + 1
         while i <= #blocks do
           local nxt = blocks[i]
-          if nxt.t == "Div"
-            and nxt.identifier == div_id
+          if nxt.t == "Div" and isWrapper(nxt)
             and pandoc.utils.equals(nxt.classes, div_classes)
-            and pandoc.utils.equals(nxt.attributes, div_attrs)
             and #nxt.content == 1
             and nxt.content[1].t == "BulletList"
           then
@@ -528,10 +549,8 @@ function operators.mergeLists(blocks)
         i = i + 1
         while i <= #blocks do
           local nxt = blocks[i]
-          if nxt.t == "Div"
-            and nxt.identifier == div_id
+          if nxt.t == "Div" and isWrapper(nxt)
             and pandoc.utils.equals(nxt.classes, div_classes)
-            and pandoc.utils.equals(nxt.attributes, div_attrs)
             and #nxt.content == 1
             and nxt.content[1].t == "OrderedList"
           then
