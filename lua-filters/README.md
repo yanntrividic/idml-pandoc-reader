@@ -34,7 +34,7 @@ diff test/test.output <(pandoc -f markdown test/test.md -t markdown --lua-filter
 To run the conversion command for _Déborder Bolloré_:
 
 ```bash
-pandoc -f docbook bollo.dbk -t markdown_phpextra --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua --lua-filter=map.lua -M map=bollo.json -o bollo.output --wrap=none
+diff test/bollo.output <(pandoc -f docbook test/bollo.dbk -t markdown_phpextra --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua --lua-filter=map.lua -M map=test/bollo.json --wrap=none)
 ```
 
 ## Panflute
