@@ -79,17 +79,29 @@ utils.ext = {
 -- There might be some problems with accentuated chars...
 function utils.slugify(str)
   str = pandoc.text.lower(str)
-  str = str:gsub("[^%w%s-]", "")    -- drop non-word chars
-  str = str:gsub("%s+", "_")        -- spaces to underscores
-  str = str:gsub("_+", "_")         -- collapse multiple _
-  str = str:gsub("^_*(.-)_*$", "%1")-- trim leading/trailing _
-  return str
+  str = str:gsub("[%z\1-\127\194-\244][\128-\191]*", { ["ü"]="u", ["ä"]="a", 
+                    ["ö"]="o", ["ß"]="ss", ["é"]="e", ["è"]="e", ["ê"]="e", 
+                    ["à"]="a", ["á"]="a", ["ç"]="c", ["ñ"]="n" })
+  str = str:gsub("[^%w%s-]", "")     -- drop non-word chars
+  str = str:gsub("[%s-]+", "_")      -- spaces to underscores
+  str = str:gsub("_+", "_")          -- collapse multiple _
+  str = str:gsub("^_*(.-)_*$", "%1") -- trim leading/trailing _
+  
+  -- Extract only the first ten words
+  local result, count = {}, 0
+  for word in string.gmatch(str, "([^_]+)") do
+      count = count + 1
+      if count > 10 then break end
+      table.insert(result, word)
+  end
+
+  return table.concat(result, "_")
 end
 
 -- extract first heading text from a block list
-function utils.firstHeading(blocks)
+function utils.firstNonEmptyHeader(blocks)
   for _, blk in ipairs(blocks) do
-    if blk.t == "Header" then
+    if blk.t == "Header" and not (#blk.content == 1 and blk.content[1].t == "LineBreak") then
       return pandoc.utils.stringify(blk.content)
     end
   end
@@ -193,6 +205,32 @@ function utils.readAndPreprocessMap(meta)
     preprocessMap(map)
   end
   return meta
+end
+
+-- Cutting is done after the mapping, so we need to update
+-- The entry._classes values with the new classes if necessary.
+function utils.updateMapWithNewClasses()
+  for _, entry in ipairs(map) do
+    local o = entry.operation
+    if o.classes and o.classes ~= "" then
+      local new_classes = {}
+      for class in string.gmatch(o.classes, "%S+") do
+          table.insert(new_classes, class)
+      end
+      entry._classes = new_classes
+    end
+  end
+end
+
+-- Function that checks if a cut entry if in the operations
+-- in order to determine if the output needs to be cut
+function utils.isCutable()
+  for _, entry in ipairs(map) do
+    if entry.operation.cut then
+      return true
+    end
+  end
+  return false
 end
 
 -- Memoized matching function

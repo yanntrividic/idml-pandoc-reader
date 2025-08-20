@@ -82,7 +82,12 @@ end
 
 function Pandoc(doc)
   doc.blocks = operators.mergeLists(doc.blocks)
-  return doc
+  utils.updateMapWithNewClasses(map)
+  if utils.isCutable() then
+    return operators.cut(doc)
+  else
+    return doc
+  end
 end
 
 -- Changing the traversal order, see:
