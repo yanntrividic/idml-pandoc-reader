@@ -6,16 +6,16 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chaîne de conversions &mdash; Documentation IDML Pandoc reader 0.2.0</title>
+  <title>Chaîne de conversions &mdash; Documentation IDML Pandoc reader 0.4.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=64fc1fe0" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f69cee05" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="_static/documentation_options.js?v=e48ecb59"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/translations.js?v=e6b791cb"></script>
@@ -100,11 +100,11 @@
 <p>Ces deux premières étapes sont les objectifs du paquet <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> développé pour ce projet.</p>
 <ol class="arabic simple" start="3">
 <li><p>Lire le fichier DocBook produit avec la <a class="reference external" href="https://github.com/yanntrividic/pandoc/">version modifiée de Pandoc</a> ;</p></li>
-<li><p>Appliquer des filtres Lua pour correctement structurer l’<a class="reference external" href="https://fr.wikipedia.org/wiki/Arbre_de_la_syntaxe_abstraite">arbre de syntaxe abstraite</a> (AST) de Pandoc ;</p></li>
+<li><p>Appliquer des filtres Lua pour correctement structurer l’<a class="reference external" href="https://fr.wikipedia.org/wiki/Arbre_de_la_syntaxe_abstraite">arbre de syntaxe abstraite</a> (AST) de Pandoc et appliquer la <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#correspondance-des-styles">correspondance des styles</a> ;</p></li>
 <li><p>Utiliser le <em>writer</em> de Pandoc souhaité.</p></li>
 </ol>
 <figure class="align-center" id="id1">
-<div class="graphviz"><object data="_images/graphviz-8464ae415d603f350be73d0f27f0317d5cddfa92.svg" type="image/svg+xml" class="graphviz">
+<div class="graphviz"><object data="_images/graphviz-3d9b4ee814421db39ef2a3506b06d775bc04b9ef.svg" type="image/svg+xml" class="graphviz">
 <p class="warning">digraph conversions {
     bgcolor=&quot;transparent&quot;
     rankdir=&quot;LR&quot;
@@ -113,7 +113,7 @@
     &quot;Hub XML&quot;:se -&gt; &quot;DocBook&quot;:w [xlabel=&quot;\nhubxml2docbook&quot; style=&quot;dotted&quot; fontsize=13 arrowhead=none];
     &quot;IDML&quot; -&gt; &quot;DocBook&quot; [label=&quot;\n\nidml2docbook&quot; labelloc=&quot;b&quot; fontsize=13];
     &quot;DocBook&quot; -&gt; p [label=&quot;Pandoc\nDocBook\nreader&quot; fontsize=13];
-    p -&gt; &quot;DOCX&quot; [xlabel=&quot;Pandoc writers    \n + Lua    &quot; fontsize=13];
+    p -&gt; &quot;DOCX&quot; [xlabel=&quot;Style mapping \n(JSON map) \n        &amp; Pandoc writers        &quot; fontsize=13];
     p -&gt; &quot;ODT&quot;;
     p -&gt; &quot;HTML&quot;;
     p -&gt; &quot;EPUB&quot;;
@@ -554,7 +554,7 @@ Hello world!
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
 	<span class="rst-current-version">
 		<span class="fa fa-folder"> Version</span>
-		<span class="version">0.2.0</span>
+		<span class="version">0.4.0</span>
 		<div class="langs">
 			<span class="fa fa-book"> Langages</span>
 				

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-23 15:13+0200\n"
+"POT-Creation-Date: 2025-08-20 11:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -38,13 +38,12 @@ msgstr ""
 
 #: ../../source/1_contents.md:6
 msgid ""
-"`lua-filters` contient des filtres Lua permettant de modifier le "
-"comportement du lecteur DocBook afin de mieux correspondre aux attendus "
-"de la conversion de fichiers IDML ;"
+"`lua-filters` contient une série de filtres Lua permettant de manipuler "
+"la structure des fichiers fournis en entrée à Pandoc, indépendemment de "
+"leur format ;"
 msgstr ""
-"`lua-filters` contains Lua filters that adjust the behavior of the "
-"DocBook reader to better match the expected output when converting IDML "
-"files;"
+"`lua-filters` contains a set of Lua filters that manipulate the structure"
+" of files passed to Pandoc, regardless of their format;"
 
 #: ../../source/1_contents.md:7
 msgid ""
@@ -69,23 +68,16 @@ msgstr ""
 
 #: ../../source/1_contents.md:9
 msgid ""
-"`batch.sh` est le script utilisé pour faciliter la conversion de fichiers"
-" en lots via Pandoc des fichiers source du recueil _Déborder Bolloré_ ;"
+"`idml.lua` est un lecteur de fichiers personnalisés pour Pandoc pour "
+"faire le lien avec `idml2docbook`, voir [Commandes de "
+"base](https://outdesign.deborderbollore.fr/fr/3_usage.html#commandes-de-"
+"base) ;"
 msgstr ""
-"`batch.sh` is the script used to facilitate batch conversion via Pandoc "
-"of the source files from the _Déborder Bolloré_ collection;"
-
-#: ../../source/1_contents.md:10
-msgid ""
-"`idml.lua` fait le lien entre `idml2docbook` et Pandoc, voir [Commandes "
-"de base](https://outdesign.deborderbollore.fr/fr/3_usage.html#commandes-"
-"de-base) ;"
-msgstr ""
-"`idml.lua` links `idml2docbook` with Pandoc, see [Basic "
-"commands](https://outdesign.deborderbollore.fr/en/3_usage.html"
+"`idml.lua` is a custom Pandoc reader that connects with `idml2docbook`, "
+"see [Basic commands](https://outdesign.deborderbollore.fr/en/3_usage.html"
 "#commandes-de-base);"
 
-#: ../../source/1_contents.md:11
+#: ../../source/1_contents.md:10
 msgid "`install.sh` est le script d'installation du projet."
 msgstr "`install.sh` is an installation script for this project."
 

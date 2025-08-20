@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-16 14:48+0200\n"
+"POT-Creation-Date: 2025-08-20 11:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -58,12 +58,12 @@ msgstr ""
 "under the FreeBSD license. We build our converter by continuing that "
 "work, offering a "
 "[_binding_](https://en.wikipedia.org/wiki/Binding#Computing) between "
-"`idml2xml-frontend` and Pandoc—i.e., converting the Hub XML output of "
+"`idml2xml-frontend` and Pandoc—that is, converting the Hub XML output of "
 "`idml2xml-frontend` into DocBook 5.1 format."
 
 #: ../../source/2_installation.md:9
 msgid "Les principales dépendances sont :"
-msgstr "The principal dependencies are:"
+msgstr "The main dependencies are:"
 
 #: ../../source/2_installation.md:11
 msgid "Python 3.x ;"
@@ -86,7 +86,7 @@ msgid ""
 "Pour comprendre l'utilité de chacune des dépendances, voir le [graphe de "
 "conversions](/5_conversion_graph)."
 msgstr ""
-"To understand the purpose of each dependency, see the [conversion "
+"To understand the role of each dependency, see the [conversion "
 "graph](/5_conversion_graph)."
 
 #: ../../source/2_installation.md:18
@@ -100,9 +100,9 @@ msgid ""
 "reader/-/releases/permalink/latest) du logiciel et décompressez l'archive"
 " ZIP obtenue."
 msgstr ""
-"First, start by downloading [the latest release of this software]"
-"(https://gitlab.com/deborderbollore/idml-pandoc-reader/-/releases"
-"/permalink/latest) and unzip the archive."
+"First, download [the latest release of this "
+"software](https://gitlab.com/deborderbollore/idml-pandoc-"
+"reader/-/releases/permalink/latest) and unzip the archive."
 
 #: ../../source/2_installation.md:22
 msgid ""
@@ -139,7 +139,7 @@ msgstr "install Python dependencies from `requirements.txt`;"
 
 #: ../../source/2_installation.md:29
 msgid "génèrer un simple fichier d'environnement `.env` ;"
-msgstr "generate a basic `.env` environment file;"
+msgstr "generate a simple `.env` environment file;"
 
 #: ../../source/2_installation.md:30
 msgid "installer éventuellement le module `idml2docbook` via `pip install .` ;"
@@ -147,7 +147,7 @@ msgstr "optionally install the `idml2docbook` module via `pip install .`;"
 
 #: ../../source/2_installation.md:31
 msgid "exécuter une commande de test pour vérifier la validité de l'installation."
-msgstr "run a test command to verify the installation is valid."
+msgstr "run a test command to verify that the installation is valid."
 
 #: ../../source/2_installation.md:33
 msgid "Pour exécuter ce script, commencez par lui donner les droits d'exécution :"
@@ -189,9 +189,9 @@ msgid ""
 msgstr ""
 "At a minimum, for the converter to work, `idml2xml-frontend` must be "
 "executed. The `IDML2HUBXML_SCRIPT_FOLDER` line in the `.env` file should "
-"therefore point to the absolute path to the `idml2xml-frontend` directory"
-" on your machine. This is likely the most important line in your `.env` "
-"file. It is usually filled in automatically by the installation script."
+"therefore point to the absolute path of the `idml2xml-frontend` directory"
+" on your machine. This is probably the most important line in your `.env`"
+" file. It is usually filled in automatically by the installation script."
 
 #: ../../source/2_installation.md:53
 msgid ""
@@ -213,27 +213,19 @@ msgstr "Pandoc"
 
 #: ../../source/2_installation.md:57
 msgid ""
-"Pandoc n'est pas une dépendance à proprement parler étant donné que le "
-"convertisseur `idml2docbook` n'en a pas besoin pour fonctionner."
-msgstr ""
-"Pandoc is not technically a dependency, since the `idml2docbook` "
-"converter does not require it to function."
-
-#: ../../source/2_installation.md:59
-msgid ""
-"Cependant, [une version un peu modifiée de "
+"[Une version un peu modifiée de "
 "Pandoc](https://github.com/yanntrividic/pandoc/) a été développée pour "
 "supporter la lecture des styles de paragraphes et de caractères. Pour "
 "l'utiliser, il faut [la compiler depuis la "
 "source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md)."
 msgstr ""
-"However, [a slightly modified version of "
-"Pandoc](https://github.com/yanntrividic/pandoc/) was developed to support"
-" reading paragraph and character styles. To use it, you must [compile it "
-"from "
+"[A slightly modified version of "
+"Pandoc](https://github.com/yanntrividic/pandoc/) has been developed to "
+"support reading paragraph and character styles. To use it, you must "
+"[compile it from "
 "source](https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md)."
 
-#: ../../source/2_installation.md:61
+#: ../../source/2_installation.md:59
 msgid ""
 "Il est aussi possible d'utiliser la version principale de Pandoc, mais "
 "alors sans [Correspondance des "
@@ -244,36 +236,25 @@ msgid ""
 "Pandoc."
 msgstr ""
 "It is also possible to use the main version of Pandoc, but without [Style"
-" Mapping](https://outdesign.deborderbollore.fr/en/3_usage.html"
+" mapping](https://outdesign.deborderbollore.fr/en/3_usage.html"
 "#correspondance-des-styles). A [_pull "
-"request_](https://github.com/jgm/pandoc/pull/10665) is close to be merged"
-" to integrate these new features into the main Pandoc branch."
+"request_](https://github.com/jgm/pandoc/pull/10932) is in progress to "
+"integrate these new features into the main Pandoc branch."
 
-#: ../../source/2_installation.md:64
+#: ../../source/2_installation.md:62
 msgid "Test de la configuration avec la version modifiée de Pandoc"
 msgstr "Configuration test with the modified version of Pandoc"
 
-#: ../../source/2_installation.md:66
+#: ../../source/2_installation.md:64
 msgid ""
 "Pour vérifier que les dépendances ont bien été installées et le fichier "
 "`.env` bien paramétré, vous pouvez tester le convertisseur dans votre "
 "terminal avec la commande suivante :"
 msgstr ""
-"To verify that the dependencies are installed and the `.env` file is "
-"correctly set up, you can test the converter in your terminal with the "
+"To check that the dependencies are properly installed and the `.env` file "
+"is correctly set up, you can test the converter in your terminal with the "
 "following command:"
 
-#: ../../source/2_installation.md:72
+#: ../../source/2_installation.md:70
 msgid "Le résultat devrait alors être :"
 msgstr "The result should then be:"
-
-#~ msgid ""
-#~ "Premièrement, commencez par cloner le "
-#~ "dépôt [`idml-pandoc-"
-#~ "reader`](https://gitlab.com/deborderbollore/idml-pandoc-"
-#~ "reader) :"
-#~ msgstr ""
-#~ "First, start by cloning the [`idml-"
-#~ "pandoc-reader`](https://gitlab.com/deborderbollore/idml-"
-#~ "pandoc-reader) repository:"
-

@@ -6,7 +6,7 @@ digraph conversions {
     "Hub XML":se -> "DocBook":w [xlabel="\nhubxml2docbook" style="dotted" fontsize=13 arrowhead=none];
     "IDML" -> "DocBook" [label="\n\nidml2docbook" labelloc="b" fontsize=13];
     "DocBook" -> p [label="Pandoc\nDocBook\nreader" fontsize=13];
-    p -> "DOCX" [xlabel="Pandoc writers    \n + Lua    " fontsize=13];
+    p -> "DOCX" [xlabel="Style mapping \n(JSON map) \n        & Pandoc writers        " fontsize=13];
     p -> "ODT";
     p -> "HTML";
     p -> "EPUB";

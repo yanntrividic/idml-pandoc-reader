@@ -6,16 +6,16 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. Contenus du dépôt &mdash; Documentation IDML Pandoc reader 0.2.0</title>
+  <title>1. Contenus du dépôt &mdash; Documentation IDML Pandoc reader 0.4.0</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=64fc1fe0" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f69cee05" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=1b0070ce"></script>
+      <script src="_static/documentation_options.js?v=e48ecb59"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="_static/translations.js?v=e6b791cb"></script>
@@ -89,11 +89,10 @@
 <p>Les fichiers et dossiers les plus importants du dépôt sont :</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> est un package Python permettant de faire le pont entre les formats IDML et DocBook, ce dernier pouvant être lu par Pandoc ;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lua-filters</span></code> contient des filtres Lua permettant de modifier le comportement du lecteur DocBook afin de mieux correspondre aux attendus de la conversion de fichiers IDML ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lua-filters</span></code> contient une série de filtres Lua permettant de manipuler la structure des fichiers fournis en entrée à Pandoc, indépendemment de leur format ;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">maps</span></code> contient des fichiers JSON exemples montrant comment paramétrer la conversion en fonction des spécificités de chaque document, voir <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#correspondance-des-styles">Correspondance des styles</a> ;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.env.sample</span></code> est un fichier de configuration permettant de donner des valeurs par défaut au convertisseur ;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">batch.sh</span></code> est le script utilisé pour faciliter la conversion de fichiers en lots via Pandoc des fichiers source du recueil <em>Déborder Bolloré</em> ;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">idml.lua</span></code> fait le lien entre <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> et Pandoc, voir <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#commandes-de-base">Commandes de base</a> ;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">idml.lua</span></code> est un lecteur de fichiers personnalisés pour Pandoc pour faire le lien avec <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>, voir <a class="reference external" href="https://outdesign.deborderbollore.fr/fr/3_usage.html#commandes-de-base">Commandes de base</a> ;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">install.sh</span></code> est le script d’installation du projet.</p></li>
 </ul>
 </section>
@@ -126,7 +125,7 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
 	<span class="rst-current-version">
 		<span class="fa fa-folder"> Version</span>
-		<span class="version">0.2.0</span>
+		<span class="version">0.4.0</span>
 		<div class="langs">
 			<span class="fa fa-book"> Langages</span>
 				

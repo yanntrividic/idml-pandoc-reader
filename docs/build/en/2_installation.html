@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2. Installation &mdash; IDML Pandoc reader 0.2.0 documentation</title>
+  <title>2. Installation &mdash; IDML Pandoc reader 0.4.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/documentation_options.js?v=6c02275b"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -95,19 +95,19 @@
 <section id="dependances">
 <h2>Dependencies<a class="headerlink" href="#dependances" title="Link to this heading"></a></h2>
 <p>The IDML format is complex, and extracting information from it is difficult. Ideally, this repository would consist of a single Haskell file, like <a class="reference external" href="https://github.com/jgm/pandoc/tree/main/src/Text/Pandoc/Readers">Pandoc’s other readers</a>. However, that would take an enormous amount of time to develop.</p>
-<p>Others have explored reading IDML files, notably the project <a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a>, distributed under the FreeBSD license. We build our converter by continuing that work, offering a <a class="reference external" href="https://en.wikipedia.org/wiki/Binding#Computing"><em>binding</em></a> between <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> and Pandoc—i.e., converting the Hub XML output of <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> into DocBook 5.1 format.</p>
-<p>The principal dependencies are:</p>
+<p>Others have explored reading IDML files, notably the project <a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a>, distributed under the FreeBSD license. We build our converter by continuing that work, offering a <a class="reference external" href="https://en.wikipedia.org/wiki/Binding#Computing"><em>binding</em></a> between <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> and Pandoc—that is, converting the Hub XML output of <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> into DocBook 5.1 format.</p>
+<p>The main dependencies are:</p>
 <ul class="simple">
 <li><p>Python 3.x;</p></li>
 <li><p>Java 1.7+;</p></li>
 <li><p>the dependencies of the Python package <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>;</p></li>
 <li><p><a class="reference external" href="https://github.com/transpect/idml2xml-frontend"><code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code></a>.</p></li>
 </ul>
-<p>To understand the purpose of each dependency, see the <a class="reference internal" href="5_conversion_graph.html"><span class="doc std std-doc">conversion graph</span></a>.</p>
+<p>To understand the role of each dependency, see the <a class="reference internal" href="5_conversion_graph.html"><span class="doc std std-doc">conversion graph</span></a>.</p>
 </section>
 <section id="installation-avec-install-sh">
 <h2>Installation with install.sh<a class="headerlink" href="#installation-avec-install-sh" title="Link to this heading"></a></h2>
-<p>First, start by downloading <a class="reference external" href="https://gitlab.com/deborderbollore/idml-pandoc-reader/-/releases/permalink/latest">the latest release of this software</a> and unzip the archive.</p>
+<p>First, download <a class="reference external" href="https://gitlab.com/deborderbollore/idml-pandoc-reader/-/releases/permalink/latest">the latest release of this software</a> and unzip the archive.</p>
 <p>Next, an <code class="docutils literal notranslate"><span class="pre">install.sh</span></code> script for Mac and Linux has been developed to make getting started with this software easier. Installation on Windows is also possible by adapting the steps described below, although it has not yet been tested. This script mainly serves to:</p>
 <ul class="simple">
 <li><p>check that Java (&gt;= 7.0.0) is installed;</p></li>
@@ -115,9 +115,9 @@
 <li><p>install <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code>;</p></li>
 <li><p>check that Python 3 and pip (&gt;= 21.0) are installed;</p></li>
 <li><p>install Python dependencies from <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>;</p></li>
-<li><p>generate a basic <code class="docutils literal notranslate"><span class="pre">.env</span></code> environment file;</p></li>
+<li><p>generate a simple <code class="docutils literal notranslate"><span class="pre">.env</span></code> environment file;</p></li>
 <li><p>optionally install the <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> module via <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">.</span></code>;</p></li>
-<li><p>run a test command to verify the installation is valid.</p></li>
+<li><p>run a test command to verify that the installation is valid.</p></li>
 </ul>
 <p>To run this script, start by making it executable:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>./install.sh
@@ -134,18 +134,17 @@
 <section id="configuration-de-lenvironnement-env">
 <h2>Environment configuration (.env)<a class="headerlink" href="#configuration-de-lenvironnement-env" title="Link to this heading"></a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">.env.sample</span></code> file shows an example configuration file.</p>
-<p>At a minimum, for the converter to work, <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> must be executed. The <code class="docutils literal notranslate"><span class="pre">IDML2HUBXML_SCRIPT_FOLDER</span></code> line in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file should therefore point to the absolute path to the <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> directory on your machine. This is likely the most important line in your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file. It is usually filled in automatically by the installation script.</p>
+<p>At a minimum, for the converter to work, <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> must be executed. The <code class="docutils literal notranslate"><span class="pre">IDML2HUBXML_SCRIPT_FOLDER</span></code> line in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file should therefore point to the absolute path of the <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> directory on your machine. This is probably the most important line in your <code class="docutils literal notranslate"><span class="pre">.env</span></code> file. It is usually filled in automatically by the installation script.</p>
 <p>The key/value pairs in the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file allow you to override the default values of the <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> package. For more information on these variables, see <a class="reference external" href="https://outdesign.deborderbollore.fr/en/3_usage.html#liste-des-options">the list of options</a>.</p>
 </section>
 <section id="pandoc">
 <h2>Pandoc<a class="headerlink" href="#pandoc" title="Link to this heading"></a></h2>
-<p>Pandoc is not technically a dependency, since the <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> converter does not require it to function.</p>
-<p>However, <a class="reference external" href="https://github.com/yanntrividic/pandoc/">a slightly modified version of Pandoc</a> was developed to support reading paragraph and character styles. To use it, you must <a class="reference external" href="https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md">compile it from source</a>.</p>
-<p>It is also possible to use the main version of Pandoc, but without <a class="reference external" href="https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles">Style Mapping</a>. A <a class="reference external" href="https://github.com/jgm/pandoc/pull/10665"><em>pull request</em></a> is close to be merged to integrate these new features into the main Pandoc branch.</p>
+<p><a class="reference external" href="https://github.com/yanntrividic/pandoc/">A slightly modified version of Pandoc</a> has been developed to support reading paragraph and character styles. To use it, you must <a class="reference external" href="https://github.com/yanntrividic/pandoc/blob/main/INSTALL.md">compile it from source</a>.</p>
+<p>It is also possible to use the main version of Pandoc, but without <a class="reference external" href="https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles">Style mapping</a>. A <a class="reference external" href="https://github.com/jgm/pandoc/pull/10932"><em>pull request</em></a> is in progress to integrate these new features into the main Pandoc branch.</p>
 </section>
 <section id="test-de-la-configuration-avec-la-version-modifiee-de-pandoc">
 <h2>Configuration test with the modified version of Pandoc<a class="headerlink" href="#test-de-la-configuration-avec-la-version-modifiee-de-pandoc" title="Link to this heading"></a></h2>
-<p>To verify that the dependencies are installed and the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file is correctly set up, you can test the converter in your terminal with the following command:</p>
+<p>To check that the dependencies are properly installed and the <code class="docutils literal notranslate"><span class="pre">.env</span></code> file is correctly set up, you can test the converter in your terminal with the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pandoc<span class="w"> </span>hello_world.idml<span class="w"> </span>-f<span class="w"> </span>idml.lua<span class="w"> </span>-t<span class="w"> </span>markdown
 </pre></div>
 </div>
@@ -186,7 +185,7 @@ Hello world!
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
 	<span class="rst-current-version">
 		<span class="fa fa-folder"> Version</span>
-		<span class="version">0.2.0</span>
+		<span class="version">0.4.0</span>
 		<div class="langs">
 			<span class="fa fa-book"> Languages</span>
 				

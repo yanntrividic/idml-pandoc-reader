@@ -6,16 +6,16 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>1. Repository Contents &mdash; IDML Pandoc reader 0.2.0 documentation</title>
+  <title>1. Repository Contents &mdash; IDML Pandoc reader 0.4.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=64fc1fe0" />
+      <link rel="stylesheet" type="text/css" href="_static/custom.css?v=f69cee05" />
 
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="_static/documentation_options.js?v=6c02275b"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -88,11 +88,10 @@
 <p>The most important files and folders in the repository are:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> is a Python package that bridges the gap between the IDML and DocBook formats, the latter being readable by Pandoc;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lua-filters</span></code> contains Lua filters that adjust the behavior of the DocBook reader to better match the expected output when converting IDML files;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lua-filters</span></code> contains a set of Lua filters that manipulate the structure of files passed to Pandoc, regardless of their format;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">maps</span></code> contains example JSON files showing how to configure the conversion according to each document’s specifics, see <a class="reference external" href="https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles">Style mapping</a>;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">.env.sample</span></code> is a configuration file that provides default values to the converter;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">batch.sh</span></code> is the script used to facilitate batch conversion via Pandoc of the source files from the <em>Déborder Bolloré</em> collection;</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">idml.lua</span></code> links <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> with Pandoc, see <a class="reference external" href="https://outdesign.deborderbollore.fr/en/3_usage.html#commandes-de-base">Basic commands</a>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">idml.lua</span></code> is a custom Pandoc reader that connects with <code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code>, see <a class="reference external" href="https://outdesign.deborderbollore.fr/en/3_usage.html#commandes-de-base">Basic commands</a>;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">install.sh</span></code> is an installation script for this project.</p></li>
 </ul>
 </section>
@@ -125,7 +124,7 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
 	<span class="rst-current-version">
 		<span class="fa fa-folder"> Version</span>
-		<span class="version">0.2.0</span>
+		<span class="version">0.4.0</span>
 		<div class="langs">
 			<span class="fa fa-book"> Languages</span>
 				

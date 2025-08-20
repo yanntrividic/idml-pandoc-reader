@@ -8,18 +8,23 @@ Un [guide de formatage](/4_formatting_guide) indique comment préparer les fichi
 
 Une fois la [version modifiée de Pandoc](https://github.com/yanntrividic/pandoc/) installée, Pandoc sera en mesure d'interpréter les attributs `role` des éléments des fichiers DocBook obtenus après conversion. Ces rôles sont ensuite considérés comme des classes par Pandoc grâce au filtre `roles-to-classes.lua`.
 
-Les attributs `role` correspondent aux styles de paragraphes et de caractères précisés dans InDesign. Comme illustré dans le fichier `maps/sample.json`, il est possible d'associer ces styles de paragraphes et de caractères à des traitements particuliers :
+Les attributs `role` correspondent aux **styles de paragraphes et de caractères** précisés dans InDesign. Comme illustré dans le fichier `maps/sample.json`, il est possible d'associer ces styles de paragraphes et de caractères à des opérations particulières :
+
+1. **Pour modifier leurs attributs :**
 
 * `classes` : remplace le style de paragraphe ou de caractère source par une ou plusieurs classes ;
 * `type` : change le type d'élément (par défaut, tous les éléments sont des `Para` ou des `Span`) vers [un nouveau type](https://pandoc.org/lua-filters.html#type-pandoc) (un titre, une emphase, une citation...) ;
 * `level` : si `type` est un titre (élément `Header`), `level` spécifie le niveau du titre ;
-* `delete` : supprime les éléments avec ce style de paragraphe ou de caractère ;
 * `simplify` : enlève tous les attributs et classes des éléments avec ce style de paragraphe ou de caractère ;
+
+2. **Ou pour modifier la structure du document :**
+
+* `delete` : supprime les éléments avec ce style de paragraphe ou de caractère ;
 * `wrap` : enveloppe l'élément dans un autre ;
 * `unwrap` : déplie le contenu de ces éléments dans l'élément parent ;
 * `br` : ajoute un saut de ligne avant l'élément concerné ;
-* `cut` : crée un nouveau fichier avant chaque élément ayant le style de paragraphe sélectionné ;
 * `empty` : conserve les éléments vides portant ce style de paragraphe (tous les autres éléments vides sont supprimés par défaut) ;
+* `cut` : crée un nouveau fichier avant chaque élément ayant le style de paragraphe sélectionné ;
 
 Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :
 
@@ -45,7 +50,7 @@ Convertir un fichier IDML et l'enregistrer dans un fichier DocBook :
 python -m idml2docbook hello_world.idml -o hello_world.dbk
 ```
 
-Il est aussi possible de directement envoyer le résultat de la conversion dans l'entrée standard de Pandoc :
+Il est aussi possible de directement envoyer le résultat de la conversion dans l'entrée standard de Pandoc, en précisant DocBook comme format d'entrée pour Pandoc :
 
 ```bash
 pandoc -f docbook -t markdown <(python -m idml2docbook hello_world.idml)
@@ -71,12 +76,6 @@ Spécifier un fichier JSON de correspondance et l'utiliser pour personnaliser vo
 
 ```bash
 pandoc -f idml.lua -t markdown --lua-filter=lua-filters/map.lua -M map=maps/sample.json hello_world.idml
-```
-
-Découper un fichier d'entrée en plusieurs fichiers de sortie ayant pour nom de base `output` avec le filtre `cut.lua` :
-
-```bash
-pandoc -f idml.lua -t markdown --lua-filter=lua-filters/cut.lua -M map=maps/sample.json hello_world.idml -o output
 ```
 
 ### Temps de calcul de idml2xml-frontend
@@ -153,10 +152,8 @@ La commande pour compiler les contributions du recueil _Déborder Bolloré_, don
 ```bash
 pandoc -f docbook \
        -t markdown_phpextra \
-       --wrap=none \
        --lua-filter=lua-filters/roles-to-classes.lua \
        --lua-filter=lua-filters/map.lua \
-       --lua-filter=lua-filters/cut.lua \
        -M map=maps/db.json \
        -o output/db.md \
        <(python -m idml2docbook db.idml \
@@ -167,10 +164,13 @@ pandoc -f docbook \
                 --media images)
 ```
 
-En détails, les options pour Pandoc :
+En détails, les [options pour Pandoc](https://pandoc.org/MANUAL.html) utilisées sont les suivantes :
 
-* `-o`/`--output` : permet de préciser le dossier où seront contenus les fichiers DocBook produits ;
-* `-m`/`--map` : spécifie les opérations à effectuer sur certains styles de caractères et de paragraphes, voir [Correspondance des styles](#correspondance-des-styles) ;
+* `-f`/`--from` : format d'entrée, ici, on donne directement le fichier sorti de `idml2docbook`, il s'agit donc du format DocBook ;
+* `-t`/`--to` : format de sortie, le plus pratique pour _Déborder Bolloré_ ayant été Markdown, dans la saveur [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) pour être facilement lu par le CMS de [deborderbollore.fr](https://deborderbollore.fr), [Kirby](https://michelf.ca/projects/php-markdown/extra/).
+* `--lua-filter` : deux filtres Lua pour Pandoc sont utilisés ici, `roles-to-classes.lua` transforme les attributs `role` des éléments DocBook en classes Pandoc, tandis que `map.lua` applique les opérations de correspondance nécessaires.
+* `-M map` : chemin vers le fichier JSON contenant les opérations à effectuer sur certains styles de caractères et de paragraphes, voir [Correspondance des styles](#correspondance-des-styles) ;
+* `-o`/`--output` : permet de préciser le dossier où seront contenus les fichiers produits (ici, dans le dossier `output `, avec des fichiers ayant pour préfixe `db`) ;
 
 Et celles pour `idml2docbook` :
 
