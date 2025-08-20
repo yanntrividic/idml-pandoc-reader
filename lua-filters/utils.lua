@@ -124,6 +124,29 @@ function utils.timeit(message, func, ...)
     return table.unpack(results)
 end
 
+function utils.mkdir(path)
+  path = path:gsub("/+$", "")
+  if path == "" then return true end
+
+  local ok, _, code = os.rename(path, path)
+  if ok or code == 13 then return true end
+
+  local parent = path:match("(.+)/[^/]+$")
+  if parent and parent ~= path then
+    mkdir_p(parent)
+  end
+
+  -- create this dir
+  if package.config:sub(1,1) == "\\" then
+    -- Windows
+    os.execute('mkdir "' .. path .. '" >NUL 2>&1')
+  else
+    -- POSIX
+    os.execute('mkdir -p "' .. path .. '"')
+  end
+  return true
+end
+
 function utils.printTable(tbl, indent)
     indent = indent or 0
     for k, v in pairs(tbl) do

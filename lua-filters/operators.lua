@@ -638,9 +638,9 @@ function operators.cut(doc)
       local filename = string.format("%s/%s_%03d%s.%s",
                                      outdir, basename, file_index, slug, extension)
 
+      utils.mkdir(outdir) -- creates the output directory if necessary
       local fh = io.open(filename, "w")
 
-      print(filename)
       
       fh:write(pandoc.write(subdoc, FORMAT, PANDOC_WRITER_OPTIONS))
       fh:close()
