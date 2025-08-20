@@ -609,6 +609,12 @@ function operators.cut(doc)
   local current = {}
   local file_index = 1
 
+  if not PANDOC_STATE.output_file then
+    -- We only apply the cuts if an output file is specified
+    -- as the stdout is for the uncut file.
+    return doc
+  end
+
   local outdir, basename
   if PANDOC_STATE.output_file and #PANDOC_STATE.output_file > 0 then
     outdir = PANDOC_STATE.output_file:match("(.+)/[^/]+$") or "."
@@ -668,7 +674,7 @@ function operators.cut(doc)
 
   flush()
 
-  return nil -- nothing to stdout, but doesn't seem to work
+  return doc -- nothing to stdout, but doesn't seem to work
 end
 
 return operators

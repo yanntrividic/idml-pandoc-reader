@@ -81,9 +81,14 @@ function Inline(el)
 end
 
 function Pandoc(doc)
+  -- First we cleanup the OrderedLists and BulletLists
   doc.blocks = operators.mergeLists(doc.blocks)
+
+  -- Then we cut
   utils.updateMapWithNewClasses(map)
   if utils.isCutable() then
+    -- And a value has to be returned in order to 
+    -- at least apply the mergeList treatment
     return operators.cut(doc)
   else
     return doc
