@@ -1,11 +1,12 @@
 # Revision history for idml-pandoc-reader
 
-## idml-pandoc-reader 0.4.0 (to release)
+## idml-pandoc-reader 0.4.0 (2025-08-20)
 
-* Mapping functionalities are now written in Lua. That means that they are now format-agnostic, and can work with Pandoc as their only dependency.
-* `idml2docbook` was updated to reflect those changes, and is now closer to a simple IDML to DocBook converter.
+* Mapping functionalities are now written in Lua. That means that they are now format-agnostic, and can work with Pandoc as their only dependency, see `lua-filters/map.lua`.
+* `idml2docbook` was updated to reflect those changes, and is now closer to a simple IDML-to-DocBook converter.
 * JSON mapping structure has changed to comply to the new architecture, operators changed as well.
-* Removing the `cut` functionalities for now, as they will be handled in Pandoc as well.
+* `cut.py` was removed and integrated as well as a Lua filter automatically called when a `cut` operation is specified in a mapping JSON file.
+* `batch.sh` was removed, as it was mostly making a bridge between `idml2docbook`, `cut.py` and Pandoc. This is not necessary anymore.
 
 ## idml-pandoc-reader 0.3.0 (2025-08-18)
 
