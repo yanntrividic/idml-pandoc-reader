@@ -644,8 +644,13 @@ function operators.cut(doc)
       local filename = string.format("%s/%s_%03d%s.%s",
                                      outdir, basename, file_index, slug, extension)
 
+      -- Follow this recommendation:
+      -- https://fosstodon.org/@pandoc/114578758417418208
+      local encoded_filename = pandoc.text.toencoding(filename)
+      local encoded_outdir = pandoc.text.toencoding(outdir)
+
       utils.mkdir(outdir) -- creates the output directory if necessary
-      local fh = io.open(filename, "w")
+      local fh = io.open(encoded_filename, "w")
 
       
       fh:write(pandoc.write(subdoc, FORMAT, PANDOC_WRITER_OPTIONS))
