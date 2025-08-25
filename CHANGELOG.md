@@ -1,5 +1,9 @@
 # Revision history for idml-pandoc-reader
 
+## idml-pandoc-reader 0.4.2 (2025-08-25)
+
+* Wrote better docs, again.
+
 ## idml-pandoc-reader 0.4.1 (2025-08-25)
 
 * Removed a few comments in the code.
