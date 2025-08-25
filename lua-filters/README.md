@@ -21,7 +21,7 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
     * [x] **level**
     * [x] **br**
     * [x] **empty**
-* [ ] Work on perfs. The map.lua filter currently multiplies by 2 the computing time of a file. _Déborder Bolloré_ takes a bit less than 3.6s, compared to 1.7s without the filter.
+* [ ] Work on perfs. The `map.lua` filter currently multiplies by 2 the computing time of a file. _Déborder Bolloré_ takes a bit less than 3.6s, compared to 1.7s without the filter. Could [jog](https://github.com/tarleb/jog) be a solution for improving perfs?
 * [ ] Add logging messages with the `pandoc.log` module.
 
 ## Run a test
@@ -46,48 +46,50 @@ It would also be possible to design these filters with a Python framework such a
 
 Pandoc's list of types available in Lua is quite short. It can be found [here](https://pandoc.org/lua-filters.html#lua-type-reference). Some types are more necessary than others for OutDesign. Checked entries are the one that are currently supported, and **bold** ones are the most important to implement for the style mapping.
 
+Checked types are the types currently supported by the filter.
+
 ### Blocks
 
 When the element can't hold classes or attributes, it must be wrapped in a `Div` that can, and this `Div` must be tagged with a `"wrapper"=1` attribute.
 
-* [ ][class attrs] **Div**
-* [ ][class attrs] **Figure**
-* [ ][class attrs] **Header**
-* [ ][no classes!] **Para**
-* [ ][no classes!] **BlockQuote**
-* [ ][no classes!] **BulletList**
-* [ ][no classes!] **OrderedList**
-* [ ][class attrs] CodeBlock
-* [ ][class attrs] Table
-* [ ][no classes!] DefinitionList
-* [ ][no classes!] HorizontalRule
-* [ ][no classes!] LineBlock
-* [ ][no classes!] Plain
-* [ ][no classes!] RawBlock
+* [x] [class attrs] **Div**
+* [x] [class attrs] **Figure**
+* [x] [class attrs] **Header**
+* [x] [no classes!] **Para**
+* [x] [no classes!] **BlockQuote**
+* [x] [no classes!] **BulletList**
+* [x] [no classes!] **OrderedList**
+* [x] [class attrs] CodeBlock
+* [ ] [class attrs] Table
+* [ ] [no classes!] DefinitionList
+* [ ] [no classes!] HorizontalRule
+* [ ] [no classes!] LineBlock
+* [ ] [no classes!] Plain
+* [x] [no classes!] RawBlock
 
 ### Inlines
 
 When an Inline can't have classes or attributes, it must be wrapped in a `Span` that can, and this `Span` must be tagged with a `"wrapper"=1` attribute.
 
-* [ ][class attrs] **Link**
-* [ ][class attrs] **Code**
-* [ ][class attrs] **Span**
-* [ ][class attrs] **Image**
-* [ ][no classes!] **LineBreak**
-* [ ][no classes!] **Superscript**
-* [ ][no classes!] **Emph**
-* [ ][no classes!] **SmallCaps**
-* [ ][no classes!] **Strikeout**
-* [ ][no classes!] **Strong**
-* [ ][no classes!] **Subscript**
-* [ ][no classes!] Cite
-* [ ][no classes!] Math
-* [ ][no classes!] Note
-* [ ][no classes!] Quoted
-* [ ][no classes!] RawInline
-* [ ][no classes!] SoftBreak
-* [ ][no classes!] Space
-* [ ][no classes!] Str
+* [x] [class attrs] **Link**
+* [x] [class attrs] **Code**
+* [x] [class attrs] **Span**
+* [x] [class attrs] **Image**
+* [x] [no classes!] **LineBreak**
+* [x] [no classes!] **Superscript**
+* [x] [no classes!] **Emph**
+* [x] [no classes!] **SmallCaps**
+* [x] [no classes!] **Strikeout**
+* [x] [no classes!] **Strong**
+* [x] [no classes!] **Subscript**
+* [ ] [no classes!] Cite
+* [ ] [no classes!] Math
+* [x] [no classes!] Note
+* [ ] [no classes!] Quoted
+* [ ] [no classes!] RawInline
+* [ ] [no classes!] SoftBreak
+* [x] [no classes!] Space
+* [x] [no classes!] Str
 
 ## querySelectorAll
 
@@ -102,3 +104,5 @@ Several scenarios have to be met:
 And it should also work according to Pandoc types:
 
 * `BlockQuote.class1` is actually refering to the elements that are `BlockQuote` elements wrapped with a `Div` that has a `class1` class.
+
+**Note:** This has been implemented, though it was adapted to Pandoc Lua filters structure into a `isMatchingSelector` ffunction.
