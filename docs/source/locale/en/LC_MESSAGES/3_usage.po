@@ -141,7 +141,7 @@ msgid ""
 "(tous les autres éléments vides sont supprimés par défaut) ;"
 msgstr ""
 "`empty`: retains empty elements with this `role` (all other empty "
-"elements are removed, unless the `-e`/`--empty` option is enabled);"
+"elements are removed by default);"
 
 #: ../../source/3_usage.md:28
 msgid ""
