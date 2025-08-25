@@ -1,5 +1,5 @@
 [
-  { "selector": ".title", "operation": { "classes": "cool-title", "type": "Para", "attrs": { "hey": "oh" }} },
+  { "selector": ".title", "operation": { "classes": "cool-title", "type": "Header", "level": 1, "attrs": { "hey": "oh" }} },
   { "selector": ".paragraph-with-a-class", "operation": { "type": "Header", "level": 2 } },
   { "selector": ".paragraph-with-another-class.and-another", "operation": { "classes": "cool-paragraph", "type": "BlockQuote" } },
   { "selector": ".word-with-a-class", "operation": { "classes": "cool-word", "type": "Code", "attrs": { "bli": "bla" }} },

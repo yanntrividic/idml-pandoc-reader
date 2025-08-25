@@ -1,8 +1,6 @@
 # First header
 
-::: {#hello-world .cool-title hey="oh" wrapper="1"}
-Hello world!
-:::
+# Hello world! {#hello-world .cool-title hey="oh"}
 
 ## Paragraph with a class that becomes a level 2 header! {.paragraph-with-a-class}
 
