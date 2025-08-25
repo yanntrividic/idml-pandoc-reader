@@ -679,7 +679,7 @@ function operators.cut(doc)
 
   flush()
 
-  return doc -- nothing to stdout, but doesn't seem to work
+  return doc
 end
 
 return operators
