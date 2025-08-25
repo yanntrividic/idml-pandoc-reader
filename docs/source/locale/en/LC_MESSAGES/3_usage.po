@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-20 11:42+0200\n"
+"POT-Creation-Date: 2025-08-25 12:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -63,12 +63,15 @@ msgstr ""
 msgid ""
 "Les attributs `role` correspondent aux **styles de paragraphes et de "
 "caractères** précisés dans InDesign. Comme illustré dans le fichier "
-"`maps/sample.json`, il est possible d'associer ces styles de paragraphes "
-"et de caractères à des opérations particulières :"
+"[`maps/sample.json`](https://github.com/yanntrividic/idml-pandoc-"
+"reader/blob/main/maps/sample.json), il est possible d'associer ces styles"
+" de paragraphes et de caractères à des opérations particulières :"
 msgstr ""
 "`role` attributes correspond to the **paragraph and character styles** "
-"defined in InDesign. As shown in the file `maps/sample.json`, these "
-"styles can be mapped to specific operations:"
+"defined in InDesign. As shown in the file "
+"[`maps/sample.json`](https://github.com/yanntrividic/idml-pandoc-"
+"reader/blob/main/maps/sample.json), these styles can be mapped to "
+"specific operations:"
 
 #: ../../source/3_usage.md:13
 msgid "**Pour modifier leurs attributs :**"
@@ -95,8 +98,8 @@ msgid ""
 "`level` : si `type` est un titre (élément `Header`), `level` spécifie le "
 "niveau du titre ;"
 msgstr ""
-"`level`: if `type` is a DocBook title (`Header` tag), `level` sets its "
-"heading level;"
+"`level`: if `type` is a title (`Header` tag), `level` sets its heading "
+"level;"
 
 #: ../../source/3_usage.md:18
 msgid ""
@@ -143,6 +146,38 @@ msgid ""
 msgstr "`cut`: creates a new file before each element with this `role`;"
 
 #: ../../source/3_usage.md:29
+msgid "Exemple d'entrée JSON"
+msgstr "Example of a JSON entry"
+
+#: ../../source/3_usage.md:31
+msgid ""
+"Prenons [une entrée](https://gitlab.com/deborderbollore/idml-pandoc-"
+"reader/blob/main/maps/sample.json#L2) du fichier de correspondance de "
+"style `maps/sample.json` comme exemple :"
+msgstr ""
+"Let’s take [an entry](https://gitlab.com/deborderbollore/idml-pandoc-"
+"reader/blob/main/maps/sample.json#L2) from the style mapping file `maps/"
+"sample.json` as an example:"
+
+#: ../../source/3_usage.md:37
+msgid ""
+"Dans ce cas, tous les paragraphes du fichier IDML ayant associés au style"
+" de paragraphe `title` vont être identifiés comme des titres de niveau 1,"
+" avec cette fois-ci une classe `cool-title` et en plus l'attribut `hey` "
+"ayant pour valeur `oh`. Tous les différents opérateurs de la sous-partie "
+"précédente peuvent être spécifiés de la même manière."
+msgstr ""
+"In this case, all paragraphs in the IDML file associated with the `title`"
+" paragraph style will be identified as level-1 headings, this time with a"
+" `cool-title` class and, in addition, the `hey` attribute with the value "
+"`oh`. All the different operators from the previous subsection can be "
+"specified in the same way."
+
+#: ../../source/3_usage.md:39
+msgid "idml2docbook/map.py"
+msgstr "idml2docbook/map.py"
+
+#: ../../source/3_usage.md:41
 msgid ""
 "Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce "
 "script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON "
@@ -154,33 +189,33 @@ msgstr ""
 "shows the style mappings that will be applied, for example using the "
 "following command:"
 
-#: ../../source/3_usage.md:35
+#: ../../source/3_usage.md:47
 msgid "Commandes de base"
 msgstr "Basic Commands"
 
-#: ../../source/3_usage.md:37
+#: ../../source/3_usage.md:49
 msgid "Il est possible d'utiliser ce convertisseur de diverses manières :"
 msgstr "This converter can be used in several ways:"
 
-#: ../../source/3_usage.md:39
+#: ../../source/3_usage.md:51
 msgid ""
 "Avec le package `idml2docbook`, puis en exécutant Pandoc sur le résultat "
 "produit ;"
 msgstr "Using the `idml2docbook` package, then running Pandoc on the output;"
 
-#: ../../source/3_usage.md:40
+#: ../../source/3_usage.md:52
 msgid "Avec le lecteur Lua `idml.lua` ;"
 msgstr "Using the Lua reader `idml.lua`;"
 
-#: ../../source/3_usage.md:41
+#: ../../source/3_usage.md:53
 msgid "Avec le script `batch.sh`."
 msgstr "Using the `batch.sh` script."
 
-#: ../../source/3_usage.md:43
+#: ../../source/3_usage.md:55
 msgid "idml2docbook"
 msgstr "idml2docbook"
 
-#: ../../source/3_usage.md:45
+#: ../../source/3_usage.md:57
 msgid ""
 "Ce package Python est la contribution principale de ce dépôt. Il offre "
 "une API permettant de convertir un fichier fichier IDML en un ou "
@@ -189,11 +224,11 @@ msgstr ""
 "This Python package is the main contribution of this repository. It "
 "provides an API to convert an IDML file into one or more DocBook files."
 
-#: ../../source/3_usage.md:47
+#: ../../source/3_usage.md:59
 msgid "Convertir un fichier IDML et l'enregistrer dans un fichier DocBook :"
 msgstr "Convert an IDML file and save it to a DocBook file:"
 
-#: ../../source/3_usage.md:53
+#: ../../source/3_usage.md:65
 msgid ""
 "Il est aussi possible de directement envoyer le résultat de la conversion"
 " dans l'entrée standard de Pandoc, en précisant DocBook comme format "
@@ -202,15 +237,15 @@ msgstr ""
 "It is also possible to send the conversion result directly to Pandoc's "
 "standard input, by specifying DocBook as an input format:"
 
-#: ../../source/3_usage.md:59
+#: ../../source/3_usage.md:71
 msgid "Afficher l'aide à l'utilisation avec l'option `-h`/`--help` :"
 msgstr "Display usage help with the `-h`/`--help` option:"
 
-#: ../../source/3_usage.md:65
+#: ../../source/3_usage.md:77
 msgid "idml.lua"
 msgstr "idml.lua"
 
-#: ../../source/3_usage.md:67
+#: ../../source/3_usage.md:79
 msgid ""
 "Ce fichier fait le pont entre Pandoc et `idml2docbook`. Il permet de "
 "prendre le résultat de ce dernier pour l'insérer dans Pandoc. [Pandoc ne "
@@ -225,7 +260,7 @@ msgstr ""
 "means only modifying the `.env` file can affect the behavior of "
 "`idml2docbook` when executed through `idml.lua`."
 
-#: ../../source/3_usage.md:69
+#: ../../source/3_usage.md:81
 msgid ""
 "Convertir un fichier IDML vers Markdown, avec par exemple le filtre "
 "`roles-to-classes.lua` :"
@@ -233,7 +268,7 @@ msgstr ""
 "Convert an IDML file to Markdown, using for example the `roles-to-"
 "classes.lua` filter:"
 
-#: ../../source/3_usage.md:75
+#: ../../source/3_usage.md:87
 msgid ""
 "Spécifier un fichier JSON de correspondance et l'utiliser pour "
 "personnaliser votre commande de conversion avec le filtre `map.lua` :"
@@ -241,11 +276,11 @@ msgstr ""
 "Specify a mapping JSON file and use it to customize your conversion "
 "command with the `map.lua` filter:"
 
-#: ../../source/3_usage.md:81
+#: ../../source/3_usage.md:93
 msgid "Temps de calcul de idml2xml-frontend"
 msgstr "Computing time of idml2xml-frontend"
 
-#: ../../source/3_usage.md:83
+#: ../../source/3_usage.md:95
 msgid ""
 "Le convertisseur `idml2xml-frontend` est l'étape du processus qui prend "
 "de loin le plus de temps de calcul. Celle-ci n'ayant pas besoin d'être "
@@ -260,7 +295,7 @@ msgstr ""
 "running `idml2xml-frontend` on a `hello_world.idml` file is saved in the "
 "`idml2hubxml` folder."
 
-#: ../../source/3_usage.md:85
+#: ../../source/3_usage.md:97
 msgid ""
 "L'option `-x`/`--idml2hubxml-file` permet de spécifier un fichier "
 "intermédiaire tel que `idml2hubxml/hello_world.xml` en tant que fichier "
@@ -273,11 +308,11 @@ msgstr ""
 "conversion. To significantly save processing time, it is possible to "
 "resume the conversion from the intermediate result:"
 
-#: ../../source/3_usage.md:91
+#: ../../source/3_usage.md:103
 msgid "Liste des options de idml2docbook"
 msgstr "List of options for idml2docbook"
 
-#: ../../source/3_usage.md:93
+#: ../../source/3_usage.md:105
 msgid ""
 "Toutes les options détaillées ici sont aussi documentées dans le logiciel"
 " en ligne de commande (voir l'aide avec `-h`/`--help`)."
@@ -285,7 +320,7 @@ msgstr ""
 "All options detailed here are also documented in the command-line tool "
 "(see the help with `-h`/`--help`)."
 
-#: ../../source/3_usage.md:95
+#: ../../source/3_usage.md:107
 msgid ""
 "**`-x`, `--idml2hubxml-file`** \\ Considère le fichier en entrée comme un"
 " fichier Hub XML. \\ Utile pour gagner du temps de traitement si "
@@ -295,7 +330,7 @@ msgstr ""
 "file. <br> Useful for saving processing time if `idml2xml-frontend` has "
 "already been run on the source IDML file."
 
-#: ../../source/3_usage.md:99
+#: ../../source/3_usage.md:111
 msgid ""
 "**`-o`, `--output <fichier>`** \\ Nom à attribuer au fichier de sortie. "
 "\\ Par défaut, la sortie est redirigée vers la sortie standard "
@@ -304,7 +339,7 @@ msgstr ""
 "**`-o`, `--output <file>`** <br> Name to assign to the output file. <br> "
 "By default, output is sent to standard output (*stdout*)."
 
-#: ../../source/3_usage.md:103
+#: ../../source/3_usage.md:115
 msgid ""
 "**`-t`, `--typography`** \\ Refonte de l’orthotypographie selon les "
 "règles françaises \\ (espaces fines, espaces insécables, etc.)."
@@ -312,7 +347,7 @@ msgstr ""
 "**`-t`, `--typography`** <br> Applies French typographic refinements <br>"
 " (thin spaces, non-breaking spaces, etc.)."
 
-#: ../../source/3_usage.md:107
+#: ../../source/3_usage.md:119
 msgid ""
 "**`-l`, `--thin-spaces`** \\ N’utiliser que des espaces fines pour la "
 "refonte de l’orthotypographie. \\ À utiliser conjointement avec "
@@ -321,13 +356,13 @@ msgstr ""
 "**`-l`, `--thin-spaces`** <br> Use only thin spaces for typography "
 "refinement. <br> Should be used together with `--typography`."
 
-#: ../../source/3_usage.md:111
+#: ../../source/3_usage.md:123
 msgid ""
 "**`-b`, `--linebreaks`** \\ Ne pas remplacer les balises `<br>` par des "
 "espaces."
 msgstr "**`-b`, `--linebreaks`** <br> Do not replace `<br>` tags with spaces."
 
-#: ../../source/3_usage.md:114
+#: ../../source/3_usage.md:126
 msgid ""
 "**`-p`, `--prettify`** \\ Embellir la sortie DocBook. \\ ⚠️ Peut ajouter "
 "des espaces indésirables dans la sortie."
@@ -335,7 +370,7 @@ msgstr ""
 "**`-p`, `--prettify`** <br> Beautify the DocBook output. <br> ⚠️ May "
 "introduce unwanted spaces in the output."
 
-#: ../../source/3_usage.md:118
+#: ../../source/3_usage.md:130
 msgid ""
 "**`-f`, `--media <chemin>`** \\ Chemin vers le dossier contenant les "
 "fichiers médias. \\ Par défaut : `Links`."
@@ -343,7 +378,7 @@ msgstr ""
 "**`-f`, `--media <path>`** <br> Path to the folder containing media "
 "files. <br> Default: `Links`."
 
-#: ../../source/3_usage.md:122
+#: ../../source/3_usage.md:134
 msgid ""
 "**`-r`, `--raster <extension>`** \\ Extension à utiliser pour remplacer "
 "celles des images *matricielles*. \\ Exemple : `jpg`. \\ Par défaut : "
@@ -352,7 +387,7 @@ msgstr ""
 "**`-r`, `--raster <extension>`** <br> Extension to use when replacing "
 "that of *raster* images. <br> Example: `jpg`. <br> Default: none."
 
-#: ../../source/3_usage.md:127
+#: ../../source/3_usage.md:139
 msgid ""
 "**`-v`, `--vector <extension>`** \\ Extension à utiliser pour remplacer "
 "celles des images *vectorielles*. \\ Exemple : `svg`. \\ Par défaut : "
@@ -361,7 +396,7 @@ msgstr ""
 "**`-v`, `--vector <extension>`** <br> Extension to use when replacing "
 "that of *vector* images. <br> Example: `svg`. <br> Default: none."
 
-#: ../../source/3_usage.md:132
+#: ../../source/3_usage.md:144
 msgid ""
 "**`-i`, `--idml2hubxml-output <chemin>`** \\ Chemin vers la sortie du "
 "convertisseur `idml2hubxml` de Transpect. \\ Par défaut : `idml2hubxml`."
@@ -369,7 +404,7 @@ msgstr ""
 "**`-i`, `--idml2hubxml-output <path>`** <br> Path to the output from "
 "Transpect's `idml2hubxml` converter. <br> Default: `idml2hubxml`."
 
-#: ../../source/3_usage.md:136
+#: ../../source/3_usage.md:148
 msgid ""
 "**`-s`, `--idml2hubxml-script <chemin>`** \\ Chemin vers le script du "
 "convertisseur `idml2xml-frontend` de Transpect. \\ Par défaut : "
@@ -379,7 +414,7 @@ msgstr ""
 "Transpect's `idml2xml-frontend` converter. <br> Default: `idml2xml-"
 "frontend`."
 
-#: ../../source/3_usage.md:140
+#: ../../source/3_usage.md:152
 msgid ""
 "**`--env <fichier>`** \\ Chemin vers un fichier d’environnement `.env` "
 "pour `idml2docbook`. \\ Par défaut, cherche un fichier `.env` dans le "
@@ -391,7 +426,7 @@ msgstr ""
 "current directory. <br> All key/value pairs in this file override the "
 "program’s default values."
 
-#: ../../source/3_usage.md:145
+#: ../../source/3_usage.md:157
 msgid ""
 "**`--version`** \\ Affiche la version de `idml2docbook` et quitte le "
 "programme."
@@ -399,11 +434,11 @@ msgstr ""
 "**`--version`** <br> Displays the version of `idml2docbook` and exits the"
 " program."
 
-#: ../../source/3_usage.md:148
+#: ../../source/3_usage.md:160
 msgid "Exemple avec la commande de conversion du recueil _Déborder Bolloré_"
 msgstr "Details of the conversion command for the _Déborder Bolloré_ reader"
 
-#: ../../source/3_usage.md:150
+#: ../../source/3_usage.md:162
 msgid ""
 "La commande pour compiler les contributions du recueil _Déborder "
 "Bolloré_, dont on peut retrouver le résultat sur le dépôt "
@@ -415,7 +450,7 @@ msgstr ""
 "[deborderbollore/articles](https://gitlab.com/deborderbollore/articles), "
 "is as follows:"
 
-#: ../../source/3_usage.md:167
+#: ../../source/3_usage.md:179
 msgid ""
 "En détails, les [options pour Pandoc](https://pandoc.org/MANUAL.html) "
 "utilisées sont les suivantes :"
@@ -423,7 +458,7 @@ msgstr ""
 "In detail, the [Pandoc options](https://pandoc.org/MANUAL.html) used are "
 "as follows:"
 
-#: ../../source/3_usage.md:169
+#: ../../source/3_usage.md:181
 msgid ""
 "`-f`/`--from` : format d'entrée, ici, on donne directement le fichier "
 "sorti de `idml2docbook`, il s'agit donc du format DocBook ;"
@@ -431,7 +466,7 @@ msgstr ""
 "`-f`/`--from`: input format; here we provide the file output by "
 "`idml2docbook`, which is therefore in DocBook format;"
 
-#: ../../source/3_usage.md:170
+#: ../../source/3_usage.md:182
 msgid ""
 "`-t`/`--to` : format de sortie, le plus pratique pour _Déborder Bolloré_ "
 "ayant été Markdown, dans la saveur [PHP Markdown "
@@ -440,32 +475,34 @@ msgid ""
 "[deborderbollore.fr](https://deborderbollore.fr), "
 "[Kirby](https://michelf.ca/projects/php-markdown/extra/)."
 msgstr ""
-"`-t`/`--to`: output format; the most practical for _Déborder Bolloré_ was "
-"Markdown, in the [PHP Markdown Extra](https://michelf.ca/projects/php-markdown/extra/) "
-"flavor, to be easily read by the CMS of [deborderbollore.fr](https://deborderbollore.fr), "
+"`-t`/`--to`: output format; the most practical for _Déborder Bolloré_ was"
+" Markdown, in the [PHP Markdown Extra](https://michelf.ca/projects/php-"
+"markdown/extra/) flavor, to be easily read by the CMS of "
+"[deborderbollore.fr](https://deborderbollore.fr), "
 "[Kirby](https://michelf.ca/projects/php-markdown/extra/)."
 
-#: ../../source/3_usage.md:171
+#: ../../source/3_usage.md:183
 msgid ""
 "`--lua-filter` : deux filtres Lua pour Pandoc sont utilisés ici, `roles-"
 "to-classes.lua` transforme les attributs `role` des éléments DocBook en "
 "classes Pandoc, tandis que `map.lua` applique les opérations de "
 "correspondance nécessaires."
 msgstr ""
-"`--lua-filter`: two Lua filters for Pandoc are used here; `roles-to-classes.lua` "
-"converts DocBook element `role` attributes into Pandoc classes, while "
-"`map.lua` applies the necessary mapping operations."
+"`--lua-filter`: two Lua filters for Pandoc are used here; `roles-to-"
+"classes.lua` converts DocBook element `role` attributes into Pandoc "
+"classes, while `map.lua` applies the necessary mapping operations."
 
-#: ../../source/3_usage.md:172
+#: ../../source/3_usage.md:184
 msgid ""
 "`-M map` : chemin vers le fichier JSON contenant les opérations à "
 "effectuer sur certains styles de caractères et de paragraphes, voir "
 "[Correspondance des styles](#correspondance-des-styles) ;"
 msgstr ""
-"`-M map`: path to the JSON file containing operations to apply to certain "
-"character and paragraph styles, see [Style Mapping](#correspondance-des-styles);"
+"`-M map`: path to the JSON file containing operations to apply to certain"
+" character and paragraph styles, see [Style Mapping](#correspondance-des-"
+"styles);"
 
-#: ../../source/3_usage.md:173
+#: ../../source/3_usage.md:185
 msgid ""
 "`-o`/`--output` : permet de préciser le dossier où seront contenus les "
 "fichiers produits (ici, dans le dossier `output `, avec des fichiers "
@@ -474,11 +511,11 @@ msgstr ""
 "`-o`/`--output`: specifies the folder where the generated files will be "
 "saved (here, in the `output` folder, with files prefixed `db`)."
 
-#: ../../source/3_usage.md:175
+#: ../../source/3_usage.md:187
 msgid "Et celles pour `idml2docbook` :"
 msgstr "And those for `idml2docbook`:"
 
-#: ../../source/3_usage.md:177
+#: ../../source/3_usage.md:189
 msgid ""
 "`-t`/`--typography` : refait totalement l'orthotypographie (espaces "
 "autour des signes de ponctuation, etc.) ;"
@@ -486,13 +523,13 @@ msgstr ""
 "`-t`/`--typography`: completely redoes typographic spacing (around "
 "punctuation, etc.);"
 
-#: ../../source/3_usage.md:178
+#: ../../source/3_usage.md:190
 msgid ""
 "`-l`/`--thin-spaces` : l'orthotypographie utilise seulement des espaces "
 "fines ;"
 msgstr "`-l`/`--thin-spaces`: typography uses only thin spaces;"
 
-#: ../../source/3_usage.md:179
+#: ../../source/3_usage.md:191
 msgid ""
 "`-r`/`--raster` : remplace les extensions des images matricielles par "
 "`jpg` dans les URL des fichiers de sortie ;"
@@ -500,11 +537,11 @@ msgstr ""
 "`-r`/`--raster`: replaces raster image extensions with `jpg` in the "
 "output file URLs;"
 
-#: ../../source/3_usage.md:180
+#: ../../source/3_usage.md:192
 msgid "`-v`/`--vector` : idem pour les images vectorielles ;"
 msgstr "`-v`/`--vector`: same for vector images;"
 
-#: ../../source/3_usage.md:181
+#: ../../source/3_usage.md:193
 msgid ""
 "`-f`/`--media-folder` : remplace l'URL absolue des médias dans les "
 "fichiers de sortie par `images/`."

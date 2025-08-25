@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>3. Usage &mdash; IDML Pandoc reader 0.4.0 documentation</title>
+  <title>3. Usage &mdash; IDML Pandoc reader 0.4.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -15,7 +15,7 @@
   
       <script src="_static/jquery.js?v=5d32c60e"></script>
       <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=6c02275b"></script>
+      <script src="_static/documentation_options.js?v=c87aa342"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
@@ -50,7 +50,11 @@
 <li class="toctree-l1"><a class="reference internal" href="2_installation.html">2. Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Usage</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#preparation-des-fichiers-idml">Preparing IDML Files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#correspondance-des-styles">Style Mapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#correspondance-des-styles">Style Mapping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#exemple-dentree-json">Example of a JSON entry</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#idml2docbook-map-py">idml2docbook/map.py</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#commandes-de-base">Basic Commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#idml2docbook">idml2docbook</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#idml-lua">idml.lua</a></li>
@@ -104,14 +108,14 @@
 <section id="correspondance-des-styles">
 <h2>Style Mapping<a class="headerlink" href="#correspondance-des-styles" title="Link to this heading"></a></h2>
 <p>Once the <a class="reference external" href="https://github.com/yanntrividic/pandoc/">modified version of Pandoc</a> is installed, Pandoc can interpret the <code class="docutils literal notranslate"><span class="pre">role</span></code> attributes of the elements in the DocBook files generated after conversion. These roles are then treated as classes by Pandoc using the <code class="docutils literal notranslate"><span class="pre">roles-to-classes.lua</span></code> filter.</p>
-<p><code class="docutils literal notranslate"><span class="pre">role</span></code> attributes correspond to the <strong>paragraph and character styles</strong> defined in InDesign. As shown in the file <code class="docutils literal notranslate"><span class="pre">maps/sample.json</span></code>, these styles can be mapped to specific operations:</p>
+<p><code class="docutils literal notranslate"><span class="pre">role</span></code> attributes correspond to the <strong>paragraph and character styles</strong> defined in InDesign. As shown in the file <a class="reference external" href="https://github.com/yanntrividic/idml-pandoc-reader/blob/main/maps/sample.json"><code class="docutils literal notranslate"><span class="pre">maps/sample.json</span></code></a>, these styles can be mapped to specific operations:</p>
 <ol class="arabic simple">
 <li><p><strong>To modify their attributes:</strong></p></li>
 </ol>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">role</span></code>: replaces the source role with one or more classes;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: changes the element type (by default, all elements are <code class="docutils literal notranslate"><span class="pre">Para</span></code> or <code class="docutils literal notranslate"><span class="pre">Span</span></code>) to <a class="reference external" href="https://pandoc.org/lua-filters.html#type-pandoc">a new type</a> (a header, emphasis, quote, etc.);</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: if <code class="docutils literal notranslate"><span class="pre">type</span></code> is a DocBook title (<code class="docutils literal notranslate"><span class="pre">Header</span></code> tag), <code class="docutils literal notranslate"><span class="pre">level</span></code> sets its heading level;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: if <code class="docutils literal notranslate"><span class="pre">type</span></code> is a title (<code class="docutils literal notranslate"><span class="pre">Header</span></code> tag), <code class="docutils literal notranslate"><span class="pre">level</span></code> sets its heading level;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simplify</span></code>: removes all attributes and classes from elements with this paragraph or character style;</p></li>
 </ul>
 <ol class="arabic simple" start="2">
@@ -125,10 +129,21 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">empty</span></code>: retains empty elements with this <code class="docutils literal notranslate"><span class="pre">role</span></code> (all other empty elements are removed, unless the <code class="docutils literal notranslate"><span class="pre">-e</span></code>/<code class="docutils literal notranslate"><span class="pre">--empty</span></code> option is enabled);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cut</span></code>: creates a new file before each element with this <code class="docutils literal notranslate"><span class="pre">role</span></code>;</p></li>
 </ul>
+<section id="exemple-dentree-json">
+<h3>Example of a JSON entry<a class="headerlink" href="#exemple-dentree-json" title="Link to this heading"></a></h3>
+<p>Let’s take <a class="reference external" href="https://gitlab.com/deborderbollore/idml-pandoc-reader/blob/main/maps/sample.json#L2">an entry</a> from the style mapping file <code class="docutils literal notranslate"><span class="pre">maps/sample.json</span></code> as an example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;selector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;classes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cool-title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Header&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;attrs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;hey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oh&quot;</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>In this case, all paragraphs in the IDML file associated with the <code class="docutils literal notranslate"><span class="pre">title</span></code> paragraph style will be identified as level-1 headings, this time with a <code class="docutils literal notranslate"><span class="pre">cool-title</span></code> class and, in addition, the <code class="docutils literal notranslate"><span class="pre">hey</span></code> attribute with the value <code class="docutils literal notranslate"><span class="pre">oh</span></code>. All the different operators from the previous subsection can be specified in the same way.</p>
+</section>
+<section id="idml2docbook-map-py">
+<h3>idml2docbook/map.py<a class="headerlink" href="#idml2docbook-map-py" title="Link to this heading"></a></h3>
 <p>The script <code class="docutils literal notranslate"><span class="pre">idml2docbook/map.py</span></code> helps create these JSON files. It takes a file generated by <code class="docutils literal notranslate"><span class="pre">idml2xml-frontend</span></code> and a mapping JSON file, and shows the style mappings that will be applied, for example using the following command:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>idml2docbook/map.py<span class="w"> </span>file.xml<span class="w"> </span>maps/sample.json
 </pre></div>
 </div>
+</section>
 </section>
 <section id="commandes-de-base">
 <h2>Basic Commands<a class="headerlink" href="#commandes-de-base" title="Link to this heading"></a></h2>
@@ -258,7 +273,7 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
 	<span class="rst-current-version">
 		<span class="fa fa-folder"> Version</span>
-		<span class="version">0.4.0</span>
+		<span class="version">0.4.1</span>
 		<div class="langs">
 			<span class="fa fa-book"> Languages</span>
 				

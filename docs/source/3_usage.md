@@ -8,7 +8,7 @@ Un [guide de formatage](/4_formatting_guide) indique comment préparer les fichi
 
 Une fois la [version modifiée de Pandoc](https://github.com/yanntrividic/pandoc/) installée, Pandoc sera en mesure d'interpréter les attributs `role` des éléments des fichiers DocBook obtenus après conversion. Ces rôles sont ensuite considérés comme des classes par Pandoc grâce au filtre `roles-to-classes.lua`.
 
-Les attributs `role` correspondent aux **styles de paragraphes et de caractères** précisés dans InDesign. Comme illustré dans le fichier `maps/sample.json`, il est possible d'associer ces styles de paragraphes et de caractères à des opérations particulières :
+Les attributs `role` correspondent aux **styles de paragraphes et de caractères** précisés dans InDesign. Comme illustré dans le fichier [`maps/sample.json`](https://github.com/yanntrividic/idml-pandoc-reader/blob/main/maps/sample.json), il est possible d'associer ces styles de paragraphes et de caractères à des opérations particulières :
 
 1. **Pour modifier leurs attributs :**
 
@@ -25,6 +25,18 @@ Les attributs `role` correspondent aux **styles de paragraphes et de caractères
 * `br` : ajoute un saut de ligne avant l'élément concerné ;
 * `empty` : conserve les éléments vides portant ce style de paragraphe (tous les autres éléments vides sont supprimés par défaut) ;
 * `cut` : crée un nouveau fichier avant chaque élément ayant le style de paragraphe sélectionné ;
+
+### Exemple d'entrée JSON
+
+Prenons [une entrée](https://gitlab.com/deborderbollore/idml-pandoc-reader/blob/main/maps/sample.json#L2) du fichier de correspondance de style `maps/sample.json` comme exemple :
+
+```json
+{ "selector": ".title", "operation": { "classes": "cool-title", "type": "Header", "level": 1, "attrs": { "hey": "oh" }} }
+```
+
+Dans ce cas, tous les paragraphes du fichier IDML ayant associés au style de paragraphe `title` vont être identifiés comme des titres de niveau 1, avec cette fois-ci une classe `cool-title` et en plus l'attribut `hey` ayant pour valeur `oh`. Tous les différents opérateurs de la sous-partie précédente peuvent être spécifiés de la même manière.
+
+### idml2docbook/map.py
 
 Le script `idml2docbook/map.py` aide à constituer ces fichiers JSON. Ce script prend un fichier sorti de `idml2xml-frontend` et un fichier JSON de correspondance, et détaille la correspondance de styles qui va être appliquée via par exemple la commande suivante :
 
