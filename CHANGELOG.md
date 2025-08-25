@@ -1,5 +1,10 @@
 # Revision history for idml-pandoc-reader
 
+## idml-pandoc-reader 0.4.1 (2025-08-25)
+
+* Removed a few comments in the code.
+* Wrote better docs.
+
 ## idml-pandoc-reader 0.4.0 (2025-08-20)
 
 * Mapping functionalities are now written in Lua. That means that they are now format-agnostic, and can work with Pandoc as their only dependency, see `lua-filters/map.lua`.

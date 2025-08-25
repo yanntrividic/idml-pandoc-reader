@@ -21,7 +21,7 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [x] Write the documentation
 * [x] Write a `setup.py` file
 * [x] Add every option to the `.env` file so that the `idml.lua` file is usable on its own
-* [ ] Enable CSS selectors in map files (maybe by temporarily converting `role` attributes into `class`?)
+* [x] Enable CSS selectors in map files (maybe by temporarily converting `role` attributes into `class`?)
 * [x] Translate the docs to english
 * [ ] Publish the package on [PyPI](https://pypi.org/)
 * [x] Mirror the repo on GitHub
@@ -40,9 +40,9 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [ ] Add in the docs a reference to the logfile that is generated
 * [ ] Write better docs for the `--typography` option
 * [ ] Enhance customisation options of the `--typography` option (specify regex, presets? en/fr?)
-* [ ] Rewrite the correspondance mapping code as a Lua filter so that it is format agnostic for Pandoc, and allows this to be a true API for conversion personalization. (It mainly concerns the files `cut.py`, `map.py`, and `core.py`. Basically, what it would enable is easy schema mapping for going to a particular schema in any format (e.g. IDML) to any format (e.g. DOCX) for any person aware of semantic structuring.)
+* [x] Rewrite the correspondance mapping code as a Lua filter so that it is format agnostic for Pandoc, and allows this to be a true API for conversion personalization. (It mainly concerns the files `cut.py`, `map.py`, and `core.py`. Basically, what it would enable is easy schema mapping for going to a particular schema in any format (e.g. IDML) to any format (e.g. DOCX) for any person aware of semantic structuring.)
 
-### Issues to publish on jgm/pandoc
+### Issues to investigate and publish on @jgm/pandoc
 
 * [ ] Linebreaks in headers isn't supported with the AsciiDoc writer
 * [ ] ID attributes are not supported in headers with the AsciiDoc writer
