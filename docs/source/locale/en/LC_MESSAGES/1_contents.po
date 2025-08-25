@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: IDML Pandoc reader \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-08-20 11:27+0200\n"
+"POT-Creation-Date: 2025-08-25 17:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yann Trividic\n"
 "Language: en\n"
@@ -25,10 +25,33 @@ msgid "Contenus du dépôt"
 msgstr "Repository Contents"
 
 #: ../../source/1_contents.md:3
-msgid "Les fichiers et dossiers les plus importants du dépôt sont :"
-msgstr "The most important files and folders in the repository are:"
+msgid ""
+"Ce projet adopte pour l'instant une structure \"monodépôt\", c'est-à-dire"
+" que plusieurs sous-projets sont contenus dans ce dépôt, qui sera "
+"sûrement découpé à termes en plusieurs dépôts distincts. Les fichiers et "
+"dossiers les plus importants du dépôt sont :"
+msgstr ""
+"This project currently follows a \"monorepo\" structure, meaning that "
+"several sub-projects are contained in this repository, which will "
+"probably eventually be split into several distinct repositories. The most"
+" important files and folders in the repository are:"
 
 #: ../../source/1_contents.md:5
+msgid ""
+"`.design` est un dossier appliquant la structure du projet "
+"[contribute.design](https://contribute.design) et qui rassemble le "
+"travail de design d'interface qui aboutira à termes sur OutDesign ;"
+msgstr ""
+"`.design` is a folder applying the structure of the "
+"[contribute.design](https://contribute.design) project and gathering the "
+"interface design work that will eventually lead to OutDesign;"
+
+#: ../../source/1_contents.md:6
+msgid "`docs` contient le code source de la présente documentation ;"
+msgstr ""
+"`docs` contains the source code of this documentation;"
+
+#: ../../source/1_contents.md:7
 msgid ""
 "`idml2docbook` est un package Python permettant de faire le pont entre "
 "les formats IDML et DocBook, ce dernier pouvant être lu par Pandoc ;"
@@ -36,7 +59,7 @@ msgstr ""
 "`idml2docbook` is a Python package that bridges the gap between the IDML "
 "and DocBook formats, the latter being readable by Pandoc;"
 
-#: ../../source/1_contents.md:6
+#: ../../source/1_contents.md:8
 msgid ""
 "`lua-filters` contient une série de filtres Lua permettant de manipuler "
 "la structure des fichiers fournis en entrée à Pandoc, indépendemment de "
@@ -45,7 +68,7 @@ msgstr ""
 "`lua-filters` contains a set of Lua filters that manipulate the structure"
 " of files passed to Pandoc, regardless of their format;"
 
-#: ../../source/1_contents.md:7
+#: ../../source/1_contents.md:9
 msgid ""
 "`maps` contient des fichiers JSON exemples montrant comment paramétrer la"
 " conversion en fonction des spécificités de chaque document, voir "
@@ -58,7 +81,7 @@ msgstr ""
 "mapping](https://outdesign.deborderbollore.fr/en/3_usage.html"
 "#correspondance-des-styles);"
 
-#: ../../source/1_contents.md:8
+#: ../../source/1_contents.md:10
 msgid ""
 "`.env.sample` est un fichier de configuration permettant de donner des "
 "valeurs par défaut au convertisseur ;"
@@ -66,7 +89,7 @@ msgstr ""
 "`.env.sample` is a configuration file that provides default values to the"
 " converter;"
 
-#: ../../source/1_contents.md:9
+#: ../../source/1_contents.md:11
 msgid ""
 "`idml.lua` est un lecteur de fichiers personnalisés pour Pandoc pour "
 "faire le lien avec `idml2docbook`, voir [Commandes de "
@@ -77,7 +100,10 @@ msgstr ""
 "see [Basic commands](https://outdesign.deborderbollore.fr/en/3_usage.html"
 "#commandes-de-base);"
 
-#: ../../source/1_contents.md:10
+#: ../../source/1_contents.md:12
 msgid "`install.sh` est le script d'installation du projet."
 msgstr "`install.sh` is an installation script for this project."
+
+#~ msgid "Les fichiers et dossiers les plus importants du dépôt sont :"
+#~ msgstr "The most important files and folders in the repository are:"
 

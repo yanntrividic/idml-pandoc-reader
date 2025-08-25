@@ -85,8 +85,10 @@
              
   <section class="tex2jax_ignore mathjax_ignore" id="contenus-du-depot">
 <h1><span class="section-number">1. </span>Repository Contents<a class="headerlink" href="#contenus-du-depot" title="Link to this heading"></a></h1>
-<p>The most important files and folders in the repository are:</p>
+<p>This project currently follows a “monorepo” structure, meaning that several sub-projects are contained in this repository, which will probably eventually be split into several distinct repositories. The most important files and folders in the repository are:</p>
 <ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.design</span></code> is a folder applying the structure of the <a class="reference external" href="https://contribute.design">contribute.design</a> project and gathering the interface design work that will eventually lead to OutDesign;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docs</span></code> contains the source code of this documentation;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">idml2docbook</span></code> is a Python package that bridges the gap between the IDML and DocBook formats, the latter being readable by Pandoc;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lua-filters</span></code> contains a set of Lua filters that manipulate the structure of files passed to Pandoc, regardless of their format;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">maps</span></code> contains example JSON files showing how to configure the conversion according to each document’s specifics, see <a class="reference external" href="https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles">Style mapping</a>;</p></li>

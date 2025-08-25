@@ -116,6 +116,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">role</span></code>: replaces the source role with one or more classes;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>: changes the element type (by default, all elements are <code class="docutils literal notranslate"><span class="pre">Para</span></code> or <code class="docutils literal notranslate"><span class="pre">Span</span></code>) to <a class="reference external" href="https://pandoc.org/lua-filters.html#type-pandoc">a new type</a> (a header, emphasis, quote, etc.);</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">level</span></code>: if <code class="docutils literal notranslate"><span class="pre">type</span></code> is a title (<code class="docutils literal notranslate"><span class="pre">Header</span></code> tag), <code class="docutils literal notranslate"><span class="pre">level</span></code> sets its heading level;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attrs</span></code>: adds or updates an attribute to all concerned elements;</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">simplify</span></code>: removes all attributes and classes from elements with this paragraph or character style;</p></li>
 </ul>
 <ol class="arabic simple" start="2">
@@ -132,7 +133,17 @@
 <section id="exemple-dentree-json">
 <h3>Example of a JSON entry<a class="headerlink" href="#exemple-dentree-json" title="Link to this heading"></a></h3>
 <p>Let’s take <a class="reference external" href="https://gitlab.com/deborderbollore/idml-pandoc-reader/blob/main/maps/sample.json#L2">an entry</a> from the style mapping file <code class="docutils literal notranslate"><span class="pre">maps/sample.json</span></code> as an example:</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;selector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;classes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cool-title&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Header&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;attrs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;hey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oh&quot;</span><span class="w"> </span><span class="p">}}</span><span class="w"> </span><span class="p">}</span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;selector&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;.title&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;operation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;classes&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cool-title&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Header&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;level&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;attrs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">&quot;hey&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;oh&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>In this case, all paragraphs in the IDML file associated with the <code class="docutils literal notranslate"><span class="pre">title</span></code> paragraph style will be identified as level-1 headings, this time with a <code class="docutils literal notranslate"><span class="pre">cool-title</span></code> class and, in addition, the <code class="docutils literal notranslate"><span class="pre">hey</span></code> attribute with the value <code class="docutils literal notranslate"><span class="pre">oh</span></code>. All the different operators from the previous subsection can be specified in the same way.</p>
