@@ -31,7 +31,17 @@ Les attributs `role` correspondent aux **styles de paragraphes et de caractères
 Prenons [une entrée](https://gitlab.com/deborderbollore/idml-pandoc-reader/blob/main/maps/sample.json#L2) du fichier de correspondance de style `maps/sample.json` comme exemple :
 
 ```json
-{ "selector": ".title", "operation": { "classes": "cool-title", "type": "Header", "level": 1, "attrs": { "hey": "oh" }} }
+{
+    "selector": ".title",
+    "operation": {
+        "classes": "cool-title",
+        "type": "Header",
+        "level": 1,
+        "attrs": {
+            "hey": "oh"
+        }
+    }
+}
 ```
 
 Dans ce cas, tous les paragraphes du fichier IDML ayant associés au style de paragraphe `title` vont être identifiés comme des titres de niveau 1, avec cette fois-ci une classe `cool-title` et en plus l'attribut `hey` ayant pour valeur `oh`. Tous les différents opérateurs de la sous-partie précédente peuvent être spécifiés de la même manière.
