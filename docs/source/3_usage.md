@@ -15,6 +15,7 @@ Les attributs `role` correspondent aux **styles de paragraphes et de caractères
 * `classes` : remplace le style de paragraphe ou de caractère source par une ou plusieurs classes ;
 * `type` : change le type d'élément (par défaut, tous les éléments sont des `Para` ou des `Span`) vers [un nouveau type](https://pandoc.org/lua-filters.html#type-pandoc) (un titre, une emphase, une citation...) ;
 * `level` : si `type` est un titre (élément `Header`), `level` spécifie le niveau du titre ;
+* `attrs` : ajoute ou actualise un attribut aux éléments concernés ;
 * `simplify` : enlève tous les attributs et classes des éléments avec ce style de paragraphe ou de caractère ;
 
 2. **Ou pour modifier la structure du document :**
