@@ -41,6 +41,7 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [ ] Write better docs for the `--typography` option
 * [ ] Enhance customisation options of the `--typography` option (specify regex, presets? en/fr?)
 * [x] Rewrite the correspondance mapping code as a Lua filter so that it is format agnostic for Pandoc, and allows this to be a true API for conversion personalization. (It mainly concerns the files `cut.py`, `map.py`, and `core.py`. Basically, what it would enable is easy schema mapping for going to a particular schema in any format (e.g. IDML) to any format (e.g. DOCX) for any person aware of semantic structuring.)
+* [ ] Technically, now that the mapping is written in Lua, it would be possible to apply Lua filters on elements selected by `isMatchingSelector`... Wouldn't it?
 
 ### Issues to investigate and publish on @jgm/pandoc
 
