@@ -4,6 +4,7 @@ import json
 import logging
 from slugs import custom_slugify
 from bs4 import BeautifulSoup
+from natsort import natsorted
 
 BOLD = '\033[1m'
 END = '\033[0m'
@@ -34,6 +35,7 @@ def log_map_entry(entry):
     if "attrs" in entry: s = s + "[attrs added " + str(entry.get("attrs")) + "]"
     if "delete" in entry: return "deleted!"
     if "unwrap" in entry: return "unwrapped!"
+    if s == "": return "no operation applied!"
     return s
 
 def bold_print(s):
@@ -69,6 +71,76 @@ def update_roles_with_better_slugs(soup, roles):
                     logging.debug("Role name for style \"" + value["native"] + "\" was changed: " + value["hub"] + " -> " + key)
                     log = True
 
+def turn_direct_formatting_into_custom_roles(xml):
+    # Hacky way to enable namespace support for the `css:`-prefixed attributes
+    xml = xml.replace('css:', 'css_namespace__')
+
+    soup = BeautifulSoup(xml, "xml")
+
+    paragraph_styles = {}
+    character_styles = {}
+
+    def normalize_attr_name(name: str) -> str:
+        """Return the local name with any namespace/prefix removed."""
+        if name.startswith('css_namespace__'):
+            name = name[len('css_namespace__'):]
+        # remove any 'prefix:' (css:font-size -> font-size)
+        if ':' in name:
+            name = name.split(':', 1)[1]
+        return name
+
+    def looks_like_css_attr(name: str):
+        """
+        Heuristic: detect attributes that were intended as css:*,
+        which means attributes that start with the css_namespace__ prefix
+        """
+        if name.startswith('css_namespace__'):
+            return True
+        return False
+
+    def canonical_css_key(tag):
+        """Create a stable tuple key of (localname, value) sorted by name/value."""
+        items = []
+        for k, v in list(tag.attrs.items()):
+            if looks_like_css_attr(k):
+                items.append((normalize_attr_name(k), v))
+        items.sort()
+        return tuple(items)
+
+    # Walk only para and phrase
+    for tag in soup.find_all(['para', 'phrase']):
+        # find css-like attrs
+        css_items = [(k, v) for k, v in tag.attrs.items() if looks_like_css_attr(k)]
+        if not css_items:
+            continue
+
+        key = canonical_css_key(tag)
+
+        if tag.name == 'para':
+            store = paragraph_styles
+            base_prefix = 'override-paragraph-style-'
+        else:
+            store = character_styles
+            base_prefix = 'override-character-style-'
+
+        if key not in store:
+            store[key] = len(store) + 1
+        style_num = store[key]
+
+        # remove the detected css-like attributes from the element
+        for k, _ in css_items:
+            if k in tag.attrs:
+                del tag.attrs[k]
+
+        # update or create role
+        old_role = tag.get('role')
+        if old_role:
+            tag['role'] = f"{old_role}-override-{style_num}"
+        else:
+            tag['role'] = f"{base_prefix}{style_num}"
+
+    return soup
+
 def fix_role_names(soup):
     roles = build_roles_map(soup)
     soup = update_roles_with_better_slugs(soup, roles)
@@ -92,7 +164,7 @@ if __name__ == "__main__":
         # Those three lines fix the roles names
         # If your map file was designed using v0.1.0
         # comment those three lines
-        soup = BeautifulSoup(hubxml, "xml")
+        soup = turn_direct_formatting_into_custom_roles(hubxml)
         fix_role_names(soup)
         hubxml = str(soup)
 
@@ -111,7 +183,7 @@ if __name__ == "__main__":
             raise ValueError("This file doesn't seem to be coming from idml2xml...")
 
         bold_print("Role/tag couples present in " + file + ":")
-        for couple in sorted(roles):
+        for couple in natsorted(roles):
             print("- " + couple[0] + " (" + couple[1] + ")")
             if map and couple[0] not in map:
                 uncovered.append(couple)

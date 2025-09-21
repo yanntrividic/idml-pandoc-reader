@@ -58,6 +58,9 @@ def load_env(argv):
         '-o', '--output', type=str,
         help='filename where output is written, defaults to stdout')
     PARSER.add_argument(
+        '-g', '--ignore-overrides', action='store_true',
+        help='ignore the style overrides (direct formatting)')
+    PARSER.add_argument(
         '-t', '--typography', action='store_true',
         help='redo the orthotypography '
         '(french typography rules, with thin spaces, nbsp...)')
@@ -112,6 +115,7 @@ def load_env(argv):
     default_options = {
         'idml2hubxml_file': False,
         'typography': getEnvOrDefault("TYPOGRAPHY"),
+        'ignore_overrides': getEnvOrDefault("IGNORE_OVERRIDES"),
         'thin_spaces': getEnvOrDefault("THIN_SPACES"),
         'linebreaks': getEnvOrDefault("LINEBREAKS"),
         'prettify': getEnvOrDefault("PRETTIFY"),

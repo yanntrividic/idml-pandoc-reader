@@ -3,3 +3,4 @@ lxml == 6.0.0
 python-dotenv == 1.1.1
 unidecode == 1.4.0
 packaging == 25.0
+natsort == 8.4.0
