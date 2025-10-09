@@ -21,8 +21,12 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
     * [x] **level**
     * [x] **br**
     * [x] **empty**
-* [ ] Work on perfs. The `map.lua` filter currently multiplies by 2 the computing time of a file. _Déborder Bolloré_ takes a bit less than 3.6s, compared to 1.7s without the filter. Could [jog](https://github.com/tarleb/jog) be a solution for improving perfs?
+* [x] Work on perfs. The `map.lua` filter currently multiplies by 2 the computing time of a file. _Déborder Bolloré_ takes a bit less than 3.6s, compared to 1.7s without the filter. Could [jog](https://github.com/tarleb/jog) be a solution for improving perfs? **Update:** Jog was made for small filters, which skip large parts of the document. The `map.lua` filter needs to apply on most elements of the AST to check whether the selector applies to them. Jog actually increases computing time by 3x to 5x.
 * [ ] Add logging messages with the `pandoc.log` module.
+* [ ] Add a `merge` operator, especially for CLV3
+* [x] Make it so it is possible to turn an `Inline` in to a `Block` through the `type` operator. Especially useful for when character styles are used as paragraph styles. **Update:** It's been explored in the `custom-traversal-order-pandoc` branch. It is not so easy to pull out because `Inline` and `Block` functions are typed. For now, the new implementation increases by 7x the computing time. Maybe it could be optimised.
+* [ ] Technically, now that the mapping is written in Lua, it would be possible to apply Lua filters on elements selected by `isMatchingSelector`... Wouldn't it?
+
 
 ## Run a test
 
