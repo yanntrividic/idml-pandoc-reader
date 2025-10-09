@@ -4,3 +4,7 @@ python-dotenv == 1.1.1
 unidecode == 1.4.0
 packaging == 25.0
 natsort == 8.4.0
+
+# For map.py advanced features!
+pandas == 2.3.2
+odfpy == 1.4.1
