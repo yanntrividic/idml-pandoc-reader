@@ -301,6 +301,22 @@ local function inlineToInline(el, newtype, wrapper_attr)
   return result
 end
 
+local function liftElement(el, targetDomain)
+  if targetDomain == "Block" then
+    return pandoc.Para({el})
+  elseif targetDomain == "Inline" then
+    return pandoc.Span(el.content or {el}, el.attr or {"", {}, {}})
+  end
+end
+
+local function inlineToBlock(el, newtype)
+  return blockToBlock(liftElement(el, "Block"), newtype, nil, false)
+end
+
+local function blockToInline(el, newtype)
+  return inlineToInline(liftElement(el, "Inline"), newtype, nil)
+end
+
 -- This function replaces the type of the given element by a new type.
 -- It works for both Inlines and Blocks, but it will only replace Block elements
 -- with other Block elements, and only replace Inline elements with Inline elements.
@@ -323,10 +339,13 @@ function operators.applyType(el, newtype)
     end
   else
     if blockTypes[el.t] and blockTypes[newtype] then
-      -- print("hello", wrapper_attr)
       return blockToBlock(el, newtype, nil, false)
     elseif inlineTypes[el.t] and inlineTypes[newtype] then
       return inlineToInline(el, newtype, nil)
+    elseif inlineTypes[el.t] and blockTypes[newtype] then
+      return inlineToBlock(el, newtype)
+    elseif blockTypes[el.t] and inlineTypes[newtype] then
+      return blockToInline(el, newtype)
     else
       -- We are in the context where this is an unwrapped Div that
       -- contains only one element. It won't work for several elements.
