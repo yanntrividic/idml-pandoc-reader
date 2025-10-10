@@ -348,8 +348,10 @@ function operators.applyLevel(el, level)
   if el.t == "Header" then
     -- Preserve attributes and content
     return pandoc.Header(level, el.content, el.attr)
+  else
+    -- If it's not a Header, raise an error
+    error("Level attributes are not applicable to " .. el.t .. " elements.")
   end
-  -- If it's not a Header, just return it unchanged
   return el
 end
 

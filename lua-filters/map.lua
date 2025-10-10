@@ -44,11 +44,17 @@ local function applyMapping(el)
         if ok then
           el = result
         else
-          logging.info("applyType: " .. entry.selector .. ": " .. result)
+          logging.warning("applyType: " .. entry.selector .. ": " .. result)
         end
       end
       if o.level then
-        el = operators.applyLevel(el, o.level)
+        local ok, result = pcall(operators.applyLevel, el, o.level)
+        -- print(status, err)
+        if ok then
+          el = result
+        else
+          logging.warning("applyLevel: " .. entry.selector .. ": " .. result)
+        end
       end
       if o.unwrap then
         el = operators.unwrap(el)
@@ -75,7 +81,7 @@ end
 filtered_inlines = {
   Str = true,
   Space = true,
-  Linebreak = true,
+  LineBreak = true,
   SoftBreak = true
 }
 
