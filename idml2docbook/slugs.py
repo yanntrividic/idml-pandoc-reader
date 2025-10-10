@@ -10,7 +10,7 @@ VECTOR_EXTS = [".svg", ".eps", ".ai", ".pdf"]
 # the file-like titles in the left sidebar
 def custom_slugify(string, length=5):
     regex_subs = [
-        (r"[’°:;,]", " "), # replaces punctuation with spaces
+        (r"[’°:;,\(\)\*]", " "), # replaces punctuation with spaces
         (r"[^\w\s-]", ""),  # remove non-alphabetical/whitespace/'-' chars
         (r"(?u)\A\s*", ""),  # strip leading whitespace
         (r"(?u)\s*\Z", ""),  # strip trailing whitespace
