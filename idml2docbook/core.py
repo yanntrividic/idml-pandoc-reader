@@ -190,7 +190,7 @@ def hubxml2docbook(file, **options):
         tag.extract()
     # <article version="5.0" xml:lang="fr-FR" xmlns="http://docbook.org/ns/docbook">
 
-    if not options["ignore_overrides"]: soup = turn_direct_formatting_into_custom_roles(str(soup))
+    if not options["ignore_overrides"]: soup, _, _ = turn_direct_formatting_into_custom_roles(str(soup))
 
     remove_unnecessary_nodes(soup)
     # remove_unnecessary_layer(soup)
