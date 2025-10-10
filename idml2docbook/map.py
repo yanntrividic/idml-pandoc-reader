@@ -6,6 +6,7 @@ import os
 from slugs import custom_slugify
 from bs4 import BeautifulSoup
 from natsort import natsorted
+import natsort as ns
 import pandas as pd
 
 BOLD = '\033[1m'
@@ -259,7 +260,7 @@ def save_styles_as_ods(
                 if col in cols:
                     ordered.append(col)
                     cols.remove(col)
-            cols = ordered + sorted(cols)
+            cols = ordered + natsorted(cols, alg=ns.IGNORECASE)
 
             df = df[cols]
 
@@ -335,7 +336,7 @@ if __name__ == "__main__":
         raise ValueError("This file doesn't seem to be coming from idml2xml...")
 
     bold_print("Role/tag couples present in " + file + ":")
-    for couple in natsorted(roles):
+    for couple in natsorted(roles, alg=ns.IGNORECASE):
         print("- " + couple[0] + " (" + couple[1] + ")")
         if map and couple[0] not in map:
             uncovered.append(couple)
