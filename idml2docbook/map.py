@@ -343,6 +343,10 @@ if __name__ == "__main__":
         else:
             covered.append(couple[0])
 
+    # Sort so that phrase are last.
+    uncovered.sort(key=lambda c: 1 if c[1] == "phrase" else 0)
+    covered.sort(key=lambda c: 1 if c[1] == "phrase" else 0)
+
     if map:
         print(OKGREEN)
         if len(covered) > 0 :
