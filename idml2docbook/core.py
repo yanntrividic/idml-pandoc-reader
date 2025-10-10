@@ -1,5 +1,5 @@
 import subprocess
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString
 import copy
 import os
 import re
@@ -130,7 +130,6 @@ def clean_urls_from_linebreaks(soup):
     
     return BeautifulSoup(re.sub(url_regex_with_br, replacer, s), "xml")
 
-
 def remove_orthotypography(soup):
     logging.info("Removing input's orthotypography...")
     s = str(soup)
@@ -150,6 +149,53 @@ def remove_orthotypography(soup):
         s = s.replace(space, " ")
 
     return BeautifulSoup(s, "xml")
+
+def move_space_outside_of_phrase(soup, space_chars=" \u00a0\u202f"):
+    """
+    Move leading/trailing characters from inside <phrase> to outside the tag,
+    but IGNORE (do nothing to) <phrase> tags whose content is entirely whitespace.
+    """
+    for phrase in list(soup.find_all("phrase")):
+        if not phrase.string:
+            continue
+
+        text = phrase.string  # pure text inside the <phrase>
+
+        # If the phrase is entirely whitespace according to space_chars -> leave it alone
+        if text.strip(space_chars) == "":
+            continue
+
+        # count leading/trailing whitespace characters (by the defined set)
+        leading = len(text) - len(text.lstrip(space_chars))
+        trailing = len(text) - len(text.rstrip(space_chars))
+
+        # nothing to do if no leading/trailing spaces
+        if not (leading or trailing):
+            continue
+
+        # replace inner text with trimmed text
+        inner_clean = text.strip(space_chars)
+        phrase.string.replace_with(inner_clean)
+
+        if leading:
+            logging.debug("Leading space(s) found a <phrase> element, moved before: " + str(phrase))
+            lead_spaces = text[:leading]
+            prev = phrase.previous_sibling
+            if isinstance(prev, NavigableString):
+                prev.replace_with(str(prev) + lead_spaces)
+            else:
+                phrase.insert_before(NavigableString(lead_spaces))
+
+        if trailing:
+            logging.debug("Trailing space(s) found a <phrase> element, moved after: " + str(phrase))
+            trail_spaces = text[-trailing:]
+            nxt = phrase.next_sibling
+            if isinstance(nxt, NavigableString):
+                nxt.replace_with(trail_spaces + str(nxt))
+            else:
+                phrase.insert_after(NavigableString(trail_spaces))
+
+    return soup
 
 def add_french_orthotypography(soup, thin_spaces):
     """Applies a series of regex to comply to French orthotypography rules
@@ -213,6 +259,7 @@ def hubxml2docbook(file, **options):
 
     if options["typography"]:
         soup = remove_orthotypography(soup)
+        soup = move_space_outside_of_phrase(soup)
         soup = add_french_orthotypography(soup, options["thin_spaces"])
 
     if options["prettify"]:
