@@ -328,10 +328,16 @@ function operators.applyType(el, newtype)
     elseif inlineTypes[el.t] and inlineTypes[newtype] then
       return inlineToInline(el, newtype, nil)
     else
-      -- We are in the context where this is an unwrapped Div that
-      -- contains only one element. It won't work for several elements.
-      if blockTypes[el[1].t] and blockTypes[newtype] then
-        return blockToBlock(el[1], newtype, wrapper_attr, true)
+      if type(el) == "table" then
+        -- We are in the context where this is an unwrapped Div that
+        -- contains only one element. It won't work for several elements.
+        if blockTypes[el[1].t] and blockTypes[newtype] then
+          return blockToBlock(el[1], newtype, wrapper_attr, true)
+        end
+      else
+        -- That means we are trying to do inline-to-block
+        -- or block-to-inline conversions
+        error(el.t .. " to " .. newtype .. " conversions are not possible.")
       end
     end
     return el

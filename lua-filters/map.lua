@@ -10,6 +10,8 @@ package.path = script_dir .. "/?.lua;" .. package.path
 local utils = require 'utils'
 local operators = require 'operators'
 
+local logging = require 'logging'
+
 function Meta(meta)
   return utils.readAndPreprocessMap(meta)
 end
@@ -37,7 +39,13 @@ local function applyMapping(el)
         operators.applyAttrs(el, o.attrs)
       end
       if o.type then
-        el = operators.applyType(el, o.type)
+        local ok, result = pcall(operators.applyType, el, o.type)
+        -- print(status, err)
+        if ok then
+          el = result
+        else
+          logging.info("applyType: " .. entry.selector .. ": " .. result)
+        end
       end
       if o.level then
         el = operators.applyLevel(el, o.level)
