@@ -1,6 +1,7 @@
 -- Mapping operators for map.lua
 
 local utils = require "utils"
+local logging = require 'logging'
 
 local operators = {}
 
@@ -541,61 +542,62 @@ end
 -- Careful: this function is executed after applyMapping,
 -- so keep in mind that this operation is applied as very last.
 function operators.mergeBlocks(blocks, map)
-  -- print("Hello merge")
-  
   for _, entry in ipairs(map) do
     local result = {}
     local merge_selector = entry.operation.merge
     if merge_selector ~= nil then
-      local i = 1
-      local merged = pandoc.List()
-      
-      while i <= #blocks do
+      local wrapper_tag, wrapper_classes = utils.parseSelector(merge_selector)
+      if not blockTypes[wrapper_tag] then
+        logging.warning("mergeBlocks: " .. entry.selector .. ": Merging elements into a " .. wrapper_tag .. " element is not possible.")
+      else
+        local i = 1
+        local merged = pandoc.List()
+        
+        while i <= #blocks do
 
-        -- Only merge blocks matching the selector
-        if utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) then
-          -- Start collecting consecutive matching blocks
-            for _, inner in ipairs(blocks[i].content or {}) do
-              merged:insert(inner)
-            end
-          i = i + 1
+          -- Only merge blocks matching the selector
+          if utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) then
+            -- Start collecting consecutive matching blocks
+              for _, inner in ipairs(blocks[i].content or {}) do
+                merged:insert(inner)
+              end
+            i = i + 1
 
-          -- Collect following consecutive matching ones
-          while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) do
-            -- merged:insert(blocks[i])
-            for _, inner in ipairs(blocks[i].content or {}) do
-              merged:insert(inner)
+            -- Collect following consecutive matching ones
+            while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) do
+              -- merged:insert(blocks[i])
+              for _, inner in ipairs(blocks[i].content or {}) do
+                merged:insert(inner)
+              end
+              i = i + 1
             end
+
+            -- Wrap the collected blocks
+            if #merged > 0 then
+              local wrapper_attr = pandoc.Attr("", wrapper_classes, {})
+              if wrapper_tag == "Div" then
+                local div = pandoc.Div(merged, wrapper_attr)
+                table.insert(result, div)
+              elseif blockTypes[wrapper_tag] then
+                block_with_newtype = blockToBlock(merged, wrapper_tag, wrapper_attr, false)
+                table.insert(result, block_with_newtype)
+              else
+              end
+            end
+
+            -- print(merged)
+
+            merged = pandoc.List()
+
+          else
+            table.insert(result, blocks[i])
             i = i + 1
           end
-
-          -- Wrap the collected blocks
-          if #merged > 0 then
-            local wrapper_tag, wrapper_classes = utils.parseSelector(merge_selector)
-            local wrapper_attr = pandoc.Attr("", wrapper_classes, {})
-            if wrapper_tag == "Div" then
-              local div = pandoc.Div(merged, wrapper_attr)
-              table.insert(result, div)
-            elseif blockTypes[wrapper_tag] then
-              block_with_newtype = blockToBlock(merged, wrapper_tag, wrapper_attr, false)
-              table.insert(result, block_with_newtype)
-            else
-              error(entry.selector .. ": Merging into a " .. wrapper_tag .. " element conversions is not possible.")
-            end
-          end
-
-          -- print(merged)
-
-          merged = pandoc.List()
-
-        else
-          table.insert(result, blocks[i])
-          i = i + 1
         end
-      end
 
-      -- Replace the blocks with the merged result
-      blocks = result
+        -- Replace the blocks with the merged result
+        blocks = result
+      end
     end
   end
 

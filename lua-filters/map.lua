@@ -99,13 +99,7 @@ function Pandoc(doc)
   doc.blocks = operators.mergeLists(doc.blocks)
 
   -- Then we do the regular merging
-  local ok, result = pcall(operators.mergeBlocks, doc.blocks, map)
-  -- print(status, err)
-  if ok then
-    doc.blocks = result
-  else
-    logging.warning("mergeBlocks: " .. result)
-  end
+  doc.blocks = operators.mergeBlocks(doc.blocks, map)
 
   -- Then we cut
   utils.updateMapWithNewClasses(map)
