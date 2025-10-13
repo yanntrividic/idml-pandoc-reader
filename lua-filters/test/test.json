@@ -25,5 +25,6 @@
   { "selector": ".insert-linebreak-before", "operation": { "br": true, "simplify": true } },
   { "selector": ".para-to-merge", "operation": { "merge": "Div.merged" } },
   { "selector": ".para-to-merge-into-blockquote-with-wrapper", "operation": { "merge": "BlockQuote.merged-blockquote" } },
-  { "selector": ".blockquote-to-merge-into-div-with-wrapper", "operation": { "merge": "Div.merged-blockquote" } }
+  { "selector": ".blockquote-to-merge-into-div-with-wrapper", "operation": { "merge": "Div.merged-blockquote" } },
+  { "selector": ".para-to-turn-into-lineblock", "operation": { "merge": "LineBlock" } }
 ]

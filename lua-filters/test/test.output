@@ -133,3 +133,6 @@ Third paragraph to merge.
 
 > Second BlockQuote to merge into a Div.
 :::
+
+| First paragraph to turn into a LineBlock.
+| Second paragraph to turn into a LineBlock.

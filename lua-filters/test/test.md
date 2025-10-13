@@ -263,3 +263,15 @@ Third paragraph to merge into a BlockQuote.
 > Second BlockQuote to merge into a Div.
 
 </div>
+
+<div class="para-to-turn-into-lineblock" wrapper=1>
+
+First paragraph to turn into a LineBlock.
+
+</div>
+
+<div class="para-to-turn-into-lineblock" wrapper=1>
+
+Second paragraph to turn into a LineBlock.
+
+</div>

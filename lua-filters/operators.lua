@@ -11,6 +11,7 @@ blockTypes = {
   Header = true,
   Para = true,
   BlockQuote = true,
+  LineBlock = true,
   BulletList = true,
   OrderedList = true,
   CodeBlock = true,
@@ -215,9 +216,29 @@ local function blockToBlock(el, newtype, wrapper_attr, is_list)
   end
 
   local content
-  if is_list then
-    content = el
+
+  if type(el) == "table" and el[1] and el[1].t then
+    -- el is a list of block elements (e.g. { Para(), Para() })
+    if newtype == "LineBlock" then
+      -- Convert each Para into a line (list of inlines)
+      local lines = pandoc.List()
+      for _, blk in ipairs(el) do
+        if blk.t == "Para" or blk.t == "Plain" then
+          lines:insert(blk.content)
+        elseif blk.t == "LineBlock" then
+          -- Flatten nested LineBlocks
+          for _, line in ipairs(blk.content) do
+            lines:insert(line)
+          end
+        end
+      end
+      return pandoc.LineBlock(lines)
+    else
+      -- For other types, treat it as a list of blocks
+      content = el
+    end
   else
+    -- el is a single block
     content = el.content
   end
 
@@ -227,6 +248,8 @@ local function blockToBlock(el, newtype, wrapper_attr, is_list)
     result = pandoc.Para(content)
   elseif newtype == "BlockQuote" then
     result = pandoc.BlockQuote(el)
+  elseif newtype == "LineBlock" then
+    result = pandoc.LineBlock({ content })
   elseif newtype == "Div" then
     result = pandoc.Div(content, getAttrWithWrapper(attr, nil))
   elseif newtype == "BulletList" then
@@ -378,6 +401,8 @@ function operators.simplify(el)
     return pandoc.Header(el.level, el.content, pandoc.Attr(id, {}, {}))
   elseif t == "BlockQuote" then
     return pandoc.BlockQuote(el.content)
+  elseif t == "LineBlock" then
+    return pandoc.LineBlock(el.content)
   elseif t == "BulletList" then
     return pandoc.BulletList(el.content)
   elseif t == "OrderedList" then
@@ -437,7 +462,7 @@ function operators.unwrap(el)
     if el.t == "Plain" then
       return pandoc.Para(el.content)
 
-    elseif el.t == "BlockQuote" or el.t == "Note" or
+    elseif el.t == "BlockQuote" or el.t == "LineBlock" or el.t == "Note" or
           el.t == "CodeBlock" or el.t == "RawBlock" or 
           el.t == "Div" or el.t == "Header" or
           el.t == "BulletList" or el.t == "OrderedList" then
