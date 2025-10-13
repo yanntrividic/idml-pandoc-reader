@@ -215,3 +215,51 @@ Ordered item with added class 3.
 A LineBreak should be added before this paragraph.
 
 </div>
+
+<div class="para-to-merge" wrapper=1>
+
+First paragraph to merge.
+
+</div>
+
+<div class="para-to-merge" wrapper=1>
+
+Second paragraph to merge.
+
+</div>
+
+<div class="para-to-merge" wrapper=1>
+
+Third paragraph to merge.
+
+</div>
+
+<div class="para-to-merge-into-blockquote-with-wrapper" wrapper=1>
+
+First paragraph to merge into a BlockQuote.
+
+</div>
+
+<div class="para-to-merge-into-blockquote-with-wrapper" wrapper=1>
+
+Second paragraph to merge into a BlockQuote.
+
+</div>
+
+<div class="para-to-merge-into-blockquote-with-wrapper" wrapper=1>
+
+Third paragraph to merge into a BlockQuote.
+
+</div>
+
+<div class="blockquote-to-merge-into-div-with-wrapper" wrapper=1>
+
+> First BlockQuote to merge into a Div.
+
+</div>
+
+<div class="blockquote-to-merge-into-div-with-wrapper" wrapper=1>
+
+> Second BlockQuote to merge into a Div.
+
+</div>

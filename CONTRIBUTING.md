@@ -25,7 +25,7 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [x] Translate the docs to english
 * [ ] Publish the package on [PyPI](https://pypi.org/)
 * [x] Mirror the repo on GitHub
-* [ ] Add a `merge` operator to the map, that merge together consecutive elements with the same selector
+* [x] Add a `merge` operator to the map, that merge together consecutive elements with the same selector
 * [ ] Add a "Motivations" documentation page that illustrates where this project can be useful
 * [x] ~~Merge all PO files into one for easier maintainance~~ seems like a pain!
 * [x] Add to the docs the alt-text of the images is to be done

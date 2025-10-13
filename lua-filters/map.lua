@@ -98,6 +98,15 @@ function Pandoc(doc)
   -- First we cleanup the OrderedLists and BulletLists
   doc.blocks = operators.mergeLists(doc.blocks)
 
+  -- Then we do the regular merging
+  local ok, result = pcall(operators.mergeBlocks, doc.blocks, map)
+  -- print(status, err)
+  if ok then
+    doc.blocks = result
+  else
+    logging.warning("mergeBlocks: " .. result)
+  end
+
   -- Then we cut
   utils.updateMapWithNewClasses(map)
   if utils.isCutable() then

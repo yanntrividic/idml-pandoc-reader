@@ -7,11 +7,11 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 ## TODO
 
 * [x] Make a pseudo CSS selector API in Lua, that could support queries such as `Div.class1.class2`
-* [ ] Enable support for conversion operators:
+* [x] Enable support for conversion operators:
     * [x] **wrap** – wrap an element in a new parent element
     * [x] **unwrap** – unwrap an element in its parent
     * [x] **delete** – delete an element
-    * [ ] **merge** – group the content of sibling elements
+    * [x] **merge** – group the content of sibling elements
     * [x] **simplify** – remove all attributes from an element
     * [x] **reassign** – change the value of an attribute
 * [x] Enable support for other operators, currently found in the JSON map files (see https://outdesign.deborderbollore.fr/en/3_usage.html#correspondance-des-styles):
@@ -22,8 +22,8 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
     * [x] **br**
     * [x] **empty**
 * [x] Work on perfs. The `map.lua` filter currently multiplies by 2 the computing time of a file. _Déborder Bolloré_ takes a bit less than 3.6s, compared to 1.7s without the filter. Could [jog](https://github.com/tarleb/jog) be a solution for improving perfs? **Update:** Jog was made for small filters, which skip large parts of the document. The `map.lua` filter needs to apply on most elements of the AST to check whether the selector applies to them. Jog actually increases computing time by 3x to 5x.
-* [ ] Add logging messages with the `pandoc.log` module.
-* [ ] Add a `merge` operator, especially for CLV3
+* [x] Add logging messages with the `pandoc.log` module.
+* [x] Add a `merge` operator, especially for CLV3
 * [x] Make it so it is possible to turn an `Inline` in to a `Block` through the `type` operator. Especially useful for when character styles are used as paragraph styles. **Update:** It's been explored in the `custom-traversal-order-pandoc` branch. It is not so easy to pull out because `Inline` and `Block` functions are typed. For now, the new implementation increases by 7x the computing time. Maybe it could be optimised.
 * [ ] Technically, now that the mapping is written in Lua, it would be possible to apply Lua filters on elements selected by `isMatchingSelector`... Wouldn't it?
 
@@ -33,13 +33,13 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 To run a test.
 
 ```bash
-diff test/test.output <(pandoc -f markdown test/test.md -t markdown --lua-filter=map.lua -M map=test/test.json)
+diff test/test.output <(pandoc -f markdown test/test.md -t markdown --lua-filter=map.lua -M map=test/test.json --verbose)
 ```
 
 To run the conversion command for _Déborder Bolloré_:
 
 ```bash
-diff test/bollo.output <(pandoc -f docbook test/bollo.dbk -t markdown_phpextra --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua --lua-filter=map.lua -M map=test/bollo.json --wrap=none)
+diff test/bollo.output <(pandoc -f docbook test/bollo.dbk -t markdown_phpextra --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua --lua-filter=map.lua -M map=test/bollo.json --wrap=none --verbose)
 ```
 
 ## Panflute

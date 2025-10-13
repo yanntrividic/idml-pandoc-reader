@@ -111,3 +111,25 @@ these [**two words**]{.underline} to be an underlined Strong.
 \
 
 A LineBreak should be added before this paragraph.
+
+::: merged
+First paragraph to merge.
+
+Second paragraph to merge.
+
+Third paragraph to merge.
+:::
+
+::: {.merged-blockquote wrapper="1"}
+> First paragraph to merge into a BlockQuote.
+>
+> Second paragraph to merge into a BlockQuote.
+>
+> Third paragraph to merge into a BlockQuote.
+:::
+
+::: merged-blockquote
+> First BlockQuote to merge into a Div.
+
+> Second BlockQuote to merge into a Div.
+:::

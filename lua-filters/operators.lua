@@ -350,7 +350,7 @@ function operators.applyLevel(el, level)
     return pandoc.Header(level, el.content, el.attr)
   else
     -- If it's not a Header, raise an error
-    error("Level attributes are not applicable to " .. el.t .. " elements.")
+    error("Level attributes are not applicable to " .. tostring(el.t) .. " elements.")
   end
   return el
 end
@@ -510,6 +510,73 @@ function operators.insertLineBreakBefore(el)
     return { pandoc.LineBreak(), el }
   end
 end
+
+-- Merge consecutive Block elements together in a wrapper element
+-- specified as argument, such as "Div.class1" or "BlockQuote.class2"
+-- Careful: this function is executed after applyMapping,
+-- so keep in mind that this operation is applied as very last.
+function operators.mergeBlocks(blocks, map)
+  -- print("Hello merge")
+  
+  for _, entry in ipairs(map) do
+    local result = {}
+    local merge_selector = entry.operation.merge
+    if merge_selector ~= nil then
+      local i = 1
+      local merged = pandoc.List()
+      
+      while i <= #blocks do
+
+        -- Only merge blocks matching the selector
+        if utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) then
+          -- Start collecting consecutive matching blocks
+            for _, inner in ipairs(blocks[i].content or {}) do
+              merged:insert(inner)
+            end
+          i = i + 1
+
+          -- Collect following consecutive matching ones
+          while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) do
+            -- merged:insert(blocks[i])
+            for _, inner in ipairs(blocks[i].content or {}) do
+              merged:insert(inner)
+            end
+            i = i + 1
+          end
+
+          -- Wrap the collected blocks
+          if #merged > 0 then
+            local wrapper_tag, wrapper_classes = utils.parseSelector(merge_selector)
+            local wrapper_attr = pandoc.Attr("", wrapper_classes, {})
+            if wrapper_tag == "Div" then
+              local div = pandoc.Div(merged, wrapper_attr)
+              table.insert(result, div)
+            elseif blockTypes[wrapper_tag] then
+              block_with_newtype = blockToBlock(merged, wrapper_tag, wrapper_attr, false)
+              table.insert(result, block_with_newtype)
+            else
+              error(entry.selector .. ": Merging into a " .. wrapper_tag .. " element conversions is not possible.")
+            end
+          end
+
+          -- print(merged)
+
+          merged = pandoc.List()
+
+        else
+          table.insert(result, blocks[i])
+          i = i + 1
+        end
+      end
+
+      -- Replace the blocks with the merged result
+      blocks = result
+    end
+  end
+
+  return blocks
+end
+
 
 -- Merge consecutive OrderedList and BulletList elements together.
 -- For now, it only considers top-level elements.
