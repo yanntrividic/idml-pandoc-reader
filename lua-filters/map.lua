@@ -113,7 +113,9 @@ end
 -- https://pandoc.org/lua-filters.html#typewise-traversal
 return {
   { Meta = Meta },     -- (1)
-  { Inline = Inline }, -- (2)
-  { Block = Block },   -- (3)
+  -- Running Block before Inline improves perfs
+  -- in cases where Blocks that contain Inlines are deleted.
+  { Block = Block },   -- (2)
+  { Inline = Inline }, -- (3)
   { Pandoc = Pandoc }  -- (4)
 }
