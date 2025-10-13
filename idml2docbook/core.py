@@ -198,7 +198,7 @@ def add_french_orthotypography(soup, thin_spaces):
     s = re.sub(r"(\d)\s(\d\d\d)", r'\1' + u"\u202f" + r'\2', s) # numbers
     s = re.sub(r"«\s?", r'«' + u"\u202f", s) # quotes
     s = re.sub(r"\s?»", u"\u202f" + r'»', s) # quotes
-    s = re.sub(r"°\s?", r'°' + u"\u202f", s) # degrees
+    s = re.sub(r"([^0-9])°\s?", r'\1°' + u"\u202f", s) # degrees
     s = re.sub(r"\.\.\.", r'…', s) # suspension marks
 
     return BeautifulSoup(s, "xml")
