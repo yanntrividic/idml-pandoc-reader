@@ -1,5 +1,17 @@
 # Revision history for idml-pandoc-reader
 
+## idml-pandoc-reader 0.5.0 (WIP)
+
+* Support for `LineBlock` blocks. Useful for poetry and other cases where linebreaks matter.
+* Basic support for the `merge` operator.
+* Basic logging features to debug the `map.lua` filter.
+* Fixed a bug with the degree sign `°` regex.
+* Benchmark tests were done to try to improve performances with `map.lua`. The only improvement found is an adjustment in the traversal order: `Block` elements are now parsed before `Inline`, with improvements in computing time when parts of the AST are pruned when applying mapping on `Block` elements.
+* Better orthotypography with leading and trailing spaces inside of inline elements are moved to the outside of those elements.
+* Style overrides are now supported, and can be disabled using the `-g`/`--ignore-overrides` flag option.
+* Better slugs are generated to rename paragraph styles and character styles in a robust way.
+* `map.py` now has a `--to-ods` flag option which enables the output of an ODS files that summarises the properties of each paragraph style and character style in an Hub XML file as [CSSa](https://github.com/le-tex/CSSa).
+
 ## idml-pandoc-reader 0.4.2 (2025-08-25)
 
 * Wrote better docs, again.
