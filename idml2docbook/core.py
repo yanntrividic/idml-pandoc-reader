@@ -11,8 +11,9 @@ from slugs import *
 from map import *
 
 NODES_TO_REMOVE = [
-    "info",
-    "sidebar",
+    "info",      # at some point it would be good to get those metadata and convert it.
+    "sidebar",   # will need to be implemented sometime, but might be hard?
+    "tab",       # no equivalent in DocBook.
     # "link",
     # "xml-model"
     # "StoryPreference",
