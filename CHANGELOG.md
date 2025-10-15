@@ -2,6 +2,7 @@
 
 ## idml-pandoc-reader 0.5.0 (WIP)
 
+* Support for endnotes in `idml2docbook`: endnotes are now converted to regular footnotes with `endnote` attribute set to `1`.
 * Support for `LineBlock` blocks. Useful for poetry and other cases where linebreaks matter.
 * Basic support for the `merge` operator.
 * Basic logging features to debug the `map.lua` filter.

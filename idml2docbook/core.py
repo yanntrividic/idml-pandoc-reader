@@ -13,7 +13,7 @@ from map import *
 NODES_TO_REMOVE = [
     "info",
     "sidebar",
-    "link"
+    # "link",
     # "xml-model"
     # "StoryPreference",
     # "InCopyExportOption",
@@ -92,6 +92,79 @@ def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None,
 
         if(wrap_fig): tag.parent.name = "figure"
         else: tag.parent.unwrap() # no need for a figure!
+
+def process_endnotes(soup):
+    """In DocBook, there is no difference between an endnote and a footnote.
+    Everything is just a <footnote>. IDML distinguishes footnotes and endnotes, and Hub XML
+    does as well. Here, we process footnotes regularly, and add a role="endnote" attribute
+    to endnotes in order to still differentiate them.
+
+    Input example:
+    - In the text body:
+      <link xml:id="id_endnoteAnchor-u8d91"
+          remap="EndnoteRange"
+          linkend="id_en-u8d92">7</link>
+
+    - At the end of the document:
+      [...]
+      <para>
+      <anchor xml:id="id_en-u8d92" role="hub:endnote"/>
+          <phrase role="hub:identifier"> <link remap="EndnoteMarker" linkend="id_endnoteAnchor-u8d91">7</link></phrase>My endnote.
+      </para>
+
+    Output example, in place of the text body snippet:
+    <footnote endnote="1"><para>My endnote.</para></footnote>
+    """
+
+    logging.info("Processing endnotes...")
+
+    # Map of endnote anchors by id for quick lookup
+    endnote_map = {}
+    for anchor in soup.find_all("anchor", attrs={"role": "hub:endnote"}):
+        anchor_id = anchor.get("xml:id")
+        if not anchor_id:
+            continue
+        para = anchor.find_parent("para")
+        if para:
+            endnote_map[anchor_id] = para
+
+    # Process all in-text endnote references
+    for link in soup.find_all("link", attrs={"remap": "EndnoteRange"}):
+        linkend = link.get("linkend")
+        if not linkend or linkend not in endnote_map:
+            logging.warning(f"Endnote target not found for linkend={linkend}")
+            continue
+
+        # Get the corresponding endnote paragraph
+        endnote_para = endnote_map[linkend]
+
+        # Deep copy the content
+        note_copy = copy.copy(endnote_para)
+
+        # Clean it
+        for el in note_copy.find_all(["anchor", "phrase"]):
+            el.decompose()
+
+        note_text_content = [child for child in note_copy.contents if not (isinstance(child, NavigableString) and not child.strip())]
+
+        # Create the <footnote> structure
+        footnote_tag = soup.new_tag("footnote")
+        footnote_tag["endnote"] = "1" # This acts as a marker to differiate endnotes from footnotes
+        para_tag = soup.new_tag("para")
+
+        for child in note_text_content:
+            para_tag.append(copy.copy(child))
+
+        footnote_tag.append(para_tag)
+
+        link.replace_with(footnote_tag)
+
+    # After all replacements, remove original endnote paras
+    for para in set(endnote_map.values()):
+        para.decompose()
+
+    logging.info("Endnotes processed successfully.")
+
 
 def remove_ns_attributes(soup):
     # Remove all css nodes
@@ -236,6 +309,8 @@ def hubxml2docbook(file, **options):
         options["raster"],
         options["vector"],
         options["media"])
+
+    process_endnotes(soup)
 
     soup = clean_urls_from_linebreaks(soup) # must be done before remove_linebreaks and removeHyphens
 
