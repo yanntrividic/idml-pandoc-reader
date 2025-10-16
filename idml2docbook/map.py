@@ -19,6 +19,30 @@ WARNING = '\033[93m'
 BASE_PREFIX_CHARACTER_STYLE = 'override-character-style-'
 BASE_PREFIX_PARAGRAPH_STYLE = 'override-paragraph-style-'
 
+# Those two lists need some tests and adjustments...
+TAGS_WITH_CSSA = [
+    "article",
+    "para",
+    "phrase",
+    "sidebar",
+    "tab",
+    "inlinemediaobject",
+    "informaltable",
+    "mediaobject",
+    "imagedata",
+    "superscript",
+    "sidebar",
+    "entry",
+    "link"
+]
+
+TAGS_WITH_RELEVENT_ROLES = [
+    "para",
+    "phrase",
+    "inlinemediaobject",
+    "superscript",
+]
+
 def get_map(file):
     logging.info("Reading map file at: " + file)
     f = open(file)
@@ -102,16 +126,16 @@ def canonical_css_key(tag, include_role=True):
     relevant_properties = ["remap", "native-name", "name"]
     if include_role: relevant_properties += ["role"]
     for k, v in list(tag.attrs.items()):
-        if looks_like_css_attr(k) or k in relevant_properties : items = filter_property(items, k, v)
+        if looks_like_css_attr(k) or k in relevant_properties : items = filter_property(items, tag, k, v)
     items.sort()
     return tuple(items)
 
 # Some CSS properties are not relevant here, so we might want to
 # filter them in order to have more interesting overrides classes...
-def filter_property(items, k, v, apply_heuristics=APPLY_HEURISTICS):
+def filter_property(items, tag, k, v, apply_heuristics=APPLY_HEURISTICS):
     # Some CSSa (https://github.com/le-tex/CSSa) properties 
-    # must be ignored for a smarter overrides detection. 
-    # This list needs to be refined
+    # must be deleted for a smarter overrides detection. 
+    # This list needs to be refined.
     CSSA_PROPERTIES_TO_IGNORE = [
         "hyphens",                 # usually used for handling rags
         "initial-letter",          # ignoring drop caps
@@ -133,7 +157,9 @@ def filter_property(items, k, v, apply_heuristics=APPLY_HEURISTICS):
 
     if apply_heuristics:
         # If we ignore this property, pass
-        if name in CSSA_PROPERTIES_TO_IGNORE: append = False
+        if name in CSSA_PROPERTIES_TO_IGNORE:
+            del tag[k]
+            append = False
         # If the color is equivalent to the default color or if is black transparent, pass
         if v == "device-cmyk(0,0,0,1)": append = False
         if v == "device-cmyk(0,0,0,0)": append = False
@@ -156,11 +182,15 @@ def turn_overrides_into_roles(xml):
     char_applied = {}
     character_styles_overrides = []
 
+    obj_map = {}
+    obj_applied = {}
+    object_styles_overrides = []
+
     # Stable counters per type (1-based)
-    counters = {"paragraph": 0, "character": 0}
+    counters = {"paragraph": 0, "character": 0, "object": 0}
 
     # Walk only para and phrase
-    for tag in soup.find_all(['para', 'phrase']):
+    for tag in soup.find_all(TAGS_WITH_CSSA):
         # find css-like attrs
         css_items = [(k, v) for k, v in tag.attrs.items() if looks_like_css_attr(k)]
         if not css_items:
@@ -174,41 +204,48 @@ def turn_overrides_into_roles(xml):
             mapping = para_map
             applied = para_applied
             out_list = paragraph_styles_overrides
-        else:
+        elif tag.name in ["phrase", "superscript"]:
             type_name = "character"
             mapping = char_map
             applied = char_applied
             out_list = character_styles_overrides
+        elif tag.name in TAGS_WITH_RELEVENT_ROLES: # could be informaltable, mediaobject, 
+              # sidebar, tab, inlinemediaobject, sidebar, entry, link...
+              # we will need to handle them at some point!
+            type_name = "object"
+            mapping = obj_map
+            applied = obj_applied
+            out_list = object_styles_overrides
 
-        if key not in mapping:
-            counters[type_name] += 1
-            idx = counters[type_name]
-            mapping[key] = idx
-            applied[key] = set()
-            out_list.append((idx, applied[key], key))
-        else:
-            idx = mapping[key]
+        if tag.name in TAGS_WITH_RELEVENT_ROLES:
+            if key not in mapping:
+                counters[type_name] += 1
+                idx = counters[type_name]
+                mapping[key] = idx
+                applied[key] = set()
+                out_list.append((idx, applied[key], key))
+            else:
+                idx = mapping[key]
 
-        # record base role if present
-        base_role = tag.get('role')
-        if base_role:
-            applied[key].add(base_role)
-        
+            # record base role if present
+            base_role = tag.get('role')
+            if base_role:
+                applied[key].add(base_role)
+
+            # update or create role
+            override_label = f"{type_name}-override-{idx}"
+            current_role = tag.get('role')
+            new_role = current_role + " " + override_label if current_role else override_label
+            tag["role"] = new_role
+
         # remove the detected css-like attributes from the element
         for k, _ in css_items:
             if k in tag.attrs:
-                del tag.attrs[k]
-
-        # update or create role
-        override_label = f"{type_name}-override-{idx}"
-        current_role = tag.get('role')
-        new_role = current_role + " " + override_label if current_role else override_label
-        tag["role"] = new_role
+                del tag[k]
 
     return soup, paragraph_styles_overrides, character_styles_overrides
 
 def get_styles(xml):
-    xml = xml.replace('css:', 'css_namespace__')
 
     soup = BeautifulSoup(xml, "xml")
 
@@ -285,12 +322,12 @@ def save_styles_as_ods(
 
 def fix_role_names(soup):
     roles = build_roles_map(soup)
-    soup = update_roles_with_better_slugs(soup, roles)
+    update_roles_with_better_slugs(soup, roles)
 
 def build_dict_from_map_array(map):
     map_dict = {}
     for entry in map:
-        map_dict[entry["selector"][1:]] = entry["operation"]
+        map_dict[entry["selector"][1:].replace(".", " ")] = entry["operation"]
     return map_dict
 
 if __name__ == "__main__":
@@ -318,6 +355,7 @@ if __name__ == "__main__":
     soup = BeautifulSoup(hubxml, "xml")
     fix_role_names(soup)
     hubxml = str(soup)
+    hubxml = hubxml.replace('css:', 'css_namespace__')
     if to_ods: paragraph_styles, character_styles = get_styles(hubxml)
     soup, paragraph_styles_overrides, character_styles_overrides = turn_overrides_into_roles(hubxml)
     hubxml = str(soup)
@@ -349,11 +387,12 @@ if __name__ == "__main__":
 
     bold_print("Role/tag couples present in " + file + ":")
     for couple in natsorted(roles, alg=ns.IGNORECASE):
-        print("- " + couple[0] + " (" + couple[1] + ")")
-        if map and couple[0] not in map:
-            uncovered.append(couple)
-        else:
-            covered.append(couple[0])
+        if couple[1] in TAGS_WITH_RELEVENT_ROLES:
+            print("- " + couple[0] + " (" + couple[1] + ")")
+            if map and couple[0] not in map:
+                uncovered.append(couple)
+            else:
+                covered.append(couple[0])
 
     # Sort so that phrase are last.
     uncovered.sort(key=lambda c: 1 if c[1] == "phrase" else 0)
