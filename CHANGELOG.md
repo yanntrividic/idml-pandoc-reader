@@ -2,6 +2,7 @@
 
 ## idml-pandoc-reader 0.5.0 (WIP)
 
+* Wrote better docs regarding InDesign file formatting.
 * `<tab>` elements are now completely ignored (removed from conversion) in `idml2docbook`.
 * Support for endnotes in `idml2docbook`: endnotes are now converted to regular footnotes with `endnote` attribute set to `1`.
 * Support for `LineBlock` blocks. Useful for poetry and other cases where linebreaks matter.
