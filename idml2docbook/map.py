@@ -320,6 +320,32 @@ def save_styles_as_ods(
 
     print(f"✅ Saved styles and overrides to {output_file}")
 
+def generate_json_template(roles, file):
+    selectors = set()
+    for role, tag in roles:
+        if tag not in TAGS_WITH_RELEVENT_ROLES:
+            continue
+        classes = role.split()
+        selector = "." + ".".join(classes)
+        selectors.add(selector)
+
+    selectors = natsorted(selectors, alg=ns.IGNORECASE)
+
+    json_template = [{"selector": s, "operation": {}} for s in selectors]
+
+    file_stem = os.path.splitext(file)[0]
+    template_filename = f"{file_stem}_template.json"
+
+    with open(template_filename, "w", encoding="utf-8") as out:
+        out.write("[\n")
+        for i, entry in enumerate(json_template):
+            comma = "," if i < len(json_template) - 1 else ""
+            out.write(f'    {{ "selector": "{entry["selector"]}", "operation": {{}} }}{comma}\n')
+        out.write("]\n")
+
+    print(f"\n✅ JSON template saved to {template_filename}")
+    sys.exit(0)
+
 def fix_role_names(soup):
     roles = build_roles_map(soup)
     update_roles_with_better_slugs(soup, roles)
@@ -332,14 +358,13 @@ def build_dict_from_map_array(map):
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: python script.py input.xml map.json [--to-ods]")
+        print("Usage: python script.py input.xml map.json [--to-ods] [--to-json-template]")
         sys.exit(1)
 
-    to_ods = False
+    to_ods = "--to-ods" in sys.argv
+    to_json_template = "--to-json-template" in sys.argv
 
-    if "--to-ods" in sys.argv:
-        to_ods = True
-        sys.argv.remove("--to-ods")
+    sys.argv = [arg for arg in sys.argv if arg not in ["--to-ods", "--to-json-template"]]
 
     file = sys.argv[1]
     map_file = sys.argv[2]
@@ -348,7 +373,7 @@ if __name__ == "__main__":
     map = get_map(sys.argv[2])
     map = build_dict_from_map_array(map)
 
-    # Read the HTML input file
+    # Read the HTML input
     with open(file, "r") as f:
         hubxml = f.read()
 
@@ -374,44 +399,51 @@ if __name__ == "__main__":
     type_and_role = r'<(\w+)[^>]*\brole="(.*?)"[^>]*>'
 
     roles = set()
+
+    try:
+        for tag_name, role_attr in re.findall(type_and_role, hubxml.split("</info>")[1]):
+            if not role_attr.startswith("hub"):
+                roles.add((role_attr, tag_name))
+    except Exception as e:
+        raise ValueError("This file doesn't seem to be coming from idml2xml...") from e
+
+    bold_print("Role/tag couples present in " + file + ":")
+    for role, tag in natsorted(roles, alg=ns.IGNORECASE):
+        if tag in TAGS_WITH_RELEVENT_ROLES:
+            print(f"- {role} ({tag})")
+
+    if to_json_template: generate_json_template(roles, file)
+
+    map = get_map(map_file)
+    map = build_dict_from_map_array(map) if map else {}
+
     covered = []
     uncovered = []
 
-    # We are only interested in what is after the info tag
-    try:
-        for el in re.findall(type_and_role, hubxml.split("</info>")[1]):
-            if not el[1].startswith("hub"): roles.add((el[1], el[0]))
-            # And not interested in hub specific tags
-    except:
-        raise ValueError("This file doesn't seem to be coming from idml2xml...")
+    for role, tag in natsorted(roles, alg=ns.IGNORECASE):
+        if tag in TAGS_WITH_RELEVENT_ROLES:
+            if map and role not in map:
+                uncovered.append((role, tag))
+            elif map:
+                covered.append(role)
 
-    bold_print("Role/tag couples present in " + file + ":")
-    for couple in natsorted(roles, alg=ns.IGNORECASE):
-        if couple[1] in TAGS_WITH_RELEVENT_ROLES:
-            print("- " + couple[0] + " (" + couple[1] + ")")
-            if map and couple[0] not in map:
-                uncovered.append(couple)
-            else:
-                covered.append(couple[0])
-
-    # Sort so that phrase are last.
     uncovered.sort(key=lambda c: 1 if c[1] == "phrase" else 0)
     covered.sort(key=lambda c: 1 if c[1] == "phrase" else 0)
 
     if map:
         print(OKGREEN)
-        if len(covered) > 0 :
+        if covered:
             bold_print("Applied mapping:")
             for c in covered:
                 print("- " + c + " => " + log_map_entry(map[c]))
         else:
-            bold_print(WARNING + (sys.argv[2] if (len(sys.argv) == 3) else DEFAULT_MAP) + " does not apply to " + file)
+            bold_print(WARNING + (map_file + " does not apply to " + file))
 
-        if len(uncovered) > 0 :
+        if uncovered:
             print(WARNING)
             bold_print("Unhandled elements:")
             for c in uncovered:
-                print("- " + c[0] + " (" + c[1] + ")")
+                print(f"- {c[0]} ({c[1]})")
         else:
             print(OKGREEN + "All elements are covered!")
         print(END)
