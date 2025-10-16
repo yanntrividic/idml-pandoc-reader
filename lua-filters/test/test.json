@@ -10,6 +10,7 @@
   { "selector": ".to-simplify", "operation": { "simplify": true, "level": 2 } },
   { "selector": "Code", "operation": { "unwrap": true } },
   { "selector": ".cut", "operation": { "cut": true } },
+  { "selector": ".to-merge", "operation": { "merge": "LineBreak" } },
   { "selector": ".to-unwrap", "operation": { "unwrap": true } },
   { "selector": ".to-wrap", "operation": { "wrap": ".wrapper-with-a-class" } },
   { "selector": ".to-strong-wrapped-in-underline", "operation": { "wrap": "Underline", "type": "Strong", "classes": "" } },
