@@ -306,7 +306,7 @@ def hubxml2docbook(file, **options):
     remove_ns_attributes(soup)
 
     process_images(soup,
-        False,
+        True,
         options["raster"],
         options["vector"],
         options["media"])
