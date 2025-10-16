@@ -9,6 +9,8 @@ from natsort import natsorted
 import natsort as ns
 import pandas as pd
 
+APPLY_HEURISTICS = True
+
 BOLD = '\033[1m'
 END = '\033[0m'
 OKGREEN = '\033[92m'
@@ -78,11 +80,6 @@ def update_roles_with_better_slugs(soup, roles):
                         logging.debug("Role name for style \"" + value["native"] + "\" was changed: " + value["hub"] + " -> " + key)
                         log = True
 
-def get_new_role_label(type, number, old_role=None):
-    if old_role:
-        return f"{old_role}-override-{number}"
-    else:
-        return f"{type}-override-{number}"
 
 def normalize_attr_name(name: str) -> str:
     """Return the local name with any namespace/prefix removed."""
@@ -99,34 +96,19 @@ def looks_like_css_attr(name: str):
         return True
     return False
 
-def canonical_css_key(tag):
+def canonical_css_key(tag, include_role=True):
     """Create a stable tuple key of (localname, value) sorted by name/value."""
     items = []
-    relevant_properties = ["remap", "native-name", "role", "name"]
+    relevant_properties = ["remap", "native-name", "name"]
+    if include_role: relevant_properties += ["role"]
     for k, v in list(tag.attrs.items()):
-        # Detect base role (for overrides) and direct formatting
-
         if looks_like_css_attr(k) or k in relevant_properties : items = filter_property(items, k, v)
     items.sort()
     return tuple(items)
 
 # Some CSS properties are not relevant here, so we might want to
 # filter them in order to have more interesting overrides classes...
-def filter_property(items, k, v):
-    name = normalize_attr_name(k)
-    append = True
-
-    # If we ignore this property, pass
-    # if name in CSSA_PROPERTIES_TO_IGNORE: append = False
-    # # If the color is equivalent to the default color or if is black transparent, pass
-    # if v == "device-cmyk(0,0,0,1)": append = False
-    # if v == "device-cmyk(0,0,0,0)": append = False
-    
-    if append: items.append((normalize_attr_name(k), v))
-
-    return items
-
-def turn_direct_formatting_into_custom_roles(xml):
+def filter_property(items, k, v, apply_heuristics=APPLY_HEURISTICS):
     # Some CSSa (https://github.com/le-tex/CSSa) properties 
     # must be ignored for a smarter overrides detection. 
     # This list needs to be refined
@@ -137,58 +119,93 @@ def turn_direct_formatting_into_custom_roles(xml):
         "line-height",             # maybe we can ignore it as well?
         "text-decoration-offset",  # offset with the underlines
         "text-decoration-width",   # width of the underline
+        "break-after",             # is this added by idml2hubxml to avoid the block-break character?
+        "page-break-after",        # is this added by idml2hubxml to avoid the page-break character?
+        "border-width",            # applied on chars by idml2hubxml, but seems to be a bug.
+        "margin-top",              # often used to adjust in the page.
+        "margin-bottom",           # often used to adjust in the page.
+        "direction",               # reading direction, most certainly is not relevent there...
+        "text-align-last",         # a wild guess...
     ]
 
+    name = normalize_attr_name(k)
+    append = True
+
+    if apply_heuristics:
+        # If we ignore this property, pass
+        if name in CSSA_PROPERTIES_TO_IGNORE: append = False
+        # If the color is equivalent to the default color or if is black transparent, pass
+        if v == "device-cmyk(0,0,0,1)": append = False
+        if v == "device-cmyk(0,0,0,0)": append = False
+    
+    if append: items.append((name, v))
+
+    return items
+
+def turn_overrides_into_roles(xml):
     # Hacky way to enable namespace support for the `css:`-prefixed attributes
     xml = xml.replace('css:', 'css_namespace__')
 
     soup = BeautifulSoup(xml, "xml")
 
-    paragraph_styles_overrides = {}
-    character_styles_overrides = {}
+    para_map = {}      # properties_tuple -> index
+    para_applied = {}  # properties_tuple -> set(base_role)
+    paragraph_styles_overrides = []     # list of (index, applied_to_set, properties_tuple) in index order
+
+    char_map = {}
+    char_applied = {}
+    character_styles_overrides = []
+
+    # Stable counters per type (1-based)
+    counters = {"paragraph": 0, "character": 0}
 
     # Walk only para and phrase
-    style_num = 0
-
     for tag in soup.find_all(['para', 'phrase']):
         # find css-like attrs
         css_items = [(k, v) for k, v in tag.attrs.items() if looks_like_css_attr(k)]
         if not css_items:
             continue
 
-        key = canonical_css_key(tag)
+        key = canonical_css_key(tag, False)  # tuple of (cssa-property, value)
+        if not key: continue
 
         if tag.name == 'para':
-            store = paragraph_styles_overrides
-            type = "paragraph"
+            type_name = "paragraph"
+            mapping = para_map
+            applied = para_applied
+            out_list = paragraph_styles_overrides
         else:
-            store = character_styles_overrides
-            type = "character"
+            type_name = "character"
+            mapping = char_map
+            applied = char_applied
+            out_list = character_styles_overrides
 
-        # --- NEW: per-role stable numbering ---
-        old_role = tag.get('role')
-        if old_role not in store:
-            store[old_role] = {}
-        role_store = store[old_role]
+        if key not in mapping:
+            counters[type_name] += 1
+            idx = counters[type_name]
+            mapping[key] = idx
+            applied[key] = set()
+            out_list.append((idx, applied[key], key))
+        else:
+            idx = mapping[key]
 
-        if key not in role_store:
-            role_store[key] = len(role_store) + 1
-
-        style_num = role_store[key]
-        # --------------------------------------
-
+        # record base role if present
+        base_role = tag.get('role')
+        if base_role:
+            applied[key].add(base_role)
+        
         # remove the detected css-like attributes from the element
         for k, _ in css_items:
             if k in tag.attrs:
                 del tag.attrs[k]
 
         # update or create role
-        new_role = get_new_role_label(type, style_num, old_role if old_role else None)
-
+        override_label = f"{type_name}-override-{idx}"
+        current_role = tag.get('role')
+        new_role = current_role + " " + override_label if current_role else override_label
         tag["role"] = new_role
 
     return soup, paragraph_styles_overrides, character_styles_overrides
-    
 
 def get_styles(xml):
     xml = xml.replace('css:', 'css_namespace__')
@@ -229,21 +246,19 @@ def save_styles_as_ods(
         for label, styles, is_override in pairs:
             rows = []
 
-            # Flatten nested structure:
-            # styles = { old_role: { key_tuple: num, ... }, ... }
             if is_override:
-                for old_role, overrides in styles.items():
-                    for k, v in overrides.items():
-                        row = {kk: vv for kk, vv in k}  # turn each tuple pair into dict
-                        row['base_role'] = old_role  # keep base role
-                        # Reconstruct final override name:
-                        row['role'] = get_new_role_label(label, v, old_role if old_role else None)
-                        rows.append(row)
+                for idx, applied_to, key in styles:
+                    row = {kk: vv for kk, vv in key}  # flatten canonical key tuple
+                    row["role"] = f"{label}-override-{idx}"
+                    if applied_to:
+                        row["applied_to"] = ", ".join(sorted(applied_to))
+                    else:
+                        row["applied_to"] = ""
+                    rows.append(row)
             else:
-                # print(styles)
-                for roles, attributes in styles.items():
-                    # print(roles, attributes)
-                    row = {kk: vv for kk, vv in attributes}  # turn each tuple pair into dict
+                for name, key in styles.items():
+                    row = {kk: vv for kk, vv in key}
+                    row["name"] = name
                     rows.append(row)
 
             if not rows:
@@ -256,17 +271,17 @@ def save_styles_as_ods(
 
             # Ensure 'role', 'base_role', and 'override_num' are first
             ordered = []
-            for col in ['name', 'role', 'base_role', 'native-name', 'remap']:
+            for col in ["name", "role", "applied_to", "native-name", "remap"]:
                 if col in cols:
                     ordered.append(col)
                     cols.remove(col)
             cols = ordered + natsorted(cols, alg=ns.IGNORECASE)
-
             df = df[cols]
 
-            df.to_excel(writer, index=False, engine="ods", sheet_name=label + ("_overrides" if is_override else ""))
+            sheet_name = label + ("_overrides" if is_override else "")
+            df.to_excel(writer, index=False, engine="ods", sheet_name=sheet_name)
 
-    print(f"Saved overrides to {output_file}")
+    print(f"✅ Saved styles and overrides to {output_file}")
 
 def fix_role_names(soup):
     roles = build_roles_map(soup)
@@ -300,14 +315,11 @@ if __name__ == "__main__":
     with open(file, "r") as f:
         hubxml = f.read()
 
-    # Those three lines fix the roles names
-    # If your map file was designed using v0.1.0
-    # comment those three lines
     soup = BeautifulSoup(hubxml, "xml")
     fix_role_names(soup)
     hubxml = str(soup)
     if to_ods: paragraph_styles, character_styles = get_styles(hubxml)
-    soup, paragraph_styles_overrides, character_styles_overrides = turn_direct_formatting_into_custom_roles(hubxml)
+    soup, paragraph_styles_overrides, character_styles_overrides = turn_overrides_into_roles(hubxml)
     hubxml = str(soup)
 
     # Save as ODS
