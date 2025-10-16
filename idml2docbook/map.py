@@ -28,7 +28,6 @@ TAGS_WITH_CSSA = [
     "tab",
     "inlinemediaobject",
     "informaltable",
-    "mediaobject",
     "imagedata",
     "superscript",
     "sidebar",
@@ -39,6 +38,7 @@ TAGS_WITH_CSSA = [
 TAGS_WITH_RELEVENT_ROLES = [
     "para",
     "phrase",
+    "mediaobject",
     "inlinemediaobject",
     "superscript",
 ]
