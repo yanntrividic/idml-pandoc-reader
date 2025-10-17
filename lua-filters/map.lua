@@ -32,15 +32,14 @@ local function applyMapping(el)
       if o.simplify then
         el = operators.simplify(el)
       end
-      if o.classes then
-        el = operators.applyClasses(el, o.classes)
+      if o.classes ~= nil then
+        el = operators.applyClasses(el, entry._classes, o.classes)
       end
       if o.attrs then
         operators.applyAttrs(el, o.attrs)
       end
       if o.type then
         local ok, result = pcall(operators.applyType, el, o.type)
-        -- print(status, err)
         if ok then
           el = result
         else
@@ -49,7 +48,6 @@ local function applyMapping(el)
       end
       if o.level then
         local ok, result = pcall(operators.applyLevel, el, o.level)
-        -- print(status, err)
         if ok then
           el = result
         else

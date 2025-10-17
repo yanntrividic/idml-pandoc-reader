@@ -110,13 +110,65 @@ function operators.isContentOneLineBreak(el)
   return el == div_wrapper_with_one_linebreak
 end
 
-function operators.applyClasses(el, classes)
-    local new_classes = {}
-    for class in string.gmatch(classes, "%S+") do
-        table.insert(new_classes, class)
-    end
-    el.classes = new_classes
+-- Modify el.classes based on selector and operation rules:
+--   - operation_classes == false → remove all classes
+--   - operation_classes == ""    → remove selector_classes only
+--   - operation_classes is string → replace selector_classes with new ones
+function operators.applyClasses(el, selector_classes, operation_classes)
+  -- Handle case where o.classes == false → remove all classes
+  if operation_classes == false then
+    el.classes = {}
     return removeUselessWrapper(el)
+  end
+
+  -- Case 1: o.classes == "" → remove only selector classes
+  if operation_classes == "" then
+    local new = {}
+    for _, c in ipairs(el.classes) do
+      local keep = true
+      for _, sel_c in ipairs(selector_classes or {}) do
+        if c == sel_c then
+          keep = false
+          break
+        end
+      end
+      if keep then table.insert(new, c) end
+    end
+    el.classes = new
+    return removeUselessWrapper(el)
+  end
+
+  -- Case 2: o.classes is a string → replace selector classes with these new ones
+  if type(operation_classes) == "string" then
+    -- Split the operation_classes string into words
+    local new_classes = {}
+    for class in string.gmatch(operation_classes, "%S+") do
+      table.insert(new_classes, class)
+    end
+
+    -- Remove selector classes from el.classes
+    local filtered = {}
+    for _, c in ipairs(el.classes) do
+      local keep = true
+      for _, sel_c in ipairs(selector_classes or {}) do
+        if c == sel_c then
+          keep = false
+          break
+        end
+      end
+      if keep then table.insert(filtered, c) end
+    end
+
+    -- Append the new replacement classes
+    for _, c in ipairs(new_classes) do
+      table.insert(filtered, c)
+    end
+
+    el.classes = filtered
+  end
+
+  -- Default: do nothing special
+  return removeUselessWrapper(el)
 end
 
 
