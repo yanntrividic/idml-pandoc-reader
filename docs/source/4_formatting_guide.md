@@ -66,4 +66,4 @@ Les sauts de paragraphes, soit deux blocs séparés par **un bloc vide**, sont s
 
 ## Limitations
 
-Les [tabulations](https://helpx.adobe.com/fr/indesign/using/tabs-indents.html) et les métadonnées du fichier IDML sont actuellement ignorées par le convertisseur.
+Les métadonnées du fichier IDML sont actuellement ignorées par le convertisseur.

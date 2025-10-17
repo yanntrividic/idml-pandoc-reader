@@ -13,7 +13,6 @@ from map import *
 NODES_TO_REMOVE = [
     "info",      # at some point it would be good to get those metadata and convert it.
     "sidebar",   # will need to be implemented sometime, but might be hard?
-    "tab",       # no equivalent in DocBook.
     # "link",
     # "xml-model"
     # "StoryPreference",
@@ -93,6 +92,13 @@ def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None,
 
         if(wrap_fig): tag.parent.name = "figure"
         else: tag.parent.unwrap() # no need for a figure!
+
+def process_tabs(soup):
+    """<tab> elements are replaced by <phrase role="[existing role] converted-tab">[tag children]</phrase>"""
+    for tab in soup.find_all("tab"):
+        tab.name = "phrase"
+        if "role" in tab.attrs.keys(): tab["role"] += " converted-tab"
+        else: tab["role"] = "converted-tab"
 
 def process_endnotes(soup):
     """In DocBook, there is no difference between an endnote and a footnote.
@@ -310,6 +316,8 @@ def hubxml2docbook(file, **options):
         options["raster"],
         options["vector"],
         options["media"])
+
+    process_tabs(soup)
 
     process_endnotes(soup)
 
