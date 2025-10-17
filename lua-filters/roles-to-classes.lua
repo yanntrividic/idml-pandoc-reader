@@ -9,15 +9,36 @@ end
 
 local function roles_to_classes(els)
     for _, el in ipairs(els) do
-        if el.attributes and el.attributes.role then
-            -- Add the space-separated roles as classes
-            for class in string.gmatch(el.attributes.role, "%S+") do
-                if not has_value(el.classes, class) then
-                    el.classes:insert(class)
+        if el.attributes then
+            while el.attributes.role do
+                -- Add the space-separated roles as classes
+                for class in string.gmatch(el.attributes.role, "%S+") do
+                    if not has_value(el.classes, class) then
+                        el.classes:insert(class)
+                    end
                 end
+                -- Remove the original "role" attribute
+                el.attributes.role = nil
+                
+                -- In some very rare cases, such as:
+                -- <para role="role1">
+                -- 	<mediaobject role="role2">
+                -- 		<imageobject>
+                -- 			<imagedata fileref="image.jpg"/>
+                -- 		</imageobject>
+                -- 	</mediaobject>
+                -- </para>
+
+                -- Pandoc merge the wrappers and output:
+                -- <div role="role1" markdown="1" wrapper="1" role="role2">
+                -- 
+                -- ![](image.jpg)
+                -- 
+                -- </div>
+
+                -- This is a bug, I think.
+                -- The while loop makes sure every role attribute is considered.
             end
-            -- Remove the original "role" attribute
-            el.attributes.role = nil
         end
     end
 end

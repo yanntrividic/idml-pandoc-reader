@@ -60,10 +60,10 @@ def fill_empty_elements_with_br(soup):
         if el.is_empty_element:
             el.append(soup.new_tag("br"))
 
-def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None, folder = None):
+def process_images(soup, rep_raster = None, rep_vector = None, folder = None):
     logging.info("Processing media filenames...")
 
-    for tag in soup.select("para > mediaobject"):
+    for tag in soup.find_all(["mediaobject", "inlinemediaobject"]):
         imagedata = tag.find_next("imagedata")
         fileref = imagedata["fileref"]
         new_fileref = ""
@@ -82,16 +82,12 @@ def process_images(soup, wrap_fig = False, rep_raster = None, rep_vector = None,
         elif rep_vector and (file_ext.lower() in VECTOR_EXTS): new_fileref = base + "." + rep_vector
         else: new_fileref = base + file_ext.lower()
 
-
         if folder: imagedata["fileref"] = folder + "/" + new_fileref.split("/").pop()
         else: imagedata["fileref"] = new_fileref
 
         if (rep_raster or rep_vector or folder):
             logging.debug("Media was: " + fileref)
             logging.debug("and is now: " + imagedata["fileref"])
-
-        if(wrap_fig): tag.parent.name = "figure"
-        else: tag.parent.unwrap() # no need for a figure!
 
 def process_tabs(soup):
     """<tab> elements are replaced by <phrase role="[existing role] converted-tab">[tag children]</phrase>"""
@@ -312,7 +308,6 @@ def hubxml2docbook(file, **options):
     remove_ns_attributes(soup)
 
     process_images(soup,
-        True,
         options["raster"],
         options["vector"],
         options["media"])

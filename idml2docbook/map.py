@@ -26,6 +26,7 @@ TAGS_WITH_CSSA = [
     "phrase",
     "sidebar",
     "tab",
+    "mediaobject",
     "inlinemediaobject",
     "informaltable",
     "imagedata",
