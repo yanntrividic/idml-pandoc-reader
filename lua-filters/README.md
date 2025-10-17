@@ -29,20 +29,21 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 * [ ] Just as in CSS, make the selectors in a cascade. Most operations are not commutative, and most of the order wanted by the users can be inferred I think. a few hints:
     * `overrides` should go first
     * `unwrap` and `classes` operations should go last, as they might remove the selector classes
+* Improve the `merge` operator so it can take `Space`, `LineBreak`, `SoftBreak` as arguments for inline merging.
 
 
 ## Run a test
 
-To run a test, you can execute the `lua-filters/test/tests.sh` bash script. It is a helper script that basically executes `diff` between expected results and what was output by Pandoc with the different filters of this repo:
+To run a test, you can execute the `lua-filters/tests/tests.sh` bash script. It is a helper script that basically executes `diff` between expected results and what was output by Pandoc with the different filters of this repo:
 
 ```bash
-diff test/test.output <(pandoc -f markdown test/test.md -t markdown --lua-filter=map.lua -M map=test/test.json --verbose)
+diff tests/test.output <(pandoc -f markdown tests/test.md -t markdown --lua-filter=map.lua -M map=tests/test.json --verbose)
 ```
 
 To run the conversion command for _Déborder Bolloré_:
 
 ```bash
-diff test/bollo.output <(pandoc -f docbook test/bollo.dbk -t markdown_phpextra --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua --lua-filter=map.lua -M map=test/bollo.json --wrap=none --verbose)
+diff tests/bollo.output <(pandoc -f docbook tests/bollo.dbk -t markdown_phpextra --lua-filter=roles-to-classes.lua --lua-filter=collapse-sections-into-headers.lua --lua-filter=map.lua -M map=tests/bollo.json --wrap=none --verbose)
 ```
 
 ## Panflute
