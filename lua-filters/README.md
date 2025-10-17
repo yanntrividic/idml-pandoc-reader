@@ -26,11 +26,14 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 * [x] Add a `merge` operator, especially for CLV3
 * [x] Make it so it is possible to turn an `Inline` in to a `Block` through the `type` operator. Especially useful for when character styles are used as paragraph styles. **Update:** It's been explored in the `custom-traversal-order-pandoc` branch. It is not so easy to pull out because `Inline` and `Block` functions are typed. For now, the new implementation increases by 7x the computing time. Maybe it could be optimised.
 * [ ] Technically, now that the mapping is written in Lua, it would be possible to apply Lua filters on elements selected by `isMatchingSelector`... Wouldn't it?
+* [ ] Just as in CSS, make the selectors in a cascade. Most operations are not commutative, and most of the order wanted by the users can be inferred I think. a few hints:
+    * `overrides` should go first
+    * `unwrap` and `classes` operations should go last, as they might remove the selector classes
 
 
 ## Run a test
 
-To run a test.
+To run a test, you can execute the `lua-filters/test/tests.sh` bash script. It is a helper script that basically executes `diff` between expected results and what was output by Pandoc with the different filters of this repo:
 
 ```bash
 diff test/test.output <(pandoc -f markdown test/test.md -t markdown --lua-filter=map.lua -M map=test/test.json --verbose)

@@ -2,6 +2,7 @@
 
 ## idml-pandoc-reader 0.5.0 (WIP)
 
+* Wrote better tests for `map.lua` in the dedicated bash script `lua-filters/test/tests.sh`.
 * `classes` operator in `map.lua` has a new behavior. It can either remove all classes of the selected element with `false` or only replace the classes with which it was selected with a string attribute.
 * Wrote better docs regarding InDesign file formatting.
 * `<tab>` elements are converted to `<phrase>` elements with an additional `converted-tab` role through `idml2docbook`.
