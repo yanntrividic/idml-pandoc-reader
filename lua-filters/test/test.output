@@ -8,6 +8,12 @@
 > Paragraph with two classes!
 :::
 
+Paragraph with two classes, and classes should be removed!
+
+::: {.other-class wrapper="1"}
+Paragraph with two classes, and the other-class should be kept!
+:::
+
 And also this word has a class and an attribute. This \
 [**code**]{.code attr1="hey" wrapper="1"} has an attribute.
 

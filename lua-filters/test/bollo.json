@@ -1,4 +1,5 @@
 [
+    { "selector": ".converted-tab", "operation": { "unwrap": true } },
     { "selector": ".Aalter_9_5", "operation": { "classes": "aalter"} },
     { "selector": ".Appel_de_notes_titre", "operation": { "unwrap": true } },
     { "selector": ".Appels_de_notes", "operation": { "unwrap": true } },

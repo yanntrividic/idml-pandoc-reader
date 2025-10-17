@@ -2,6 +2,8 @@
   { "selector": ".title", "operation": { "classes": "cool-title", "type": "Header", "level": 1, "attrs": { "hey": "oh" }} },
   { "selector": ".paragraph-with-a-class", "operation": { "type": "Header", "level": 2 } },
   { "selector": ".paragraph-with-another-class.and-another", "operation": { "classes": "cool-paragraph", "type": "BlockQuote" } },
+  { "selector": ".class-to-remove-with-false", "operation": { "classes": false } },
+  { "selector": ".class-to-remove-with-empty-string", "operation": { "classes": "" } },
   { "selector": ".word-with-a-class", "operation": { "classes": "cool-word", "type": "Code", "attrs": { "bli": "bla" }} },
   { "selector": ".delete", "operation": { "delete": true } },
   { "selector": ".remove-class", "operation": { "classes": "" } },

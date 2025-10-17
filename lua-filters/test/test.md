@@ -14,6 +14,18 @@ Paragraph with two classes!
 
 </div>
 
+<div class="class-to-remove-with-false other-class" wrapper=1>
+
+Paragraph with two classes, and classes should be removed!
+
+</div>
+
+<div class="class-to-remove-with-empty-string other-class" wrapper=1>
+
+Paragraph with two classes, and the `other-class` should be kept!
+
+</div>
+
 And also this <span class="word-with-a-class" bli="blo">word</span> has a class and an attribute. This `code`{.code attr1="hey"} has an attribute. <span class="delete">This sentence has to be deleted.</span>
 
 <div class="delete" wrapper=1>
