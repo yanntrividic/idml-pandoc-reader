@@ -10,7 +10,7 @@ idml2hubxml
 # dev
 *.native
 bollo.*
-!lua-filters/test/bollo.*
+!lua-filters/tests/bollo.*
 *.xml
 *.log
 sources
