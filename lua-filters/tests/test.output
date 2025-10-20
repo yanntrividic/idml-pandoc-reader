@@ -24,9 +24,7 @@ should be unwrapped!
 Header
 :::
 
-::: {.to-merge wrapper="1"}
 Paragraph to merge #0.
-:::
 
 Paragraph to simplify.
 
@@ -34,17 +32,7 @@ Paragraph to simplify.
 
 ## Header to cut {#header-to-cut .cut}
 
-::: {.to-merge wrapper="1"}
-Paragraph to merge #1.
-:::
-
-::: {.to-merge wrapper="1"}
-Paragraph to merge #2.
-:::
-
-::: {.to-merge wrapper="1"}
-Paragraph to merge #3.
-:::
+Paragraph to merge #1. Paragraph to merge #2. Paragraph to merge #3.
 
 Paragraph to unwrap.
 
