@@ -43,6 +43,8 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [x] Rewrite the correspondance mapping code as a Lua filter so that it is format agnostic for Pandoc, and allows this to be a true API for conversion personalization. (It mainly concerns the files `cut.py`, `map.py`, and `core.py`. Basically, what it would enable is easy schema mapping for going to a particular schema in any format (e.g. IDML) to any format (e.g. DOCX) for any person aware of semantic structuring.)
 * [x] Add support for endnotes.
 * [ ] Investigate what would be necessary to bridge OutDesign with [Stylo's templates](https://framagit.org/stylo-editeur/templates-stylo/) for XML TEI, Commons and Erudit.
+* [ ] Make it inline styles with `font-style: italic` are turned into `emphasis role="italic"` elements, and do the same for `font-weight: bold`, etc.
+* [ ] Support conversion for `<span id="id_d43308e2527"></span>` object anchors.
 
 
 ### Issues to investigate and publish on @jgm/pandoc
