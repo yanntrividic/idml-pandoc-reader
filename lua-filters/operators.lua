@@ -580,10 +580,11 @@ function operators.insertLineBreakBefore(el)
   end
 end
 
-local function getSeparatorElement(tag)
-  if tag == "Space" then return pandoc.Space() end
-  if tag == "SoftBreak" then return pandoc.SoftBreak() end
-  if tag == "LineBreak" then return pandoc.LineBreak() end
+local function getSeparatorElement(sep)
+  if sep == "Space" then return pandoc.Space() end
+  if sep == "SoftBreak" then return pandoc.SoftBreak() end
+  if sep == "LineBreak" then return pandoc.LineBreak() end
+  return pandoc.Str(sep)
 end
 
 -- Merge consecutive Block elements together in a wrapper element

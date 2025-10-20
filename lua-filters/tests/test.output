@@ -129,7 +129,7 @@ Third paragraph to merge.
 
 # First header 1 to join Second header 1 to join
 
-# Header 1 to join with a header 2 Header 2 to join with a header 1 {.joined-headers}
+# Header 1 to join with a header 2 : Header 2 to join with a header 1 {.joined-headers}
 
 ::: {.joined-blockquotes wrapper="1"}
 > First BlockQuote to join.\
