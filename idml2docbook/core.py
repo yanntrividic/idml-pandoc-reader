@@ -231,6 +231,10 @@ def move_space_outside_of_phrase(soup, space_chars=" \u00a0\u202f"):
         # flattened text inside the phrase
         total_text = phrase.get_text()
         if total_text.strip(space_chars) == "":
+            # If the phrase is only spaces, we unwrap it.
+            # Not sure if this is good in all cases, but it made sense
+            # at least in one real-life case.
+            phrase.unwrap()
             continue
 
         # operate on first descendant text node for leading spaces
