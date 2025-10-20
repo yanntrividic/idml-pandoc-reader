@@ -34,12 +34,6 @@ inlineTypes = {
   Underline = true
 }
 
-inlineSeparatorTypes = {
-  Space = true,
-  SoftBreak = true,
-  LineBreak = true
-}
-
 -- Helper function to get every Attr value as a table
 local function getAttr(attr)
   local id, classes, attrs
@@ -293,7 +287,7 @@ local function blockToBlock(el, newtype, wrapper_attr, is_list)
   end
 
   if newtype == "Header" then
-    result = pandoc.Header(1, pandoc.utils.blocks_to_inlines({el}), getAttrWithWrapper(attr, nil))
+    result = pandoc.Header(1, pu.blocks_to_inlines({el}), getAttrWithWrapper(attr, nil))
   elseif newtype == "Para" then
     result = pandoc.Para(content)
   elseif newtype == "BlockQuote" then
@@ -307,7 +301,7 @@ local function blockToBlock(el, newtype, wrapper_attr, is_list)
   elseif newtype == "OrderedList" then
     result = pandoc.OrderedList({ el })
   elseif newtype == "CodeBlock" then
-    result = pandoc.CodeBlock(pandoc.utils.stringify(content), getAttrWithWrapper(attr, nil))
+    result = pandoc.CodeBlock(pu.stringify(content), getAttrWithWrapper(attr, nil))
   else
     result = el
   end
@@ -335,7 +329,7 @@ local function inlineToInline(el, newtype, wrapper_attr)
   end
 
   local inlines = el.content or ({ pandoc.Str(el.text)}) or {}
-  local text = el.text or pandoc.utils.stringify(inlines)
+  local text = el.text or pu.stringify(inlines)
   local result
 
   if newtype == "Span" then
@@ -516,7 +510,7 @@ function operators.unwrap(el)
           el.t == "CodeBlock" or el.t == "RawBlock" or 
           el.t == "Div" or el.t == "Header" or
           el.t == "BulletList" or el.t == "OrderedList" then
-      return pandoc.Para(pandoc.utils.blocks_to_inlines({el}))
+      return pandoc.Para(pu.blocks_to_inlines({el}))
 
     elseif el.t == "Para" then
       return el  -- already Para
@@ -596,21 +590,37 @@ end
 -- specified as argument, such as "Div.class1" or "BlockQuote.class2"
 -- Careful: this function is executed after applyMapping,
 -- so keep in mind that this operation is applied as very last.
-function operators.merge(blocks, map)
+function operators.mergeAndJoin(blocks, map)
   for _, entry in ipairs(map) do
     local result = {}
-    local merge_selector = entry.operation.merge
-    if merge_selector ~= nil then
-      local merge_tag, wrapper_classes = utils.parseSelector(merge_selector)
-      local is_list_merge = (merge_tag == "BulletList" or merge_tag == "OrderedList")
-      local is_inline_merge = inlineSeparatorTypes[merge_tag]
-      local separator = merge_tag
+
+    local selector
+    local is_block_merge = false
+    local is_inline_merge = false
+    if entry.operation.merge then
+      selector = entry.operation.merge
+      is_block_merge = true
+    elseif entry.operation.join then
+      selector = entry.operation.join
+      is_inline_merge = true
+    end
+
+    -- In the context of inline merge
+    local inlineSeparatorTypes = {
+      Space = true,
+      SoftBreak = true,
+      LineBreak = true
+    }
+
+    if is_block_merge or is_inline_merge then
+      local wrapper_tag
+      local selector_tag, wrapper_classes = utils.parseSelector(selector)
+      local is_list_merge = (selector_tag == "BulletList" or selector_tag == "OrderedList")
 
       local i = 1
       while i <= #blocks do
         if utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) then
           local merged_items = pandoc.List()
-
           -- Start merging consecutive matches
           while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) do
             local blk = blocks[i]
@@ -628,15 +638,11 @@ function operators.merge(blocks, map)
 
             -- If we are doing an inline merge
             elseif is_inline_merge then
-              local inner_blocks
-
-              -- We update the merge_tag so it can use the same code afterwards
               if utils.isWrapper(blk) then
-                merge_tag = blk.content[1].tag
+                wrapper_tag = blk.content[1].tag
               else
-                merge_tag = blk.t or entry._tag or "Para" -- Fallbacks to the selector, then Para
+                wrapper_tag = blk.t or entry._tag or "Para" -- Fallbacks to the selector, then Para
               end
-
               merged_items:insert(blk)
 
             -- Normal merge: merge content of matching blocks
@@ -650,7 +656,9 @@ function operators.merge(blocks, map)
 
           -- In the case of an inline merge, we must convert the blocks to inlines.
           if is_inline_merge then
-            merged_items = pu.blocks_to_inlines(merged_items, { getSeparatorElement(separator) })
+            merged_items = pandoc.Para(pu.blocks_to_inlines(merged_items, { getSeparatorElement(selector_tag) }))
+          else
+            wrapper_tag = selector_tag
           end
 
           -- Now wrap merged content
@@ -658,23 +666,23 @@ function operators.merge(blocks, map)
 
           if is_list_merge then
             local list
-            if merge_tag == "BulletList" then
+            if wrapper_tag == "BulletList" then
               list = pandoc.BulletList(merged_items)
             else
               list = pandoc.OrderedList(merged_items)
             end
             -- Include attributes
             if #wrapper_classes > 0 then
-              table.insert(result, pandoc.Div(list, pandoc.Attr("", wrapper_classes, { wrapper = "1" })))
+              table.insert(result, pandoc.Div(list, getAttrWithWrapper(wrapper_attr, 1)))
             else
               table.insert(result, list)
             end
           else
             -- Non-list merging (Div, BlockQuote, etc.)
-            if merge_tag == "Div" then
+            if wrapper_tag == "Div" then
               table.insert(result, pandoc.Div(merged_items, wrapper_attr))
             else
-              local block_with_newtype = blockToBlock(merged_items, merge_tag, wrapper_attr, false)
+              local block_with_newtype = blockToBlock(merged_items, wrapper_tag, wrapper_attr, false)
               table.insert(result, block_with_newtype)
             end
           end
