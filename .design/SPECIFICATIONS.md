@@ -4,6 +4,10 @@
 
 OutDesign is _not_ a text editor. It _could_ allow some basic text editing, but its purpose is to customise conversions; both _format conversions_ and _schema conversions_.
 
+## Style preview
+
+Elements have style. We are currently able to extract it, and I am pretty convinced it would help if we had a preview of those styles (even if support is not 100%). Also, it would be handy to have an idea of what are the styles applied.
+
 ## Interactive conversion operators
 
 An IDML file is basically a zipped archive of XML files. The structure of IDML editorial content can be abstracted to a XML tree with a depth of one. From that, we want to be able to reconstruct a more complex tree structure to fit the needs of virtually any data schema, in any conversion workflow.
@@ -19,7 +23,8 @@ Operators will include (WIP):
 * **wrap** – wrap an element in a new parent element
 * **unwrap** – unwrap an element in its parent
 * **delete** – delete an element
-* **merge** – group the content of sibling elements
+* **merge** – group sibling elements in one wrapper element
+* **join** – join the content of a series of sibling elements inline 
 * **simplify** – remove all attributes from an element
 * **reassign** – change the value of an attribute
 * etc.

@@ -45,6 +45,7 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [ ] Investigate what would be necessary to bridge OutDesign with [Stylo's templates](https://framagit.org/stylo-editeur/templates-stylo/) for XML TEI, Commons and Erudit.
 * [ ] Make it inline styles with `font-style: italic` are turned into `emphasis role="italic"` elements, and do the same for `font-weight: bold`, etc.
 * [ ] Support conversion for `<span id="id_d43308e2527"></span>` object anchors.
+* [ ] Enable `applyMapping` for `merge` and `join`.
 
 
 ### Issues to investigate and publish on @jgm/pandoc
