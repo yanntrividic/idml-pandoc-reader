@@ -93,17 +93,11 @@ these [**two words**]{.underline} to be an underlined Strong.
 
 3.  Ordered item with class 3.
 
-4.  ::: paragraph-list-item-with-class-to-turn-into-orderedlist
-    Ordered item with class but not in wrapper 1.
-    :::
+4.  Ordered item with class but not in wrapper 1.
 
-5.  ::: paragraph-list-item-with-class-to-turn-into-orderedlist
-    Ordered item with class but not in wrapper 2.
-    :::
+5.  Ordered item with class but not in wrapper 2.
 
-6.  ::: paragraph-list-item-with-class-to-turn-into-orderedlist
-    Ordered item with class but not in wrapper 3.
-    :::
+6.  Ordered item with class but not in wrapper 3.
 :::
 
 ::: {.ordered-list wrapper="1"}

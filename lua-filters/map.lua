@@ -93,11 +93,8 @@ function Inline(el)
 end
 
 function Pandoc(doc)
-  -- First we cleanup the OrderedLists and BulletLists
-  doc.blocks = operators.mergeLists(doc.blocks)
-
-  -- Then we do the regular merging
-  doc.blocks = operators.mergeBlocks(doc.blocks, map)
+  -- Block merging
+  doc.blocks = operators.merge(doc.blocks, map)
 
   -- Then we cut
   utils.updateMapWithNewClasses(map)

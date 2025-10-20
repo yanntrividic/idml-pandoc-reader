@@ -20,7 +20,7 @@
     { "selector": ".intertitre", "operation": { "type": "Header", "level": 2, "classes": "subhead" } },
     { "selector": ".Italique", "operation": { "type" : "Emph", "classes": "" } },
     { "selector": ".Italique_souligne", "operation": { "type": "Emph", "wrap": "Underline" } },
-    { "selector": ".Liste_02", "operation": { "type": "BulletList", "classes": "" } },
+    { "selector": ".Liste_02", "operation": { "merge": "BulletList" } },
     { "selector": ".Nom_de_l_auteur", "operation": { "classes" : "author", "cut": true, "type": "Header", "level": 1 } },
     { "selector": ".Note_de_bas_de_pages", "operation": { "unwrap": true } },
     { "selector": ".Numerotation_notes", "operation": { "delete": true } },

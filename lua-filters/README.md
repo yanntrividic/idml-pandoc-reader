@@ -29,7 +29,8 @@ In addition to storing some Lua filters for the IDML Pandoc Reader, this folder 
 * [ ] Just as in CSS, make the selectors in a cascade. Most operations are not commutative, and most of the order wanted by the users can be inferred I think. a few hints:
     * `overrides` should go first
     * `unwrap` and `classes` operations should go last, as they might remove the selector classes
-* Improve the `merge` operator so it can take `Space`, `LineBreak`, `SoftBreak` as arguments for inline merging.
+* [ ] Improve the `merge` operator so it can take `Space`, `LineBreak`, `SoftBreak` as arguments for inline merging.
+* [x] Change the behavior of mergeList so that it falls into `mergeBlocks`.
 
 
 ## Run a test

@@ -55,15 +55,6 @@ local function getAttr(attr)
   return id, classes, attrs
 end
 
--- Helper function that checks if an element is a wrapper
--- that is, if it is a Span or a Div with a wrapper=1 attribute.
-local function isWrapper(el)
-  if (el.t == "Div" or el.t == "Span") and el.attr and el.attr.attributes then
-    return el.attr.attributes["wrapper"] == "1"
-  end
-  return false
-end
-
 -- Helper function to check if an Attr is empty
 local function isEmptyAttr(attr)
   local id, classes, attrs = getAttr(attr)
@@ -82,7 +73,7 @@ end
 -- i.e. A Div with only a wrapper attribute
 -- or a span with only a wrapper attribute
 local function removeUselessWrapper(el)
-  if not isWrapper(el) then
+  if not utils.isWrapper(el) then
     return el
   end
 
@@ -384,7 +375,7 @@ end
 -- a wrapper Div or Span is created around the new element type to keep all
 -- the data after conversion.
 function operators.applyType(el, newtype)
-  if isWrapper(el) then
+  if utils.isWrapper(el) then
     local wrapper_id, wrapper_classes, wrapper_attributes = getAttr(el)
     local wrapper_attr = pandoc.Attr(wrapper_id, wrapper_classes, wrapper_attributes)
 
@@ -505,7 +496,7 @@ function operators.unwrap(el)
   end
 
   if blockTypes[el.t] then
-    if isWrapper(el) then
+    if utils.isWrapper(el) then
       return pandoc.Para(el.content[1].content)
     else
       return el.content
@@ -593,170 +584,80 @@ end
 -- specified as argument, such as "Div.class1" or "BlockQuote.class2"
 -- Careful: this function is executed after applyMapping,
 -- so keep in mind that this operation is applied as very last.
-function operators.mergeBlocks(blocks, map)
+function operators.merge(blocks, map)
   for _, entry in ipairs(map) do
     local result = {}
     local merge_selector = entry.operation.merge
     if merge_selector ~= nil then
       local wrapper_tag, wrapper_classes = utils.parseSelector(merge_selector)
-      if not blockTypes[wrapper_tag] then
-        logging.warning("mergeBlocks: " .. entry.selector .. ": Merging elements into a " .. wrapper_tag .. " element is not possible.")
-      else
-        local i = 1
-        local merged = pandoc.List()
-        
-        while i <= #blocks do
+      local is_list_merge = (wrapper_tag == "BulletList" or wrapper_tag == "OrderedList")
 
-          -- Only merge blocks matching the selector
-          if utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) then
-            -- Start collecting consecutive matching blocks
-              for _, inner in ipairs(blocks[i].content or {}) do
-                merged:insert(inner)
-              end
-            i = i + 1
+      local i = 1
+      while i <= #blocks do
+        if utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) then
+          local merged_items = pandoc.List()
 
-            -- Collect following consecutive matching ones
-            while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) do
-              -- merged:insert(blocks[i])
-              for _, inner in ipairs(blocks[i].content or {}) do
-                merged:insert(inner)
-              end
-              i = i + 1
-            end
+          -- Start merging consecutive matches
+          while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) do
+            local blk = blocks[i]
 
-            -- Wrap the collected blocks
-            if #merged > 0 then
-              local wrapper_attr = pandoc.Attr("", wrapper_classes, {})
-              if wrapper_tag == "Div" then
-                local div = pandoc.Div(merged, wrapper_attr)
-                table.insert(result, div)
-              elseif blockTypes[wrapper_tag] then
-                block_with_newtype = blockToBlock(merged, wrapper_tag, wrapper_attr, false)
-                table.insert(result, block_with_newtype)
+            -- If we're doing a list merge, each matching block becomes one list item
+            if is_list_merge then
+              -- Each list item must be a list of blocks
+              local inner_blocks
+              if blk.t == "Div" and #blk.content > 0 then
+                inner_blocks = blk.content
               else
+                inner_blocks = { blk }
+              end
+              merged_items:insert(inner_blocks)
+            else
+              -- Normal merge: merge content of matching blocks
+              for _, inner in ipairs(blk.content or {}) do
+                merged_items:insert(inner)
               end
             end
-
-            -- print(merged)
-
-            merged = pandoc.List()
-
-          else
-            table.insert(result, blocks[i])
             i = i + 1
           end
-        end
 
-        -- Replace the blocks with the merged result
-        blocks = result
+          -- Now wrap merged content
+          local wrapper_attr = pandoc.Attr("", wrapper_classes, {})
+
+          if is_list_merge then
+            local list
+            if wrapper_tag == "BulletList" then
+              list = pandoc.BulletList(merged_items)
+            else
+              list = pandoc.OrderedList(merged_items)
+            end
+            -- Include attributes
+            if #wrapper_classes > 0 then
+              table.insert(result, pandoc.Div(list, pandoc.Attr("", wrapper_classes, { wrapper = "1" })))
+            else
+              table.insert(result, list)
+            end
+          else
+            -- Non-list merging (Div, BlockQuote, etc.)
+            if wrapper_tag == "Div" then
+              table.insert(result, pandoc.Div(merged_items, wrapper_attr))
+            else
+              local block_with_newtype = blockToBlock(merged_items, wrapper_tag, wrapper_attr, false)
+              table.insert(result, block_with_newtype)
+            end
+          end
+
+        else
+          -- Not matching, keep block as-is
+          table.insert(result, blocks[i])
+          i = i + 1
+        end
       end
+
+      blocks = result
     end
   end
 
   return blocks
-end
-
-
--- Merge consecutive OrderedList and BulletList elements together.
--- For now, it only considers top-level elements.
--- It works for both "simple" series of Lists, and also with
--- Div-wrapped lists (and ignores it if the Div is not a wrapper.)
-function operators.mergeLists(blocks)
-  local result = {}
-  local i = 1
-
-  while i <= #blocks do
-    local blk = blocks[i]
-
-    -- Case 1: plain BulletList
-    if blk.t == "BulletList" then
-      local items = pandoc.List(blk.content)
-      i = i + 1
-      while i <= #blocks and blocks[i].t == "BulletList" do
-        items:extend(blocks[i].content)
-        i = i + 1
-      end
-      table.insert(result, pandoc.BulletList(items))
-
-    -- Case 2: plain OrderedList
-    elseif blk.t == "OrderedList" then
-      local attr = blk.content[1]
-      local items = pandoc.List(blk.content)
-      i = i + 1
-      while i <= #blocks and blocks[i].t == "OrderedList" do
-        local other_attr = blocks[i].content[1]
-        local other_items = pandoc.List(blocks[i].content)
-        if other_attr.style == attr.style and other_attr.delimiter == attr.delimiter then
-          items:extend(other_items)
-          i = i + 1
-        else
-          break
-        end
-      end
-      local listattr = pandoc.ListAttributes(attr.start, attr.style, attr.delimiter)
-      table.insert(result, pandoc.OrderedList(items, listattr))
-
-    -- Case 3: Div-wrapped list
-    elseif blk.t == "Div" and isWrapper(blk)
-      and #blk.content == 1
-      and (blk.content[1].t == "BulletList" or blk.content[1].t == "OrderedList")
-    then
-      local div_id, div_classes, div_attrs = getAttr(blk.attr)
-      local inner = blk.content[1]
-
-      if inner.t == "BulletList" then
-        local items = pandoc.List(inner.content)
-        i = i + 1
-        while i <= #blocks do
-          local nxt = blocks[i]
-          if nxt.t == "Div" and isWrapper(nxt)
-            and pandoc.utils.equals(nxt.classes, div_classes)
-            and #nxt.content == 1
-            and nxt.content[1].t == "BulletList"
-          then
-            items:extend(nxt.content[1].content)
-            i = i + 1
-          else
-            break
-          end
-        end
-        table.insert(result, pandoc.Div({ pandoc.BulletList(items) }, pandoc.Attr(div_id, div_classes, div_attrs)))
-
-      elseif inner.t == "OrderedList" then
-        local attr = inner.content[1]
-        local items = pandoc.List(inner.content)
-        i = i + 1
-        while i <= #blocks do
-          local nxt = blocks[i]
-          if nxt.t == "Div" and isWrapper(nxt)
-            and pandoc.utils.equals(nxt.classes, div_classes)
-            and #nxt.content == 1
-            and nxt.content[1].t == "OrderedList"
-          then
-            local other_attr = nxt.content[1].content
-            local other_items = pandoc.List(nxt.content[1].content)
-            if other_attr.style == attr.style and other_attr.delimiter == attr.delimiter then
-              items:extend(other_items)
-              i = i + 1
-            else
-              break
-            end
-          else
-            break
-          end
-        end
-        local listattr = pandoc.ListAttributes(attr.start, attr.style, attr.delimiter)
-        table.insert(result, pandoc.Div({ pandoc.OrderedList(items, listattr) }, pandoc.Attr(div_id, div_classes, div_attrs)))
-      end
-
-    else
-      -- default: leave block unchanged
-      table.insert(result, blk)
-      i = i + 1
-    end
-  end
-
-  return result
 end
 
 function operators.cut(doc)
