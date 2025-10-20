@@ -42,7 +42,7 @@ And this paragraph has a class that should be removed. And this `code` should be
 
 # Header {.change-to-paragraph-and-wrap hey="ho"}
 
-<div class="to-merge" wrapper=1>
+<div class="to-join" wrapper=1>
 
 Paragraph to merge #0.
 
@@ -58,19 +58,19 @@ Paragraph to simplify.
 
 ## Header to cut {.cut}
 
-<div class="to-merge" wrapper=1>
+<div class="to-join" wrapper=1>
 
 Paragraph to merge #1.
 
 </div>
 
-<div class="to-merge" wrapper=1>
+<div class="to-join" wrapper=1>
 
 Paragraph to merge #2.
 
 </div>
 
-<div class="to-merge" wrapper=1>
+<div class="to-join" wrapper=1>
 
 Paragraph to merge #3.
 
@@ -285,5 +285,25 @@ First paragraph to turn into a LineBlock.
 <div class="para-to-turn-into-lineblock" wrapper=1>
 
 Second paragraph to turn into a LineBlock.
+
+</div>
+
+# First header 1 to join {.header-1-to-join}
+
+# Second header 1 to join {.header-1-to-join}
+
+# Header 1 to join with a header 2 {.headers-1-and-2-to-join}
+
+## Header 2 to join with a header 1 {.headers-1-and-2-to-join}
+
+<div class="blockquote-to-join" wrapper=1>
+
+> First BlockQuote to join.
+
+</div>
+
+<div class="blockquote-to-join" wrapper=1>
+
+> Second BlockQuote to join.
 
 </div>

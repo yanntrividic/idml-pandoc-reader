@@ -94,7 +94,7 @@ end
 
 function Pandoc(doc)
   -- Block merging
-  doc.blocks = operators.merge(doc.blocks, map)
+  doc.blocks = operators.mergeAndJoin(doc.blocks, map)
 
   -- Then we cut
   utils.updateMapWithNewClasses(map)

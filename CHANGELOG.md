@@ -2,6 +2,7 @@
 
 ## idml-pandoc-reader 0.5.0 (WIP)
 
+* Basic support for the `join` operator.
 * Solved a bug with `mediaobject` and `inlinemediaobjects` that were not well processed by `core.py` and `map.py`. 
 * Solved a bug with unwanted role attributes in output: when Pandoc flattens a structure to have only one wrapper instead of several, it doesn't merge the role attributes together. See `lua-filters/roles-to-classes.lua`.
 * Wrote better tests for `map.lua` in the dedicated bash script `lua-filters/test/tests.sh`.

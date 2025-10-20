@@ -32,7 +32,9 @@ Paragraph to simplify.
 
 ## Header to cut {#header-to-cut .cut}
 
-Paragraph to merge #1. Paragraph to merge #2. Paragraph to merge #3.
+Paragraph to merge #1.\
+Paragraph to merge #2.\
+Paragraph to merge #3.
 
 Paragraph to unwrap.
 
@@ -124,3 +126,12 @@ Third paragraph to merge.
 
 | First paragraph to turn into a LineBlock.
 | Second paragraph to turn into a LineBlock.
+
+# First header 1 to join Second header 1 to join
+
+# Header 1 to join with a header 2 Header 2 to join with a header 1 {.joined-headers}
+
+::: {.joined-blockquotes wrapper="1"}
+> First BlockQuote to join.\
+> Second BlockQuote to join.
+:::
