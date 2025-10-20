@@ -256,10 +256,26 @@ function utils.isCutable()
   return false
 end
 
+-- Helper function that checks if an element is a wrapper
+-- that is, if it is a Span or a Div with a wrapper=1 attribute.
+function utils.isWrapper(el)
+  if (el.t == "Div" or el.t == "Span") and el.attr and el.attr.attributes then
+    return el.attr.attributes["wrapper"] == "1"
+  end
+  return false
+end
+
 -- Memoized matching function
 function utils.isMatchingSelector(el, tag, classes)
   -- Build a unique key per element + selector
-  local el_tag = el.t or ""
+  local el_tag = ""
+  if tag then
+    if utils.isWrapper(el) then
+      el_tag = el.content[1].tag
+    else
+      el_tag = el.t or ""
+    end
+  end
   local el_classes = el.classes or {}
   local key = el_tag .. ":" .. table.concat(el_classes, ",") ..
               "|" .. (tag or "") .. ":" .. table.concat(classes or {}, ",")
