@@ -17,6 +17,7 @@ sources
 output
 articles
 *.old
+workshop
 
 # docs
 !docs/build
