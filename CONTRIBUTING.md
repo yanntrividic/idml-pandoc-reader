@@ -46,6 +46,8 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [ ] Make it inline styles with `font-style: italic` are turned into `emphasis role="italic"` elements, and do the same for `font-weight: bold`, etc.
 * [ ] Support conversion for `<span id="id_d43308e2527"></span>` object anchors.
 * [ ] Enable `applyMapping` for `merge` and `join`.
+* [ ] Better heuristics in `map.py`, remove 0-like values.
+* [ ] Add an `id` operator to `map.lua`
 
 
 ### Issues to investigate and publish on @jgm/pandoc

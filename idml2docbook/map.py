@@ -164,6 +164,7 @@ def filter_property(items, tag, k, v, apply_heuristics=APPLY_HEURISTICS):
         # If the color is equivalent to the default color or if is black transparent, pass
         if v == "device-cmyk(0,0,0,1)": append = False
         if v == "device-cmyk(0,0,0,0)": append = False
+        # TODO: Detect if value is 0 or one of the variants, and append false
     
     if append: items.append((name, v))
 
