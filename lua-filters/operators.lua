@@ -17,8 +17,7 @@ blockTypes = {
   OrderedList = true,
   CodeBlock = true,
   Note = true,
-  RawBlock = true,
-  List = true
+  RawBlock = true
 }
 
 inlineTypes = {
