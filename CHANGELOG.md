@@ -18,7 +18,7 @@
 * Better orthotypography with leading and trailing spaces inside of inline elements are moved to the outside of those elements.
 * Style overrides are now supported, and can be disabled using the `-g`/`--ignore-overrides` flag option.
 * Better slugs are generated to rename paragraph styles and character styles in a robust way.
-* `map.py` now has a `--to-ods` flag option which enables the output of an ODS files that summarises the properties of each paragraph style and character style in an Hub XML file as [CSSa](https://github.com/le-tex/CSSa).
+* `map.py` now has `--to-ods`, `--to-json-template` and `--to-css` flag options which enables different output formats that summarise the properties of each paragraph style and character style in an Hub XML file as [CSSa](https://github.com/le-tex/CSSa).
 
 ## idml-pandoc-reader 0.4.2 (2025-08-25)
 

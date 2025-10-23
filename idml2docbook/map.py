@@ -263,7 +263,7 @@ def get_styles(xml):
     
     return paragraph_styles, character_styles
 
-def save_styles_as_ods(
+def generate_ods(
     paragraph_styles,
     character_styles,
     paragraph_styles_overrides,
@@ -322,6 +322,59 @@ def save_styles_as_ods(
 
     print(f"✅ Saved styles and overrides to {output_file}")
 
+def generate_css(
+    paragraph_styles,
+    character_styles,
+    paragraph_styles_overrides,
+    character_styles_overrides,
+    filename_stem):
+    """In the same way generate_ods generates an ODS file with styles and overrides,
+    generate_css generates a CSS file with all the styles, overrides and properties from
+    the input file."""
+
+    output_file = f"{filename_stem}.css"
+
+    def format_css_block(selector, props):
+        IGNORED_PROPS = ["name", "native-name"]
+        lines = [f"{selector} {{"]
+        props["--element"] = "\"" + selector + "\""
+        for k, v in props.items():
+            print(v, type(v))
+            if k not in IGNORED_PROPS:
+                if k == "font-family": v = "\"" + v + "\""
+                lines.append(f"  {k}: {v};")
+        lines.append("}\n")
+        return "\n".join(lines)
+
+    with open(output_file, "w", encoding="utf-8") as out:
+        out.write("/* Auto-generated CSS from IDML converter */\n\n")
+
+        sections = [
+            ("Paragraph styles", paragraph_styles, False),
+            ("Character styles", character_styles, False),
+            ("Paragraph styles overrides", paragraph_styles_overrides, True),
+            ("Character styles overrides", character_styles_overrides, True),
+        ]
+
+        for label, styles, is_override in sections:
+            if not styles:
+                continue
+
+            out.write(f"/* {label} */\n")
+
+            if is_override:
+                for idx, applied_to, key in styles:
+                    props = {kk: vv for kk, vv in key}
+                    selector = f".{label.lower().replace(' ', '-')}-{idx}"
+                    out.write(format_css_block(selector, props))
+            else:
+                for name, key in styles.items():
+                    props = {kk: vv for kk, vv in key}
+                    selector = f".{name}"
+                    out.write(format_css_block(selector, props))
+
+    print(f"✅ Saved CSS to {output_file}")
+
 def generate_json_template(roles, file):
     selectors = set()
     for role, tag in roles:
@@ -359,14 +412,15 @@ def build_dict_from_map_array(map):
     return map_dict
 
 if __name__ == "__main__":
-    if len(sys.argv) < 3:
-        print("Usage: python script.py input.xml map.json [--to-ods] [--to-json-template]")
+    if len(sys.argv) < 4:
+        print("Usage: python script.py input.xml map.json [--to-ods] [--to-css] [--to-json-template]")
         sys.exit(1)
 
     to_ods = "--to-ods" in sys.argv
+    to_css = "--to-css" in sys.argv
     to_json_template = "--to-json-template" in sys.argv
 
-    sys.argv = [arg for arg in sys.argv if arg not in ["--to-ods", "--to-json-template"]]
+    sys.argv = [arg for arg in sys.argv if arg not in ["--to-ods", "--to-css", "--to-json-template"]]
 
     file = sys.argv[1]
     map_file = sys.argv[2]
@@ -390,7 +444,18 @@ if __name__ == "__main__":
     # Save as ODS
     if to_ods:
         file_stem = os.path.splitext(file)[0]
-        save_styles_as_ods(
+        generate_ods(
+            paragraph_styles,
+            character_styles,
+            paragraph_styles_overrides,
+            character_styles_overrides,
+            file_stem
+        )
+
+    # Save as CSS
+    if to_css:
+        file_stem = os.path.splitext(file)[0]
+        generate_css(
             paragraph_styles,
             character_styles,
             paragraph_styles_overrides,
