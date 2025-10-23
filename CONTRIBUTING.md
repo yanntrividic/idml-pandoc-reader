@@ -47,7 +47,8 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [ ] Support conversion for `<span id="id_d43308e2527"></span>` object anchors.
 * [ ] Enable `applyMapping` for `merge` and `join`.
 * [ ] Better heuristics in `map.py`, remove 0-like values.
-* [ ] Add an `id` operator to `map.lua`
+* [ ] Add an `id` operator to `map.lua`, so an `id` is attributed to each element that match this selector (and thus new operations can be applied to this element based on its `id`). `id` values could be based on the content of the element, so that when an element content is changed, a warning is printed.
+* [ ] Write a CSS export from map.py that recreates the document paragraph and character styles, so that it can be used as a `--css` option for Pandoc.
 
 
 ### Issues to investigate and publish on @jgm/pandoc
@@ -55,6 +56,8 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [ ] Linebreaks in headers isn't supported with the AsciiDoc writer
 * [ ] ID attributes are not supported in headers with the AsciiDoc writer
 * [ ] Brackets in asciidoc are broken
+* [ ] Wrapped elements with same attributes collapse with several occurrences of the same attribute (see `roles-to-classes.lua`)
+* [ ] AsciiDoc writer does not support Blocks attributes.
 
 ### idml2xml
 
