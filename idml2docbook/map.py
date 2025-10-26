@@ -437,7 +437,7 @@ if __name__ == "__main__":
     fix_role_names(soup)
     hubxml = str(soup)
     hubxml = hubxml.replace('css:', 'css_namespace__')
-    if to_ods: paragraph_styles, character_styles = get_styles(hubxml)
+    paragraph_styles, character_styles = get_styles(hubxml)
     soup, paragraph_styles_overrides, character_styles_overrides = turn_overrides_into_roles(hubxml)
     hubxml = str(soup)
 
