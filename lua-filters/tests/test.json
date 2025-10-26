@@ -31,6 +31,8 @@
   { "selector": ".blockquote-to-merge-into-div-with-wrapper", "operation": { "merge": "Div.merged-blockquote" } },
   { "selector": ".para-to-turn-into-lineblock", "operation": { "merge": "LineBlock" } },
   { "selector": ".header-1-to-join", "operation": { "join": "Space" } },
-  { "selector": ".headers-1-and-2-to-join", "operation": { "join": " : .joined-headers" } },
-  { "selector": ".blockquote-to-join", "operation": { "join": "LineBreak.joined-blockquotes" } }
+  { "selector": ".headers-1-and-2-to-join", "operation": { "join": { "separator": " : ", "classes": "joined-headers", "type": "Header", "level": 2 } } },
+  { "selector": ".blockquote-to-join", "operation": { "join": "LineBreak.joined-blockquotes" } },
+  { "selector": "Header", "operation": { "id": true } },
+  { "selector": ".para-to-add-id", "operation": { "id": true } }
 ]

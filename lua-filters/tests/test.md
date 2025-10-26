@@ -307,3 +307,15 @@ Second paragraph to turn into a LineBlock.
 > Second BlockQuote to join.
 
 </div>
+
+<div class="para-to-add-id" wrapper=1>
+
+First paragraph to add an identifier.
+
+</div>
+
+<div class="para-to-add-id" wrapper=1>
+
+Second paragraph to add an identifier.
+
+</div>

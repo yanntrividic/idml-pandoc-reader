@@ -10,8 +10,6 @@ package.path = script_dir .. "/?.lua;" .. package.path
 local utils = require 'utils'
 local operators = require 'operators'
 
-local logging = require 'logging'
-
 function Meta(meta)
   return utils.readAndPreprocessMap(meta)
 end
@@ -19,51 +17,7 @@ end
 local function applyMapping(el)
   for _, entry in ipairs(map) do
     if utils.isMatchingSelector(el, entry._tag, entry._classes) then
-      local o = entry.operation
-      -- and apply the various operations
-      if o.delete then
-        return {}
-      end
-      if not o.empty then
-        if operators.isContentOneLineBreak(el) then
-          return {}
-        end
-      end
-      if o.simplify then
-        el = operators.simplify(el)
-      end
-      if o.classes ~= nil then
-        el = operators.applyClasses(el, entry._classes, o.classes)
-      end
-      if o.attrs then
-        operators.applyAttrs(el, o.attrs)
-      end
-      if o.type then
-        local ok, result = pcall(operators.applyType, el, o.type)
-        if ok then
-          el = result
-        else
-          logging.warning("applyType: " .. entry.selector .. ": " .. result)
-        end
-      end
-      if o.level then
-        local ok, result = pcall(operators.applyLevel, el, o.level)
-        if ok then
-          el = result
-        else
-          logging.warning("applyLevel: " .. entry.selector .. ": " .. result)
-        end
-      end
-      if o.unwrap then
-        el = operators.unwrap(el)
-      end
-      if o.wrap then
-        el = operators.wrap(el, o.wrap)
-      end
-      el = operators.clean(el)
-      if o.br then
-        el = operators.insertLineBreakBefore(el)
-      end
+      el = operators.applyOperation(el, entry, entry.operation)
     end
   end
   return el

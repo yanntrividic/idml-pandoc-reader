@@ -2,7 +2,7 @@
 
 # Hello world! {#hello-world .cool-title hey="oh"}
 
-## Paragraph with a class that becomes a level 2 header! {.paragraph-with-a-class}
+## Paragraph with a class that becomes a level 2 header! {#header-1 .paragraph-with-a-class}
 
 ::: {.cool-paragraph ble="ble" wrapper="1"}
 > Paragraph with two classes!
@@ -129,9 +129,17 @@ Third paragraph to merge.
 
 # First header 1 to join Second header 1 to join
 
-# Header 1 to join with a header 2 : Header 2 to join with a header 1 {.joined-headers}
+## Header 1 to join with a header 2 : Header 2 to join with a header 1 {.joined-headers}
 
 ::: {.joined-blockquotes wrapper="1"}
 > First BlockQuote to join.\
 > Second BlockQuote to join.
+:::
+
+::: {#para-to-add-id-1 .para-to-add-id wrapper="1"}
+First paragraph to add an identifier.
+:::
+
+::: {#para-to-add-id-2 .para-to-add-id wrapper="1"}
+Second paragraph to add an identifier.
 :::
