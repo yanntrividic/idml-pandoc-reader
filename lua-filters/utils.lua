@@ -2,6 +2,8 @@
 
 local json = require 'pandoc.json' -- requires Pandoc>=3.1.1
 
+local logging = require 'logging'
+
 local utils = {}
 
 utils.ext = {
@@ -181,32 +183,58 @@ local function split(str, pat)
 end
 
 function utils.parseSelector(sel)
-  local parts = split(sel, "%.")
-  local tag, classes
+  if type(sel) ~= "string" or sel == "" then
+    error("Selector must be a non-empty string.")
+  end
 
-  if #parts == 0 then
-    return nil, {}
-  elseif #parts == 1 then
-    if sel:sub(1,1) == "." then
-      tag = nil
-      classes = { sel:sub(2) }
-    else
-      tag = sel
-      classes = {}
+  local tag
+  local id = ""
+  local classes = {}
+
+  -- Split into parts: tag, id, classes
+  -- /!\ CSS-like syntax is order-independent
+  local tag_pattern = "^[%a]+"
+  local tag_match = sel:match(tag_pattern)
+
+  local remainder = sel
+  if tag_match then
+    tag = tag_match
+    remainder = sel:sub(#tag + 1)
+  end
+
+  -- Extract ID (at most one)
+  local id_pos = remainder:find("#")
+  if id_pos then
+    local after_id = remainder:sub(id_pos + 1)
+    local id_match = after_id:match("^[%w_-]+")
+    if not id_match then
+      error("Invalid ID in selector: " .. sel)
     end
-  else
-    if sel:sub(1,1) == "." then
-      tag = nil
-      classes = parts
-      classes[1] = sel:sub(2, #parts[1]+1)
-    else
-      tag = parts[1]
-      classes = { table.unpack(parts, 2) }
+    id = id_match
+    -- remove the ID part by slicing
+    remainder = remainder:sub(1, id_pos - 1) .. remainder:sub(id_pos + 1 + #id)
+    -- check for another '#'
+    if remainder:find("#") then
+      error("Selector cannot contain multiple IDs: " .. sel)
     end
   end
 
-  return tag, classes
+  -- Handle classes (can appear before or after #)
+  for class in remainder:gmatch("%.[%w_-]+") do
+    table.insert(classes, class:sub(2))
+  end
+
+  -- Check for invalid punctuation (anything not . or # or valid chars)
+  local cleaned = remainder:gsub("%.[%w_-]+", "")
+  cleaned = cleaned:gsub("#[%w_-]+", "")
+  cleaned = cleaned:gsub("[%w_]+", "")
+  if cleaned:match("[^%s]") then
+    error("Invalid selector syntax: " .. sel)
+  end
+
+  return tag, id, classes
 end
+
 
 -- Cache for memoization: element+selector -> match result
 local matchCache = {}
@@ -214,9 +242,15 @@ local matchCache = {}
 -- Precompute parsed selectors for map entries
 local function preprocessMap(map)
   for _, entry in ipairs(map) do
-    local tag, classes = utils.parseSelector(entry.selector)
-    entry._tag = tag
-    entry._classes = classes
+    local tag, id, classes
+    local ok, result, id, classes = pcall(utils.parseSelector, entry.selector)
+    if ok then
+      entry._tag = result
+      entry._id = id
+      entry._classes = classes
+    else
+      logging.warning("preprocessMap: " .. result)
+    end
   end
 end
 
@@ -266,34 +300,42 @@ function utils.isWrapper(el)
 end
 
 -- Memoized matching function
-function utils.isMatchingSelector(el, tag, classes)
+function utils.isMatchingSelector(el, tag, id, classes)
   -- Build a unique key per element + selector
-  local el_tag = ""
-  if tag then
-    if utils.isWrapper(el) then
-      el_tag = el.content[1].tag
-    else
-      el_tag = el.t or ""
-    end
-  end
+  local el_tag = el.t or ""
+  local el_id = el.identifier or ""
   local el_classes = el.classes or {}
-  local key = el_tag .. ":" .. table.concat(el_classes, ",") ..
-              "|" .. (tag or "") .. ":" .. table.concat(classes or {}, ",")
+
+  if utils.isWrapper(el) then
+    el_tag = el.content[1].tag or el_tag
+    el_id = el.content[1].identifier or el_id
+  end
+
+  local key = el_tag .. ":" .. el_id .. ":" .. table.concat(el_classes, ",") ..
+              "|" .. (tag or "") .. ":" .. (id or "") .. ":" .. table.concat(classes or {}, ",")
 
   if matchCache[key] ~= nil then
     return matchCache[key]
   end
 
   -- Check tag
-  if tag and el.t ~= tag then
+  if tag and el_tag ~= tag then
+    matchCache[key] = false
+    return false
+  end
+
+  -- Check ID
+  if id ~= "" and el_id ~= id then
     matchCache[key] = false
     return false
   end
 
   -- Check classes
-  if classes then
+  if classes and #classes > 0 then
     local el_class_set = {}
-    for _, c in ipairs(el_classes) do el_class_set[c] = true end
+    for _, c in ipairs(el_classes) do
+      el_class_set[c] = true
+    end
     for _, class in ipairs(classes) do
       if not el_class_set[class] then
         matchCache[key] = false

@@ -81,6 +81,16 @@ local function removeEmptyWrapper(el)
   return el
 end
 
+-- This returns a new Attr object with an updated
+-- wrapper attribute value.
+-- Some Pandoc types have tuples as attributes,
+-- others have Attr. This function covers both cases.
+local function getAttrWithWrapper(attr, value)
+  local id, classes, attrs = getAttr(attr)
+  attrs["wrapper"] = value
+  return pandoc.Attr(id, classes, attrs)
+end
+
 -- Function that removes a useless wrapper
 -- i.e. A Div with only a wrapper attribute
 -- or a span with only a wrapper attribute
@@ -119,20 +129,20 @@ end
 -- Global counter table for unique IDs
 local id_counters = {}
 
-function operators.applyId(el, selector)
-  local selector_tag, selector_classes = utils.parseSelector(selector)
+function operators.applyId(el)
   local id, classes, attrs = getAttr(el.attr)
   if id ~= "" then return el end
 
   -- Compose base id parts
-  local base_parts = {}
-  
-  if selector_tag and selector_tag ~= "" then
-    table.insert(base_parts, string.lower(selector_tag))
+  local base_parts = { }
+  if utils.isWrapper(el) then
+    table.insert(base_parts, string.lower(el.content[1].tag))
+  else
+    table.insert(base_parts, string.lower(el.tag))
   end
 
-  if selector_classes and #selector_classes > 0 then
-    for _, c in ipairs(selector_classes) do
+  if classes and #classes > 0 then
+    for _, c in ipairs(classes) do
       table.insert(base_parts, c)
     end
   end
@@ -151,7 +161,7 @@ function operators.applyId(el, selector)
 
     el.attr = pandoc.Attr(id, classes, attrs)
   else
-    local attr = pandoc.Attr(id, {}, {})
+    local attr = pandoc.Attr(new_id, {}, {})
 
     if blockTypes[el.tag] then
       return pandoc.Div({el}, getAttrWithWrapper(attr, 1))
@@ -285,16 +295,6 @@ function operators.applyAttrs(el, keyvals)
 end
 
 -- THIS RELATES TO applyType
-
--- This returns a new Attr object with an updated
--- wrapper attribute value.
--- Some Pandoc types have tuples as attributes,
--- others have Attr. This function covers both cases.
-local function getAttrWithWrapper(attr, value)
-  local id, classes, attrs = getAttr(attr)
-  attrs["wrapper"] = value
-  return pandoc.Attr(id, classes, attrs)
-end
 
 -- Smart block conversion
 local function blockToBlock(el, newtype, wrapper_attr, is_list)
@@ -493,7 +493,7 @@ function operators.simplify(el)
   elseif t == "Header" then
     -- I have no idea why the id is not being returned, it really
     -- seems like a bug here...
-    return pandoc.Header(el.level, el.content, pandoc.Attr(id, {}, {}))
+    return pandoc.Header(el.level, el.content, pandoc.Attr("", {}, {}))
   elseif t == "BlockQuote" then
     return pandoc.BlockQuote(el.content)
   elseif t == "LineBlock" then
@@ -581,7 +581,7 @@ end
 -- Note: These wrappers are explicit, not explicit such as elements
 -- with wrapper=1 atributes.
 function operators.wrap(el, wrapper)
-  local tag, classes = utils.parseSelector(wrapper)
+  local tag, _, classes = utils.parseSelector(wrapper)
   if blockTypes[el.t] then
     -- Wrap Blocks in a Div
     return pandoc.Div({el}, pandoc.Attr("", classes))
@@ -677,15 +677,15 @@ function operators.mergeAndJoin(blocks, map)
 
     if is_block_merge or is_inline_merge then
       local wrapper_tag
-      local selector_tag, wrapper_classes = utils.parseSelector(selector)
+      local selector_tag, _, wrapper_classes = utils.parseSelector(selector)
       local is_list_merge = (selector_tag == "BulletList" or selector_tag == "OrderedList")
 
       local i = 1
       while i <= #blocks do
-        if utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) then
+        if utils.isMatchingSelector(blocks[i], entry._tag, entry._id, entry._classes) then
           local merged_items = pandoc.List()
           -- Start merging consecutive matches
-          while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._classes) do
+          while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._id, entry._classes) do
             local blk = blocks[i]
 
             -- If we're doing a list merge, each matching block becomes one list item
@@ -835,7 +835,7 @@ function operators.cut(doc)
   for _, blk in ipairs(doc.blocks) do
     local is_cut = false
     for _, entry in ipairs(map) do
-      if utils.isMatchingSelector(blk, entry._tag, entry._classes)
+      if utils.isMatchingSelector(blk, entry._tag, entry._id, entry._classes)
          and entry.operation.cut then
         is_cut = true
         break
@@ -855,6 +855,9 @@ end
 
 function operators.applyOperation(el, entry, operation)
   local o = operation
+
+  if o == nil then error("Missing operation in an entry.") end
+
   -- and apply the various operations
   if o.delete then
     return {}
@@ -866,9 +869,6 @@ function operators.applyOperation(el, entry, operation)
   end
   if o.simplify then
     el = operators.simplify(el)
-  end
-  if o.id then
-    el = operators.applyId(el, entry.selector)
   end
   if o.classes ~= nil then
     el = operators.applyClasses(el, entry._classes, o.classes)
@@ -883,6 +883,9 @@ function operators.applyOperation(el, entry, operation)
     else
       logging.warning("applyType: " .. entry.selector .. ": " .. result)
     end
+  end
+  if o.id then
+     el = operators.applyId(el)
   end
   if o.level then
     local ok, result = pcall(operators.applyLevel, el, o.level)
