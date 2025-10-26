@@ -90,9 +90,6 @@ Frequency: _always_.
 
 Paragraph, character and object styles from the InDesign document are specified as classes. Those classes are central in the selector logics. Classes can be used to:
 
-## C
-
-The last step of the use of the tool is to 
 * Merge paragraph and character styles and overrides into lesser classes and overrides.
 * Comply to an existing schema.
 
