@@ -91,6 +91,17 @@ local function getAttrWithWrapper(attr, value)
   return pandoc.Attr(id, classes, attrs)
 end
 
+-- Helper function to wrap element in wrapper if attrs are needed.
+local function addWrapper(el)
+  local attr = pandoc.Attr("", {}, {})
+  if blockTypes[el.t] and not blockSupportsAttrs[el.t] then
+    el = pandoc.Div({el}, getAttrWithWrapper(attr, 1))
+  elseif inlineTypes[el.t] and not inlineSupportsAttrs[el.t] then
+    el = pandoc.Span({el}, getAttrWithWrapper(attr, 1))
+  end
+  return el
+end
+
 -- Function that removes a useless wrapper
 -- i.e. A Div with only a wrapper attribute
 -- or a span with only a wrapper attribute
@@ -184,7 +195,7 @@ function operators.applyClasses(el, selector_classes, operation_classes)
     return removeUselessWrapper(el)
   end
 
-  -- Case 1: o.classes == "" → remove only selector classes
+  -- Case 1: o.classes == "" -> remove only selector classes
   if operation_classes == "" then
     local new = {}
     for _, c in ipairs(el.classes) do
@@ -201,7 +212,7 @@ function operators.applyClasses(el, selector_classes, operation_classes)
     return removeUselessWrapper(el)
   end
 
-  -- Case 2: o.classes is a string → replace selector classes with these new ones
+  -- Case 2: o.classes is a string -> replace selector classes with these new ones
   if type(operation_classes) == "string" then
     -- Split the operation_classes string into words
     local new_classes = {}
@@ -211,6 +222,10 @@ function operators.applyClasses(el, selector_classes, operation_classes)
 
     -- Remove selector classes from el.classes
     local filtered = {}
+
+    -- Add wrapper if the element does not support attributes
+    el = addWrapper(el)
+
     for _, c in ipairs(el.classes) do
       local keep = true
       for _, sel_c in ipairs(selector_classes or {}) do
