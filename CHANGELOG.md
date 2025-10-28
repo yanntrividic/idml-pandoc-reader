@@ -2,6 +2,7 @@
 
 ## idml-pandoc-reader 0.5.0 (WIP)
 
+* Support for multiple selectors and `id`-based selectors.
 * Support for the `id` operator.
 * Support for the `join` operator.
 * Solved a bug with `mediaobject` and `inlinemediaobjects` that were not well processed by `core.py` and `map.py`. 

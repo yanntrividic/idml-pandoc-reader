@@ -235,6 +235,24 @@ function utils.parseSelector(sel)
   return tag, id, classes
 end
 
+function utils.parseSelectorList(sel)
+  if type(sel) ~= "string" or sel == "" then
+    error("Selector must be a non-empty string.")
+  end
+
+  local selectors = {}
+  for part in sel:gmatch("[^,]+") do
+    local trimmed = part:match("^%s*(.-)%s*$")
+    local tag, id, classes = utils.parseSelector(trimmed)
+    table.insert(selectors, {
+      _tag = tag,
+      _id = id,
+      _classes = classes,
+      _raw = trimmed
+    })
+  end
+  return selectors
+end
 
 -- Cache for memoization: element+selector -> match result
 local matchCache = {}
@@ -242,12 +260,9 @@ local matchCache = {}
 -- Precompute parsed selectors for map entries
 local function preprocessMap(map)
   for _, entry in ipairs(map) do
-    local tag, id, classes
-    local ok, result, id, classes = pcall(utils.parseSelector, entry.selector)
+    local ok, result = pcall(utils.parseSelectorList, entry.selector)
     if ok then
-      entry._tag = result
-      entry._id = id
-      entry._classes = classes
+      entry._selectors = result
     else
       logging.warning("preprocessMap: " .. result)
     end
@@ -346,6 +361,15 @@ function utils.isMatchingSelector(el, tag, id, classes)
 
   matchCache[key] = true
   return true
+end
+
+function utils.isMatchingSelectorList(el, selectorList)
+  for _, sel in ipairs(selectorList) do
+    if utils.isMatchingSelector(el, sel._tag, sel._id, sel._classes) then
+      return sel
+    end
+  end
+  return false
 end
 
 return utils

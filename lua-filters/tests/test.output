@@ -2,7 +2,7 @@
 
 # Hello world! {#hello-world .cool-title hey="oh"}
 
-## Paragraph with a class that becomes a level 2 header! {#header-1 .paragraph-with-a-class}
+## Paragraph with a class that becomes a level 2 header! {#header-paragraph-with-a-class-1 .paragraph-with-a-class}
 
 ::: {.cool-paragraph ble="ble" wrapper="1"}
 > Paragraph with two classes!
@@ -28,7 +28,7 @@ Paragraph to merge #0.
 
 Paragraph to simplify.
 
-## Hello
+## Hello {#header-1}
 
 ## Header to cut {#header-to-cut .cut}
 
@@ -136,14 +136,18 @@ Third paragraph to merge.
 > Second BlockQuote to join.
 :::
 
-::: {#para-to-add-id-1 .para-to-add-id wrapper="1"}
+::: {#para-para-to-add-id-1 .para-to-add-id wrapper="1"}
 First paragraph to add an identifier.
 :::
 
-::: {#para-to-add-id-2 .para-to-add-id wrapper="1"}
+::: {#para-para-to-add-id-2 .para-to-add-id wrapper="1"}
 Second paragraph to add an identifier.
 :::
 
 ::: {#header-to-select wrapper="1"}
 Turn Header in Para through id selection
 :::
+
+# First eader to simplify by testing out multiple selectors entry
+
+## Second header to simplify by testing out multiple selectors entry

@@ -35,6 +35,6 @@
   { "selector": ".blockquote-to-join", "operation": { "join": "LineBreak.joined-blockquotes" } },
   { "selector": "Header", "operation": { "id": true } },
   { "selector": ".para-to-add-id", "operation": { "id": true } },
-  { "selector": "#", "operation": {} },
-  { "selector": "#header-to-select", "operation": { "type": "Para" } }
+  { "selector": "#header-to-select", "operation": { "type": "Para" } },
+  { "selector": "#multiple-selector-id-1.multiple-selector-class-1, .multiple-selector-class-2", "operation": { "simplify": true } }
 ]

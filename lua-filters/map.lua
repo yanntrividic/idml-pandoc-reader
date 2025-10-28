@@ -18,12 +18,13 @@ end
 
 local function applyMapping(el)
   for _, entry in ipairs(map) do
-    if utils.isMatchingSelector(el, entry._tag, entry._id, entry._classes) then
-      ok, result = pcall(operators.applyOperation, el, entry, entry.operation)
+    matched_sel = utils.isMatchingSelectorList(el, entry._selectors)
+    if matched_sel then
+      ok, result = pcall(operators.applyOperation, el, entry, matched_sel, entry.operation)
       if ok then
         el = result
       else
-        logging.warning("applyMapping: " .. entry.selector .. ": " .. result)
+        logging.warning("applyMapping: \"" .. entry.selector .. "\": " .. result)
       end
     end
   end

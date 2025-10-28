@@ -682,10 +682,11 @@ function operators.mergeAndJoin(blocks, map)
 
       local i = 1
       while i <= #blocks do
-        if utils.isMatchingSelector(blocks[i], entry._tag, entry._id, entry._classes) then
+        local matched_sel = utils.isMatchingSelectorList(blocks[i], entry._selectors)
+        if matched_sel then
           local merged_items = pandoc.List()
           -- Start merging consecutive matches
-          while i <= #blocks and utils.isMatchingSelector(blocks[i], entry._tag, entry._id, entry._classes) do
+          while i <= #blocks and utils.isMatchingSelectorList(blocks[i], entry._selectors) do
             local blk = blocks[i]
 
             -- If we're doing a list merge, each matching block becomes one list item
@@ -756,9 +757,9 @@ function operators.mergeAndJoin(blocks, map)
             end
           end
 
-          -- 🔹 NEW: Apply operation dict if merge/join is a table
+          -- Apply operation dict if merge/join is a table
           if merge_table then
-            merged_el = operators.applyOperation(merged_el, entry, merge_table)
+            merged_el = operators.applyOperation(merged_el, entry, matched_sel, merge_table)
           end
 
           table.insert(result, merged_el)
@@ -835,7 +836,7 @@ function operators.cut(doc)
   for _, blk in ipairs(doc.blocks) do
     local is_cut = false
     for _, entry in ipairs(map) do
-      if utils.isMatchingSelector(blk, entry._tag, entry._id, entry._classes)
+      if utils.isMatchingSelectorList(blk, entry._selectors)
          and entry.operation.cut then
         is_cut = true
         break
@@ -853,7 +854,7 @@ function operators.cut(doc)
   return doc
 end
 
-function operators.applyOperation(el, entry, operation)
+function operators.applyOperation(el, entry, matched_sel, operation)
   local o = operation
 
   if o == nil then error("Missing operation in an entry.") end
@@ -871,7 +872,7 @@ function operators.applyOperation(el, entry, operation)
     el = operators.simplify(el)
   end
   if o.classes ~= nil then
-    el = operators.applyClasses(el, entry._classes, o.classes)
+    el = operators.applyClasses(el, matched_sel._classes, o.classes)
   end
   if o.attrs then
     operators.applyAttrs(el, o.attrs)
@@ -881,7 +882,7 @@ function operators.applyOperation(el, entry, operation)
     if ok then
       el = result
     else
-      logging.warning("applyType: " .. entry.selector .. ": " .. result)
+      logging.warning("applyType: \"" .. matched_sel._raw .. "\": " .. result)
     end
   end
   if o.id then
@@ -892,7 +893,7 @@ function operators.applyOperation(el, entry, operation)
     if ok then
       el = result
     else
-      logging.warning("applyLevel: " .. entry.selector .. ": " .. result)
+      logging.warning("applyLevel: \"" .. matched_sel._raw .. "\": " .. result)
     end
   end
   if o.unwrap then

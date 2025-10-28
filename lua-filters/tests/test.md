@@ -321,3 +321,7 @@ Second paragraph to add an identifier.
 </div>
 
 # Turn Header in Para through id selection {#header-to-select}
+
+# First eader to simplify by testing out multiple selectors entry {#multiple-selector-id-1 .multiple-selector-class-1}
+
+## Second header to simplify by testing out multiple selectors entry {.multiple-selector-class-2}
