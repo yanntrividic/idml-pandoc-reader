@@ -51,6 +51,8 @@ Every contribution to the code must be published under the [CC BY-SA 4.0](https:
 * [ ] Write a CSS export from map.py that recreates the document paragraph and character styles, so that it can be used as a `--css` option for Pandoc.
 * [ ] Convert the `applyCut` function into a [`ChunkedDoc`](https://pandoc.org/lua-filters.html#type-chunkeddoc) support?
 * [ ] Add ids by default on all Header with [`unique_identifier`](https://pandoc.org/lua-filters.html#pandoc.structure.unique_identifier)
+* [ ] Pandoc doesnt support multiline notes for Asciidoc, make an option to collapse them into single-line notes.
+* [ ] Add `start` and `end` operators that ignore everything before and after the first matches of these selectors.
 
 
 ### Issues to investigate and publish on @jgm/pandoc
